@@ -6,3 +6,5 @@ before_script:
   - npm install -g bower grunt-cli
   - bower install
 services: mongodb
+notifications:
+  slack: cse112:gt3gr0iMlKDsF9MPtiUWdZbh
