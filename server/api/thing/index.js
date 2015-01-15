@@ -4,7 +4,7 @@ var express = require('express');
 var controller = require('./thing.controller');
 
 var router = express.Router();
-
+//Routing
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
