@@ -16,5 +16,11 @@ First Run
 
         $ bower install
         $ npm install
-6. Use ``grunt serve`` to run the application.
+
+6. Start up the MongoDB server with 
+
+        $ mkdir db
+        $ mongod --dbpath db
+
+7. Use ``grunt serve`` to run the application.
 
