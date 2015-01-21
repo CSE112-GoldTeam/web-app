@@ -27,7 +27,8 @@ First Run
 More Generators
 -----------------------
 Install [angular-fullstack-generator](https://github.com/DaftMonk/generator-angular-fullstack) to get more generator tools to make development faster. List of generators [here](https://github.com/DaftMonk/generator-angular-fullstack#generators)
-
+Using NPM
+`npm install -g angular-fullstack-generator`
 Project Structure
 -----------------------
 Overview (to change, using default structure)
