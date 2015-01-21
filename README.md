@@ -71,14 +71,14 @@ Tools
 -----------------------
 * Yeoman
     - A webscaffolding tool to get you sprinting instead of wasting time trying to setup your project.
-    - Has tons of generators to fit your tech. stack of choice, one of the most popular ones which, we'll be using is called [angular-fullstack-generator](https://github.com/DaftMonk/generator-angular-fullstack).
+    - Has tons of generators to fit your tech. stack of choice, one of the most popular ones, which we'll be using is called [angular-fullstack-generator](https://github.com/DaftMonk/generator-angular-fullstack).
     - Simply type `yo` and choose what you want in your project and you're up and running.
 * Bower
     - This manages packages so you don't have to. Simply type `bower install` and it will install all packages in your `bower.json` everytime.
     - This is great because you don't have your web dependencies in your repo. You just have to simply run bower when you download a new project.
 * Grunt
     - Building and Automation Tool, it can also be used with [Heroku's toolbelt](https://github.com/DaftMonk/generator-angular-fullstack#heroku) for deployment.
-    - Building and deploying is two commands away, `grunt && grunt buildcontrol:heroku`
+    - Building and deploying are two commands away, `grunt && grunt buildcontrol:heroku`
     - Also runs client-side and server-side unit tests with Karma.
     - `grunt serve` will be used alot to run the application and another good feature is grunt's injector. It will automatically restart the server or refresh your page if theres any change in server-side or client-side code.
 * NPM
