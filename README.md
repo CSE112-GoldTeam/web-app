@@ -24,7 +24,7 @@ First Run
 
 7. Use ``grunt serve`` to run the application.
 
-Build & Deploy to Continous Integration
+Build & Deploy to Continous Integration & Deployment
 -----------------------
 To build and deploy to the production branch which will be grabbed by CodeShip for testing and deploying.
 ```
