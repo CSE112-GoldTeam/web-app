@@ -377,6 +377,12 @@ module.exports = function (grunt) {
         connectCommits: false,
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
       },
+      deploy: {
+        options: {
+          remote: 'git@github.com:CSE112-GoldTeam/web-app.git',
+          branch: 'deploy'
+        }
+      },
       heroku: {
         options: {
           remote: 'heroku',
