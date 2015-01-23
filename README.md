@@ -17,12 +17,20 @@ First Run
         $ bower install
         $ npm install
 
-6. Start up the MongoDB server with 
+6. Start up the MongoDB server with
 
         $ mkdir db
         $ mongod --dbpath db
 
 7. Use ``grunt serve`` to run the application.
+
+Build & Deploy to Continous Integration
+-----------------------
+To build and deploy to the production branch which will be grabbed by CodeShip for testing and deploying.
+```
+grunt build:dist
+grunt buildcontrol:deploy
+```
 
 More Generators
 -----------------------
@@ -81,7 +89,6 @@ Tools
     - Also runs client-side and server-side unit tests with Karma.
     - `grunt serve` will be used alot to run the application and another good feature is grunt's injector. It will automatically restart the server or refresh your page if theres any change in server-side or client-side code.
 * NPM
-    - Node Package Manager - a bunch of package for node including all the tools above. 
-    - Running `npm install` will look for the `package.json` file to install all the server-side dependencies. 
+    - Node Package Manager - a bunch of package for node including all the tools above.
+    - Running `npm install` will look for the `package.json` file to install all the server-side dependencies.
 * More to come
- 
