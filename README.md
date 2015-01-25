@@ -11,13 +11,14 @@ First Run
         $ npm install -g yo
         $ npm install -g bower
         
-3.1. (Optional) [Angular Fullstack Generator](https://github.com/DaftMonk/generator-angular-fullstack#generators) for yo, 
-not necessary for running the app, but it has useful features to auto-generate code:
+ (Optional) [Angular Fullstack Generator](https://github.com/DaftMonk/generator-angular-fullstack#generators) for yo, not necessary for running the app, but it has useful features to auto-generate code:
+        
         $ npm install -g angular-fullstack-generator
 4. Navigate to the web-app directory
 5. Install npm and bower dependencies:
 
-        $ bower install && npm install
+        $ bower install 
+        $ npm install
 
 6. Start up the MongoDB server with
 
