@@ -13,8 +13,16 @@ Here are the steps to do that:
 5. ``git push -u origin branch-name`` This will push your branch to Github. You only need to do this once per branch.
 6. Submit a pull request
 
-Commit Messages
----------------
+Commits
+-------
+Each commit should reflect a small, isolated change. Avoid having one commit cover an entire feature. 
+For example, if the feature you're working on is user registration you might have the following commits:
+
+1. Added HTML for registration page.
+2. Styled registration page.
+3. Created API for registering new user.
+4. Added Angular controller to handle user registration.
+
 Please refrain from garbage commit messages like *jfdkjsfkjsf*. All pull requests
 with these will be denied. Instead, use the following template:
 
