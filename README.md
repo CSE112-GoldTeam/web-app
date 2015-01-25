@@ -13,7 +13,7 @@ First Run
         
  (Optional) install [Angular Fullstack Generator](https://github.com/DaftMonk/generator-angular-fullstack#generators) for yo, not necessary for running the app, but it has useful features to auto-generate code:
         
-        $ npm install -g angular-fullstack-generator
+        $ npm install -g generator-angular-fullstack
 4. Navigate to the web-app directory
 5. Install npm and bower dependencies:
 
