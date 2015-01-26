@@ -9,7 +9,7 @@ Here are the steps to do that:
 1. ``git checkout develop`` This will switch you to the develop branch.
 2. ``git pull`` This will make sure your develop branch is up to date.
 3. ``git checkout -b branch-name`` This will checkout a new branch with the name *branch-name*.
-4. Write some code, commit it. Continue to step 5 when done writing code
+4. Write some code, commit it. Make sure to add '''--skip-ci''' or '''[skip ci]''' to the commit message of the last commit before you push. So it does not get built by CodeShip. Continue to step 5 when done writing code
 5. ``git push -u origin branch-name`` This will push your branch to Github. You only need to do this once per branch.
 6. Submit a pull request
 
