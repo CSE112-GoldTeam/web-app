@@ -20,39 +20,43 @@ exports.index = function(req, res) {
 
   // query the collection
   Users.find({ }, function(err, users) {
-    if (err === undefined) { return handleError(res, err); }
-    res.json(200, users);
+    if (err) { return handleError(res, err); }
+    return res.json(200, users);
     //res.send(users);
   });
 };
 
+//Create a User
+exports.create = function(req, res) {
 
-// // Get list of things
-// exports.index = function(req, res) {
-//   User.find(function (err, things) {
-//     if(err) { return handleError(res, err); }
-//     return res.json(200, things);
-//   });
-// };
-//
-// // Get a single thing
-// exports.show = function(req, res) {
-//   User.findById(req.params.id, function (err, thing) {
-//     if(err) { return handleError(res, err); }
-//     if(!thing) { return res.send(404); }
-//     return res.json(thing);
-//   });
-// };
-//
-// // Creates a new thing in the DB.
-// exports.create = function(req, res) {
-//   User.create(req.body, function(err, thing) {
-//     if(err) { return handleError(res, err); }
-//     return res.json(201, thing);
-//   });
-// };
-//
-// // Updates an existing thing in the DB.
+  // grab our db object from the request
+  var db = req.db;
+  var Users = db.get('users');
+
+  // query to create entry in collection
+  Users.insert(req.body, function (err, doc) {
+    if (err) { return handleError(res, err); }
+    return res.json(201,doc);
+  });
+};
+
+// Get a single user
+exports.show = function(req, res) {
+
+  // grab our db object from the request
+  var db = req.db;
+  var Users = db.get('users');
+
+  // query to create entry in collection
+  Users.findById(req.params.id, function (err, doc) {
+    if(err) { return handleError(res, err); }
+    if(!doc) { return res.sendStatus(404); }// res.send is deprecated
+    return res.json(doc);
+  });
+};
+
+//TODO: Convert Moongose DELETE to Monk DELETE
+// Updates an existing thing in the DB.
 // exports.update = function(req, res) {
 //   if(req.body._id) { delete req.body._id; }
 //   User.findById(req.params.id, function (err, thing) {
@@ -65,19 +69,20 @@ exports.index = function(req, res) {
 //     });
 //   });
 // };
-//
-// // Deletes a thing from the DB.
-// exports.destroy = function(req, res) {
-//   User.findById(req.params.id, function (err, thing) {
-//     if(err) { return handleError(res, err); }
-//     if(!thing) { return res.send(404); }
-//     thing.remove(function(err) {
-//       if(err) { return handleError(res, err); }
-//       return res.send(204);
-//     });
-//   });
-// };
-//
+
+// Deletes a thing from the DB.
+exports.destroy = function(req, res) {
+  // grab our db object from the request
+  var db = req.db;
+  var Users = db.get('users');
+
+  // query to create entry in collection
+  Users.remove({ _id: req.params.id }, function(err) {
+    if(err) { return handleError(res, err); }
+    return res.sendStatus(204);
+  });
+};
+
 function handleError(res, err) {
-  return res.send(500, err);
+  return res.sendStatus(500, err);
 }
