@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }}</title>
+    <title>Welcome to {{ title }}!</title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
 
     <!-- Bootstrap CSS -->
@@ -12,10 +12,30 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="col-sm-3"></div>
+<div class="container col-sm-6">
+    <div class="header text-center">
+    <h1>Welcome to {{ title }}!</h1>
 
-<h1>{{ title }}</h1>
-
-<p>Welcome1 to {{ title }}</p>
-
+    <!-- <p>Welcome1 to {{ title }}</p> -->
+    </div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <img src="http://placehold.it/512x150" class="img-rounded" class="img-responsive">
+        </div>
+        <label class="">Enter confirmation code</label>
+        <br>
+        <span>Description text</span>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-success">Next</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="col-sm-3"></div>
 </body>
 </html>
