@@ -22,7 +22,6 @@ exports.index = function(req, res) {
   Users.find({ }, function(err, users) {
     if (err) { return handleError(res, err); }
     return res.json(200, users);
-    //res.send(users);
   });
 };
 
@@ -44,31 +43,22 @@ exports.create = function(req, res) {
 exports.show = function(req, res) {
 
   // grab our db object from the request
-  var db = req.db;
-  var Users = db.get('users');
+    var db = req.db;
+    var Users = db.get('users');
 
-  // query to create entry in collection
-  Users.findById(req.params.id, function (err, doc) {
+    // query to create entry in collection
+    Users.findById(req.params.id, function (err, doc) {
     if(err) { return handleError(res, err); }
     if(!doc) { return res.sendStatus(404); }// res.send is deprecated
     return res.json(doc);
   });
 };
 
-//TODO: Convert Moongose DELETE to Monk DELETE
-// Updates an existing thing in the DB.
-// exports.update = function(req, res) {
-//   if(req.body._id) { delete req.body._id; }
-//   User.findById(req.params.id, function (err, thing) {
-//     if (err) { return handleError(res, err); }
-//     if(!thing) { return res.send(404); }
-//     var updated = _.merge(thing, req.body);
-//     updated.save(function (err) {
-//       if (err) { return handleError(res, err); }
-//       return res.json(200, thing);
-//     });
-//   });
-// };
+//TODO: Convert Moongose PUT to Monk PUT
+Updates an existing thing in the DB.
+exports.update = function(req, res) {
+
+};
 
 // Deletes a thing from the DB.
 exports.destroy = function(req, res) {
