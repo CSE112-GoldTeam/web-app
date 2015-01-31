@@ -14,7 +14,6 @@ var routes = require('./routes/index');
 var business = require('./routes/business');
 var checkin = require('./routes/checkin');
 var users = require('./routes/users');
-var code = require('./routes/code');
 
 var app = express();
 
@@ -39,8 +38,6 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/', business);
 app.use('/', checkin);
-app.use('/', code);
-
 app.use('/users', users);
 
 
