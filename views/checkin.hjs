@@ -12,18 +12,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<!DOCTYPE html>
-<html lang="en">
 <body>
 <div class="container">
-    <!-- <div style="width:100em;height:5em;border:1px solid #000;">Company Logo</div> --!>
     <h1 style="text-align:center;margin-top: 3em">Welcome to Company!</h1>
     <img style="display:block;margin-left: auto;margin-right:auto" src="http://placehold.it/500x200" alt="..." class="img-thumbnail">
     <button type="button" class="btn btn-success" style="display:block;margin-left:auto;margin-right:auto;margin-top:5em">Check In</button></div>
     <div style="text-align:center;margin-top: 1em"><a href="#">I don't have an appointment.</a></div>
-
 </body>
-</html>
 </body>
 </html>
 
