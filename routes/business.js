@@ -6,4 +6,8 @@ router.get('/sample', function (req, res, next) {
     res.render('index', {title: 'Express'});
 });
 
+router.get('/manageForms', function (req, res, next) {
+    res.render('manageForms', {title: 'Express'});
+});
+
 module.exports = router;
