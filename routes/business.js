@@ -8,6 +8,7 @@ router.get('/sample', function (req, res, next) {
 
 router.get('/manageForms', function (req, res, next) {
     res.render('manageForms', {title: 'Express'});
+});
 
 router.get('/settings', function (req, res, next) {
     res.render('settings', {title: 'Express'});
