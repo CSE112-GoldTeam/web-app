@@ -6,11 +6,10 @@ router.get('/sample2', function (req, res, next) {
     res.render('index', {title: 'Express'});
 });
 
-<<<<<<< HEAD
 router.get('/formscomplete', function (req, res, next) {
   res.render('formscomplete', {title: 'Express'});
 });
-=======
+
 router.get('/welcome', function (req, res, next) {
     res.render('welcome', {title: 'Express'});
 });
@@ -23,5 +22,4 @@ router.get('/checkin', function (req, res, next) {
     res.render('checkin', {title: 'Express'});
 });
 
->>>>>>> origin/develop
 module.exports = router;
