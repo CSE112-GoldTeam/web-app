@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+
+<style>
+    .container
+    {
+        border: solid 1px black;
+    }
+</style>
+
+<body>
+
+<div class="header">
+    <h1>Manage Forms<br>
+      <small>Set up what forms to use from templates or create your own.</small></h1>
+</div>
+
+<br>
+
+<div class="container">
+  <div class="row">
+        <div class="col-md-8">
+            <h2>Edit Existing Forms<br>
+                <small>Choose an existing form to edit or create a new one from scratch</small></h2>
+        </div>
+    </div>
+    <div class="row">
+        <form class="form-vertical">
+            <div class="col-md-3 "> 
+              <img src="http://placehold.it/250x300">
+              <center>First Time Registration</center>
+            </div>
+            <div class="col-md-3" >
+              <img src="http://placehold.it/250x300">
+              <center>Other Form</center>
+            </div>
+            <div class="col-md-3 " >
+              <img src="http://placehold.it/250x300">
+              <center>Other Form</center>
+            </div>
+        </form>
+        
+        <button type="button" class="btn btn-default btn-lg">
+            <span class="glyphicon glyphicon-plus"></span> 
+        </button> 
+    </div>
+</div>
+
+<br>
+
+<div class="container">
+  <div class="row">
+        <div class="col-md-6">
+            <h2>Create a New Form with a Template<br>
+            <small>Choose any of the following templates to create a new form</small></h2>
+        </div>
+    </div>
+    <div class="row">
+        <form class="form-vertical">
+            <div class="col-md-3 "> 
+              <img src="http://placehold.it/250x300">
+              <center>First Time Registration</center>
+            </div>
+            <div class="col-md-3" >
+              <img src="http://placehold.it/250x300">
+              <center>Other Form</center>
+            </div>
+            <div class="col-md-3 " >
+              <img src="http://placehold.it/250x300">
+              <center>Other Form</center>
+            </div>
+            <div class="col-md-3 "> 
+              <img src="http://placehold.it/250x300">
+              <center>First Time Registration</center>
+            </div>
+        </form>
+        
+        <form class="form-vertical">
+            <div class="col-md-3 "> 
+              <img src="http://placehold.it/250x300">
+              <center>First Time Registration</center>
+            </div>
+            <div class="col-md-3" >
+              <img src="http://placehold.it/250x300">
+              <center>Other Form</center>
+            </div>
+            <div class="col-md-3 " >
+              <img src="http://placehold.it/250x300">
+              <center>Other Form</center>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
