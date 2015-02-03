@@ -10,4 +10,8 @@ router.get('/welcome', function (req, res, next) {
     res.render('welcome', {title: 'Express'});
 });
 
+router.get('/walkin', function (req, res, next) {
+    res.render('walkin', {title: 'Express'});
+});
+
 module.exports = router;
