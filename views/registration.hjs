@@ -69,10 +69,9 @@
     </nav>
     <div class="jumbotron">
 <div class="container">
-<table class="center"cellspacing="5" border="0" cellpadding="0">
-<tr valign="top" align="left">
-    <td width="300">
         <h3>Create an Account</h3>
+        <img src="http://placehold.it/350x150" class="company-banner">
+          <p class="company-info">Insert paragraph and stuff here</p>
         <form class="regis">
             <input type="text" name="companyname">
             <br>
@@ -101,14 +100,6 @@
             <br>
             <input type="submit" value="SignUp">
         </form>
-    </td>
-    <td width="1" bgcolor="#00000"><BR></td>
-    <td width="150" valign="top" align="left">
-    <img src="http://placehold.it/350x150" class="company-banner">
-    <p class="company-info">Insert paragraph and stuff here</p>
-    </td>
-</tr>
-</table>
 </div>
 </div>
 
