@@ -6,6 +6,11 @@ router.get('/sample', function (req, res, next) {
     res.render('index', {title: 'Express'});
 });
 
+
+router.get('/registration', function (req, res, next) {
+    res.render('registration');
+});
+
 /* GET landing page.*/
 router.get('/landing', function (req, res, next) {
     res.render('landing', {title: 'Landing'});
