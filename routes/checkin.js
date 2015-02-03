@@ -6,6 +6,10 @@ router.get('/sample2', function (req, res, next) {
     res.render('index', {title: 'Express'});
 });
 
+router.get('/office/:id/done', function (req, res, next) {
+    res.render('done', {title: 'Express'});
+});
+
 router.get('/formscomplete', function (req, res, next) {
   res.render('formscomplete', {title: 'Express'});
 });
