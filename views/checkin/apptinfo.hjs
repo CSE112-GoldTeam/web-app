@@ -13,35 +13,42 @@
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
     <div class="col-md-4"></div>
-      <div class="col-md-4">
+    <div class="col-md-4">
         <h1>
-          <img src="http://placehold.it/140x100">
-          Hi, John
+            <img src="http://placehold.it/140x100">
+            Hi, John
         </h1>
-        <p class="lead">Appointment Time: 10:00 am</p>
-        <div class="col-md-4">
-          <p>Name</p>
-          <p>DOB</p>
-          <p>Phone</p>
-        </div>
-        <div class="col-md-4">
-          <p>John Doe</p>
-          <p>01/02/03</p>
-          <p>(123)456-7890</p>
-        </div>
-      </div>
-      
 
-    </div><!-- /.container -->
-    <div class="col-md-4"></div>
-    <div class="col-md-2">
-         <button class="btn btn-lg btn-primary btn-block" type="submit">Not you?</button>
+        <p class="lead">Appointment Time: 10:00 am</p>
+
+        <div class="col-md-4">
+            <p>Name</p>
+
+            <p>DOB</p>
+
+            <p>Phone</p>
+        </div>
+        <div class="col-md-4">
+            <p>John Doe</p>
+
+            <p>01/02/03</p>
+
+            <p>(123)456-7890</p>
+        </div>
     </div>
-    <div class="col-md-2">
-         <button class="btn btn-lg btn-primary btn-block" type="submit">Next</button>
-    </div>
+
+
+</div>
+<!-- /.container -->
+<div class="col-md-4"></div>
+<div class="col-md-2">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Not you?</button>
+</div>
+<div class="col-md-2">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Next</button>
+</div>
 </body>
 </html>
-  
+
