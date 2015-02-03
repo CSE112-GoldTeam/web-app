@@ -14,4 +14,8 @@ router.get('/walkin', function (req, res, next) {
     res.render('walkin', {title: 'Express'});
 });
 
+router.get('/checkin', function (req, res, next) {
+    res.render('checkin', {title: 'Express'});
+});
+
 module.exports = router;
