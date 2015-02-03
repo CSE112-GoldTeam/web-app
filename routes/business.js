@@ -6,4 +6,8 @@ router.get('/sample', function (req, res, next) {
     res.render('index', {title: 'Express'});
 });
 
+router.get('/settings', function (req, res, next) {
+    res.render('settings', {title: 'Express'});
+});
+
 module.exports = router;
