@@ -1,33 +1,25 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/sample', function (req, res, next) {
-    res.render('index', {title: 'Express'});
+
+//Company Registration
+router.get('/register', function (req, res, next) {
+    res.render('business/register');
 });
 
-
-router.get('/registration', function (req, res, next) {
-    res.render('registration');
+//Landing Page
+router.get('/', function (req, res, next) {
+    res.render('business/landing', {title: 'Landing Page'});
 });
 
-/* GET landing page.*/
-router.get('/landing', function (req, res, next) {
-    res.render('landing', {title: 'Landing'});
+//Enter Code
+router.get('/entercode', function (req, res, next) {
+    res.render('checkin/entercode', {title: 'CompanyName'});
 });
 
-router.get('/manageForms', function (req, res, next) {
-    res.render('manageForms', {title: 'Express'});
-});
-
-
-/* GET enter code page. */
-router.get('/code', function (req, res, next) {
-    res.render('code', {title: 'CompanyName'});
-});
-
-router.get('/settings', function (req, res, next) {
-    res.render('settings', {title: 'Express'});
+//Office Configuration
+router.get('/config', function (req, res, next) {
+    res.render('config', {title: 'Express'});
 });
 
 module.exports = router;
