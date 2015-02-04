@@ -11,6 +11,11 @@ router.get('/office/:id/apptinfo', function (req, res, next) {
     res.render('checkin/apptinfo', {title: 'Express'});
 });
 
+//Enter Code
+router.get('/office/:id/entercode', function (req, res, next) {
+    res.render('checkin/entercode', {title: 'CompanyName'});
+});
+
 //No Code
 router.get('/office/:id/nocode', function (req, res, next) {
     res.render('checkin/apptinfo', {title: 'Express'});
