@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Bare - Start Bootstrap Template</title>
+    <title>{{ title }}</title>
 
     <link rel='stylesheet' href='/stylesheets/style.css'/>
 
