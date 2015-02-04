@@ -15,28 +15,6 @@
 
 <!-- start of outer container -->
 <div class="container-fluid">
-
-    <!-- Header section where some links exist as well a login button-->
-    <div class="head">
-        <div class="col-xs-1 col-xs-offset-1">
-            <a href="#">Company Logo</a>
-        </div>
-
-        <div class="col-xs-2 col-xs-offset-4">
-            <a href="#">Features</a>
-        </div>
-
-        <div class="col-xs-2">
-            <a href="#" class="text-">About us</a>
-        </div>
-
-        <div class="col-xs-1">
-            <a href="#" type="button" class="btn btn-success btn-md">Log in</a>
-        </div>
-    </div>
-    <br><br><br><br>
-
-
     <div class="jumbocontainer">
 
         <!-- container for the jumbotron -->
@@ -78,25 +56,6 @@
         </div>
 
     </div>
-
-
-    <!-- Footer which will contain the links for more company information on RoboBetty-->
-    <div class="foot">
-        <div class="col-xs-6  col-xs-offset-3">
-            <div class="linkbox text-center">
-
-                <a href="#" class="text-muted">About us</a>
-                <a href="#" class="text-muted">Store</a>
-                <a href="#" class="text-muted">Jobs</a>
-                <a href="#" class="text-muted">Privacy</a>
-                <a href="#" class="text-muted">Terms</a>
-                <a href="#" class="text-muted">Support</a>
-
-            </div>
-        </div>
-    </div>
-
-    <br><br><br>
 
 </div>
 </body>
