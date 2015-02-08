@@ -1,1 +1,20 @@
 
+/* shared class written to be shared across checkin and done page */
+.header {
+	text-align:center;
+	margin-top: 3em;
+}
+
+/* shared class written to be shared across checkin and done page */
+.checkinphoto {
+	display:block;
+	margin-left: auto;
+	margin-right:auto;
+	margin-top:2em;
+}
+
+.checkinbutton {
+	margin-top:3em;
+	width:180px;
+	height:40px;
+}
