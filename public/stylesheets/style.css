@@ -1,1 +1,17 @@
+/* Begin: Changes made by William Huang 2/7/15 */
+html, body {
+    height: 100%;
+}
 
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+/* These are global changes applied to every page that is linked to this stylesheet */
+/* End: Changes made by William Huang 2/7/15 */
