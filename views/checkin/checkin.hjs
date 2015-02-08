@@ -10,12 +10,23 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container">
-    <h1 style="text-align:center;margin-top: 3em">Welcome to Company!</h1>
-    <img style="display:block;margin-left: auto;margin-right:auto" src="http://placehold.it/500x200" alt="..."
-         class="img-thumbnail">
-    <button type="button" class="btn btn-success"
-            style="display:block;margin-left:auto;margin-right:auto;margin-top:5em">Check In
+    
+<!-- this nav bar is consistent with PK's navbar -->
+<header role="banner" class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <div class="navbar-inverse side-collapse in">
+        <ul class="nav navbar-nav">    
+            <li><a href="#">Company Logo</a></li>      
+        </ul>
+    </div>
+  </div>
+</header>
+
+<div class="container"> 
+    <h1 class ="header">Welcome to Company!</h1>
+    <img class="checkinphoto" src="http://placehold.it/500x200" alt="...">
+    <button type="button" class="btn btn-success checkinbutton"
+            style="display:block;margin-left:auto;margin-right:auto">Check In
     </button>
 </div>
 <div style="text-align:center;margin-top: 1em"><a href="#">I don't have an appointment.</a></div>
