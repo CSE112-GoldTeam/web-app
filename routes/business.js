@@ -9,7 +9,7 @@ router.get('/register', function (req, res, next) {
 
 //Landing Page
 router.get('/', function (req, res, next) {
-    res.render('business/landing', {title: 'Landing Page'});
+    res.render('business/landing', {title: 'Jon Page'});
 });
 
 //Office Configuration
