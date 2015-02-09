@@ -7,7 +7,7 @@ gulp.task('server', function () {
     server.run({
         file: './bin/www'
     });
-
+    // delete later
     // Restart the server when file changes
     gulp.watch(['app/**/*.html'], server.notify);
     gulp.watch(['app/styles/**/*.scss'], ['styles:scss']);
