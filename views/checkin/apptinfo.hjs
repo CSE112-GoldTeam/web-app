@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h1>
+            <img src="http://placehold.it/140x100">
+            Hi, John
+        </h1>
+
+        <p class="lead">Appointment Time: 10:00 am</p>
+
+        <div class="col-md-4">
+            <p>Name</p>
+
+            <p>DOB</p>
+
+            <p>Phone</p>
+        </div>
+        <div class="col-md-4">
+            <p>John Doe</p>
+
+            <p>01/02/03</p>
+
+            <p>(123)456-7890</p>
+        </div>
+    </div>
+
+
+</div>
+<!-- /.container -->
+<div class="col-md-4"></div>
+<div class="col-md-2">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Not you?</button>
+</div>
+<div class="col-md-2">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Next</button>
+</div>
+</body>
+</html>
+
