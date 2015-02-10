@@ -14,6 +14,15 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var subpath = express();// API path for swagger
+
+var swagger = require("swagger-node-express").createNew(app);
+var models = require("./routes/api/config/models.js");
+
+app.use("/api", subpath);
+swagger.setAppHandler(subpath);
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,7 +43,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', routes);
-app.use('/api/users', require('./api/user'));
+app.use('/api/users', require('./routes/api/user'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
