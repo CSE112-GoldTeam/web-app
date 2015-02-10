@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>Setting Up<br>
+        <small>Set up how you want your check in process to work</small>
+    </h1>
+</div>
+
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Check In Configurations<br>
+                <small>Lorem ipsum explanations</small>
+            </h2>
+        </div>
+    </div>
+    <div class="row">
+        <form class="form-vertical">
+            <div class="col-md-5 col-md-offset-1">
+                <h3 class="config-heading">Location:</h3>
+                <label class="radio" for="loc1">
+                    <input name="radioLocation" id="loc1" value="In Office Only" checked="checked" type="radio">
+                    In Office Only</label>
+                <label class="radio" for="loc2">
+                    <input name="radioLocation" id="loc2" value="Outside Office Only" type="radio">
+                    Outside Office Only</label>
+                <label class="radio" for="loc3">
+                    <input name="radioLocation" id="loc3" value="Both" type="radio">
+                    Both</label>
+            </div>
+        </form>
+
+        <form class="form-vertical">
+            <div class="col-md-6">
+                <h3 class="config-heading">Device Type:</h3>
+                <label class="check" for="dev1">
+                    <input name="deviceType" id="dev1" value="Tablet" type="checkbox">
+                    Tablet</label><br>
+                <label class="check" for="dev2">
+                    <input name="deviceType" id="dev2" value="PC" type="checkbox">
+                    PC</label><br>
+                <label class="check" for="dev3">
+                    <input name="deviceType" id="dev3" value="Phone" type="checkbox">
+                    Phone</label>
+            </div>
+        </form>
+    </div>
+</div>
+
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Other Configurations</h2>
+        </div>
+    </div>
+    <div class="row">
+        <form class="form-vertical">
+            <div class="col-md-5 col-md-offset-1">
+                <h3 class="config-heading">Location:</h3>
+                <label class="radio" for="loc1">
+                    <input name="radioLocation" id="loc1" value="In Office Only" checked="checked" type="radio">
+                    Lorem Ipsum</label>
+                <label class="radio" for="loc2">
+                    <input name="radioLocation" id="loc2" value="Outside Office Only" type="radio">
+                    Lorem Ipsum</label>
+                <label class="radio" for="loc3">
+                    <input name="radioLocation" id="loc3" value="Both" type="radio">
+                    Lorem Ipsum</label>
+            </div>
+        </form>
+
+        <form class="form-vertical">
+            <div class="col-md-6">
+                <h3 class="config-heading">Lorem Ipsum</h3>
+                <label class="check" for="dev1">
+                    <input name="deviceType" id="dev1" value="Tablet" type="checkbox">
+                    Lorem Ipsum</label><br>
+                <label class="check" for="dev2">
+                    <input name="deviceType" id="dev2" value="PC" type="checkbox">
+                    Lorem Ipsum</label><br>
+                <label class="check" for="dev3">
+                    <input name="deviceType" id="dev3" value="Phone" type="checkbox">
+                    Lorem Ipsum</label>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+

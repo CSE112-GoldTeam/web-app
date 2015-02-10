@@ -10,19 +10,10 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/robobetty');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var business = require('./routes/business');
+var checkin = require('./routes/checkin');
 
 var app = express();
-var subpath = express();// API path for swagger
-
-var swagger = require("swagger-node-express").createNew(app);
-var models = require("./routes/api/config/models.js");
-
-app.use("/api", subpath);
-swagger.setAppHandler(subpath);
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -42,8 +33,10 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/', routes);
 app.use('/api/users', require('./routes/api/user'));
+
+app.use('/', business);
+app.use('/', checkin);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

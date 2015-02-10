@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+       
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+   
+<div class="col-md-4 col-md-offset-4">
+
+         
+    <form class="form-inline">
+                <h2 class="form-signin-heading">Please enter the following information</h2>
+               
+        <fieldset>
+
+                    <label class="inputFirst" class="sr-only">First Name</label>
+                    <input type="firstName" name="inputFirst" class="form-control" required autofocus>
+                   
+        </fieldset>
+               
+        <fieldset>
+                    <label class="inputLast" class="sr-only">Last Name</label>
+                    <input type="lastName" id="inputLast" class="form-control" required autofocus>
+                   
+        </fieldset>
+               
+        <fieldset>
+                    <label class="inputDOB" class="sr-only">Date of Birth</label>
+                    <input type="birthDate" id="inputDOB" class="form-control" placeholder='MM/DD/YY' required
+                           autofocus>
+                   
+        </fieldset>
+               
+        <div class="checkbox">
+                   
+        </div>
+               
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Next</button>
+             
+    </form>
+       
+</div>
+   
+
+    </div> <!-- /container -->
+</body>
+
+</html>
+
+
+

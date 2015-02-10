@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1 style="text-align:center;margin-top: 3em">Welcome to Company!</h1>
+    <img style="display:block;margin-left: auto;margin-right:auto" src="http://placehold.it/500x200" alt="..."
+         class="img-thumbnail">
+    <button type="button" class="btn btn-success"
+            style="display:block;margin-left:auto;margin-right:auto;margin-top:5em">Check In
+    </button>
+</div>
+<div style="text-align:center;margin-top: 1em"><a href="#">I don't have an appointment.</a></div>
+</body>
+</html>
+
