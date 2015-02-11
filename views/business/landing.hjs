@@ -8,69 +8,48 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
-
-
 <body>
-<header>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">
-            RoboBetty
-        </a>
-      </div>
-      <div class="navbar-padding-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <button type="button" class="btn" id="login-btn-navbar">Log In</button>
-            </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-<!-- start of outer container -->
-<div class="container-fluid">
-    <div>
-
-        <!-- container for the jumbotron -->
-        <div>
-
-            <div class="col-xs-5 col-xs-offset-1">
+    <header>
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <div id="company-logo">RoboBetty</div>
+            </a>
+          </div>
+          <div class="navbar-padding-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#">Features</a>
+                </li>
+                <li>
+                    <a href="#">About Us</a>
+                </li>
+                <li>
+                    <button type="button" class="btn custom-button" id="login-btn-navbar">Log In</button>
+                </li>
+            </ul>
+          </div>
+        </nav>
+    </header>
+    <!-- start of outer container -->
+    <div class="container-fluid" id="container-landing-page">
+        <div class="row" id="first-section">
+            <div id="intro" class="col-xs-6">
                 <h3 class="bold text-center">The old rules of waiting are over.</h3>
-
-                <p class="text-center">Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum
-                    laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales
-                    pulvinar tempor. Cum Sociees natoque panatibus et magnis dis parturient montes, nascetur ridiculus
-                    mus. Nam fermentum, null luctus pharetra vulputate, felix tellus mellis orci, sed rhoncus sapien
-                    nunc eget odio.</p>
-
+                <p class="text-center">Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor. Cum Sociees natoque panatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, null luctus pharetra vulputate, felix tellus mellis orci, sed rhoncus sapien nunc eget odio.</p>
                 <div class="form-group">
                     <div class="col-xs-9">
-                        <input type="company" class="small form-control" id="inputCompany"
-                               placeholder="Step 1: Enter company name">
+                        <input type="company" class="small form-control" id="inputCompany" placeholder="Step 1: Enter company name">
                     </div>
                     <div class="col-xs-1 text-small">
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="submit" class="btn custom-button">Submit</button>
                     </div>
                 </div>
-
             </div>
-
-            <div class="col-xs-5 col-xs-offset 1">
-                <img src="http://placehold.it/350x420"/>
-            </div>
-
-        </div>
-
-
-        <div class="secondjumbo">
-            <div class="col-xs-10 col-xsoffset 2">
-                <img src="http://placehold.it/350x420"/>
-                <img src="http://placehold.it/350x420"/>
+            <div class="col-xs-6">
+                <img id="intro-image" src="http://placehold.it/500x420"/>
             </div>
         </div>
-
     </div>
-
-</div>
 </body>
 </html>
