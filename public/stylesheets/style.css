@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Lato';
+  src: url(http://fonts.googleapis.com/css?family=Lato);
+}
+
+html *
+{
+   font-family: Lato !important;
+}
+
 
 /* shared class written to be shared across checkin and done page */
 .header {
@@ -118,7 +128,7 @@
 
 #first-section {
   background-color: #999999;
-  height: 75vh;
+  height: 70vh;
   padding-top: 160px;
 }
 
@@ -128,8 +138,10 @@
 }
 
 #intro-image {
-  margin-top: -75px;
-  margin-left: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -100px;
 }
 
 #second-section {
@@ -197,4 +209,17 @@ a:hover {
   color: #ffffff;
 }
 
-/********************************************** */
+/***********************************************/
+
+/********************* Registration Page **************************/
+
+.regis {
+  display: block;
+  margin-bottom: 20px;
+  height: 50px;
+  width: 300px;
+}
+
+
+
+/***********************************************/
