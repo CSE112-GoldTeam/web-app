@@ -1,5 +1,5 @@
 describe ("test", function(){
 	it("should work", function () {
-		expect(true).toBe(true)
+		expect(true).toBe(false)
 	})
 })
