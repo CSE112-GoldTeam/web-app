@@ -112,8 +112,8 @@
 }
 
 /* Made navbar static so need to push container down*/
-#container-landing-page {
-  margin-top: 30px;
+.container-margin {
+  margin-top: 50px;
 }
 
 #first-section {
