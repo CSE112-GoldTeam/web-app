@@ -30,44 +30,30 @@
         </ul>
       </div>
     </nav>
-    <div class="jumbotron">
-        <div class="container">
-            <h3>Create an Account</h3>
-            <img src="http://placehold.it/350x150" class="company-banner">
+    <div class="container container-margin">
+            <div class="row">
+                <div class="col-xs-offset-1 col-xs-4">
+                    <h2>Create an Account</h2>
+                </div>
+            </div>
 
-            <p class="company-info">Insert paragraph and stuff here</p>
-
-            <form class="regis">
-                <input type="text" name="companyname">
-                <br>
-                Company Name
-                <br>
-                <br>
-                <input type="text" name="fullname">
-                <br>
-                Your full name
-                <br>
-                <br>
-                <input type="text" name="email">
-                <br>
-                Email
-                <br>
-                <br>
-                <input type="tel" name="number">
-                <br>
-                Phone Number
-                <br>
-                <br>
-                <input type="password" name="pw">
-                <br>
-                Password
-                <br>
-                <br>
-                <input type="submit" value="SignUp">
-            </form>
-        </div>
+            <div class="row text-center" id="regis-container">
+                <div class="col-xs-offset-1 col-xs-4" id="form-separator">
+                    <form>
+                        <input class="regis" type="text" name="companyname" placeholder="COMPANY NAME">
+                        <input class="regis" type="text" name="fullname" placeholder="YOUR FULL NAME">
+                        <input class="regis" type="text" name="email" placeholder="EMAIL">
+                        <input class="regis" type="tel" name="number" placeholder="PHONE NUMBER">
+                        <input class="regis" type="password" name="pw" placeholder="PASSWORD">
+                        <input class="btn custom-button" type="submit" value="SignUp">
+                    </form>
+                </div>
+                <div class="col-xs-7">
+                    <img class="center-image" src="http://placehold.it/500x420"/>
+                </div>
+            </div>
     </div>
-    <footer class="footer">
+    <footer class="footer navbar-fixed-bottom">
         <div class="container">
             <ul class="list-inline footer-links text-center">
                 <li><a href="">About Us</a></li>
