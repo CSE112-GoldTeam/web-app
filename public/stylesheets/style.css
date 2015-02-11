@@ -1,1 +1,26 @@
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+.navbar-custom {
+    background-color:#33343E;
+    border-radius:0;
+
+}
+.navbar-custom .navbar-brand {
+    color: #EAEAEB;
+}
+
 
