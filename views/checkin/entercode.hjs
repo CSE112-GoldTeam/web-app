@@ -14,23 +14,14 @@ p.padding{
     padding:0.5cm;
 }
 </style>
-<!---->
 <nav class="navbar navbar-custom navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Company Logo</a>
   </div>
 </nav>
-<!---->
 <body>
-<!---->
-
-<!---->
-
-<!---->
-    
     <h4 style = "text-align:left"> &nbsp;&nbsp; Your Check-in Progress:</h4>
-
     <div class="container" class="centeredz">
         <div class="progress">
         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="10"
