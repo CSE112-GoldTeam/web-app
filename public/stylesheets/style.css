@@ -86,18 +86,55 @@
 
 #company-logo {
   margin-left: 50px;
+  color: #ffffff;
 }
 
 #login-btn-navbar {
   margin-top: 8px;
   margin-right: 100px;
   margin-left: 15px;
+}
+/***********************************************/
+
+/********************* Landing Page **************************/
+
+.custom-button {
   background-color: #21ca6b;
   color: #ffffff;
   font-family: 'Lato', sans-serif;
+  border-radius: 0 !important; /* Overrides bootstrap rounded corners*/
+  width: 100px;
+}
+
+.custom-button:hover {
+  background-color: #1eb962;
+  color: #ffffff;
+}
+
+/* Made navbar static so need to push container down*/
+#container-landing-page {
+  margin-top: 30px;
+}
+
+#first-section {
+  background-color: #999999;
+  height: 75vh;
+  padding-top: 160px;
+}
+
+#intro {
+  width: 40%;
+  margin-left: 130px;
+}
+
+#intro-image {
+  margin-top: -75px;
+  margin-left: 100px;
+}
+
+#second-section {
+  height: 50vh;
 }
 
 
-
 /***********************************************/
-
