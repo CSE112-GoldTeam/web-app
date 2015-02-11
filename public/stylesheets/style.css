@@ -132,10 +132,6 @@
   margin-left: 100px;
 }
 
-#second-section {
-  height: 50vh;
-}
-
 .testimonial {
     margin: 50px auto;
     background: #42444F;
@@ -165,6 +161,8 @@
 .testimonial-author {
     font-size: 12px;
     color: #666666;
-}​
+}
+
+
 
 /********************************************** */
