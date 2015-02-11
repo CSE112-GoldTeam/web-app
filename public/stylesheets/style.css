@@ -18,3 +18,86 @@
 	width:180px;
 	height:40px;
 }
+
+/********************* NavBar CSS **************************/
+/*
+    Editing Bootstrap navbar colors is very hacky.
+*/
+
+.navbar-default {
+  background-color: #42444f;
+  border-color: #42444f;
+}
+.navbar-default .navbar-brand {
+  color: #999999;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+  color: #ffffff;
+}
+.navbar-default .navbar-text {
+  color: #999999;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #999999;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: #ffffff;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  color: #ffffff;
+  background-color: #42444f;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  color: #ffffff;
+  background-color: #42444f;
+}
+.navbar-default .navbar-toggle {
+  border-color: #42444f;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: #42444f;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #999999;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #999999;
+}
+.navbar-default .navbar-link {
+  color: #999999;
+}
+.navbar-default .navbar-link:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #999999;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ffffff;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffffff;
+    background-color: #42444f;
+  }
+}
+
+#company-logo {
+  margin-left: 50px;
+}
+
+#login-btn-navbar {
+  margin-top: 8px;
+  margin-right: 100px;
+  margin-left: 15px;
+  background-color: #21ca6b;
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+}
+
+
+
+/***********************************************/
+
