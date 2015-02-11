@@ -136,5 +136,35 @@
   height: 50vh;
 }
 
+.testimonial {
+    margin: 50px auto;
+    background: #42444F;
+    padding: 20px 30px;
+    color: #ffffff;
+    font-style: italic;
+    width: 70%;
+}
 
-/***********************************************/
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #42444F;
+    margin-top: -50px;
+    margin-left: 140px;
+}
+
+.testimonial-author {
+    margin: 10px 0 0 120px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #999999;
+    text-align:left;
+}
+
+.testimonial-author {
+    font-size: 12px;
+    color: #666666;
+}​
+
+/********************************************** */

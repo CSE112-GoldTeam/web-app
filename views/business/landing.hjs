@@ -50,6 +50,32 @@
                 <img id="intro-image" src="http://placehold.it/500x420"/>
             </div>
         </div>
+        <div class="row" id="second-section">
+            <div class="col-xs-6">
+                <div>
+                    <blockquote class="testimonial"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <div class="arrow-down"></div>
+                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                </div>
+                <div>
+                    <blockquote class="testimonial"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <div class="arrow-down"></div>
+                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div>
+                    <blockquote class="testimonial"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <div class="arrow-down"></div>
+                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                </div>
+                <div>
+                    <blockquote class="testimonial"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <div class="arrow-down"></div>
+                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
