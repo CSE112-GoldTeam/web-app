@@ -10,7 +10,6 @@
 </head>
 
 <body>
-<header>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">
@@ -31,7 +30,6 @@
         </ul>
       </div>
     </nav>
-</header>
 <div class="jumbotron">
     <div class="container">
         <h3>Create an Account</h3>

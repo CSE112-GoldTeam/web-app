@@ -9,28 +9,26 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-default navbar-fixed-top">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <div id="company-logo">RoboBetty</div>
-            </a>
-          </div>
-          <div class="navbar-padding-right">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#">Features</a>
-                </li>
-                <li>
-                    <a href="#">About Us</a>
-                </li>
-                <li>
-                    <button type="button" class="btn custom-button" id="login-btn-navbar">Log In</button>
-                </li>
-            </ul>
-          </div>
-        </nav>
-    </header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+            <div id="company-logo">RoboBetty</div>
+        </a>
+      </div>
+      <div class="navbar-padding-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#">Features</a>
+            </li>
+            <li>
+                <a href="#">About Us</a>
+            </li>
+            <li>
+                <button type="button" class="btn custom-button" id="login-btn-navbar">Log In</button>
+            </li>
+        </ul>
+      </div>
+    </nav>
     <!-- start of outer container -->
     <div class="container-fluid" id="container-landing-page">
         <div class="row" id="first-section">
