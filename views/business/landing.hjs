@@ -40,7 +40,7 @@
                         <input type="company" class="small form-control" id="inputCompany" placeholder="Step 1: Enter company name">
                     </div>
                     <div class="col-xs-1 text-small">
-                        <button type="submit" class="btn custom-button">Submit</button>
+                        <a type="submit" class="btn custom-button" href="/register">Submit</a>
                     </div>
                 </div>
             </div>
