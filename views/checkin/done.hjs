@@ -10,21 +10,22 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="panel-heading">
-    <h1 style="text-align: center"> Thank you! Someone will be with you shortly. </h1>
-</div>
-<div class="container">
-    <div class="row centered-form">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <div class="panel-body">
-                <form role="form">
-                    <div class="form-group">
-                        <img class="img-responsive img-rounded" src="http://placehold.it/560x220" alt="">
-                    </div>
-                </form>
-            </div>
-        </div>
+
+<!-- Nav bar to match the Axure file's design -->
+<header role="banner" class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <div class="navbar-inverse side-collapse in">
+        <ul class="nav navbar-nav">    
+            <li><a href="#">Company Logo</a></li>      
+        </ul>
     </div>
+  </div>
+</header>
+   
+<!-- Took out all unnecessary divs to make consistent with checkin page design -->
+<div class="container">
+    <h1 class="header"> Thank you! Someone will be with you shortly. </h1>
+    <img class="checkinphoto" src="http://placehold.it/500x200" alt="">
 </div>
 
 </body>
