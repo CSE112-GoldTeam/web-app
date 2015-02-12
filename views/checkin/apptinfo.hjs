@@ -62,7 +62,7 @@
     <button class="btn btn-lg btn-danger btn-block" type="submit">Not you?</button>
 </div>
 <div class="col-md-2">
-    <button class="btn btn-lg btn-success btn-block custom-button" type="submit">Next</button>
+    <button class="btn btn-lg btn-success btn-block" type="submit">Next</button>
 </div>
 </body>
 </html>
