@@ -18,7 +18,7 @@ router.get('/office/:id/entercode', function (req, res, next) {
 
 //No Code
 router.get('/office/:id/nocode', function (req, res, next) {
-    res.render('checkin/apptinfo', {title: 'Express'});
+    res.render('checkin/nocode', {title: 'Express'});
 });
 
 //Checkin Start
