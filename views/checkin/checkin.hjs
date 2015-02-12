@@ -9,26 +9,26 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    
+
 <!-- this nav bar is consistent with PK's navbar -->
 <header role="banner" class="navbar navbar-fixed-top navbar-custom">
   <div class="container">
     <div class="navbar-inverse side-collapse in">
-        <ul class="nav navbar-nav">    
-            <li><a class="navbar-brand" href="#">Company Logo</a></li>      
+        <ul class="nav navbar-nav">
+            <li><a class="navbar-brand" href="#">Company Logo</a></li>
         </ul>
     </div>
   </div>
 </header>
 
-<div class="container"> 
+<div class="container">
     <h1 class ="header">Welcome to Company!</h1>
     <img class="checkinphoto" src="http://placehold.it/500x200" alt="...">
-    <button type="button" class="btn btn-success custom-button checkinbutton"
+    <a type="button" class="btn btn-success custom-button checkinbutton" href="entercode"
             style="display:block;margin-left:auto;margin-right:auto">Check In
-    </button>
+    </a>
 </div>
-<div style="text-align:center;margin-top: 1em"><a href="#">I don't have an appointment.</a></div>
+<div style="text-align:center;margin-top: 1em"><a href="nocode">I don't have an appointment.</a></div>
 </body>
 </html>
 
