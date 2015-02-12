@@ -153,6 +153,10 @@ body {
   width: 100px;
 }
 
+.custom-button:visited, .custom-button:link, .btn:visited, .btn:link {
+    color: #ffffff;
+}
+
 .custom-button:hover {
   background-color: #1eb962;
   color: #ffffff;
