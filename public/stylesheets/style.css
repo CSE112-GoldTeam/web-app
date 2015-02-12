@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Lato';
+  src: url(http://fonts.googleapis.com/css?family=Lato);
+}
+
+html *
+{
+   font-family: Lato !important;
+}
+
 /* Begin: Changes made by William Huang 2/7/15 */
 html, body {
     height: 100%;
@@ -15,3 +25,231 @@ body {
 }
 /* These are global changes applied to every page that is linked to this stylesheet */
 /* End: Changes made by William Huang 2/7/15 */
+
+/* shared class written to be shared across checkin and done page */
+.header {
+	text-align:center;
+	margin-top: 3em;
+}
+
+/* shared class written to be shared across checkin and done page */
+.checkinphoto {
+	display:block;
+	margin-left: auto;
+	margin-right:auto;
+	margin-top:2em;
+}
+
+.checkinbutton {
+	margin-top:3em;
+	width:180px;
+	height:40px;
+}
+
+/********************* NavBar CSS **************************/
+/*
+    Editing Bootstrap navbar colors is very hacky.
+*/
+
+.navbar-default {
+  background-color: #42444f;
+  border-color: #42444f;
+}
+.navbar-default .navbar-brand {
+  color: #999999;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+  color: #ffffff;
+}
+.navbar-default .navbar-text {
+  color: #999999;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #999999;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: #ffffff;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  color: #ffffff;
+  background-color: #42444f;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  color: #ffffff;
+  background-color: #42444f;
+}
+.navbar-default .navbar-toggle {
+  border-color: #42444f;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: #42444f;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #999999;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #999999;
+}
+.navbar-default .navbar-link {
+  color: #999999;
+}
+.navbar-default .navbar-link:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #999999;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ffffff;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffffff;
+    background-color: #42444f;
+  }
+}
+
+#company-logo {
+  margin-left: 50px;
+  color: #ffffff;
+}
+
+#login-btn-navbar {
+  margin-top: 8px;
+  margin-right: 100px;
+  margin-left: 15px;
+}
+/***********************************************/
+
+/********************* Landing Page **************************/
+
+.custom-button {
+  background-color: #21ca6b;
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  border-radius: 0 !important; /* Overrides bootstrap rounded corners*/
+  width: 100px;
+}
+
+.custom-button:hover {
+  background-color: #1eb962;
+  color: #ffffff;
+}
+
+/* Made navbar static so need to push container down*/
+.container-margin {
+  margin-top: 50px;
+}
+
+#first-section {
+  background-color: #999999;
+  height: 70vh;
+  padding-top: 160px;
+}
+
+#intro {
+  width: 40%;
+  margin-left: 130px;
+  margin-top: -20px;
+}
+
+#intro-image {
+    margin-left: 100px;
+    margin-top: -60px;
+}
+
+#second-section {
+  margin-bottom: 50px;
+}
+
+.testimonial {
+  margin: 50px auto;
+  background: #42444F;
+  padding: 20px 30px;
+  color: #ffffff;
+  font-style: italic;
+  width: 70%;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #42444F;
+  margin-top: -50px;
+  margin-left: 140px;
+}
+
+.testimonial-author {
+  margin: 10px 0 0 120px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #999999;
+  text-align:left;
+}
+
+.testimonial-grey {
+  background: #eceef0;
+  color: #42444F;
+}
+
+.arrow-down-grey {
+  border-top: 15px solid #eceef0;
+}
+
+.testimonial-author {
+    font-size: 12px;
+    color: #666666;
+}
+
+.footer {
+  height: 100px;
+  background-color: #42444f;
+}
+
+.footer-links {
+  margin-top: 40px;
+}
+
+a:link {
+  color: #999999;
+}
+
+a:visited {
+  color: #999999;
+}
+
+a:hover {
+  color: #ffffff;
+}
+
+/***********************************************/
+
+/********************* Registration Page **************************/
+
+.regis {
+  display: block;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  height: 50px;
+  width: 300px;
+}
+
+.center-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#regis-container {
+  margin-top: 20px;
+  margin-bottom: 150px;
+}
+
+#form-separator {
+  border-right: 2px solid;
+  border-color: #999999;
+}
+/***********************************************/
