@@ -46,6 +46,16 @@ body {
 	height:40px;
 }
 
+/* Sabryna's navbar changes */
+.navbar-custom {
+    background-color:#33343E;
+    border-radius:0;
+
+}
+.navbar-custom .navbar-brand {
+    color: #EAEAEB;
+}
+
 /********************* NavBar CSS **************************/
 /*
     Editing Bootstrap navbar colors is very hacky.
