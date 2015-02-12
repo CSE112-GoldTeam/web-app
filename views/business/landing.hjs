@@ -32,7 +32,7 @@
     <!-- start of outer container -->
     <div class="container-fluid container-margin">
         <div class="row" id="first-section">
-            <div id="intro" class="col-xs-6">
+            <div id="intro" class="col-xs-7">
                 <h3 class="bold text-center">The old rules of waiting are over.</h3>
                 <p class="text-center">Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor. Cum Sociees natoque panatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, null luctus pharetra vulputate, felix tellus mellis orci, sed rhoncus sapien nunc eget odio.</p>
                 <div class="form-group">
@@ -44,8 +44,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-6">
-                <img id="intro-image" src="http://placehold.it/500x420"/>
+            <div class="col-xs-4">
+                <img id="intro-image" src="http://placehold.it/270x370"/>
             </div>
         </div>
         <div class="row" id="second-section">
