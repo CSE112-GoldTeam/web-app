@@ -5,7 +5,7 @@
 
 html *
 {
-   font-family: Lato !important;
+   font-family: Lato;
 }
 
 /* Begin: Changes made by William Huang 2/7/15 */
@@ -48,7 +48,7 @@ body {
 
 /* Sabryna's navbar changes */
 .navbar-custom {
-    background-color:#33343E;
+    background-color:#42444f;
     border-radius:0;
 
 }
@@ -56,6 +56,16 @@ body {
     color: #EAEAEB;
 }
 
+.progress-bar-title {
+  margin-top: 70px;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.progress-bar-title2 {
+  text-align: left;
+  margin-left: 10px;
+}
 /********************* NavBar CSS **************************/
 /*
     Editing Bootstrap navbar colors is very hacky.
@@ -224,15 +234,15 @@ body {
 }
 
 a:link {
-  color: #999999;
+  color: #0099FF;
 }
 
 a:visited {
-  color: #999999;
+  color: #0099FF;
 }
 
 a:hover {
-  color: #ffffff;
+  color: #004C80;
 }
 
 /***********************************************/
