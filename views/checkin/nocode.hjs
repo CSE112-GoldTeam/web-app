@@ -14,8 +14,8 @@
 <header role="banner" class="navbar navbar-fixed-top navbar-custom">
   <div class="container">
     <div class="navbar-inverse side-collapse in">
-        <ul class="nav navbar-nav">    
-            <li><a class="navbar-brand" href="#">Company Logo</a></li>      
+        <ul class="nav navbar-nav">
+            <li><a class="navbar-brand" href="#">Company Logo</a></li>
         </ul>
     </div>
   </div>
@@ -51,7 +51,7 @@
                    
         </div>
                
-        <button class="btn btn-lg btn-primary btn-block custom-button" type="submit">Next</button>
+        <a class="btn btn-lg btn-primary btn-block custom-button" type="submit" href="done">Next</a>
              
     </form>
        
