@@ -17,4 +17,9 @@ router.get('/config', function (req, res, next) {
     res.render('business/config', {title: 'Express'});
 });
 
+//Dashboard dashboard
+router.get('/dashboard', function (req, res, next) {
+    res.render('business/dashboard', {title: 'Express'});
+});
+
 module.exports = router;
