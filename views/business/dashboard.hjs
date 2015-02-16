@@ -10,10 +10,13 @@
 
 </head>
 <body>
-  <div class="container" style ="vertical-align: top;"boarder ="1">
-    <h4><strong>Hey there! </strong>Your patient, <strong>Test, </strong>just checked in and is now waiting in the lobby       <button class="btn btn-info">Click when the patient has been roomed</button></h4>
+  <div class="container" style ="vertical-align: top;">
+    <div class="panel panel-default">
+      <h4><strong>Hey there! </strong>Your patient, <strong>Test, </strong>just checked in and is now waiting in the lobby       <button class="btn btn-info">Click when the patient has been roomed</button></h4>
+    </div>
   </div>
   <h1 style ="vertical-align: top;text-align: left;"><strong>Hello, Dr. Jane!</strong></h1>
+  <br>
 <div class="container">
       <h1>Today</h1>
       <h1>February 3, 2015</h1>
