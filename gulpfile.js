@@ -1,12 +1,14 @@
 // gulpfile.js
 var gulp = require('gulp');
 var server = require('gulp-express');
-
-gulp.task('server', function () {
+gulp.task('express-run', function() {
     // Start the server at the beginning of the task
     server.run({
         file: './bin/www'
     });
+});
+
+gulp.task('server', function () {
     // Restart the server when file changes
     gulp.watch(['app/**/*.html'], server.notify);
     gulp.watch(['app/styles/**/*.scss'], ['styles:scss']);
@@ -16,18 +18,18 @@ gulp.task('server', function () {
     gulp.watch(['{.tmp,app}/styles/**/*.css'], function(event){
         gulp.run('styles:css');
         server.notify(event);
-        //pipe support is added for server.notify since v0.1.5, 
+        //pipe support is added for server.notify since v0.1.5,
         //see https://github.com/gimm/gulp-express#servernotifyevent
     });
 
     gulp.watch(['app/scripts/**/*.js'], ['jshint']);
     gulp.watch(['app/images/**/*'], server.notify);
-    gulp.watch(['app.js', 'routes/**/*.js'], [server.run]);
+    gulp.watch(['app.js', 'routes/**/*.js'], ['express-run']);
 });
 
-gulp.task('default', ['server']);
+gulp.task('default', ['express-run','server']);
 
- 
+
 var karma = require('karma').server;
 /**
  * Run test once and exit
