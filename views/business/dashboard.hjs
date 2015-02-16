@@ -10,25 +10,60 @@
 
 </head>
 <body>
+  <div class="container" style ="vertical-align: top;"boarder ="1">
+    <h4><strong>Hey there! </strong>Your patient, <strong>Test, </strong>just checked in and is now waiting in the lobby       <button class="btn btn-info">Click when the patient has been roomed</button></h4>
+  </div>
+  <h1 style ="vertical-align: top;text-align: left;"><strong>Hello, Dr. Jane!</strong></h1>
+<div class="container">
+      <h1>Today</h1>
+      <h1>February 3, 2015</h1>
+      <p>Current Time: 10:15am</p>                                                                                      
+      <div class="row">          
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th></th>
+            <th>Appointment Time</th>
+            <th>Status</th>
+            <th></th>
+            <th>Picture</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Test</td>
+            <td> <a href="https://projects.invisionapp.com/share/7H21XIHQW#/screens/63048119?maintainScrollPosition=false">View Form</a> </td>
+            <td>9:40 am</td>
+            <td>Roomed</td>
+            <td><input type="checkbox"></input></td>
+            <td><img src="views/business/logo.png"> </td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Test</td>
+            <td> <a href="https://projects.invisionapp.com/share/7H21XIHQW#/screens/63048119?maintainScrollPosition=false">View Form</a> </td>
+            <td>9:40 am</td>
+            <td>Roomed</td>
+            <td><input type="checkbox"></input></td>
+            <td><img src="views/business/logo.png"> </td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Test</td>
+            <td> <a href="https://projects.invisionapp.com/share/7H21XIHQW#/screens/63048119?maintainScrollPosition=false">View Form</a> </td>
+            <td>9:40 am</td>
+            <td>Roomed</td>
+            <td><input type="checkbox"></input></td>
+            <td><img src="views/business/logo.png"> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 
-	<h1 style = "text-align=left "> Hello, Dr.Jane!</h1>
-	<TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" 
-	WIDTH="300" HEIGHT="200">
-
-	<TR>
-	<TD ALIGN="CENTER" ROWSPAN="3" WIDTH="100">Column 1</TD>
-	<TD ALIGN="CENTER" WIDTH="200">Row 1</TD>
-	</TR>
-
-	<TR>
-	<TD ALIGN="CENTER">Row 2</TD>
-	</TR>
-
-	<TR>
-	<TD ALIGN="CENTER">Row 3</TD>
-	</TR>
-
-</TABLE>
 </body>
 </html>
