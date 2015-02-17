@@ -3,6 +3,10 @@ var express = require('express'),
     gm = require('gm');
 var router = express.Router();
 
+router.get('/api/signature', function(req, res, next) {
+    res.redirect('%20')
+})
+
 router.get('/api/signature/:text', function (req, res, next) {
     var text = req.params.text;
 
