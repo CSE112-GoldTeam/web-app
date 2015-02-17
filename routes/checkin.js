@@ -115,7 +115,6 @@ router.post('/office/:id/customform', function (req, res, next) {
         var business = results[0]; //TODO: This assumes there is a result
         forms.find({business: business._id}, function (err, results) {
             var form = results[0]; //TODO: This assumes there is a result
-            var formResponse = {answers: []};
 
             //Ensure that there are all the responses
             var valid = _.every(form.fields, function (field, index) {
@@ -132,8 +131,22 @@ router.post('/office/:id/customform', function (req, res, next) {
                         formError: 'You are missing required fields.'
                     });
                 });
-            } else {
+            } else { //Form is valid, let's put it into the DB
+                var formResponses = db.get('formResponses');
+                var formResponse = {answers: []};
 
+                _.each(form.fields, function (field, index) {
+                    var name = '_' + index;
+                    formResponse.answers.push({
+                        label: field.label,
+                        response: req.body[name]
+                    });
+                });
+
+                formResponses.insert(formResponse, function (err, result) {
+                    //TODO: Error checking
+                    res.redirect('done');
+                })
             }
         });
     });
@@ -141,7 +154,7 @@ router.post('/office/:id/customform', function (req, res, next) {
 
 router.get('/office/:id/customform', function (req, res, next) {
     var db = req.db;
-    makeForm(db, req.params.id, function (formHtml) {
+    makeForm(db, req.params.id, {}, function (formHtml) {
         res.render('checkin/customform', {
             title: 'Express',
             formHtml: formHtml
