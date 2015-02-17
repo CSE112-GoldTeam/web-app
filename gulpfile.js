@@ -40,3 +40,22 @@ gulp.task('test', function (done) {
     singleRun: true
   }, done);
 });
+
+var mongobackup = require('mongobackup');
+
+// mongodump - dump all database on localhost
+gulp.task('mongodump', function() {
+  mongobackup.dump({
+    host : 'localhost',
+    out : './dumps/mongo'
+  });
+});
+
+// mongorestore - restore 'testdb' database to localhost
+gulp.task('mongorestore', function() {
+  mongobackup.restore({
+    host : 'localhost',
+    drop : true,
+    path : './dumps/mongo/testdb'
+  });
+});
