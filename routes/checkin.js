@@ -26,4 +26,9 @@ router.get('/office/:id/checkin', function (req, res, next) {
     res.render('checkin/checkin', {title: 'Express'});
 });
 
+//Custom Form
+router.get('/office/:id/customform', function (req, res, next) {
+    res.render('checkin/customform', {title: 'Express'});
+});
+
 module.exports = router;
