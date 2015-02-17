@@ -22,7 +22,7 @@
 </header>
 
 <div class="container">
-
+    {{{ formHtml }}}
 </div>
 
 </body>
