@@ -5,10 +5,6 @@ var nodemon = require('gulp-nodemon');
 var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync');
 
-// we'd need a slight delay to reload browsers
-// connected to browser-sync after restarting nodemon
-var BROWSER_SYNC_RELOAD_DELAY = 500;
-
 gulp.task('nodemon', function (cb) {
   var called = false;
   return nodemon({
