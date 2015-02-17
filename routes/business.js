@@ -17,4 +17,8 @@ router.get('/config', function (req, res, next) {
     res.render('business/config', {title: 'Express'});
 });
 
+//Office Configuration
+router.get('/uploadlogo', function (req, res, next) {
+    res.render('business/uploadlogo', {title: 'Express'});
+});
 module.exports = router;
