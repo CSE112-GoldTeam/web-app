@@ -18,7 +18,7 @@ router.get('/register', function (req, res, next) {
 
 //Landing Page
 router.get('/', function (req, res, next) {
-    res.render('businesslanding', {title: 'Landing Page'});
+    res.render('business/landing', {title: 'Landing Page'});
 });
 
 //Office Configuration
@@ -44,15 +44,12 @@ router.post('/register', function(req, res) {
         ||  phone === '' || password === ''){
         res.render('business/register', {
             error: 'You must fill in all fields.',
-            companyName: companyName
+            companyName: companyName,
+            phone: phone,
+            username : username, 
+            email: email, 
         });
     } else { 
-        req.session.companyName = companyName;
-        req.session.username = username;
-        req.session.email = email;
-        req.session.phone = phone;
-        req.session.password = password;
-
         // Set our collection
         var collection = db.get('businesses');
 
@@ -67,13 +64,13 @@ router.post('/register', function(req, res) {
             "walkins" : false
         }, function (err, doc) {
             if (err) {
+                console.error('Error registering new company:', err);
+
                 // If it failed, return error
                 res.send("there was a problem adding the information to the database.");
             }
             else {
-                res.location("business/config");
-                // And forward to success page
-                res.render("business/config");
+               res.redirect('config');
             }
         });
     }
