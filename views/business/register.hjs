@@ -2,53 +2,69 @@
 <html>
 <head>
     <title>{{ title }}</title>
-
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-<div class="jumbotron">
-    <div class="container">
-        <h3>Create an Account</h3>
-        <img src="http://placehold.it/350x150" class="company-banner">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">
+            <div id="company-logo">RoboBetty</div>
+        </a>
+      </div>
+      <div class="navbar-padding-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#">Features</a>
+            </li>
+            <li>
+                <a href="#">About Us</a>
+            </li>
+            <li>
+                <button type="button" class="btn custom-button" id="login-btn-navbar">Log In</button>
+            </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container container-margin">
+            <div class="row">
+                <div class="col-xs-offset-1 col-xs-4">
+                    <h2>Create an Account</h2>
+                </div>
+            </div>
 
-        <p class="company-info">Insert paragraph and stuff here</p>
-
-        <form class="regis">
-            <input type="text" name="companyname">
-            <br>
-            Company Name
-            <br>
-            <br>
-            <input type="text" name="fullname">
-            <br>
-            Your full name
-            <br>
-            <br>
-            <input type="text" name="email">
-            <br>
-            Email
-            <br>
-            <br>
-            <input type="tel" name="number">
-            <br>
-            Phone Number
-            <br>
-            <br>
-            <input type="password" name="pw">
-            <br>
-            Password
-            <br>
-            <br>
-            <input type="submit" value="SignUp">
-        </form>
+            <div class="row text-center" id="regis-container">
+                <div class="col-xs-offset-1 col-xs-4" id="form-separator">
+                    <form method="post" action="" enctype="application/x-www-form-urlencoded">
+                        <input class="regis" type="text" name="companyName" value="{{ companyName }}" placeholder="COMPANY NAME" required>
+                        <input class="regis" type="text" name="username" value="{{ username }}" placeholder="YOUR FULL NAME" required> 
+                        <input class="regis" type="email" name="email" value="{{ email }}" placeholder="EMAIL" required>
+                        <input class="regis" type="tel" name="phone" value="{{ phone }}" placeholder="PHONE NUMBER" required>
+                        <input class="regis" type="password" name="password" value="{{ password }}" placeholder="PASSWORD" required>
+                        <input class="btn custom-button" name="submit" type="submit" value="SignUp">
+                    </form>
+                </div>
+                <div class="col-xs-7">
+                    <img class="center-image" src="http://placehold.it/500x420"/>
+                </div>
+            </div>
     </div>
-</div>
-
+    <footer class="footer navbar-fixed-bottom">
+        <div class="container">
+            <ul class="list-inline footer-links text-center">
+                <li><a href="">About Us</a></li>
+                <li><a href="">Store</a></li>
+                <li><a href="">Jobs</a></li>
+                <li><a href="">Privacy</a></li>
+                <li><a href="">Terms</a></li>
+                <li><a href="">Support</a></li>
+            </ul>
+        </div>
+    </footer>
 </body>
 
 </html>
