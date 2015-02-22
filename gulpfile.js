@@ -1,6 +1,8 @@
 // gulpfile.js
 var gulp = require('gulp');
 var server = require('gulp-express');
+var child_process = require('child_process');
+
 gulp.task('express-run', function() {
     // Start the server at the beginning of the task
     server.run({
@@ -27,7 +29,25 @@ gulp.task('server', function () {
     gulp.watch(['app.js', 'routes/**/*.js'], ['express-run']);
 });
 
-gulp.task('default', ['express-run','server']);
+gulp.task('mongostart', function() {
+    child_process.exec('mongod --dbpath db', function(err, stdout, stderr) {
+        if(err) {
+            console.log(err.stack);
+            console.log("Error code: " + err.code);
+            console.log("Signal received: " + err.signal);
+        }
+    });
+
+    child_process.exec("mongod --dbpath db --shutdown", function(err, stdout, stderr) {
+        if(err) {
+            console.log(err.stack);
+            console.log("Error code: " + err.code);
+            console.log("Signal received: " + err.signal);
+        }
+    });
+});
+
+gulp.task('default', ['express-run', 'mongostart','server']);
 
 
 var karma = require('karma').server;
