@@ -27,6 +27,11 @@ router.get('/office/:id/checkin', function (req, res, next) {
     res.render('checkin/checkin', {title: 'Express'});
 });
 
+//Sig Page
+router.get('/office/:id/sign', function(req, res, next) {
+		res.render('checkin/sign', {title: 'Express'});
+});
+
 //Custom Form
 function makeDropdown(options, name, body) {
     var s = '<select class="form-control" name="'+name+'" id="'+name+'">';

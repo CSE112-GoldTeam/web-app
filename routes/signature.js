@@ -14,13 +14,14 @@ router.get('/api/signature/:text', function (req, res, next) {
         child;
 
     // creating an image
-    gm(200, 100, "#ffffffff")
+    gm(500, 100, "#ffffffff")
         .options({imageMagick: true})
         .transparent('#ffffffff')
-        .fill('#000000')
-        .font('Monotype-Corsiva',42)
-        .drawText(10,50,text)
-        .toBuffer('PNG',function (err, buffer) {
+				.fill('#000000')
+        .font('BrushScriptI',32)
+				.drawText(10,50,text)
+				.trim()
+				.toBuffer('PNG',function (err, buffer) {
             //DO SOME ERROR CHECKING HERE
             res.set('Content-Type', 'image/png');
             res.send(buffer);
