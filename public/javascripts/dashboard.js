@@ -42,3 +42,27 @@ function checkTime(i) {
 }
 
 
+function poll() {
+    setTimeout(function(){
+        $('#tblBody').empty();
+        var cols=['hello','world'];
+        for( var i = 0; i < 5; i++) {
+            insRow(cols);
+        }
+        poll();
+    },1000);//checks every 1000 millisecond
+}
+
+// JQuery Insert Row
+function insRow(cols) {
+  $row = $('<tr/>'); // Create a r
+
+  // Loop through data
+  for (var i = 0; i < cols.length; i++) {
+    $col = $('<td/>'); // Create a column
+    $col.append(cols[i]); // Append column data to column
+    $row.append($col); // Append column to row
+  }
+
+  $('#tblBody').prepend($row); // Append to top of element using prepend
+}

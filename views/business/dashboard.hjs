@@ -20,12 +20,8 @@
   <br>
 <div class="container">
       <h1>Today</h1>
-      <h1 id="currentDate"><script>getDate()</script></h1>
-<!-- 
-      <body onload="showDate()">
-
-      <div id="text"></div> -->
-      <body onload="startTime()">
+      <h1 id="currentDate"></h1>
+      <body>
 
       <div id="txt"></div>
       <p></p>                                                                                      
@@ -56,5 +52,10 @@
       </table>
     </div>
   </div>
+  <script>
+    getDate();
+    $(startTime);
+    $(poll);
+  </script>
 </body>
 </html>
