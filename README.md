@@ -9,11 +9,12 @@ First Run
 5. Install npm dependencies:
 
         $ npm install
+        $ npm install --global gulp
 
 6. Start up the MongoDB server with
 
         $ mkdir db
         $ mongod --dbpath db
 
-7. Use ``npm start`` to run the application.
+7. Use ``gulp`` to run the application.
 8. Navigate your browser to [http://localhost:3000](http://localhost:3000/)
