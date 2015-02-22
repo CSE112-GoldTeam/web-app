@@ -12,6 +12,7 @@ var db = monk('localhost:27017/robobetty');
 
 var business = require('./routes/business');
 var checkin = require('./routes/checkin');
+var signature = require('./routes/signature');
 
 var app = express();
 
@@ -44,6 +45,7 @@ app.use(function(req, res, next) {
 
 app.use('/', business);
 app.use('/', checkin);
+app.use('/', signature);
 
 
 // catch 404 and forward to error handler
