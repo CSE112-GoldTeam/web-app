@@ -5,6 +5,7 @@ client/bower_components
 dist
 /server/config/local.env.js
 db/
+dumps/
 .DS_Store
 npm-debug.log
 mongod.log
