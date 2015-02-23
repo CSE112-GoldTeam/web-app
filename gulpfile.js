@@ -67,7 +67,7 @@ gulp.task('mongostart', function() {
 
 gulp.task('mongoend', function() {
 
-    child_process.exec("mongod --dbpath db --shutdown", function(err, stdout, stderr) {
+    child_process.exec("mongo --eval 'db.shutdownServer()' admin", function(err, stdout, stderr) {
         if(err) {
             console.log(err.stack);
             console.log("Error code: " + err.code);
