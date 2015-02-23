@@ -1,3 +1,5 @@
+require('newrelic');  
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -15,14 +17,6 @@ var checkin = require('./routes/checkin');
 var signature = require('./routes/signature');
 
 var app = express();
-
-//setup for external plugins
-if (app.get('env') === 'development') {
-    //Do localhost stuff here
-} else {
-    //Do heroku stuff here  
-    require('newrelic');  
-}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
