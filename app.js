@@ -1,4 +1,9 @@
-require('newrelic');
+if (app.get('env') === 'development') {
+    //Do localhost stuff here
+} else {
+    //Do heroku stuff here  
+    require('newrelic');  
+}
 
 var express = require('express');
 var path = require('path');
