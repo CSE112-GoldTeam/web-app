@@ -32,7 +32,7 @@ gulp.task('nodemon', function (cb) {
     });
 });
 
-gulp.task('browser-sync', ['nodemon'], function () {
+gulp.task('browser-sync', ['nodemon', 'mongostart'], function () {
 
   // for more browser-sync config options: http://www.browsersync.io/docs/options/
   browserSync.init({
@@ -55,7 +55,6 @@ gulp.task('browser-sync', ['nodemon'], function () {
   });
 });
 
-<<<<<<< HEAD
 gulp.task('mongostart', function() {
     child_process.exec('mongod --dbpath db', function(err, stdout, stderr) {
         if(err) {
@@ -64,6 +63,9 @@ gulp.task('mongostart', function() {
             console.log("Signal received: " + err.signal);
         }
     });
+});
+
+gulp.task('mongoend', function() {
 
     child_process.exec("mongod --dbpath db --shutdown", function(err, stdout, stderr) {
         if(err) {
@@ -72,13 +74,10 @@ gulp.task('mongostart', function() {
             console.log("Signal received: " + err.signal);
         }
     });
-});
+})
 
-gulp.task('default', ['express-run', 'mongostart','server']);
-=======
 
 gulp.task('default', ['browser-sync']);
->>>>>>> e31a438e2c6019e1ea32b964ddc61c4af6a34cad
 
 
 var karma = require('karma').server;
