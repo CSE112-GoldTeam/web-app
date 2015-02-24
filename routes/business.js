@@ -31,6 +31,11 @@ router.get('/formbuilder', function (req, res, next) {
     res.render('business/formbuilder', {title: 'Express'});
 });
 
+//Device Reg
+router.get('/registerDevice', function (req,res, next) {
+    res.render('business/registerDevice', {title: 'Express'});
+});
+
 router.post('/register', function(req, res) {
     var db = req.db;
     var companyName = req.body.companyName;
@@ -46,10 +51,10 @@ router.post('/register', function(req, res) {
             error: 'You must fill in all fields.',
             companyName: companyName,
             phone: phone,
-            username : username, 
-            email: email, 
+            username : username,
+            email: email,
         });
-    } else { 
+    } else {
         // Set our collection
         var collection = db.get('businesses');
 
