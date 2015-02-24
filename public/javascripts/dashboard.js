@@ -47,12 +47,12 @@ function poll() {
         $('#tblBody').empty();
         //var cols=['1','Test ','views','9:30 am', 'Roomed','checkbox','img'];
         $.get("/api/appointments", function( data ){
-            console.log("Appintment Data: " + data[1].fname);
+            console.log("Appintment Data: " + data[0].fname);
 
             var hours,minutes,appTime;
             for(var i=0; i<data.length; i++){
                 $img = $('<img id="Image" src="http://placehold.it/50x50" />');
-                $form = $('<a href="/viewform/'+data[i].business+'">View Forms</a>');
+                $form = $('<a href="/viewform/'+data[i]._id+'">View Forms</a>');
                 var appDate = new Date(data[i].date);
                 hours = ("0"+appDate.getHours()).slice(-2); //returns 0-23
                 minutes = ("0"+appDate.getMinutes()).slice(-2); //returns 0-59
@@ -75,7 +75,7 @@ function poll() {
         });
 
         poll();
-    },2000);//checks every 1000 millisecond
+    },3000);//checks every 1000 millisecond
 }
 
 // JQuery Insert Row
