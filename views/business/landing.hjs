@@ -2,61 +2,90 @@
 <html>
 <head>
     <title>{{ title }}</title>
-
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
-
-
 <body>
-
-<!-- start of outer container -->
-<div class="container-fluid">
-    <div class="jumbocontainer">
-
-        <!-- container for the jumbotron -->
-        <div class="firstjumbo">
-
-            <div class="col-xs-5 col-xs-offset-1">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">
+            <div id="company-logo">RoboBetty</div>
+        </a>
+      </div>
+      <div class="navbar-padding-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#">Features</a>
+            </li>
+            <li>
+                <a href="#">About Us</a>
+            </li>
+            <li>
+                <button type="button" class="btn custom-button" id="login-btn-navbar">Log In</button>
+            </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- start of outer container -->
+    <div class="container-fluid container-margin">
+        <div class="row" id="first-section">
+            <div id="intro" class="col-xs-7">
                 <h3 class="bold text-center">The old rules of waiting are over.</h3>
-
-                <p class="text-center">Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum
-                    laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales
-                    pulvinar tempor. Cum Sociees natoque panatibus et magnis dis parturient montes, nascetur ridiculus
-                    mus. Nam fermentum, null luctus pharetra vulputate, felix tellus mellis orci, sed rhoncus sapien
-                    nunc eget odio.</p>
-
+                <p class="text-center">Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor. Cum Sociees natoque panatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, null luctus pharetra vulputate, felix tellus mellis orci, sed rhoncus sapien nunc eget odio.</p>
                 <div class="form-group">
                     <div class="col-xs-9">
-                        <input type="company" class="small form-control" id="inputCompany"
-                               placeholder="Step 1: Enter company name">
+                        <input type="company" class="small form-control" id="inputCompany" placeholder="Step 1: Enter company name">
                     </div>
                     <div class="col-xs-1 text-small">
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <a type="submit" class="btn custom-button" href="/register">Submit</a>
                     </div>
                 </div>
-
             </div>
-
-            <div class="col-xs-5 col-xs-offset 1">
-                <img src="http://placehold.it/350x420"/>
-            </div>
-
-        </div>
-
-
-        <div class="secondjumbo">
-            <div class="col-xs-10 col-xsoffset 2">
-                <img src="http://placehold.it/350x420"/>
-                <img src="http://placehold.it/350x420"/>
+            <div class="col-xs-4">
+                <img id="intro-image" src="http://placehold.it/270x370"/>
             </div>
         </div>
-
+        <div class="row" id="second-section">
+            <div class="col-xs-6">
+                <div>
+                    <blockquote class="testimonial"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <div class="arrow-down"></div>
+                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                </div>
+                <div>
+                    <blockquote class="testimonial testimonial-grey"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <div class="arrow-down arrow-down-grey"></div>
+                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div>
+                    <blockquote class="testimonial testimonial-grey"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <div class="arrow-down arrow-down-grey"></div>
+                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                </div>
+                <div>
+                    <blockquote class="testimonial"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <div class="arrow-down"></div>
+                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                </div>
+            </div>
+        </div>
     </div>
-
-</div>
+    <footer class="footer navbar-bottom">
+        <div class="container">
+            <ul class="list-inline footer-links text-center">
+                <li><a href="">About Us</a></li>
+                <li><a href="">Store</a></li>
+                <li><a href="">Jobs</a></li>
+                <li><a href="">Privacy</a></li>
+                <li><a href="">Terms</a></li>
+                <li><a href="">Support</a></li>
+            </ul>
+        </div>
+    </footer>
 </body>
 </html>

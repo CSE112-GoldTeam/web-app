@@ -1,11 +1,18 @@
+if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
+    require('newrelic');
+}
+
 var express = require('express');
-var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var session = require('express-session');
+//var router = express.Router();
+
+
 var app = express();
 
 
@@ -20,33 +27,19 @@ var collect = db.get('users');
 
 
 
-//passport functions to Serialize and Deserialize users
-
-passport.serializeUser(function(user, done) {
-        done(null, user._id);
-    });
-
-// used to deserialize the user
-passport.deserializeUser(function(id, done) {
-    collect.findById(id, function(err, user) {
-        done(err, user);
-    });
-});
 
 
 
 
 
-require('./config/passport')(passport); // pass passport for configuration
+require('./config/passport')(passport,collect); // pass passport for configuration
 
 
 
 
-//var business = require('./routes/business');
-//var checkin = require('./routes/checkin');
-
-//delete this after integrating authentication into main application
-var auth = require('./routes/auth')(passport);//pass in passport dependency into routes
+var business = require('./routes/business')(passport);
+var checkin = require('./routes/checkin');
+var signature = require('./routes/signature');
 
 
 
@@ -64,10 +57,17 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+// router.use(session({
+//     secret: '1234567890QWERTY',
+//     resave: false,
+//     saveUninitialized: true
+// }));
 
 
-app.use(session({secret: 'test'}));
 //required for passport
+app.use(session({secret: '1234567890QWERTY',
+    resave: false,
+    saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
@@ -96,14 +96,17 @@ app.use(function (req, res, next) {
 
 
 
-//uncomment after trying passportjs
-//app.use('/', business);
-//app.use('/', checkin);
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'fonts.googleapis.com');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
 
+    next();
+});
 
-//use the auth routes, delete this after integrating into app
-app.use('/',auth);
-
+app.use('/', business);
+app.use('/', checkin);
+app.use('/', signature);
 
 
 
