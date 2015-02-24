@@ -11,6 +11,7 @@
 
 </head>
 <body>
-	<h1><strong>VIEW FORM</strong></h1>
+	<h1><strong>VIEW FORM1 {{ title }}</strong></h1>
+	<pre>{{ formData }}</pre>
 </body>
 </html>
