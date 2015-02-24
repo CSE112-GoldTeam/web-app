@@ -1,6 +1,5 @@
 
 var express = require('express');
-var passport = require('passport');
 var router = express.Router();
 
 
@@ -64,7 +63,6 @@ router.post('/signup', passport.authenticate('local-signup', {
 
 
 router.get('/profile', isLoggedIn, function(req, res) {
-    console.log(req.body);
     res.render('auth/profile.hjs', {
         user : req.user // get the user out of session and pass to template
     });
@@ -73,10 +71,10 @@ router.get('/profile', isLoggedIn, function(req, res) {
 // =====================================
 // LOGOUT ==============================
 // =====================================
-router.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-});
+// router.get('/logout', function(req, res) {
+//     req.logout();
+//     res.redirect('/');
+// });
 
 
 

@@ -3,33 +3,12 @@
 //monk and db are neeeded because pass.deserialize doesnt pass a req parameter, 
 //so in order to find the correct id in mongo, we need to make a connection to database and findbyid
 
-
-var monk = require('monk');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt-nodejs');
-var db = monk('localhost:27017/robobetty');
-var collect = db.get('users');
-
-
 
 
 //need this since we are passing in a passport dependency in app.js line 22
 module.exports = function(passport) {
-
-
-
-//passport functions to Serialize and Deserialize users
-
-passport.serializeUser(function(user, done) {
-        done(null, user._id);
-    });
-
-// used to deserialize the user
-passport.deserializeUser(function(id, done) {
-    collect.findById(id, function(err, user) {
-        done(err, user);
-    });
-});
 
 
 // =========================================================================
@@ -51,13 +30,12 @@ function(req, email, password, done) {
 
     // asynchronous
     // User.findOne wont fire unless data is sent back
-    process.nextTick(function() {
-
+   
     var collection = req.db.get('users');
     
     // find a user whose email is the same as the forms email
     // we are checking to see if the user trying to login already exists
-    collection.findOne({},{ email :  email }, function(err, user) {
+    collection.findOne({ 'email' :  email }, function(err, user) {
         // if there are any errors, return the error
         
         if (err){
@@ -94,7 +72,7 @@ function(req, email, password, done) {
 
     });    
 
-    });
+
 
 }));
 

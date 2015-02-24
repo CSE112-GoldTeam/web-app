@@ -10,13 +10,31 @@ var app = express();
 
 
 
-
-
 //Database
 var monk = require('monk');
 var db = monk('localhost:27017/robobetty');
 
 //login config
+var collect = db.get('users');
+
+
+
+
+//passport functions to Serialize and Deserialize users
+
+passport.serializeUser(function(user, done) {
+        done(null, user._id);
+    });
+
+// used to deserialize the user
+passport.deserializeUser(function(id, done) {
+    collect.findById(id, function(err, user) {
+        done(err, user);
+    });
+});
+
+
+
 
 
 require('./config/passport')(passport); // pass passport for configuration
