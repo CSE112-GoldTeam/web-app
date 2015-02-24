@@ -40,13 +40,13 @@
         </thead>
         <tbody id="tblBody">
           <tr>
-            <td>1</td>
-            <td>Test</td>
-            <td> <a href="https://projects.invisionapp.com/share/7H21XIHQW#/screens/63048119?maintainScrollPosition=false">View Form</a> </td>
-            <td>9:40 am</td>
-            <td>Roomed</td>
-            <td><input type="checkbox"></input></td>
-            <td><img src="http://placehold.it/270x370"> </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></input></td>
+            <td></td>
           </tr>
         </tbody>
       </table>
