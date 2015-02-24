@@ -22,10 +22,10 @@ router.get('/viewform/:id', function (req, res, next) {
 	var db = req.db;
 	var response = db.get('formResponses');
 	// query the collection
-	response.findById(req.params.id, function(err, data) {
+	response.find({ appointments : req.params.id }, function(err, data) {
 	if (err) { return res.sendStatus(500, err); }
 		console.log(data);
-		return res.render('business/viewform', {title: req.params.id, formData : JSON.stringify(data) });
+		return res.render('business/viewform', {title: req.params.id, formData : data });
 	});
 });
 
@@ -34,12 +34,12 @@ router.get('/dashboard', function (req, res, next) {
     res.render('business/dashboard', {title: 'Express'});
 });
 
-router.get('/api/formResponses/:id', function (req, res, next) {
+router.get('/api/formResponses/appointments/:id', function (req, res, next) {
      // grab our db object from the request
 	var db = req.db;
 	var response = db.get('formResponses');
 	// query the collection
-	response.find({ }, function(err, data) {
+	response.find({ appointments : req.params.id }, function(err, data) {
 	if (err) { return res.sendStatus(500, err); }
 		return res.json(200, data);
 	});
@@ -57,7 +57,7 @@ router.get('/api/appointments', function (req, res, next) {
 	});
 });
 
-router.put('/api/appointments/:id/state', function (req, res, next) {
+router.put('/api/formResponses/:id/state', function (req, res, next) {
      // grab our db object from the request
 	var db = req.db;
 	var appt = db.get('appointments');
