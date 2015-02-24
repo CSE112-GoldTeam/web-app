@@ -8,7 +8,32 @@ var bcrypt = require('bcrypt-nodejs');
 
 
 //need this since we are passing in a passport dependency in app.js line 22
-module.exports = function(passport) {
+module.exports = function(passport,collect) {
+
+
+
+
+
+
+//passport functions to Serialize and Deserialize users
+
+passport.serializeUser(function(user, done) {
+        console.log("serialize");
+        console.log(user);
+        done(null, user._id);
+    });
+
+// used to deserialize the user
+passport.deserializeUser(function(id, done) {
+    console.log(id);
+    collect.findById(id, function(err, user) {
+        console.log("deserialize");
+        console.log(user);
+        done(err, user);
+    });
+});
+
+
 
 
 // =========================================================================
@@ -28,10 +53,28 @@ passport.use('local-signup', new LocalStrategy({
 },
 function(req, email, password, done) {
 
-    // asynchronous
-    // User.findOne wont fire unless data is sent back
+    
+    var db = req.db;
+    var companyName = req.body.companyName;
+    var username = req.body.username;
+    var phone = req.body.phone;
+ 
+
+     // Check if any field has been left blank
+    if(companyName === '' || username === '' || email === ''
+        ||  phone === '' || password === ''){
+        res.render('business/register', {
+            error: 'You must fill in all fields.',
+            companyName: companyName,
+            phone: phone,
+            username : username, 
+            email: email, 
+        });
+    } else {
+
+        var collection = db.get('businesses');
    
-    var collection = req.db.get('users');
+    
     
     // find a user whose email is the same as the forms email
     // we are checking to see if the user trying to login already exists
@@ -53,28 +96,24 @@ function(req, email, password, done) {
             // set the user's local credentials
             password = hashPassword(password);
 
-            var dbemail    = email;
-            var dbpassword = password;
-            var dbcname = req.body.cname;
-            var dbtel = req.body.tel;
-            var dbname = req.body.name;
+            
 
             // save the user
-            collection.insert({'email' : dbemail, 'password' : dbpassword, 'Company Name' : dbcname, 'telephone' : dbtel, 'name' : dbname}, function(err,user) {
+            collection.insert({'email' : email, 'password' : password, 'companyName' : companyName, 'phone' : phone, 'username' : username,  "logo" : '',
+            "walkins" : false}, function(err,user) {
                 if (err)
                     throw err;
-                
+              
                 return done(null,user);
-
+                  console.log(user);
                 
             });
         }
+    });
+}
 
-    });    
+}));    
 
-
-
-}));
 
 
    // =========================================================================
@@ -98,6 +137,7 @@ function(req, email, password, done) {
 
         collection.findOne({ 'email' :  email }, function(err, user) {
             // if there are any errors, return the error before anything else
+
              if (err)
                 return done(err);
 
