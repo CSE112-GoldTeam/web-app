@@ -45,12 +45,18 @@ function checkTime(i) {
 function poll() {
     setTimeout(function(){
         $('#tblBody').empty();
-        var cols=['hello','world'];
-        for( var i = 0; i < 5; i++) {
-            insRow(cols);
-        }
+        //var cols=['1','Test ','views','9:30 am', 'Roomed','checkbox','img'];
+        $.get("/api/appointments", function( data ){
+            console.log("Appintment Data: " + data[0].fname);
+                for(var i=0; i<data.length; i++){
+                $img = $('<img id="Image" src="http://placehold.it/64x64" />');
+                var cols = [i+1,data[i].fname + " " + data[i].lname,"View Form","10:00 PM","Roomed","X",$img];
+                insRow(cols);
+            }
+        });
+
         poll();
-    },1000);//checks every 1000 millisecond
+    },2000);//checks every 1000 millisecond
 }
 
 // JQuery Insert Row
@@ -64,5 +70,5 @@ function insRow(cols) {
     $row.append($col); // Append column to row
   }
 
-  $('#tblBody').prepend($row); // Append to top of element using prepend
+  $('#tblBody').append($row); // Append to top of element using prepend
 }
