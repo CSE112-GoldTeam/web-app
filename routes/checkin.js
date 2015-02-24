@@ -54,7 +54,7 @@ function makeFormGroup(field, index, body) {
     s += '<label for="' + name + '" class="col-md-2 control-label">' + field.label + '</label>';
 
     s += '<div class="col-md-10">';
-    if (field.type === 'textbox') {
+    if (field.type === 'textfield') {
         s += makeTextfield(name, body);
     } else if (field.type === 'dropdown') {
         s += makeDropdown(field.options, name, body);
