@@ -10,10 +10,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var passport = require('passport');
-
-//var router = express.Router();
-
-
+var router = express.Router();
 var app = express();
 
 
@@ -72,6 +69,11 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+//so... when only using router, for some reason deserialize wont work
+//but when using both or just app.use(session), the route works
+//note to j
 
 
 // router.use(session({
