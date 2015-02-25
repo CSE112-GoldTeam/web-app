@@ -24,7 +24,7 @@
 <div class="container">
     <h1 class ="header">Welcome to Company!</h1>
     <img class="checkinphoto" src="http://placehold.it/500x200" alt="...">
-    <a type="button" class="btn btn-success custom-button checkinbutton" href="entercode"
+    <a type="button" class="btn btn-success custom-button checkinbutton" href="nocode"
             style="display:block;margin-left:auto;margin-right:auto">Check In
     </a>
 </div>
