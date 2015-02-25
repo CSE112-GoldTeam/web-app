@@ -16,15 +16,15 @@ p.padding{
 </style>
 
 <!-- this nav bar is consistent with PK's navbar -->
- <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">
-            <div id="company-logo">Company Logo</div>
-        </a>
-      </div>
-</nav>
 
 <body>
+     <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <div id="company-logo">Company Logo</div>
+            </a>
+         </div>
+    </nav>
     <h4 class = "progress-bar-title">Your Check-in Progress:</h4>
     <div class="container" class="centeredz">
         <ul class="nav nav-wizard">
