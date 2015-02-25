@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>{{ title }}</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-nav-wizard.css">
@@ -10,34 +9,32 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-<!-- this nav bar is consistent with PK's navbar -->
- <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">
-            <div id="company-logo">Company Logo</div>
-        </a>
-      </div>
+    <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <div id="company-logo">Company Logo</div>
+            </a>
+          </div>
     </nav>
 
-<div class="container container-margin">
-    <div class="row">
-        <div class="navwizard">
-            Your checkin process:
-            <ul class="nav nav-wizard">
-                <li class="active"><a href="#">Step 1: Enter Code</a></li>
-                <li><a href="#">Step 2: Confirm Appointment</a></li>
-                <li><a href="#">Step 3: Checked In</a></li>
-            </ul>
+    <div class="container container-margin">
+        <div class="row">
+            <div class="nav-wizard-margins">
+                <h3>Your checkin process:</h3>
+                <ul class="nav nav-wizard">
+                    <li><a href="#">Step 1: General Information</a></li>
+                    <li class="active"><a href="#">Step 2: Additional Information</a></li>
+                    <li><a href="#">Step 3: Checked In</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            {{#formError}}
+                <div class="alert alert-danger" role="alert">{{formError}}</div>
+            {{/formError}}
+            {{{ formHtml }}}
         </div>
     </div>
-    <div class="row">
-        {{#formError}}
-            <div class="alert alert-danger" role="alert">{{formError}}</div>
-        {{/formError}}
-        {{{ formHtml }}}
-    </div>
-</div>
 
 </body>
 </html>
