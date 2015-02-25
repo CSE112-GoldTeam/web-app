@@ -12,22 +12,18 @@
 <body>
 
 <!-- this nav bar is consistent with PK's navbar -->
-<header role="banner" class="navbar navbar-fixed-top navbar-custom">
-    <div class="container">
-        <div class=" side-collapse in">
-            <ul class="nav navbar-nav">
-                <li><a class="navbar-brand" href="#">Company Logo</a></li>
-            </ul>
-        </div>
-    </div>
-</header>
-
-
+ <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">
+            <div id="company-logo">Company Logo</div>
+        </a>
+      </div>
+    </nav>
 
 <div class="container container-margin">
     <div class="row">
         <div class="navwizard">
-            <h2>Your checkin process:</h2>
+            Your checkin process:
             <ul class="nav nav-wizard">
                 <li class="active"><a href="#">Step 1: Enter Code</a></li>
                 <li><a href="#">Step 2: Confirm Appointment</a></li>
