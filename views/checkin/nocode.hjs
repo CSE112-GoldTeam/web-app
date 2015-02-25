@@ -20,29 +20,36 @@
     </div>
   </div>
 </header>
-   
-<div class="col-md-4 col-md-offset-4">
 
-         
-    <form class="form-inline">
-                <h2 class="form-signin-heading">Please enter the following information</h2>
-               
+<div class="col-md-4 col-md-offset-4">
+	         
+    <form class="form-inline" action="" method="post">
+                
+		{{#error}}
+	  	<div class="alert alert-danger" role="alert">
+				{{ error }}
+			</div>
+		{{/error}}
+		
+				<h2 class="form-signin-heading">Please enter the following information</h2>
+   
+	             
         <fieldset>
 
                     <label class="inputFirst" class="sr-only">First Name</label>
-                    <input type="firstName" name="inputFirst" class="form-control" required autofocus>
+                    <input type="text" id="inputFirst" name="inputFirst" value="{{ inputFirst }}" class="form-control" required autofocus>
                    
         </fieldset>
                
         <fieldset>
                     <label class="inputLast" class="sr-only">Last Name</label>
-                    <input type="lastName" id="inputLast" class="form-control" required autofocus>
+                    <input type="text" id="inputLast" name="inputLast" value="{{ inputLast }}" class="form-control" required autofocus>
                    
         </fieldset>
                
         <fieldset>
                     <label class="inputDOB" class="sr-only">Date of Birth</label>
-                    <input type="birthDate" id="inputDOB" class="form-control" placeholder='MM/DD/YY' required
+                    <input type="text" id="inputDOB" name="inputDOB" value="{{ inputDOB }}" class="form-control" placeholder='MM/DD/YY' required
                            autofocus>
                    
         </fieldset>
@@ -51,7 +58,7 @@
                    
         </div>
                
-        <a class="btn btn-lg btn-primary btn-block custom-button" type="submit" href="done">Next</a>
+        <button class="btn btn-lg btn-primary btn-block custom-button" type="submit">Next</button>
              
     </form>
        
