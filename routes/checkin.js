@@ -20,15 +20,15 @@ router.get('/office/:id/entercode', function (req, res, next) {
 
 router.get('/office/:id/apptinfo', function(req, res, next) {
 var db = req.db;
-var forms = db.get('forms'); //This gets the collection
+var appoint = db.get('appointments'); //This gets the collection
 
-forms.find({_id: '54ec302331efcff3535b53ec'}, function(err, result) {
-  if(err) {
-    return console.log('findOne error:', err);
+appointments.find({_id: '54ec302331efc353ec'}, function(err, result) {
+  if(result) {
+    var appt = results[0];
   }
   else {
-    res.json(result);
-  }
+    return console.log('findOne error:', err);
+   }
 //Result is an array of all docs returned
 });
 });
