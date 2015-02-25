@@ -20,7 +20,7 @@
 </nav>
 
 <!-- Took out all unnecessary divs to make consistent with checkin page design -->
-<div class="container container-margin">
+<div class="container container-margin containter-checkin">
     <h1 class="header"> Thank you! Someone will be with you shortly. </h1>
     <img class="checkinphoto" src="http://placehold.it/500x200" alt="">
 </div>
