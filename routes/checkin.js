@@ -32,7 +32,45 @@ router.get('/office/:id/checkin', function (req, res, next) {
 
 //Sig Page
 router.get('/office/:id/sign', function(req, res, next) {
-		res.render('checkin/sign', {title: 'Express'});
+    var db = req.db;
+    var businesses = db.get('businesses');
+
+    businesses.find({_id: ObjectID(req.params.id)}, function (err, results) {
+        //TODO: Verify that there are results and no errors
+        var business = results[0];
+        res.render('checkin/sign', {
+            title: 'Express',
+            disclosure: business.disclosure
+        });
+    });
+});
+
+router.post('/office/:id/sign', function (req, res, next) {
+    var sig = req.body.sig.trim();
+    if (sig === '') {
+        var db = req.db;
+        var businesses = db.get('businesses');
+
+        businesses.find({_id: ObjectID(req.params.id)}, function (err, results) {
+            //TODO: Verify that there are results and no errors
+            var business = results[0];
+            res.render('checkin/sign', {
+                title: 'Express',
+                disclosure: business.disclosure,
+                error: 'You must provide a signature'
+            });
+        });
+    } else {
+        //Update the state of the appointment
+        var appointmentId = req.session.appointmentId;
+        req.db.get('appointments').update({_id: ObjectID(appointmentId)}, {
+            $set: {
+                state: 'checkedIn'
+            }
+        }, function (err) {
+            res.redirect('done');
+        });
+    }
 });
 
 //Custom Form
@@ -153,8 +191,17 @@ router.post('/office/:id/customform', function (req, res, next) {
 
                 formResponses.insert(formResponse, function (err, result) {
                     //TODO: Error checking
-                    res.redirect('done');
-                })
+
+                    //Update the state of the appointment
+                    var appointmentId = req.session.appointmentId;
+                    db.get('appointments').update({_id: ObjectID(appointmentId)}, {
+                       $set: {
+                            state: 'formDone'
+                       }
+                    }, function (err) {
+                        res.redirect('sign');
+                    });
+                });
             }
         });
     });
@@ -189,19 +236,19 @@ router.post('/office/:id/nocode', function (req, res, next) {
 		var inputDOB = req.body.inputDOB;
 		var dobSubStr = req.body.inputDOB;
 		var numSlash = inputDOB.match(/\//g).length;
-		
+
 		var busName;
 		var aptID;
 
 		if (numSlash != 2) {
 			res.render('checkin/nocode', {
-				error: dobFormatErr, 
+				error: dobFormatErr,
 				inputFirst: inputFirst,
 				inputLast: inputLast,
 				inputDOB: inputDOB
 			});
 		}
-		
+
 		var firstSep = dobSubStr.indexOf("/");
 		var inputMonth = dobSubStr.substring(0, firstSep);
 
@@ -228,7 +275,7 @@ router.post('/office/:id/nocode', function (req, res, next) {
 		}
 
 		var inputYear = dobSubStr.substring(secondSep+1);
-		
+
 		if (inputYear.length != 4)
 		{
 			res.render('checkin/nocode', {
@@ -272,8 +319,8 @@ router.post('/office/:id/nocode', function (req, res, next) {
 		}
 
 		inputDOB = inputMonth + "/" + inputDay + "/" + inputYear;
-	
-		appointments.find({business: req.params.id, fname: inputFirst, lname: inputLast, dob: inputDOB}, function(err, result) {
+
+		appointments.find({business: ObjectID(req.params.id), fname: inputFirst, lname: inputLast, dob: inputDOB}, function(err, result) {
 			if (result.length == 0) {
 				res.render('checkin/nocode', {
 					error: 'No appointment found',
@@ -285,11 +332,15 @@ router.post('/office/:id/nocode', function (req, res, next) {
 			else {
 				var appt = result[0];
 				var apptID = appt._id;
-				req.session.apointmentId = apptID;
-				res.redirect('apptinfo');
+				req.session.appointmentId = apptID;
+                req.session.save(function (err) {
+                    if (err) {
+                        console.error("Session save error:", err);
+                    }
+                    res.redirect('apptinfo');
+                });
 			}
 		});
-		
 });
 
 module.exports = router;
