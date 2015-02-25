@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="row">
-            <h2 class="form-signin-heading">Please enter the following information:</h2>
+            <h3 class="form-signin-heading">Please enter the following information:</h3>
             <form class="form-horizontal">
                 <div class="form-group">
                     <label class="col-md-2 control-label">First Name</label>
