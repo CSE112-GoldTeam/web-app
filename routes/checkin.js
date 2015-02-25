@@ -183,7 +183,16 @@ router.post('/office/:id/customform', function (req, res, next) {
 
                 formResponses.insert(formResponse, function (err, result) {
                     //TODO: Error checking
-                    res.redirect('sign');
+
+                    //Update the state of the appointment
+                    var appointmentId = req.session.appointmentId;
+                    db.get('appointments').update({_id: ObjectID(appointmentId)}, {
+                       $set: {
+                            state: 'formDone'
+                       }
+                    }, function (err) {
+                        res.redirect('sign');
+                    });
                 });
             }
         });
