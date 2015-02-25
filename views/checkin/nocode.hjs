@@ -37,19 +37,19 @@
         <fieldset>
 
                     <label class="inputFirst" class="sr-only">First Name</label>
-                    <input type="text" id="inputFirst" name="inputFirst" value="{{ inputFirst }}" class="form-control" required autofocus>
+                    <input type="firstName" id="inputFirst" name="inputFirst" value="{{ inputFirst }}" class="form-control" required autofocus>
                    
         </fieldset>
                
         <fieldset>
                     <label class="inputLast" class="sr-only">Last Name</label>
-                    <input type="text" id="inputLast" name="inputLast" value="{{ inputLast }}" class="form-control" required autofocus>
+                    <input type="lastName" id="inputLast" name="inputLast" value="{{ inputLast }}" class="form-control" required autofocus>
                    
         </fieldset>
                
         <fieldset>
                     <label class="inputDOB" class="sr-only">Date of Birth</label>
-                    <input type="text" id="inputDOB" name="inputDOB" value="{{ inputDOB }}" class="form-control" placeholder='MM/DD/YY' required
+                    <input type="birthDate" id="inputDOB" name="inputDOB" value="{{ inputDOB }}" class="form-control" placeholder='MM/DD/YY' required
                            autofocus>
                    
         </fieldset>
