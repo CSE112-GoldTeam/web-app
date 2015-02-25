@@ -189,19 +189,19 @@ router.post('/office/:id/nocode', function (req, res, next) {
 		var inputDOB = req.body.inputDOB;
 		var dobSubStr = req.body.inputDOB;
 		var numSlash = inputDOB.match(/\//g).length;
-		
+
 		var busName;
 		var aptID;
 
 		if (numSlash != 2) {
 			res.render('checkin/nocode', {
-				error: dobFormatErr, 
+				error: dobFormatErr,
 				inputFirst: inputFirst,
 				inputLast: inputLast,
 				inputDOB: inputDOB
 			});
 		}
-		
+
 		var firstSep = dobSubStr.indexOf("/");
 		var inputMonth = dobSubStr.substring(0, firstSep);
 
@@ -228,7 +228,7 @@ router.post('/office/:id/nocode', function (req, res, next) {
 		}
 
 		var inputYear = dobSubStr.substring(secondSep+1);
-		
+
 		if (inputYear.length != 4)
 		{
 			res.render('checkin/nocode', {
@@ -272,8 +272,8 @@ router.post('/office/:id/nocode', function (req, res, next) {
 		}
 
 		inputDOB = inputMonth + "/" + inputDay + "/" + inputYear;
-	
-		appointments.find({business: req.params.id, fname: inputFirst, lname: inputLast, dob: inputDOB}, function(err, result) {
+
+		appointments.find({business: ObjectID(req.params.id), fname: inputFirst, lname: inputLast, dob: inputDOB}, function(err, result) {
 			if (result.length == 0) {
 				res.render('checkin/nocode', {
 					error: 'No appointment found',
@@ -289,7 +289,6 @@ router.post('/office/:id/nocode', function (req, res, next) {
 				res.redirect('apptinfo');
 			}
 		});
-		
 });
 
 module.exports = router;
