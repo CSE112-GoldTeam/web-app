@@ -277,3 +277,20 @@ a:hover {
 .nav-wizard-margins {
   margin-bottom: 50px;
 }
+
+.containter-checkin {
+  margin-top: 200px;
+  margin-bottom: 200px;
+}
+
+#disclosure-text {
+  overflow-y: scroll;
+  height: 300px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#sigImg {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
