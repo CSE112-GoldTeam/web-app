@@ -29,6 +29,7 @@
             </div>
         </div>
         <div class="row">
+            <h3>Tell us a little bit more about yourself: </h3>
             {{#formError}}
                 <div class="alert alert-danger" role="alert">{{formError}}</div>
             {{/formError}}
