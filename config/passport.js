@@ -8,32 +8,7 @@ var bcrypt = require('bcrypt-nodejs');
 
 
 //need this since we are passing in a passport dependency in app.js line 22
-module.exports = function(passport,collect) {
-
-
-
-
-
-
-//passport functions to Serialize and Deserialize users
-
-passport.serializeUser(function(user, done) {
-        console.log("serialize");
-        console.log(user);
-        done(null, user._id);
-    });
-
-// used to deserialize the user
-passport.deserializeUser(function(id, done) {
-    console.log(id);
-    collect.findById(id, function(err, user) {
-        console.log("deserialize");
-        console.log(user);
-        done(err, user);
-    });
-});
-
-
+module.exports = function(passport) {
 
 
 // =========================================================================
@@ -105,7 +80,6 @@ function(req, email, password, done) {
                     throw err;
               
                 return done(null,user);
-                  console.log(user);
                 
             });
         }

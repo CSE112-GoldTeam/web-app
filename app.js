@@ -3,13 +3,14 @@ if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
 }
 
 var express = require('express');
+var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var passport = require('passport');
-var session = require('express-session');
+
 //var router = express.Router();
 
 
@@ -22,17 +23,33 @@ var monk = require('monk');
 var db = monk('localhost:27017/robobetty');
 
 //login config
-var collect = db.get('users');
+var collect = db.get('businesses');
 
 
 
 
+//passport functions to Serialize and Deserialize users
+
+passport.serializeUser(function(user, done) {
+        console.log("serialize");
+        console.log(user._id);
+        done(null, user._id);
+    });
+
+// used to deserialize the user
+passport.deserializeUser(function(id, done) {
+    console.log(id);
+    collect.findById(id, function(err, user) {
+        console.log("deserialize");
+        console.log(user);
+        done(err, user);
+    });
+});
 
 
 
 
-
-require('./config/passport')(passport,collect); // pass passport for configuration
+require('./config/passport')(passport); // pass passport for configuration
 
 
 
@@ -65,9 +82,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //required for passport
-app.use(session({secret: '1234567890QWERTY',
-    resave: false,
-    saveUninitialized: true}));
+app.use(session({secret: '1234567890QWERTY'}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 

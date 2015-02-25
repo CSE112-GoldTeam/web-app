@@ -1,6 +1,4 @@
 var express = require('express');
-var bodyParser = require('body-parser');
-var passport = require('passport');
 var router = express.Router();
 
 
@@ -44,7 +42,6 @@ router.post('/register', passport.authenticate('local-signup',{
 function isLoggedIn(req, res, next) {
     //console.log(req.passport.session);
     // if user is authenticated in the session, carry on 
-    console.log(req.isAuthenticated());
     if (req.isAuthenticated())
         return next();
 
