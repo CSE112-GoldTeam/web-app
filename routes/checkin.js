@@ -184,7 +184,7 @@ router.post('/office/:id/customform', function (req, res, next) {
                 formResponses.insert(formResponse, function (err, result) {
                     //TODO: Error checking
                     res.redirect('sign');
-                })
+                });
             }
         });
     });
@@ -315,7 +315,7 @@ router.post('/office/:id/nocode', function (req, res, next) {
 			else {
 				var appt = result[0];
 				var apptID = appt._id;
-				req.session.apointmentId = apptID;
+				req.session.appointmentId = apptID;
                 req.session.save(function (err) {
                     if (err) {
                         console.error("Session save error:", err);
