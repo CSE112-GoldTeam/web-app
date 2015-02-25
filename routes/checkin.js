@@ -45,6 +45,26 @@ router.get('/office/:id/sign', function(req, res, next) {
     });
 });
 
+router.post('/office/:id/sign', function (req, res, next) {
+    var sig = req.body.sig.trim();
+    if (sig === '') {
+        var db = req.db;
+        var businesses = db.get('businesses');
+
+        businesses.find({_id: ObjectID(req.params.id)}, function (err, results) {
+            //TODO: Verify that there are results and no errors
+            var business = results[0];
+            res.render('checkin/sign', {
+                title: 'Express',
+                disclosure: business.disclosure,
+                error: 'You must provide a signature'
+            });
+        });
+    } else {
+        res.redirect('done');
+    }
+});
+
 //Custom Form
 function makeDropdown(options, name, body) {
     var s = '<select class="form-control" name="'+name+'" id="'+name+'">';
