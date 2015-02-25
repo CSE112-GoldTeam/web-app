@@ -33,6 +33,12 @@
     </div>
 </header>
 
+{{#error}}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+{{/error}}
+
 <h3>Disclosure Agreement</h3>
 
 {{{ disclosure }}}
@@ -42,7 +48,7 @@
 <form action="sign" method="post">
     <img id="sigImg" src="/api/signature/" style="width:auto" />
     <br />
-    <input type="text" id="sig" />
+    <input type="text" id="sig" name="sig" />
     <button class="btn btn-default" type="submit">Sign</button>
 </form>
 
