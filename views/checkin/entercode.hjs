@@ -16,15 +16,13 @@ p.padding{
 </style>
 
 <!-- this nav bar is consistent with PK's navbar -->
-<header role="banner" class="navbar navbar-fixed-top navbar-custom">
-  <div class="container">
-    <div class="navbar-inverse side-collapse in">
-        <ul class="nav navbar-nav">
-            <li><a class="navbar-brand" href="#">Company Logo</a></li>
-        </ul>
-    </div>
-  </div>
-</header>
+ <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">
+            <div id="company-logo">Company Logo</div>
+        </a>
+      </div>
+</nav>
 
 <body>
     <h4 class = "progress-bar-title">Your Check-in Progress:</h4>
