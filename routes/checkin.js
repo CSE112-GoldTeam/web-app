@@ -286,7 +286,12 @@ router.post('/office/:id/nocode', function (req, res, next) {
 				var appt = result[0];
 				var apptID = appt._id;
 				req.session.apointmentId = apptID;
-				res.redirect('apptinfo');
+                req.session.save(function (err) {
+                    if (err) {
+                        console.error("Session save error:", err);
+                    }
+                    res.redirect('apptinfo');
+                });
 			}
 		});
 });
