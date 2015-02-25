@@ -17,20 +17,18 @@ router.get('/office/:id/entercode', function (req, res, next) {
     res.render('checkin/entercode', {title: 'CompanyName'});
 });
 
+//Checks if the object(person in our case) exist in the database
+router.get('/api/office/appointment/:id/', function(req, res, next) {
+  //requesting the database
+  var db = req.db;
+  var appointments = db.get('appointments'); //This gets the collection
 
-router.get('/office/:id/apptinfo', function(req, res, next) {
-var db = req.db;
-var appoint = db.get('appointments'); //This gets the collection
-
-appointments.find({_id: '54ec302331efc353ec'}, function(err, result) {
-  if(result) {
-    var appt = results[0];
-  }
-  else {
-    return console.log('findOne error:', err);
-   }
-//Result is an array of all docs returned
-});
+  appointments.findById(req.params.id, function(err, result) {
+    if (err) { return res.sendStatus(500, err); }
+    if(!result) { return res.send(404,'User not found');}
+      //Result is an array of all docs returned
+    return res.json(result);
+  });
 });
 
 
