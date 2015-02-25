@@ -22,7 +22,6 @@ router.get('/api/office/appointment/:id/', function(req, res, next) {
   //requesting the database
   var db = req.db;
   var appointments = db.get('appointments'); //This gets the collection
-
   appointments.findById(req.params.id, function(err, result) {
     if (err) { return res.sendStatus(500, err); }
     if(!result) { return res.send(404,'User not found');}
