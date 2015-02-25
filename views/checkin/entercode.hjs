@@ -18,51 +18,50 @@ p.padding{
 <!-- this nav bar is consistent with PK's navbar -->
 
 <body>
-     <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">
                 <div id="company-logo">Company Logo</div>
             </a>
          </div>
     </nav>
-    <h4 class = "progress-bar-title">Your Check-in Progress:</h4>
-    <div class="container" class="centeredz">
-        <ul class="nav nav-wizard">
-            <li class="active"><a href="#">Step 1: Enter Code</a></li>
-            <li><a href="#">Step 2: Confirm Appointment</a></li>
-            <li><a href="#">Step 3: Checked In</a></li>
-        </ul>
-    </div>
 
-<!---->
-<div class="container-">
-    <div class="col-sm-7 col-sm-offset-2">
-        <div class="header text-center">
-            <h1>Welcome to {{ title }}!</h1>
+    <div class="container container-margin">
+        <div class="container centeredz">
+            <h3>Your checkin process:</h3>
+            <ul class="nav nav-wizard">
+                <li class="active"><a href="#">Step 1: Enter Code</a></li>
+                <li><a href="#">Step 2: Confirm Appointment</a></li>
+                <li><a href="#">Step 3: Checked In</a></li>
+            </ul>
         </div>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <img src="http://placehold.it/768x400" class="img-rounded img-responsive max-width:100% height:auto;">
+        <div class="col-sm-7 col-sm-offset-2">
+            <div class="header text-center">
+                <h1>Welcome to {{ title }}!</h1>
             </div>
-
-            <h4 class="bold" style = "text-align:left">
-                <strong>Enter confirmation code</strong><br>
-                <small class=""> Codes are sent after you fill out your form.</small>
-            </h4>
-
-            <div class="form-group">
-                <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Enter code">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <img src="http://placehold.it/768x400" class="img-rounded img-responsive max-width:100% height:auto;">
                 </div>
-                <div class="col-sm-3">
-                    <a type="button" class="btn btn-success btn-lg btn-block custom-button" href="apptinfo">Next</a>
+
+                <h4 class="bold" style = "text-align:left">
+                    <strong>Enter confirmation code</strong><br>
+                    <small class=""> Codes are sent after you fill out your form.</small>
+                </h4>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" id="inputEmail3" placeholder="Enter code">
+                    </div>
+                    <div class="col-sm-3">
+                        <a type="button" class="btn btn-success btn-lg btn-block custom-button" href="apptinfo">Next</a>
+                    </div>
                 </div>
-            </div>
-            <span style = "float:left; padding-bottom:50px"><strong>Don't have a code?</strong> <a href="nocode">No Problem.</a></span>
-            <br>
-        </form>
+                <span style = "float:left; padding-bottom:50px"><strong>Don't have a code?</strong> <a href="nocode">No Problem.</a></span>
+                <br>
+            </form>
+        </div>
     </div>
-</div>
 
 </body>
 </html>
