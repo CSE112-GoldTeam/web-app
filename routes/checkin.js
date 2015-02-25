@@ -61,7 +61,15 @@ router.post('/office/:id/sign', function (req, res, next) {
             });
         });
     } else {
-        res.redirect('done');
+        //Update the state of the appointment
+        var appointmentId = req.session.appointmentId;
+        req.db.get('appointments').update({_id: ObjectID(appointmentId)}, {
+            $set: {
+                state: 'checkedIn'
+            }
+        }, function (err) {
+            res.redirect('done');
+        });
     }
 });
 
