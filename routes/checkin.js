@@ -153,7 +153,7 @@ router.post('/office/:id/customform', function (req, res, next) {
 
                 formResponses.insert(formResponse, function (err, result) {
                     //TODO: Error checking
-                    res.redirect('done');
+                    res.redirect('sign');
                 })
             }
         });
