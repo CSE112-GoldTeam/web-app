@@ -32,7 +32,17 @@ router.get('/office/:id/checkin', function (req, res, next) {
 
 //Sig Page
 router.get('/office/:id/sign', function(req, res, next) {
-		res.render('checkin/sign', {title: 'Express'});
+    var db = req.db;
+    var businesses = db.get('businesses');
+
+    businesses.find({_id: ObjectID(req.params.id)}, function (err, results) {
+        //TODO: Verify that there are results and no errors
+        var business = results[0];
+        res.render('checkin/sign', {
+            title: 'Express',
+            disclosure: business.disclosure
+        });
+    });
 });
 
 //Custom Form
