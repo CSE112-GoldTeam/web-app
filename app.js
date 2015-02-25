@@ -12,7 +12,9 @@ var bodyParser = require('body-parser');
 //Database
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/robobetty');
+var mongoURI = process.env.MONGOLAB_URI || 'localhost:27017/robobetty';
+console.log('Connecting to DB: ' + mongoURI);
+var db = monk(mongoURI);
 
 var business = require('./routes/business');
 var checkin = require('./routes/checkin');
