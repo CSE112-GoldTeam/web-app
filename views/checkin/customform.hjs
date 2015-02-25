@@ -22,9 +22,11 @@
             <div class="nav-wizard-margins">
                 <h3>Your checkin process:</h3>
                 <ul class="nav nav-wizard">
-                    <li><a href="#">Step 1: General Information</a></li>
-                    <li class="active"><a href="#">Step 2: Additional Information</a></li>
-                    <li><a href="#">Step 3: Checked In</a></li>
+                    <li><a href="#">Step 1: Identification</a></li>
+                    <li><a href="#">Step 2: Confirm Appointment</a></li>
+                    <li class="active"><a href="#">Step 3: Additional Information</a></li>
+                    <li><a href="#">Step 4: Sign Disclosure Agreement</a></li>
+                    <li><a href="#">Step 5: Checked In!</a></li>
                 </ul>
             </div>
         </div>
