@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>{{ title }}</title>
+    <title>{{ title }}</title>
        
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
@@ -9,13 +9,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
     <script>
-    $(document).ready(function() {
-        $('#sig').on('input', function(){
-            var sig = $('#sig').val();
-            sig = '/api/signature/' + sig;
-            $('#sigImg').attr('src', sig);
-        })
-    });
+        $(document).ready(function () {
+            $('#sig').on('input', function () {
+                var sig = $('#sig').val();
+                sig = '/api/signature/' + sig;
+                $('#sigImg').attr('src', sig);
+            })
+        });
     </script>
 
 </head>
@@ -46,13 +46,11 @@
 <h3>SIGN HERE</h3>
 
 <form action="sign" method="post">
-    <img id="sigImg" src="/api/signature/" style="width:auto" />
-    <br />
-    <input type="text" id="sig" name="sig" />
+    <img id="sigImg" src="/api/signature/" style="width:auto"/>
+    <br/>
+    <input type="text" id="sig" name="sig"/>
     <button class="btn btn-default" type="submit">Sign</button>
 </form>
-
-
 
 
 </body>
