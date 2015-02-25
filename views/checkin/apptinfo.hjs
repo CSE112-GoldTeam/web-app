@@ -64,7 +64,7 @@
     <a class="btn btn-lg btn-danger btn-block" type="submit" href="entercode">Not you?</a>
 </div>
 <div class="col-md-2">
-    <a class="btn btn-lg btn-success btn-block" type="submit" href="done">Next</a>
+    <a class="btn btn-lg btn-success btn-block" type="submit" href="customform">Next</a>
 </div>
 </body>
 </html>
