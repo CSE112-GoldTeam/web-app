@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }}</title>
-       
+    <title>{{ title }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-nav-wizard.css">
@@ -31,21 +30,27 @@
             </div>
         </div>
         <div class="row">
-            <form class="form-inline text-center">
-                <h2 class="form-signin-heading">Please enter the following information</h2>
-                <fieldset>
-                    <label class="inputFirst" class="sr-only">First Name</label>
-                    <input type="firstName" name="inputFirst" class="form-control" required autofocus>
-                </fieldset>
-                <fieldset>
-                    <label class="inputLast" class="sr-only">Last Name</label>
-                    <input type="lastName" id="inputLast" class="form-control" required autofocus>
-                </fieldset>
-                <fieldset>
-                    <label class="inputDOB" class="sr-only">Date of Birth</label>
-                    <input type="birthDate" id="inputDOB" class="form-control" placeholder='MM/DD/YY' required autofocus>
-                </fieldset>
-                <a class="btn btn-lg btn-primary btn-block custom-button" type="submit" href="done">Next</a>
+            <h2 class="form-signin-heading">Please enter the following information:</h2>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">First Name</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Last Name</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Date of Birth</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" value="">
+                    </div>
+                </div>
+               <a class="btn custom-button center-image" type="submit" href="done">Next</a>
             </form>
         </div>
     </div>
