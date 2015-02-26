@@ -40,11 +40,8 @@ function checkTime(i) {
     if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
     return i;
 }
-
-
-function poll() {
-    setTimeout(function(){
-        $('#tblBody').empty();
+function table() {
+    $('#tblBody').empty();
 
         $.get("/api/appointments", function( data ){
 
@@ -94,6 +91,11 @@ function poll() {
             }       
               
         });
+}
+
+function poll() {
+    setTimeout(function(){
+        table();
 
         poll();
     },10000);//checks every 1000 millisecond
