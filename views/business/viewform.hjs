@@ -11,11 +11,9 @@
 </head>
 <body>
 	<h1><strong>Form Results</strong></h1>
-    <!-- <ul> -->
         {{#formData}}
              <li><strong>{{label}}:{{response}}</strong></li>
         {{/formData}}
-    <!-- </ul> -->
 </p>
 
 </body>
