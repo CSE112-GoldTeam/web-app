@@ -1,15 +1,16 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var router = express.Router();
-var session = require('express-session');
+// var session = require('express-session');
+
+
+
+
+module.exports = function(passport){
 
 router.use(bodyParser.json()); // for parsing application/json
 router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-router.use(session({
-    secret: '1234567890QWERTY',
-    resave: false,
-    saveUninitialized: true
-}));
+
 
 //Company Registration
 router.get('/register', function (req, res, next) {
@@ -22,7 +23,7 @@ router.get('/', function (req, res, next) {
 });
 
 //Office Configuration
-router.get('/config', function (req, res, next) {
+router.get('/config', isLoggedIn, function (req, res, next) {
     res.render('business/config', {title: 'Express'});
 });
 
@@ -31,49 +32,29 @@ router.get('/formbuilder', function (req, res, next) {
     res.render('business/formbuilder', {title: 'Express'});
 });
 
-router.post('/register', function(req, res) {
-    var db = req.db;
-    var companyName = req.body.companyName;
-    var username = req.body.username;
-    var email = req.body.email;
-    var phone = req.body.phone;
-    var password = req.body.password;
 
-    // Check if any field has been left blank
-    if(companyName === '' || username === '' || email === ''
-        ||  phone === '' || password === ''){
-        res.render('business/register', {
-            error: 'You must fill in all fields.',
-            companyName: companyName,
-            phone: phone,
-            username : username, 
-            email: email, 
-        });
-    } else { 
-        // Set our collection
-        var collection = db.get('businesses');
+router.post('/register', passport.authenticate('local-signup',{
+    successRedirect : '/config', // redirect to the secure profile section
+    failureRedirect : '/register' // redirect back to the signup page if there is an error
+}));
 
-        // Submit to the db
-        collection.insert({
-            "companyName" : companyName,
-            "username" : username,
-            "password" : password,
-            "email" : email,
-            "phone" : phone,
-            "logo" : '',
-            "walkins" : false
-        }, function (err, doc) {
-            if (err) {
-                console.error('Error registering new company:', err);
 
-                // If it failed, return error
-                res.send("there was a problem adding the information to the database.");
-            }
-            else {
-               res.redirect('config');
-            }
-        });
-    }
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+    // if user is authenticated in the session, carry on 
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
+
+
+//Device Reg
+router.get('/registerDevice', function (req,res, next) {
+    res.render('business/registerDevice', {title: 'Express'});
 });
 
-module.exports = router;
+ return router;
+};
