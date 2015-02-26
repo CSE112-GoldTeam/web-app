@@ -7,14 +7,14 @@ First Run
 3. Install [Node.js](http://nodejs.org/download/)
 4. Install Imagemagick using [Homebrew](http://brew.sh/) if you're using OS X
 
-				$ brew install imagemagick
-				$ brew install graphicsmagick
+        $ brew install imagemagick
+        $ brew install graphicsmagick
 
 5. Navigate to the web-app directory
 6. Install npm dependencies:
 
         $ npm install
-				$ npm install gm
+        $ npm install gm
         $ npm install --global gulp
 
 7. Create a folder for the MongoDB server with
