@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+  <div style="position:absolute;top:150px;left:80px">
+    <h2 top="50px" align="left">Setting Up</h2>
+    <h4 align="left">Register all of your devices and generate activation keys</h4>
+        <div style="position:relative;top:50px;left:30px">
+             <h3 top="50px" align="left">Registered Devices</h2>
+             <h4 align="left">Lorem ipsum explanations</h4>
+             <div style="position:relative;top:50px">
+             <table border="2" style="width:200%">
+               <tr>
+                 <td>#      Location</td>
+                 <td>Description</td>
+                 <td>Device Type</td>
+                 <td>Activated</td>
+               </tr>
+             </table>
+             <div style="position:relative;top:50px">
+                <h3 top="50px" align="left">Add a New Device</h2>
+                <h4 align="left">You have X devices left in your subscription plan</h4>
+                <a style="position:relative;right:-225px;top:-30px;href=">Upgrade my Plan</a>
+                <div align="left">
+                    <input placeholder="Location">
+                    <input placeholder="Description">
+                    <input placeholder="Device Type">
+                    <button type="button" class="btn btn-success">Get Key</button>
+                </div>
+             </div>
+            </div>
+        </div>
+  </div>
+</body>

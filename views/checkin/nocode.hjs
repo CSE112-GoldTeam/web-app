@@ -9,7 +9,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-
     <nav class="navbar navbar-default navbar-fixed-top">
           <div class="navbar-header">
             <a class="navbar-brand" href="/">
@@ -32,27 +31,32 @@
             </div>
         </div>
         <div class="row">
+            {{#error}}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {{/error}}
             <h3 class="form-signin-heading">Please enter the following information:</h3>
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="" method="post">
                 <div class="form-group">
-                    <label class="col-md-2 control-label">First Name</label>
+                    <label class="col-md-2 control-label inputFirst">First Name</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" value="">
+                        <input type="firstName" id="inputFirst" name="inputFirst" value="{{ inputFirst }}" class="form-control" required autofocus>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Last Name</label>
+                    <label class="col-md-2 control-label inputLast">Last Name</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" value="">
+                        <input type="lastName" id="inputLast" name="inputLast" value="{{ inputLast }}" class="form-control" required autofocus>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Date of Birth</label>
+                    <label class="col-md-2 control-label inputDOB">Date of Birth</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" value="">
+                        <input type="birthDate" id="inputDOB" name="inputDOB" value="{{ inputDOB }}" class="form-control" placeholder='MM/DD/YY' required autofocus>
                     </div>
                 </div>
-               <a class="btn custom-button custom-center" type="submit" href="done">Next</a>
+               <button class="btn btn-lg btn-block custom-button custom-center" type="submit">Next</button>
             </form>
         </div>
     </div>

@@ -1,40 +1,115 @@
+if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
+    require('newrelic');
+}
+
 var express = require('express');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var router = express.Router();
+var app = express();
+
+
 
 //Database
-var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/robobetty');
+var mongoURI = process.env.MONGOLAB_URI || 'localhost:27017/robobetty';
+console.log('Connecting to DB: ' + mongoURI);
+var db = monk(mongoURI);
 
-var business = require('./routes/business');
+//login config
+var collect = db.get('businesses');
+
+
+
+
+//passport functions to Serialize and Deserialize users
+
+passport.serializeUser(function(user, done) {
+        done(null, user._id);
+    });
+
+// used to deserialize the user
+passport.deserializeUser(function(id, done) {
+    collect.findById(id, function(err, user) {
+        done(err, user);
+    });
+});
+
+
+
+
+require('./config/passport')(passport); // pass passport for configuration
+
+
+
+
+var business = require('./routes/business')(passport);
 var checkin = require('./routes/checkin');
 var signature = require('./routes/signature');
 
-var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+//so... when only using router, for some reason deserialize wont work
+//but when using both or just app.use(session), the route works
+//note to j
+
+
+// router.use(session({
+//     secret: '1234567890QWERTY',
+//     resave: false,
+//     saveUninitialized: true
+// }));
+
+
+//required for passport
+app.use(session({secret: '1234567890QWERTY'}));
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
+
+
+
+
+
+
+
+
 
 // Make our db accessible to our router
 app.use(function (req, res, next) {
     req.db = db;
+    req.passport = passport;
+    req.app = app;
     next();
 });
 
-//CORS
+
+
+
+
+
+
+
+
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', 'fonts.googleapis.com');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -46,6 +121,7 @@ app.use(function(req, res, next) {
 app.use('/', business);
 app.use('/', checkin);
 app.use('/', signature);
+
 
 
 // catch 404 and forward to error handler
