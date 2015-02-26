@@ -257,7 +257,7 @@ router.post('/office/:id/nocode', function (req, res) {
 			});
 		}
 
-		var firstSep = dobSubStr.indexOf("/");
+		var firstSep = dobSubStr.indexOf('/');
 		var inputMonth = dobSubStr.substring(0, firstSep);
 
 		if (inputMonth.length > 2) {
@@ -270,7 +270,7 @@ router.post('/office/:id/nocode', function (req, res) {
 		}
 
 		dobSubStr = dobSubStr.substring(firstSep+1);
-		var secondSep = dobSubStr.indexOf("/");
+		var secondSep = dobSubStr.indexOf('/');
 		var inputDay = dobSubStr.substring(0, secondSep);
 
 		if (inputDay.length > 2) {
@@ -307,7 +307,7 @@ router.post('/office/:id/nocode', function (req, res) {
 		}
 		else if (monthInt < 10 && inputMonth.length === 1)
 		{
-			inputMonth = "0" + inputMonth;
+			inputMonth = '0' + inputMonth;
 		}
 
 		var dayInt = parseInt(inputDay);
@@ -323,10 +323,10 @@ router.post('/office/:id/nocode', function (req, res) {
 		}
 		else if (dayInt < 10 && inputDay.length === 1)
 		{
-			inputDay = "0" + inputDay;
+			inputDay = '0' + inputDay;
 		}
 
-		inputDOB = inputMonth + "/" + inputDay + "/" + inputYear;
+		inputDOB = inputMonth + '/' + inputDay + '/' + inputYear;
 
 		appointments.find({business: ObjectID(req.params.id), fname: inputFirst, lname: inputLast, dob: inputDOB}, function(err, result) {
 			if (result.length === 0) {
@@ -343,7 +343,7 @@ router.post('/office/:id/nocode', function (req, res) {
 				req.session.appointmentId = apptID;
                 req.session.save(function (err) {
                     if (err) {
-                        console.error("Session save error:", err);
+                        console.error('Session save error:', err);
                     }
                     res.redirect('apptinfo');
                 });
