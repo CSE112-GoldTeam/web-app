@@ -55,7 +55,9 @@
   <script>
     getDate();
     $(startTime);
+    $(table);
     $(poll);
   </script>
 </body>
 </html>
+
