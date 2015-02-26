@@ -47,14 +47,14 @@
 
                 <p>DOB</p>
 
-                <p>Phone</p>
+                <p>Email</p>
             </div>
             <div class="col-md-6">
                 <p><b>{{name}}</b></p>
 
                 <p><b>{{DOB}}</b></p>
 
-                <p><b>{{PNumber}}</b></p>
+                <p><b>{{email}}</b></p>
             </div>
         </div>
     </div>
