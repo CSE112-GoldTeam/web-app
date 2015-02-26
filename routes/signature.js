@@ -18,7 +18,7 @@ router.get('/api/signature/:text', function (req, res, next) {
         .options({imageMagick: true})
         .transparent('#ffffffff')
 				.fill('#000000')
-        .font('BrushScriptI',32)
+        .font('brushscript.ttf',32)
 				.drawText(10,50,text)
 				.trim()
 				.toBuffer('PNG',function (err, buffer) {
