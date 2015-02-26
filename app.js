@@ -6,14 +6,10 @@ var express = require('express');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var passport = require('passport');
-var router = express.Router();
 var app = express();
-
-
 
 //Database
 var monk = require('monk');
@@ -23,9 +19,6 @@ var db = monk(mongoURI);
 
 //login config
 var collect = db.get('businesses');
-
-
-
 
 //passport functions to Serialize and Deserialize users
 
@@ -40,18 +33,11 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
-
-
-
 require('./config/passport')(passport); // pass passport for configuration
-
-
-
 
 var business = require('./routes/business')(passport);
 var checkin = require('./routes/checkin');
 var signature = require('./routes/signature');
-
 
 
 // view engine setup
@@ -72,27 +58,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 //but when using both or just app.use(session), the route works
 //note to j
 
-
-// router.use(session({
-//     secret: '1234567890QWERTY',
-//     resave: false,
-//     saveUninitialized: true
-// }));
-
-
 //required for passport
 app.use(session({secret: '1234567890QWERTY'}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-
-
-
-
-
-
-
-
-
 
 // Make our db accessible to our router
 app.use(function (req, res, next) {
@@ -101,14 +70,6 @@ app.use(function (req, res, next) {
     req.app = app;
     next();
 });
-
-
-
-
-
-
-
-
 
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', 'fonts.googleapis.com');
@@ -136,7 +97,7 @@ app.use(function (req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
+    app.use(function (err, req, res) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -147,7 +108,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
