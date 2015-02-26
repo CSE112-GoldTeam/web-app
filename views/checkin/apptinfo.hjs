@@ -37,7 +37,7 @@
         <div class="col-md-4">
             <h1>
                 <img src="http://placehold.it/140x100">
-                Hi, John
+                Hi, {{name}}
             </h1>
 
             <p class="lead"><b>Appointment Time: 10:00 am</b></p>
@@ -47,14 +47,14 @@
 
                 <p>DOB</p>
 
-                <p>Phone</p>
+                <p>Email</p>
             </div>
             <div class="col-md-6">
-                <p><b>John Doe</b></p>
+                <p><b>{{name}}</b></p>
 
-                <p><b>01/02/03</b></p>
+                <p><b>{{DOB}}</b></p>
 
-                <p><b>(123) 456-7890</b></p>
+                <p><b>{{email}}</b></p>
             </div>
         </div>
     </div>
@@ -68,4 +68,3 @@
 </div>
 </body>
 </html>
-
