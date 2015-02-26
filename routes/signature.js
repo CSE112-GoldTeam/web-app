@@ -10,7 +10,7 @@ router.get('/api/signature/:text', function (req, res) {
     var text = req.params.text;
 
     // creating an image
-    gm(500, 100, "#ffffffff")
+    gm(500, 100, '#ffffffff')
         .options({imageMagick: true})
         .transparent('#ffffffff')
         .fill('#000000')
