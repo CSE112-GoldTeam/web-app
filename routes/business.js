@@ -13,22 +13,22 @@ router.use(bodyParser.urlencoded({ extended: true })); // for parsing applicatio
 
 
 //Company Registration
-router.get('/register', function (req, res, next) {
+router.get('/register', function (req, res) {
     res.render('business/register');
 });
 
 //Landing Page
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
     res.render('business/landing', {title: 'Landing Page'});
 });
 
 //Office Configuration
-router.get('/config', isLoggedIn, function (req, res, next) {
+router.get('/config', isLoggedIn, function (req, res) {
     res.render('business/config', {title: 'Express'});
 });
 
 //Form Builder
-router.get('/formbuilder', function (req, res, next) {
+router.get('/formbuilder', function (req, res) {
     res.render('business/formbuilder', {title: 'Express'});
 });
 
@@ -42,9 +42,10 @@ router.post('/register', passport.authenticate('local-signup',{
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated()) {
         return next();
+    }
 
     // if they aren't redirect them to the home page
     res.redirect('/');
@@ -52,7 +53,7 @@ function isLoggedIn(req, res, next) {
 
 
 //Device Reg
-router.get('/registerDevice', function (req,res, next) {
+router.get('/registerDevice', function (req,res) {
     res.render('business/registerDevice', {title: 'Express'});
 });
 
