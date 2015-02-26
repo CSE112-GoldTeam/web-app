@@ -12,7 +12,7 @@ router.get('/office/:id/done', function (req, res, next) {
 router.get('/office/:id/apptinfo', function (req, res, next) {
     var db = req.db;
     var appointments = db.get('appointments'); //This gets the collection
-    appointments.findById(req.params.id, function(err, result) {
+    appointments.findById(req.session.appointmentId, function(err, result) {
         if (err) { return res.sendStatus(500, err); }
         if(!result) { return res.send(404,'User not found');}
         res.render('checkin/apptinfo', {
