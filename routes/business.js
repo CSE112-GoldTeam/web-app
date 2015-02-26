@@ -1,14 +1,15 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var router = express.Router();
-
+// var session = require('express-session');
 
 
 
 
 module.exports = function(passport){
 
-// router.use(bodyParser.json()); // for parsing application/json
-// router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+router.use(bodyParser.json()); // for parsing application/json
+router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 
 //Company Registration
@@ -40,7 +41,6 @@ router.post('/register', passport.authenticate('local-signup',{
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
-    //console.log(req.passport.session);
     // if user is authenticated in the session, carry on 
     if (req.isAuthenticated())
         return next();

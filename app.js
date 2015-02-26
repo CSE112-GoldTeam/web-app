@@ -28,17 +28,12 @@ var collect = db.get('businesses');
 //passport functions to Serialize and Deserialize users
 
 passport.serializeUser(function(user, done) {
-        console.log("serialize");
-        console.log(user._id);
         done(null, user._id);
     });
 
 // used to deserialize the user
 passport.deserializeUser(function(id, done) {
-    console.log(id);
     collect.findById(id, function(err, user) {
-        console.log("deserialize");
-        console.log(user);
         done(err, user);
     });
 });
