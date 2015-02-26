@@ -248,7 +248,7 @@ router.post('/office/:id/nocode', function (req, res) {
 		var dobSubStr = req.body.inputDOB;
 		var numSlash = inputDOB.match(/\//g).length;
 
-		if (numSlash != 2) {
+		if (numSlash !== 2) {
 			res.render('checkin/nocode', {
 				error: dobFormatErr,
 				inputFirst: inputFirst,
@@ -284,7 +284,7 @@ router.post('/office/:id/nocode', function (req, res) {
 
 		var inputYear = dobSubStr.substring(secondSep+1);
 
-		if (inputYear.length != 4)
+		if (inputYear.length !== 4)
 		{
 			res.render('checkin/nocode', {
 				error: dobFormatErr,
@@ -305,7 +305,7 @@ router.post('/office/:id/nocode', function (req, res) {
 				inputDOB: inputDOB
 			});
 		}
-		else if (monthInt < 10 && inputMonth.length == 1)
+		else if (monthInt < 10 && inputMonth.length === 1)
 		{
 			inputMonth = "0" + inputMonth;
 		}
@@ -321,7 +321,7 @@ router.post('/office/:id/nocode', function (req, res) {
 				inputDOB: inputDOB
 			});
 		}
-		else if (dayInt < 10 && inputDay.length == 1)
+		else if (dayInt < 10 && inputDay.length === 1)
 		{
 			inputDay = "0" + inputDay;
 		}
@@ -329,7 +329,7 @@ router.post('/office/:id/nocode', function (req, res) {
 		inputDOB = inputMonth + "/" + inputDay + "/" + inputYear;
 
 		appointments.find({business: ObjectID(req.params.id), fname: inputFirst, lname: inputLast, dob: inputDOB}, function(err, result) {
-			if (result.length == 0) {
+			if (result.length === 0) {
 				res.render('checkin/nocode', {
 					error: 'No appointment found',
 					inputFirst: inputFirst,
