@@ -1,26 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <title>{{ title }}</title>
+       
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<script>
-$(document).ready(function() {
-	$('#sig').on('input', function(){
-		var sig = $('#sig').val();
-		sig = '/api/signature/' + sig;
-		$('#sigImg').attr('src', sig);
-	})
-});
-</script>
+    <script>
+        $(document).ready(function () {
+            $('#sig').on('input', function () {
+                var sig = $('#sig').val();
+                sig = '/api/signature/' + sig;
+                $('#sigImg').attr('src', sig);
+            })
+        });
+    </script>
 
 </head>
 
 <body>
+
+<!-- this nav bar is consistent with PK's navbar -->
+<header role="banner" class="navbar navbar-fixed-top navbar-custom">
+    <div class="container">
+        <div class="navbar-inverse side-collapse in">
+            <ul class="nav navbar-nav">
+                <li><a class="navbar-brand" href="#">Company Logo</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+{{#error}}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+{{/error}}
+
+<h3>Disclosure Agreement</h3>
+
+{{{ disclosure }}}
+
 <h3>SIGN HERE</h3>
 
-<img id="sigImg" src="/api/signature/" style="width:auto" />
-<br />
-<input type="text" id="sig" />
+<form action="sign" method="post">
+    <img id="sigImg" src="/api/signature/" style="width:auto"/>
+    <br/>
+    <input type="text" id="sig" name="sig"/>
+    <button class="btn btn-default" type="submit">Sign</button>
+</form>
+
 
 </body>
 </html>

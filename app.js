@@ -17,7 +17,9 @@ var app = express();
 
 //Database
 var monk = require('monk');
-var db = monk('localhost:27017/robobetty');
+var mongoURI = process.env.MONGOLAB_URI || 'localhost:27017/robobetty';
+console.log('Connecting to DB: ' + mongoURI);
+var db = monk(mongoURI);
 
 //login config
 var collect = db.get('businesses');
