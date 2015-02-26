@@ -32,6 +32,7 @@ router.get('/formbuilder', function (req, res, next) {
     res.render('business/formbuilder', {title: 'Express'});
 });
 
+
 router.post('/register', passport.authenticate('local-signup',{
     successRedirect : '/config', // redirect to the secure profile section
     failureRedirect : '/register' // redirect back to the signup page if there is an error
@@ -49,6 +50,11 @@ function isLoggedIn(req, res, next) {
     res.redirect('/');
 }
 
+
+//Device Reg
+router.get('/registerDevice', function (req,res, next) {
+    res.render('business/registerDevice', {title: 'Express'});
+});
 
  return router;
 };
