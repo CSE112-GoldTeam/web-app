@@ -1,71 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }}</title>
-       
+    <title>{{ title }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-nav-wizard.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <div id="company-logo">Company Logo</div>
+            </a>
+          </div>
+    </nav>
 
-    <!-- this nav bar is consistent with PK's navbar -->
-<header role="banner" class="navbar navbar-fixed-top navbar-custom">
-  <div class="container">
-    <div class="navbar-inverse side-collapse in">
-        <ul class="nav navbar-nav">
-            <li><a class="navbar-brand" href="#">Company Logo</a></li>
-        </ul>
-    </div>
-  </div>
-</header>
-
-<div class="col-md-4 col-md-offset-4">
-	         
-    <form class="form-inline" action="" method="post">
-                
-		{{#error}}
-	  	<div class="alert alert-danger" role="alert">
-				{{ error }}
-			</div>
-		{{/error}}
-		
-				<h2 class="form-signin-heading">Please enter the following information</h2>
-   
-	             
-        <fieldset>
-
-                    <label class="inputFirst" class="sr-only">First Name</label>
-                    <input type="firstName" id="inputFirst" name="inputFirst" value="{{ inputFirst }}" class="form-control" required autofocus>
-                   
-        </fieldset>
-               
-        <fieldset>
-                    <label class="inputLast" class="sr-only">Last Name</label>
-                    <input type="lastName" id="inputLast" name="inputLast" value="{{ inputLast }}" class="form-control" required autofocus>
-                   
-        </fieldset>
-               
-        <fieldset>
-                    <label class="inputDOB" class="sr-only">Date of Birth</label>
-                    <input type="birthDate" id="inputDOB" name="inputDOB" value="{{ inputDOB }}" class="form-control" placeholder='MM/DD/YY' required
-                           autofocus>
-                   
-        </fieldset>
-               
-        <div class="checkbox">
-                   
+    <div class="container container-margin">
+        <div class="row">
+            <div class="nav-wizard-margins">
+                <h3>Your checkin process:</h3>
+                <ul class="nav nav-wizard">
+                    <li class="active"><a href="#">Step 1: Identification</a></li>
+                    <li><a href="#">Step 2: Confirm Appointment</a></li>
+                    <li><a href="#">Step 3: Additional Information</a></li>
+                    <li><a href="#">Step 4: Sign Disclosure Agreement</a></li>
+                    <li><a href="#">Step 5: Checked In!</a></li>
+                </ul>
+            </div>
         </div>
-               
-        <button class="btn btn-lg btn-primary btn-block custom-button" type="submit">Next</button>
-             
-    </form>
-       
-</div>
-   
+        <div class="row">
+            {{#error}}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {{/error}}
+            <h3 class="form-signin-heading">Please enter the following information:</h3>
+            <form class="form-horizontal" action="" method="post">
+                <div class="form-group">
+                    <label class="col-md-2 control-label inputFirst">First Name</label>
+                    <div class="col-md-10">
+                        <input type="firstName" id="inputFirst" name="inputFirst" value="{{ inputFirst }}" class="form-control" required autofocus>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label inputLast">Last Name</label>
+                    <div class="col-md-10">
+                        <input type="lastName" id="inputLast" name="inputLast" value="{{ inputLast }}" class="form-control" required autofocus>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label inputDOB">Date of Birth</label>
+                    <div class="col-md-10">
+                        <input type="birthDate" id="inputDOB" name="inputDOB" value="{{ inputDOB }}" class="form-control" placeholder='MM/DD/YY' required autofocus>
+                    </div>
+                </div>
+               <button class="btn btn-lg btn-block custom-button custom-center" type="submit">Next</button>
+            </form>
+        </div>
+    </div>
 
-    </div> <!-- /container -->
 </body>
 
 </html>
