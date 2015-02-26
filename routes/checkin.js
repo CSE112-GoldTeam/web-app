@@ -1,5 +1,4 @@
 var express = require('express');
-var _ = require('underscore');
 var router = express.Router();
 var ObjectID = require('mongodb').ObjectID;
 
@@ -11,11 +10,28 @@ router.get('/office/:id/done', function (req, res, next) {
 //Appointment Info
 router.get('/office/:id/apptinfo', function (req, res, next) {
     res.render('checkin/apptinfo', {title: 'Express'});
+
 });
 
 //Enter Code
 router.get('/office/:id/entercode', function (req, res, next) {
     res.render('checkin/entercode', {title: 'CompanyName'});
+});
+
+router.get('/:id', function(req, res, next) {
+ //requesting the database
+ var db = req.db;
+ var appointments = db.get('appointments'); //This gets the collection
+ appointments.findById(req.params.id, function(err, result) {
+  if (err) { return res.sendStatus(500, err); }
+  if(!result) { return res.send(404,'User not found');}
+    res.render('checkin/apptinfo', {
+      name: result.fname,
+      DOB: result.dob,
+      email: result.email
+    });
+
+ });
 });
 
 //No Code
