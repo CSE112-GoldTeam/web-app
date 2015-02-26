@@ -27,25 +27,11 @@ router.get('/:id', function(req, res, next) {
     res.render('checkin/apptinfo', {
       name: result.fname,
       DOB: result.dob,
-      PNumber: result.PhoneNumber
+      email: result.email
     });
 
  });
 });
-
-//Checks if the object(person in our case) exist in the database
-/*router.get('/office/appointment/:id/', function(req, res, next) {
-  //requesting the database
-  var db = req.db;
-  var appointments = db.get('appointments'); //This gets the collection
-  appointments.findById(req.params.id, function(err, result) {
-    if (err) { return res.sendStatus(500, err); }
-    if(!result) { return res.send(404,'User not found');}
-      //Result is an array of all docs returned
-    return res.json(result);
-  });
-});*/
-
 
 //No Code
 router.get('/office/:id/nocode', function (req, res, next) {
