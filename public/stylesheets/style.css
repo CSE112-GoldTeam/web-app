@@ -4,7 +4,7 @@ html *
 }
 
 /* Begin: Changes made by William Huang 2/7/15 */
-html, body {
+/*html, body {
     height: 100%;
 }
 
@@ -17,7 +17,7 @@ body {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-}
+}*/
 /* These are global changes applied to every page that is linked to this stylesheet */
 /* End: Changes made by William Huang 2/7/15 */
 
@@ -256,7 +256,7 @@ a:hover {
   width: 300px;
 }
 
-.center-image {
+.custom-center {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -272,3 +272,25 @@ a:hover {
   border-color: #999999;
 }
 /***********************************************/
+
+
+.nav-wizard-margins {
+  margin-bottom: 50px;
+}
+
+.containter-checkin {
+  margin-top: 200px;
+  margin-bottom: 200px;
+}
+
+#disclosure-text {
+  overflow-y: scroll;
+  height: 300px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#sigImg {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
