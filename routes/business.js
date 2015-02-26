@@ -57,7 +57,8 @@ router.get('/api/appointments', function (req, res, next) {
 	});
 });
 
-router.put('/api/formResponses/:id/state', function (req, res, next) {
+router.put('/api/appointments/:id/state', function (req, res, next) {
+	console.log("Change State");
      // grab our db object from the request
 	var db = req.db;
 	var appt = db.get('appointments');

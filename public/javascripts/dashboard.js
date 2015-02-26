@@ -69,7 +69,19 @@ function table() {
                         $form = $('<a href="/viewform/'+data[i]._id+'">View Forms</a>');
 
                         if (data[i].state == 'checkedIn'){
-                            $check = $('<input type= checkbox>');
+                            $check = $('<input type="checkbox">').data("appid",data[i]._id);
+                            $check.change(function(){
+                                console.log("updateState()");
+                                 $appid = $(this).data('appid');
+
+                                $.ajax({
+                                    url :  '/api/appointments/'+$appid+'/state',
+                                    type : "PUT"
+                                }).done(function( data ){
+                                    console.log("state changed: ");
+                                })
+                            });
+
                             var cols = [count,data[i].fname + " " + data[i].lname,$form,appTime,data[i].state,$check,$img];
                         }
                         else{
@@ -78,7 +90,7 @@ function table() {
                     }
                     else {
                         if (data[i].state == 'checkedIn'){
-                            $check = $('<input type= checkbox>');
+                            $check = $('<input type="checkbox">');
                             cols = [count,data[i].fname + " " + data[i].lname,,appTime,data[i].state,$check,$img];
                         }
                         else{
