@@ -4,12 +4,12 @@ var router = express.Router();
 var ObjectID = require('mongodb').ObjectID;
 
 //No associated use case so far
-router.get('/office/:id/done', function (req, res, next) {
+router.get('/office/:id/done', function (req, res) {
     res.render('checkin/done', {title: 'Express'});
 });
 
 //Appointment Info
-router.get('/office/:id/apptinfo', function (req, res, next) {
+router.get('/office/:id/apptinfo', function (req, res) {
     var db = req.db;
     var appointments = db.get('appointments'); //This gets the collection
     appointments.findById(req.session.appointmentId, function(err, result) {
@@ -25,24 +25,24 @@ router.get('/office/:id/apptinfo', function (req, res, next) {
 });
 
 //Enter Code
-router.get('/office/:id/entercode', function (req, res, next) {
+router.get('/office/:id/entercode', function (req, res) {
     res.render('checkin/entercode', {title: 'CompanyName'});
 });
 
 //No Code
-router.get('/office/:id/nocode', function (req, res, next) {
+router.get('/office/:id/nocode', function (req, res) {
     res.render('checkin/nocode', {title: 'Express'});
 });
 
 
 
 //Checkin Start
-router.get('/office/:id/checkin', function (req, res, next) {
+router.get('/office/:id/checkin', function (req, res) {
     res.render('checkin/checkin', {title: 'Express'});
 });
 
 //Sig Page
-router.get('/office/:id/sign', function(req, res, next) {
+router.get('/office/:id/sign', function(req, res) {
     var db = req.db;
     var businesses = db.get('businesses');
 
@@ -56,7 +56,7 @@ router.get('/office/:id/sign', function(req, res, next) {
     });
 });
 
-router.post('/office/:id/sign', function (req, res, next) {
+router.post('/office/:id/sign', function (req, res) {
     var sig = req.body.sig.trim();
     if (sig === '') {
         var db = req.db;
@@ -78,7 +78,7 @@ router.post('/office/:id/sign', function (req, res, next) {
             $set: {
                 state: 'checkedIn'
             }
-        }, function (err) {
+        }, function () {
             res.redirect('done');
         });
     }
@@ -162,7 +162,7 @@ function makeForm(db, businessId, body, fn) {
  * Custom Form POST route. Called when the user submits a form. If the form
  * is valid then it redirects to the next page, otherwise it will show an error.
  */
-router.post('/office/:id/customform', function (req, res, next) {
+router.post('/office/:id/customform', function (req, res) {
     //Get the DB
     var db = req.db;
     var businesses = db.get('businesses');
@@ -200,7 +200,7 @@ router.post('/office/:id/customform', function (req, res, next) {
                     });
                 });
 
-                formResponses.insert(formResponse, function (err, result) {
+                formResponses.insert(formResponse, function () {
                     //TODO: Error checking
 
                     //Update the state of the appointment
@@ -209,7 +209,7 @@ router.post('/office/:id/customform', function (req, res, next) {
                        $set: {
                             state: 'formDone'
                        }
-                    }, function (err) {
+                    }, function () {
                         res.redirect('sign');
                     });
                 });
@@ -218,7 +218,7 @@ router.post('/office/:id/customform', function (req, res, next) {
     });
 });
 
-router.get('/office/:id/customform', function (req, res, next) {
+router.get('/office/:id/customform', function (req, res) {
     var db = req.db; makeForm(db, req.params.id, {}, function (formHtml) {
         res.render('checkin/customform', {
             title: 'Express',
@@ -235,7 +235,7 @@ router.get('/office/:id/customform', function (req, res, next) {
  * If input errors detected or no appointment found, error
  * printed on screen
  */
-router.post('/office/:id/nocode', function (req, res, next) {
+router.post('/office/:id/nocode', function (req, res) {
 		var db = req.db;
 		var appointments = db.get('appointments');
 		var dobFormatErr = 'Please enter your Date of Birth in MM/DD/YYYY format';
@@ -247,9 +247,6 @@ router.post('/office/:id/nocode', function (req, res, next) {
 		var inputDOB = req.body.inputDOB;
 		var dobSubStr = req.body.inputDOB;
 		var numSlash = inputDOB.match(/\//g).length;
-
-		var busName;
-		var aptID;
 
 		if (numSlash != 2) {
 			res.render('checkin/nocode', {
