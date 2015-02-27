@@ -8,6 +8,9 @@ First Run
 4. Install Imagemagick using [Homebrew](http://brew.sh/) if you're using OS X
 
         $ brew install imagemagick
+   
+   If you're using Windows, head to http://www.imagemagick.org/download/ and download
+   the latest version of Imagemagick, and just follow the installer steps.
 
 5. Navigate to the web-app directory
 6. Install npm dependencies:
