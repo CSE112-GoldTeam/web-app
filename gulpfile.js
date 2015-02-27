@@ -9,6 +9,22 @@ var browserSync = require('browser-sync');
 
 var mongobackup = require('mongobackup');
 
+//// these plugins are added first, but still need for
+//// dev team to group files by types to make it happen
+//// such as .js folder, .css folder, build folder
+
+var gutil = require('gulp-util');
+var clean = require('gulp-clean');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
+
+
+//// end of additional plugins
+
+
+
+
 gulp.task('nodemon', function (cb) {
   var called = false;
   return nodemon({
@@ -94,6 +110,27 @@ gulp.task('mongorestore', function() {
     path : './dumps/mongo/'
   });
 });
+
+
+//// begin of additional plugins
+gulp.task('clean', function () {  
+  return gulp.src('build', {read: false})
+    .pipe(clean());
+});
+
+gulp.task('vendor', function() {
+  return gulp.src('vendor/*.js')
+    .pipe(concat('vendor.js'))
+    .pipe(gulp.dest('build'))
+    .pipe(uglify())
+    .pipe(rename('vendor.min.js'))
+    .pipe(gulp.dest('build'))
+    .on('error', gutil.log)
+});
+
+//// end of additional plugins
+
+
 
 
 gulp.task('default', ['browser-sync']);
