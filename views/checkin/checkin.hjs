@@ -21,14 +21,13 @@
   </div>
 </header>
 
-<div class="container">
+<div class="container containter-checkin">
     <h1 class ="header">Welcome to Company!</h1>
     <img class="checkinphoto" src="http://placehold.it/500x200" alt="...">
-    <a type="button" class="btn btn-success custom-button checkinbutton" href="entercode"
+    <a type="button" class="btn custom-button checkinbutton" href="nocode"
             style="display:block;margin-left:auto;margin-right:auto">Check In
     </a>
 </div>
-<div style="text-align:center;margin-top: 1em"><a href="nocode">I don't have an appointment.</a></div>
 </body>
 </html>
 
