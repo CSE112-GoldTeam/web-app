@@ -16,7 +16,6 @@ First Run
 6. Install npm dependencies:
 
         $ npm install
-        $ npm install gm
         $ npm install --global gulp
 
 7. Create a folder for the MongoDB server with
