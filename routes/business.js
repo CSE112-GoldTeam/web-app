@@ -61,7 +61,7 @@ router.get('/api/employee/:eid/appointments/today', function (req, res) {
         '-business'
     ], function (err, results) {
         if (err) {
-            console.error("MongoDB Error in /api/employee/:eid/appointments/today: " + err);
+            console.error('MongoDB Error in /api/employee/:eid/appointments/today: ' + err);
             return res.send(500);
         }
         res.json(results);
