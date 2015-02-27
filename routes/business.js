@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var router = express.Router();
+var ObjectID = require('mongodb').ObjectID;
 // var session = require('express-session');
 
 
@@ -38,6 +39,34 @@ router.post('/register', passport.authenticate('local-signup',{
     failureRedirect : '/register' // redirect back to the signup page if there is an error
 }));
 
+router.get('/api/employee/:eid/appointments/today', function (req, res) {
+    var db = req.db;
+    var appointments = db.get('appointments');
+
+    //Get the start and end of today
+    var begin = new Date();
+    begin.setHours(0,0,0,0);
+
+    var end = new Date();
+    end.setHours(23, 59, 59, 999);
+
+    appointments.find({
+        employee: ObjectID(req.params.eid),
+        date: {
+            $gte: begin,
+            $lte: end
+        }
+    }, [ //Fields to not return
+        '-employee',
+        '-business'
+    ], function (err, results) {
+        if (err) {
+            console.error('MongoDB Error in /api/employee/:eid/appointments/today: ' + err);
+            return res.send(500);
+        }
+        res.json(results);
+    });
+});
 
 
 // route middleware to make sure a user is logged in
