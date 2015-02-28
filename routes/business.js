@@ -23,6 +23,15 @@ router.get('/', function (req, res) {
     res.render('business/landing', {title: 'Landing Page'});
 });
 
+router.get('/login', function(req, res) {
+    res.render('business/login.hjs');
+});
+
+router.post('/login', passport.authenticate('local-login', {
+    successRedirect : '/config',
+    failureRedirect : '/login'
+}));
+
 //Office Configuration
 router.get('/config', isLoggedIn, function (req, res) {
     res.render('business/config', {title: 'Express'});
@@ -59,6 +68,7 @@ router.get('/api/formResponses/appointments/:id', function (req, res, next) {
 
 router.get('/api/appointments', function (req, res, next) {
      // grab our db object from the request
+
 	var db = req.db;
 	var appt = db.get('appointments');
 	// query the collection
@@ -80,6 +90,11 @@ router.put('/api/appointments/:id/state', function (req, res, next) {
 		return res.json(200, data);
 	});
 });
+
+
+
+
+
 
 //Form Builder
 router.get('/formbuilder', function (req, res) {
