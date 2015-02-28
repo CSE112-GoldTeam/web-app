@@ -48,6 +48,7 @@ router.get('/api/formResponses/appointments/:id', function (req, res, next) {
 
 router.get('/api/appointments', function (req, res, next) {
      // grab our db object from the request
+
 	var db = req.db;
 	var appt = db.get('appointments');
 	// query the collection
@@ -69,5 +70,10 @@ router.put('/api/appointments/:id/state', function (req, res, next) {
 		return res.json(200, data);
 	});
 });
+
+
+
+
+
 
 module.exports = router;
