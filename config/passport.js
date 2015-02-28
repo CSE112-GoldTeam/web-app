@@ -4,7 +4,7 @@
 //so in order to find the correct id in mongo, we need to make a connection to database and findbyid
 
 var LocalStrategy = require('passport-local').Strategy;
-var bcrypt = require('bcrypt-nodejs');
+var auth = require('../lib/auth');
 
 
 //need this since we are passing in a passport dependency in app.js line 22
@@ -67,7 +67,7 @@ function(req, email, password, done) {
             // create the user
 
             // set the user's local credentials
-            password = hashPassword(password);
+            password = auth.hashPassword(password);
 
             // save the user
             businesses.insert({
@@ -107,45 +107,13 @@ function(req, email, password, done) {
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
     function(req, email, password, done) { // callback with email and password from our form
-
-        // find a user whose email is the same as the forms email
-        // we are checking to see if the user trying to login already exists
-
-        var businesses = req.db.get('businesses');
-
-        businesses.findOne({ email :  email }, function(err, user) {
-            // if there are any errors, return the error before anything else
-            console.log(err, user);
-
-             if (err) {
-                 return done(err);
-             }
-
-            // if no user is found, return the message
-            if (!user) {
-                return done(null, false);
+        auth.validateLogin(req.db, email, password, function (business) {
+            if (!business) {
+                done(null, false);
+            } else {
+                done(null, business);
             }
-
-            if (!validPassword(user,password)) {
-                return done(null, false);
-             }
-            // all is well, return successful user
-            return done(null, user);
         });
     }));
-
-
-//function to hash password
-
-function hashPassword(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-}
-
-
-//function to check if password is correct
-function validPassword(user,password){
-    return bcrypt.compareSync(password, user.password);
-}
-
 };
 
