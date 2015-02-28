@@ -43,6 +43,13 @@ router.get('/formbuilder', function (req, res) {
 });
 
 
+//Employee Signup
+
+router.get('/addemployees' ,function (req,res){
+    res.render('business/addemployees',{title: 'Express'});
+})
+
+
 router.post('/register', passport.authenticate('local-signup',{
     successRedirect : '/config', // redirect to the secure profile section
     failureRedirect : '/register' // redirect back to the signup page if there is an error
