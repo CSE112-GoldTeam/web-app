@@ -23,6 +23,15 @@ router.get('/', function (req, res) {
     res.render('business/landing', {title: 'Landing Page'});
 });
 
+router.get('/login', function(req, res) {
+    res.render('business/login.hjs');
+});
+
+router.post('/login', passport.authenticate('local-login', {
+    successRedirect : '/config',
+    failureRedirect : '/login'
+}));
+
 //Office Configuration
 router.get('/config', isLoggedIn, function (req, res) {
     res.render('business/config', {title: 'Express'});
