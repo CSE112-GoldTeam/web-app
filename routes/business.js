@@ -33,7 +33,7 @@ router.get('/viewform/:id', function (req, res, next) {
 	var db = req.db;
 	var response = db.get('formResponses');
 	// query the collection
-	response.findById(req.params.id, function(err, data) {
+	response.find({ appointment : req.params.id }, function(err, data) {
 	if (err) { return res.sendStatus(500, err); }
 		console.log(data);
 		return res.render('business/viewform', {title: req.params.id, formData : data[0].answers });
