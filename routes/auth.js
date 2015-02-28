@@ -6,36 +6,6 @@ var router = express.Router();
 
 module.exports = function(passport){
 
-// =====================================
-// HOME PAGE (with login links) ========
-// =====================================
-router.get('/', function(req, res) {
-    res.render('auth/index.hjs'); // load the index.ejs file
-});
-
-
-
-
-    // =====================================
-    // LOGIN ===============================
-    // =====================================
-    // show the login form
-router.get('/login', function(req, res) {
-    // render the page and pass in any flash data if it exists
-    res.render('auth/login.hjs'); 
-});
-
-
-    // process the login form
-router.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/profile', // redirect to the secure profile section
-    failureRedirect : '/login', // redirect back to the signup page if there is an error
-}));
-
-
-
-
-
 
     // =====================================
     // Signup ===============================
@@ -81,7 +51,7 @@ router.get('/profile', isLoggedIn, function(req, res) {
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
 
-    // if user is authenticated in the session, carry on 
+    // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();
 

@@ -38,6 +38,7 @@ require('./config/passport')(passport); // pass passport for configuration
 var business = require('./routes/business')(passport);
 var checkin = require('./routes/checkin');
 var signature = require('./routes/signature');
+var mobile = require('./routes/mobile');
 
 
 // view engine setup
@@ -82,6 +83,7 @@ app.use(function(req, res, next) {
 app.use('/', business);
 app.use('/', checkin);
 app.use('/', signature);
+app.use('/', mobile);
 
 
 
