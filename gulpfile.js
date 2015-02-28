@@ -6,6 +6,7 @@ var child_process = require('child_process');
 var nodemon = require('gulp-nodemon');
 var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync');
+var checkPages = require('check-pages');
 
 var mongobackup = require('mongobackup');
 
@@ -108,4 +109,51 @@ gulp.task('test', function (done) {
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
   }, done);
+});
+
+var mongobackup = require('mongobackup');
+
+// mongodump - dump all database on localhost
+gulp.task('mongodump', function() {
+  mongobackup.dump({
+    host : 'localhost',
+    out : './dumps/mongo'
+  });
+});
+
+// mongorestore - restore 'testdb' database to localhost
+gulp.task('mongorestore', function() {
+  mongobackup.restore({
+    host : 'localhost',
+    drop : true,
+    path : './dumps/mongo/testdb'
+  });
+});
+
+// check pages on dev
+gulp.task('checkDev', function(callback) {
+  var options = {
+    pageUrls: [
+      'http://localhost:4000/'
+    ],
+    checkLinks: true,
+    onlySameDomain: true,
+    queryHashes: true,
+    noRedirects: true,
+    noLocalLinks: true,
+    linksToIgnore: [
+      // 'http://localhost:4000/ignore.html'
+    ],
+    checkXhtml: true,
+    checkCaching: true,
+    checkCompression: true,
+    maxResponseTime: 200,
+    summary: true
+  };
+
+  var callback = function() {
+    console.log('Done checking dev.');
+  };
+
+  checkPages(console, options, callback);
 });
