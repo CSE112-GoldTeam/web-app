@@ -1,6 +1,6 @@
 // config/passport.js
 
-//monk and db are neeeded because pass.deserialize doesnt pass a req parameter, 
+//monk and db are neeeded because pass.deserialize doesnt pass a req parameter,
 //so in order to find the correct id in mongo, we need to make a connection to database and findbyid
 
 var LocalStrategy = require('passport-local').Strategy;
@@ -27,13 +27,11 @@ passport.use('local-signup', new LocalStrategy({
     passReqToCallback : true // allows us to pass back the entire request to the callback
 },
 function(req, email, password, done) {
-
-    
     var db = req.db;
     var companyName = req.body.companyName;
     var username = req.body.username;
     var phone = req.body.phone;
- 
+
 
      // Check if any field has been left blank
     if(companyName === '' || username === '' || email === ''
@@ -42,20 +40,20 @@ function(req, email, password, done) {
             error: 'You must fill in all fields.',
             companyName: companyName,
             phone: phone,
-            username : username, 
-            email: email, 
+            username : username,
+            email: email,
         });
     } else {
 
-        var collection = db.get('businesses');
-   
-    
-    
+        var businesses = db.get('businesses');
+
+
+
     // find a user whose email is the same as the forms email
     // we are checking to see if the user trying to login already exists
-    collection.findOne({ 'email' :  email }, function(err, user) {
+    businesses.findOne({ 'email' :  email }, function(err, user) {
         // if there are any errors, return the error
-        
+
         if (err){
             return done(err);
         }
@@ -71,22 +69,28 @@ function(req, email, password, done) {
             // set the user's local credentials
             password = hashPassword(password);
 
-            
-
             // save the user
-            collection.insert({'email' : email, 'password' : password, 'companyName' : companyName, 'phone' : phone, 'username' : username,  "logo" : '',
-            "walkins" : false}, function(err,user) {
-                if (err)
+            businesses.insert({
+                email : email,
+                password : password,
+                companyName : companyName,
+                phone : phone,
+                username : username,
+                logo : '',
+                walkins : false
+            }, function(err,user) {
+                if (err) {
                     throw err;
-              
+                }
+
                 return done(null,user);
-                
+
             });
         }
     });
 }
 
-}));    
+}));
 
 
 
@@ -107,35 +111,34 @@ function(req, email, password, done) {
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
 
-        var collection = req.db.get('users');
+        var businesses = req.db.get('businesses');
 
-        collection.findOne({ 'email' :  email }, function(err, user) {
+        businesses.findOne({ email :  email }, function(err, user) {
             // if there are any errors, return the error before anything else
+            console.log(err, user);
 
-             if (err)
-                return done(err);
+             if (err) {
+                 return done(err);
+             }
 
             // if no user is found, return the message
-            if (!user){
-                return done(null, false); 
+            if (!user) {
+                return done(null, false);
             }
-            
 
-      
-            if (!validPassword(user,password)){
-                return done(null, false); 
-             }      
+            if (!validPassword(user,password)) {
+                return done(null, false);
+             }
             // all is well, return successful user
             return done(null, user);
-        })
+        });
     }));
 
 
 //function to hash password
 
 function hashPassword(password) {
-    var hashedPassword =  bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-    return hashedPassword;
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 }
 
 
