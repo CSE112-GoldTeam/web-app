@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var auth = require('../lib/auth');
 
 /**
  * Takes an HTTP Basic Auth String and returns the username and password parts of it.
@@ -29,7 +30,17 @@ function decodeAuthString(authString) {
     };
 }
 
-router.get('/api/mobileauth', function (req, res) {
+router.post('/api/authTest', function (req, res) {
+    auth.isValidToken(req.db, req.headers.authorization, function (result) {
+        if (!result) {
+            res.send(401);
+        } else {
+            res.send(200);
+        }
+    });
+});
+
+router.post('/api/auth', function (req, res) {
     if (!req.headers.authorization) {
         return res.send(400, 'Basic HTTP Auth required');
     }
@@ -42,15 +53,33 @@ router.get('/api/mobileauth', function (req, res) {
         return res.send(400, 'Basic HTTP Auth required.');
     }
 
-    var auth = decodeAuthString(matches[1]);
+    var user = decodeAuthString(matches[1]);
+    auth.validateLogin(req.db, user.email, user.password, function (result) {
+        if (result) {
+            var name = req.body.name;
+            if (name === '') {
+                return res.send(400, 'Name field required');
+            }
 
-    passport.authenticate('local-login', function (req, res) {
+            var mobileTokens = req.db.get('mobileTokens');
+            mobileTokens.insert({
+                business: user._id,
+                name: name
+            }, function (err, result) {
+                if (err) {
+                    return console.error('Mongo Error: ' + err);
+                }
 
-    }, function (req, res) {
+                res.json(200, {
+                    api_token: result._id
+                });
+            });
 
+            //res.json(200, req.body);
+        } else {
+            res.send(401);
+        }
     });
-
-    res.json();
 });
 
 module.exports = router;
