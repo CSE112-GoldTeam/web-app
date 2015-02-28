@@ -1,3 +1,4 @@
+
 function dateToString(date) {
 	var monthNames = [ "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December" ];
@@ -41,7 +42,7 @@ function checkTime(i) {
     return i;
 }
 function table() {
-    $('#tblBody').empty();
+    
 
         $.get("/api/appointments", function( data ){
 
@@ -51,6 +52,10 @@ function table() {
             var currmonth = currDate.getMonth()+1;
             var currdate =  currDate.getDate();
             var count =0;
+      
+            console.log("Data results: " + data.length);
+            
+            $('#tblBody').empty();
             for(var i=0; i<data.length; i++){
                 $img = $('<img id="Image" src="http://placehold.it/50x50" />');
                 var dbDate = new Date(data[i].date);
@@ -110,7 +115,7 @@ function poll() {
         table();
 
         poll();
-    },10000);//checks every 1000 millisecond
+    },1000);//checks every 1000 millisecond
 }
 
 // JQuery Insert Row
