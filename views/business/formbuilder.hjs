@@ -75,7 +75,7 @@
                 dropCounter = 0;
                 var form = $("fieldset");
                 var fields = [];
-                var json = "{ business: ObjectId(\"test\"), fields: [ ";
+                var json = '{ "business":"ObjectId", "fields": [ ';
                 form.children().each(function(i, elem){
                     if ($(this).find("select.fieldtype").first().val()) {
                         if ($(this).find("select.fieldtype").first().val() == 'dropdown') {
@@ -97,15 +97,37 @@
                 })
 
                 for (i = 0; i < fields.length; i++) {
-                    if (fields[i] === 'textbox') {
+                    if(fields[i] === 'textbox') {
                         label = fields[i + 1];
-                        json += "{ type: \"textfield\", label: \"" + label + "\" }, ";
-                        i += 1
+                        i += 2;
+                        if (fields[i] != undefined) 
+                            json += '{ "type":"textfield", "label":"' + label + '" }, ';
+                        else
+                            json += '{ "type":"textfield", "label":"' + label + '" } ';
+                    }
+                    if(fields[i] === 'dropdown') {
+                        label = fields[i + 1];
+                        json += '{ "type":"dropdown", "label":"' + label + '", ';
+                        i += 2;
+                    }
+                    if(fields[i] != 'textbox' || fields[i] != 'dropdown') {
+                        option = fields[i];
+                        if (option != undefined) {
+                            if(fields[i + 1] === 'textbox' || fields[i + 1] === 'dropdown' || i >= fields.length - 1)
+                                if(fields[i + 2] != undefined)
+                                    json += '"option":"' + option + '"}, ';
+                                else
+                                    json += '"option":"' + option + '"} ';
+                            else
+                                json += '"option":"' + option + '", ';
+                        }
                     }
                 }
 
                 console.log(fields);
-                json += "] }";
+                json += ']}';
+                console.log(json);
+                json = JSON.parse(json);
                 console.log(json);
             })
 });
