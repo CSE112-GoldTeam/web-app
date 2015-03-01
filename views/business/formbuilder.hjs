@@ -13,7 +13,8 @@
 
     <script type="text/javascript">
 
-        var fieldSet = $("<fieldset id=\"yourform\"><legend>Your Form</legend></fieldset>");
+        var fieldSet = $("<fieldset><legend>Your Form</legend></fieldset>");
+        var json = [];
 
         function insert() {
             var x = document.getElementById("mySelect");
@@ -49,7 +50,6 @@
                     var label = $("<label for=\"" + id + "\">" + $(this).find("input.fieldname").first().val() + "</label>");
                     var input;
                     switch ($(this).find("select.fieldtype").first().val()) {
-                       
                         case "textbox":
                             input = $("<div><input type=\"text\" id=\"" + id + "\" name=\"" + id + "\" /></div>");
                             break;
@@ -64,21 +64,29 @@
             });
 
             $("#submit").click(function() {
-                console.log(fieldSet.prop("outerHTML"));
+                console.log(fieldSet.prop('outerHTML'));
 
-                var labels = $("label");
+                var form = $("fieldset");
+                var json = [];
+                form.children().each(function(i, elem){
+                    if ($(this).find("select.fieldtype").first().val()) { 
+                        if ($(this).find("select.fieldtype").first().val() == 'dropdown') {
+                            json.push('dropdown');
+                            json.push($(this).find("input.fieldname").first().val());
 
-                for (var i = 0; i < labels.length; i++) {
-                    var fieldId = labels[i].htmlFor;
-                    if (fieldId != "") {
-                        var elem = $("#" + fieldId);
-                        if (elem.length != 0) {
-                            elem.data("label", $(labels[i]));   
+                            var options = $('#mySelect option');
+                            var values = $.map(options ,function(option) {
+                                json.push(option.value);
+                            });
                         }
-                    }
-                    console.log($(labels[i]).text());
-                }
+                        else {
+                            json.push('textbox');
+                            json.push($(this).find("input.fieldname").first().val());
+                        }
 
+                    }
+                })
+                console.log(json);
             })
 });
     </script>
