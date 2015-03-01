@@ -24,7 +24,7 @@
                 <a href="#">About Us</a>
             </li>
             <li>
-                <button type="button" class="btn custom-button" id="login-btn-navbar">Log In</button>
+                <a href="login" class="btn custom-button" id="login-btn-navbar">Log In</a>
             </li>
         </ul>
       </div>
