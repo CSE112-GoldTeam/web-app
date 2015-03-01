@@ -68,28 +68,40 @@
 
             $("#submit").click(function() {
                 console.log(fieldSet.prop('outerHTML'));
-                counter = 0;
+                dropCounter = 0;
                 var form = $("fieldset");
-                var json = [];
+                var fields = [];
+                var json = "{ business: ObjectId(\"test\"), fields: [ ";
                 form.children().each(function(i, elem){
                     if ($(this).find("select.fieldtype").first().val()) { 
                         if ($(this).find("select.fieldtype").first().val() == 'dropdown') {
-                            json.push('dropdown');
-                            json.push($(this).find("input.fieldname").first().val());
+                            dropCounter += 1;
+                            fields.push('dropdown');
+                            fields.push($(this).find("input.fieldname").first().val());
 
                             var options = $("#drop" + dropCounter + " option");
                             var values = $.map(options ,function(option) {
-                                json.push(option.value);
+                                fields.push(option.value);
                             });
-                            counter += 1;
                         }
                         else {
-                            json.push('textbox');
-                            json.push($(this).find("input.fieldname").first().val());
+                            fields.push('textbox');
+                            fields.push($(this).find("input.fieldname").first().val());
                         }
 
                     }
                 })
+
+                for (i = 0; i < fields.length; i++) {
+                    if (fields[i] === 'textbox') {
+                        label = fields[i + 1];
+                        json += "{ type: \"textfield\", label: \"" + label + "\" }, ";
+                        i += 1
+                    }
+                }
+
+                json += "] }";
+                json = JSON.parse(json);
                 console.log(json);
             })
 });
