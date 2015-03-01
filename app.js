@@ -79,7 +79,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/api/users', require('./routes/api/user'));
+app.use('/api/auth', require('./routes/api/auth'));
 
 app.use('/', business);
 app.use('/', checkin);
