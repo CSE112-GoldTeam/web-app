@@ -124,10 +124,7 @@ router.get('/api/employee/:eid/appointments/today', function (req, res) {
             $gte: begin,
             $lte: end
         }
-    }, [ //Fields to not return
-        '-employee',
-        '-business'
-    ], function (err, results) {
+    },{sort : {date: 1}}, function (err, results) {
         if (err) {
             console.error('MongoDB Error in /api/employee/:eid/appointments/today: ' + err);
             return res.send(500);
