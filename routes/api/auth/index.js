@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var auth = require('../lib/auth');
+var auth = require('../../../lib/auth');
 
 /**
  * Takes an HTTP Basic Auth String and returns the username and password parts of it.
