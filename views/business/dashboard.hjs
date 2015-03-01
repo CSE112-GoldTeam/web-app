@@ -35,17 +35,20 @@
             <th>Appointment Time</th>
             <th>Status</th>
             <th></th>
+            <th></th>
             <th>Picture</th>
           </tr>
         </thead>
         <tbody id="tblBody">
           <tr>
+
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td></input></td>
+            <td></td>
+            <td></td>
             <td></td>
           </tr>
         </tbody>

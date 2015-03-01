@@ -44,10 +44,12 @@ function checkTime(i) {
 function table() {
     
 
-        $.get("/api/appointments", function( data ){
+        
+        $.get("/api/employee/"+"54ecaa24fb4974129dc2050d"+"/appointments/today", function( data ){
             $('#tblBody').empty();
             //current time to comare with database time to display in dashbaord
             var currDate = new Date();
+            //console.log("currDate: "+currDate.toISOString());
             var curryear = currDate.getFullYear();
             var currmonth = currDate.getMonth()+1;
             var currdate =  currDate.getDate();
@@ -59,16 +61,35 @@ function table() {
             for(var i=0; i<data.length; i++){
                 $img = $('<img id="Image" src="http://placehold.it/50x50" />');
                 var dbDate = new Date(data[i].date);
+                //console.log("dbDate: "+dbDate.toISOString());
                 var year = dbDate.getFullYear();
                 var month = dbDate.getMonth()+1;
                 var date =  dbDate.getDate();
-                 if (year==curryear && month == currmonth && date == currdate){
+                 //if (year==curryear && month == currmonth && date == currdate){
                     count++;
                     var appDate = new Date(data[i].date);
                     //parsing to get time
-                    var hours = ("0"+appDate.getHours()).slice(-2); //returns 0-23
-                    var minutes = ("0"+appDate.getMinutes()).slice(-2); //returns 0-59
-                    var appTime = hours+":"+minutes;
+                    var fhours = appDate.getHours();
+                    console.log(fhours/12);
+                    console.log("app date is " + appDate);
+                    console.log("fhours is " + fhours);
+                    if(fhours/12 < 1){
+                      var hours = ("0"+appDate.getHours()).slice(-2); //returns 0-
+                      var minutes = ("0"+appDate.getMinutes()).slice(-2); //returns 0-59
+                      var appTime = hours+":"+minutes + " AM";
+                     } 
+                     else{
+                      var pmHours = appDate.getHours()%12;
+
+                      if(pmHours === 0)
+                        pmHours = 12;
+
+                      var hours = ("0"+pmHours).slice(-2); //returns 0-
+                      var minutes = ("0"+appDate.getMinutes()).slice(-2); //returns 0-59
+                      var appTime = hours+":"+minutes + " PM";
+                    }   
+                    
+
                     if (data[i].state == 'checkedIn' | data[i].state == 'roomed') {
 
                         $form = $('<a href="/viewform/'+data[i]._id+'">View Forms</a>');
@@ -90,24 +111,24 @@ function table() {
                             
                             });
 
-                            var cols = [count,data[i].fname + " " + data[i].lname,$form,appTime,data[i].state,$check,$img];
+                            var cols = [count,data[i].fname + " " + data[i].lname,$form,appTime,data[i].state,$check,,$img];
                         }
                         else{
-                            cols = [count,data[i].fname + " " + data[i].lname,$form,appTime,data[i].state,,$img];
+                            cols = [count,data[i].fname + " " + data[i].lname,$form,appTime,data[i].state,,,$img];
                         }
                     }
                     else {
                         if (data[i].state == 'checkedIn'){
                             $check = $('<input type="checkbox">');
-                            cols = [count,data[i].fname + " " + data[i].lname,,appTime,data[i].state,$check,$img];
+                            cols = [count,data[i].fname + " " + data[i].lname,,appTime,data[i].state,$check,,$img];
                         }
                         else{
-                            cols = [count,data[i].fname + " " + data[i].lname,,appTime,data[i].state,,$img];
+                            cols = [count,data[i].fname + " " + data[i].lname,,appTime,data[i].state,,,$img];
                         }
                     }
                     
                     insRow(cols);
-                }
+                //}
             }       
               
         });
