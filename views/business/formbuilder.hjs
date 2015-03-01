@@ -9,7 +9,7 @@
     <input type="button" value="Preview form" class="add" id="preview" />
     <input type="button" value="Add a field" class="add" id="add" />
     <input type="button" value="Submit" class="add" id="submit" />
-    <script src="/javascripts/lib/jquery/jquery-2.1.3.min.js"></script> 
+    <script src="/javascripts/lib/jquery/jquery-2.1.3.min.js"></script>
 
     <script type="text/javascript">
 
@@ -20,7 +20,11 @@
             var x = document.getElementById("drop" + dropcounter);
             var option = document.createElement("option");
             option.text = prompt ("Name your option");
-            x.add(option);
+            //checks for null or undefined
+            if (option.text)
+            {
+               x.add(option);
+            }
         }
         function removeOption(dropcounter) {
             var x = document.getElementById("drop" + dropcounter);
@@ -32,8 +36,8 @@
                 var intId = $("#buildyourform div").length + 1;
                 var fieldWrapper = $("<div class=\"fieldwrapper\" id=\"field" + intId + "\"/>");
                 var fName = $("<input type=\"text\" class=\"fieldname\" />");
-                var fType = $("<select class=\"fieldtype\"><option value=\"textbox\">Text</option> class=\"fieldtype\"><option value=\"dropdown\">Drop</option> </select>");
-                
+                var fType = $("<select class=\"fieldtype\"><option value=\"textbox\">Text</option><option value=\"dropdown\">Drop</option> </select>");
+
                 var removeButton = $("<input type=\"button\" class=\"remove\" value=Remove>");
                 removeButton.click(function () {
                     $(this).parent().remove();
@@ -59,7 +63,7 @@
                             dropCounter += 1;
                             input = $("<div class=\"previewForm\"><select id=\"drop" + dropCounter + "\">  </select> <button type=\"button\" onclick=\"insertOption(" + dropCounter +")\">Insert option</button> <button type=\"button\" onclick=\"removeOption(" + dropCounter + ")\">Remove option</button></div>");
                             break;
-                    } 
+                    }
                     fieldSet.append(label);
                     fieldSet.append(input);
                 });
@@ -73,7 +77,7 @@
                 var fields = [];
                 var json = "{ business: ObjectId(\"test\"), fields: [ ";
                 form.children().each(function(i, elem){
-                    if ($(this).find("select.fieldtype").first().val()) { 
+                    if ($(this).find("select.fieldtype").first().val()) {
                         if ($(this).find("select.fieldtype").first().val() == 'dropdown') {
                             dropCounter += 1;
                             fields.push('dropdown');
@@ -100,8 +104,8 @@
                     }
                 }
 
+                console.log(fields);
                 json += "] }";
-                json = JSON.parse(json);
                 console.log(json);
             })
 });
@@ -109,9 +113,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
