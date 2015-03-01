@@ -55,7 +55,7 @@ exports.show = function(req, res) {
 };
 
 //TODO: Convert Moongose PUT to Monk PUT
-//Updates an existing thing in the DB.
+//pdates an existing thing in the DB.
 exports.update = function(req, res) {
 
 };

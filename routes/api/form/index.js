@@ -4,12 +4,14 @@ var express = require('express');
 var controller = require('./form.controller');
 
 var router = express.Router();
+var auth = require('../../../lib/auth');
 
-router.get('/', controller.index);
-router.get('/:id', controller.show);
-router.post('/', controller.create);
-router.put('/:id', controller.update);
-router.patch('/:id', controller.update);
-router.delete('/:id', controller.destroy);
+//Request a form
+//api/form/:id
+router.get('/:id',  auth.isAuthenticated, controller.show);
+
+//Send form response
+//api/form/fromResponse
+router.post('/formResponse',  auth.isAuthenticated, controller.createResponse);
 
 module.exports = router;

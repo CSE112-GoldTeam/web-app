@@ -11,66 +11,47 @@
 
 var _ = require('underscore');
 
-// Get list of things
-exports.index = function(req, res) {
-
-  // grab our db object from the request
-  var db = req.db;
-  var collection = db.get('myCollection');
-
-  // query the collection
-  collection.find({ }, function(err, users) {
-    if (err) { return handleError(res, err); }
-    return res.json(200, users);
-  });
-};
-
-//Create a User
-exports.create = function(req, res) {
-
-  // grab our db object from the request
-  var db = req.db;
-  var collection = db.get('myCollection');
-
-  // query to create entry in collection
-  collection.insert(req.body, function (err, doc) {
-    if (err) { return handleError(res, err); }
-    return res.json(201,doc);
-  });
-};
-
-// Get a single user
+// Request a form
 exports.show = function(req, res) {
 
-  // grab our db object from the request
+    // grab our db object from the request
+      var db = req.db;
+      var collection = db.get('forms');
+
+      // query to create entry in collection
+      collection.findById(req.params.id, function (err, doc) {
+          if(err) { return handleError(res, err); }
+          if(!doc) { return res.sendStatus(404); }// res.send is deprecated
+          return res.json(doc);
+      });
+};
+
+// Create a form
+exports.createForm = function(req, res) {
+
+    // grab our db object from the request
     var db = req.db;
-    var collection = db.get('myCollection');
+    var collection = db.get('forms');
 
     // query to create entry in collection
-    collection.findById(req.params.id, function (err, doc) {
-    if(err) { return handleError(res, err); }
-    if(!doc) { return res.sendStatus(404); }// res.send is deprecated
-    return res.json(doc);
-  });
+    collection.insert(req.body, function (err, doc) {
+        if (err) { return handleError(res, err); }
+        return res.json(201,doc);
+    });
 };
 
-//TODO: Convert Moongose PUT to Monk PUT
-//pdates an existing thing in the DB.
-exports.update = function(req, res) {
+// Create a formResponse
+exports.createResponse = function(req, res) {
 
-};
+    // grab our db object from the request
+    var db = req.db;
+    var collection = db.get('forms');
 
-// Deletes a thing from the DB.
-exports.destroy = function(req, res) {
-  // grab our db object from the request
-  var db = req.db;
-  var collection = db.get('myCollection');
-
-  // query to create entry in collection
-  collection.remove({ _id: req.params.id }, function(err) {
-    if(err) { return handleError(res, err); }
-    return res.sendStatus(204);
-  });
+    // query to create entry in collection
+    collection.insert(req.body, function (err, doc) {
+        if (err) { return handleError(res, err); }
+        return res.json(201,doc);
+    });
 };
 
 function handleError(res, err) {

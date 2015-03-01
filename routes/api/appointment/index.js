@@ -6,11 +6,16 @@ var controller = require('./appointment.controller');
 var router = express.Router();
 var auth = require('../../../lib/auth');
 
-router.get('/', auth.isAuthenticated, controller.index);
-router.get('/:id', controller.show);
-router.post('/', controller.create);
-router.put('/:id', controller.update);
-router.patch('/:id', controller.update);
-router.delete('/:id', controller.destroy);
+// Confirm Identity
+// /api/appointment?fname=John&lname="Doe"&dob="05/13/1965"
+router.get('/', auth.isAuthenticated, controller.confirm);
+
+// Retrieve Appointment Information
+// /api/appointment/:id/
+router.get('/:id', auth.isAuthenticated, controller.retrieve);
+
+// Sign Disclosure Agreements
+// /api/appointments/:id
+router.post('/:id', auth.isAuthenticated, controller.sign);
 
 module.exports = router;
