@@ -34,6 +34,71 @@
       </div>
     </nav>
 
+    <div class="container container-margin">
+            <div class="row">
+                <div class="col-xs-offset-1 col-xs-4">
+                    <h2>Register Employees</h2>
+                    <p class="subtitle">Register all your employee(s) through a CSV file!</p>
+                </div>
+            </div>
+
+            <div class="row text-center" id="regis-container">
+                    <form method="post" action="" enctype="application/x-www-form-urlencoded">
+                        <input class="add-email" type="text" name="csvEmployees" value="{{ csvEmployees }}" placeholder="CSV of Employees EMAILS" required>
+                        <input class="btn custom-button" name="upload" type="upload" value="Upload">
+                    </form>
+
+            </div>
+            <h3>Employees already registered</h3>
+            <table class="registeredTable">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>jd123@j.com</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jane Doe</td>
+                        <td>jn123@j.com</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Johnny Doe</td>
+                        <td>jj123@j.com</td>
+                    </tr>
+            </table>
+
+            <h3>Employees not yet registered</h3>
+            <table class="notRegisteredTable">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>jd123@j.com</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jane Doe</td>
+                        <td>jn123@j.com</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Johnny Doe</td>
+                        <td>jj123@j.com</td>
+                    </tr>
+            </table>
+
+    </div>
+
 
 </body>
 </html>
