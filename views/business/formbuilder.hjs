@@ -13,18 +13,17 @@
 
     <script type="text/javascript">
 
-        var fieldSet = $("<fieldset><legend>Your Form</legend></fieldset>");
+        var fieldSet = $("<fieldset id=\"previewForm\"><legend>Your Form</legend></fieldset>");
         var json = [];
 
-        function insert() {
-            var x = document.getElementById("mySelect");
+        function insertOption(dropcounter) {
+            var x = document.getElementById("drop" + dropcounter);
             var option = document.createElement("option");
             option.text = prompt ("Name your option");
             x.add(option);
         }
         function removeOption() {
-            var x = document.getElementById("mySelect");
-            x.remove(x.selectedIndex);
+            $(this).remove($(this).selectedIndex);
         }
 
         $(document).ready(function () {
@@ -44,17 +43,20 @@
                 $("#buildyourform").append(fieldWrapper);
             });
             $("#preview").click(function () {
+                dropCounter = 0;
                 $("#yourform").remove();
+                var fieldSet = $("<fieldset id=\"yourform\"><legend>Your Form</legend></fieldset>");
                 $("#buildyourform div").each(function () {
                     var id = "input" + $(this).attr("id").replace("field", "");
                     var label = $("<label for=\"" + id + "\">" + $(this).find("input.fieldname").first().val() + "</label>");
                     var input;
                     switch ($(this).find("select.fieldtype").first().val()) {
                         case "textbox":
-                            input = $("<div><input type=\"text\" id=\"" + id + "\" name=\"" + id + "\" /></div>");
+                            input = $("<div class=\"previewForm\"><input type=\"text\" id=\"" + id + "\" name=\"" + id + "\" /></div>");
                             break;
                         case "dropdown":
-                            input = $("<div><select id=\"mySelect\">  </select> <button type=\"button\" onclick=\"insert()\">Insert option</button> <button type=\"button\" onclick=\"removeOption()\">Remove option</button></div>");
+                            dropCounter += 1;
+                            input = $("<div class=\"previewForm\"><select id=\"drop" + dropCounter + "\">  </select> <button type=\"button\" onclick=\"insertOption(" + dropCounter +")\">Insert option</button> <button type=\"button\" onclick=\"removeOption()\">Remove option</button></div>");
                             break;
                     } 
                     fieldSet.append(label);
@@ -65,7 +67,7 @@
 
             $("#submit").click(function() {
                 console.log(fieldSet.prop('outerHTML'));
-
+                counter = 0;
                 var form = $("fieldset");
                 var json = [];
                 form.children().each(function(i, elem){
@@ -74,10 +76,11 @@
                             json.push('dropdown');
                             json.push($(this).find("input.fieldname").first().val());
 
-                            var options = $('#mySelect option');
+                            var options = $("#drop" + dropCounter + " option");
                             var values = $.map(options ,function(option) {
                                 json.push(option.value);
                             });
+                            counter += 1;
                         }
                         else {
                             json.push('textbox');
