@@ -9,7 +9,7 @@
 
 'use strict';
 
-var _ = require('lodash');
+var _ = require('underscore');
 
 // Get list of things
 exports.index = function(req, res) {
