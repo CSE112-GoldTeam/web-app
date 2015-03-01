@@ -22,8 +22,9 @@
             option.text = prompt ("Name your option");
             x.add(option);
         }
-        function removeOption() {
-            $(this).remove($(this).selectedIndex);
+        function removeOption(dropcounter) {
+            var x = document.getElementById("drop" + dropcounter);
+            x.remove(x.selectedIndex);
         }
 
         $(document).ready(function () {
@@ -56,7 +57,7 @@
                             break;
                         case "dropdown":
                             dropCounter += 1;
-                            input = $("<div class=\"previewForm\"><select id=\"drop" + dropCounter + "\">  </select> <button type=\"button\" onclick=\"insertOption(" + dropCounter +")\">Insert option</button> <button type=\"button\" onclick=\"removeOption()\">Remove option</button></div>");
+                            input = $("<div class=\"previewForm\"><select id=\"drop" + dropCounter + "\">  </select> <button type=\"button\" onclick=\"insertOption(" + dropCounter +")\">Insert option</button> <button type=\"button\" onclick=\"removeOption(" + dropCounter + ")\">Remove option</button></div>");
                             break;
                     } 
                     fieldSet.append(label);
