@@ -8,6 +8,8 @@ var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync');
 var checkPages = require('check-pages');
 
+var mongobackup = require('mongobackup');
+
 gulp.task('nodemon', function (cb) {
   var called = false;
   return nodemon({
@@ -33,6 +35,27 @@ gulp.task('nodemon', function (cb) {
     });
 });
 
+gulp.task('mongostart', function() {
+    child_process.exec('mongod --dbpath db', function(err, stdout, stderr) {
+        if(err) {
+            console.log(err.stack);
+            console.log("Error code: " + err.code);
+            console.log("Signal received: " + err.signal);
+        }
+    });
+});
+
+gulp.task('mongoend', function() {
+
+    child_process.exec("mongo --eval 'db.shutdownServer()' admin", function(err, stdout, stderr) {
+        if(err) {
+            console.log(err.stack);
+            console.log("Error code: " + err.code);
+            console.log("Signal received: " + err.signal);
+        }
+    });
+})
+
 gulp.task('browser-sync', ['nodemon', 'mongostart'], function () {
 
   // for more browser-sync config options: http://www.browsersync.io/docs/options/
@@ -56,26 +79,22 @@ gulp.task('browser-sync', ['nodemon', 'mongostart'], function () {
   });
 });
 
-gulp.task('mongostart', function() {
-    child_process.exec('mongod --dbpath db', function(err, stdout, stderr) {
-        if(err) {
-            console.log(err.stack);
-            console.log("Error code: " + err.code);
-            console.log("Signal received: " + err.signal);
-        }
-    });
+// mongodump - dump all databases on localhost
+gulp.task('mongodump', function() {
+  mongobackup.dump({
+    host : 'localhost',
+    out : './dumps/mongo'
+  });
 });
 
-gulp.task('mongoend', function() {
-
-    child_process.exec("mongod --dbpath db --shutdown", function(err, stdout, stderr) {
-        if(err) {
-            console.log(err.stack);
-            console.log("Error code: " + err.code);
-            console.log("Signal received: " + err.signal);
-        }
-    });
-})
+// mongorestore - restore database to localhost
+gulp.task('mongorestore', function() {
+  mongobackup.restore({
+    host : 'localhost',
+    drop : true,
+    path : './dumps/mongo/'
+  });
+});
 
 
 gulp.task('default', ['browser-sync']);
@@ -91,8 +110,6 @@ gulp.task('test', function (done) {
     singleRun: true
   }, done);
 });
-
-var mongobackup = require('mongobackup');
 
 // mongodump - dump all database on localhost
 gulp.task('mongodump', function() {
