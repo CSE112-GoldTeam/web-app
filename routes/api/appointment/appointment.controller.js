@@ -15,14 +15,15 @@ var _ = require('underscore');
 exports.index = function(req, res) {
 
   // grab our db object from the request
-  var db = req.db;
-  var collection = db.get('myCollection');
-
-  // query the collection
-  collection.find({ }, function(err, users) {
-    if (err) { return handleError(res, err); }
-    return res.json(200, users);
-  });
+  // var db = req.db;
+  // var collection = db.get('myCollection');
+  //
+  // // query the collection
+  // collection.find({ }, function(err, users) {
+  //   if (err) { return handleError(res, err); }
+  //   return res.json(200, users);
+  // });
+  return res.json(200, {hello:"world"});
 };
 
 //Create a User

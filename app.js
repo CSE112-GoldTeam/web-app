@@ -42,7 +42,7 @@ var checkin = require('./routes/checkin');
 var signature = require('./routes/signature');
 
 // Load Routes for Mobile
-var mobileAuth = require('./routes/mobile');
+var mobileAuth = require('./routes/api/auth');
 var mobileCheckin = require('./routes/api/checkin');
 var mobileForm = require('./routes/api/form');
 var mobileAppointment = require('./routes/api/appointment');
@@ -95,9 +95,9 @@ app.use('/', signature);
 
 // Set Mobile Routes
 app.use('/', mobileAuth);
-app.use('/', mobileCheckin);
-app.use('/', mobileForm);
-app.use('/', mobileAppointment);
+app.use('/api/m/checkin', mobileCheckin);
+app.use('/api/m/form', mobileForm);
+app.use('/api/m/appointment', mobileAppointment);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
