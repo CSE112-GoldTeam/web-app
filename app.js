@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var multer = require('multer');
 var passport = require('passport');
 var app = express();
 
@@ -38,6 +39,7 @@ require('./config/passport')(passport); // pass passport for configuration
 var business = require('./routes/business')(passport);
 var checkin = require('./routes/checkin');
 var signature = require('./routes/signature');
+var mobile = require('./routes/mobile');
 
 
 // view engine setup
@@ -51,6 +53,7 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(multer());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -84,6 +87,7 @@ app.use('/api/auth', require('./routes/api/auth'));
 app.use('/', business);
 app.use('/', checkin);
 app.use('/', signature);
+app.use('/', mobile);
 
 
 // catch 404 and forward to error handler
