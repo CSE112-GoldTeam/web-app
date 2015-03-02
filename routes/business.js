@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var router = express.Router();
 var ObjectID = require('mongodb').ObjectID;
+
+var sendgrid  = require('sendgrid')('robobetty', 'NoKcE0FGE4bd');
 // var session = require('express-session');
 
 
@@ -46,8 +48,18 @@ router.get('/formbuilder', function (req, res) {
 //Employee Signup
 
 router.get('/addemployees' ,function (req,res){
+
     res.render('business/addemployees',{title: 'Express'});
-})
+});
+
+
+
+
+router.post('addemployees',function (req,res){
+
+});
+
+
 
 
 router.post('/register', passport.authenticate('local-signup',{
