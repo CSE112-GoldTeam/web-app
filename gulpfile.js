@@ -116,7 +116,7 @@ gulp.task('mongorestore', function() {
   mongobackup.restore({
     host : 'localhost',
     drop : true,
-    path : './dumps/mongo/'
+    path : './dumps/mongo'
   });
 });
 
@@ -233,23 +233,6 @@ gulp.task('test', function (done) {
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
   }, done);
-});
-
-// mongodump - dump all database on localhost
-gulp.task('mongodump', function() {
-  mongobackup.dump({
-    host : 'localhost',
-    out : './dumps/mongo'
-  });
-});
-
-// mongorestore - restore 'testdb' database to localhost
-gulp.task('mongorestore', function() {
-  mongobackup.restore({
-    host : 'localhost',
-    drop : true,
-    path : './dumps/mongo/testdb'
-  });
 });
 
 // check pages on dev
