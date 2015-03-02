@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var router = express.Router();
 var ObjectID = require('mongodb').ObjectID;
+var baby = require('babyparse');
 // var session = require('express-session');
 
 
@@ -23,7 +24,7 @@ router.get('/', function (req, res) {
     res.render('business/landing', {title: 'Landing Page'});
 });
 
-router.get('/login', function(req, res) {
+router.get('/login', function (req, res) {
     res.render('business/login.hjs');
 });
 
@@ -47,6 +48,13 @@ router.get('/formbuilder', function (req, res) {
 
 router.get('/addemployees' ,function (req,res){
     res.render('business/addemployees',{title: 'Express'});
+
+    var db = req.db;
+    var csvEmployees = db.get('csvEmployees');
+
+    parsed = baby.parse(csvEmployees);
+    rows = parsed.data;
+
 })
 
 

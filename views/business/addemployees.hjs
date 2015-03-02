@@ -38,66 +38,48 @@
             <div class="row">
                 <div class="col-xs-offset-1 col-xs-4">
                     <h2>Register Employees</h2>
-                    <p class="subtitle">Register all your employee(s) through a CSV file!</p>
+                    <h4 align="left">Register all your employee(s) through a CSV file!</h4>
                 </div>
             </div>
 
             <div class="row text-center" id="regis-container">
-                    <form method="post" action="" enctype="application/x-www-form-urlencoded">
-                        <input class="add-email" type="text" name="csvEmployees" value="{{ csvEmployees }}" placeholder="CSV of Employees EMAILS" required>
-                        <input class="btn custom-button" name="upload" type="upload" value="Upload">
-                    </form>
-
+                <form method="post" action="" enctype="application/x-www-form-urlencoded">
+                    <input class="add-email" type="text" name="csvEmployees" value="{{ csvEmployees }}" placeholder="CSV of Employees EMAILS" required>
+                    <div class="col-xs-1 text-small">
+                        <a type="submit" class="btn custom-button" href="/addemployees">Submit</a>
+                    </div>
+                </form>
+            
+                <div style="position:relative;top:50px;left:30px">
+                    <h3 top="50px" align="left">Employees already registered</h2>
+                        <div style="position:relative;top:50px">
+                        
+                        <table border="2" style="width:200%" id="registeredEmployees">
+                        <tr>
+                            <td>#</td>
+                            <td>Name</td>
+                            <td>Email</td>
+                        </tr>
+                        <tr>
+                        </table>
+                        </div>
+                
+                    <h3 top="50px" align="left">Employees not yet registered</h2>
+                        <div style="position:relative;top:50px">
+                        
+                        <table border="2" style="width:200%" id="unregisteredEmployees">
+                        <tr>
+                            <td>#</td>
+                            <td>Name</td>
+                            <td>Email</td>
+                        </tr>
+                        <tr>
+                        </table>
+                        </div>
+                </div>
             </div>
-            <h3>Employees already registered</h3>
-            <table class="registeredTable">
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td>jd123@j.com</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jane Doe</td>
-                        <td>jn123@j.com</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Johnny Doe</td>
-                        <td>jj123@j.com</td>
-                    </tr>
-            </table>
-
-            <h3>Employees not yet registered</h3>
-            <table class="notRegisteredTable">
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td>jd123@j.com</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jane Doe</td>
-                        <td>jn123@j.com</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Johnny Doe</td>
-                        <td>jj123@j.com</td>
-                    </tr>
-            </table>
-
     </div>
+
 
 
 </body>
