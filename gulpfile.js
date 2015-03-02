@@ -109,7 +109,10 @@ gulp.task('mongorestore', function() {
 //               - must be authenticated with heroku
 //               - must have git installed and be in application root directory
 //               - must be authenticated with git so that password does not have to be entered on push
-gulp.task('stage', function(){ 
+// example cmd
+// gulp stage                                  "pushes to default stage test1"
+// gulp stage --test [stage number]            "push to a specific stage test 1 - 3"
+gulp.task('stage',['test'], function(){ 
     if (argv.test == null){ 
         execute('git symbolic-ref --short HEAD', function(br){
             console.log('deploying current branch: ' + br);
