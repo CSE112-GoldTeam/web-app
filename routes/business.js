@@ -4,6 +4,7 @@ var router = express.Router();
 var ObjectID = require('mongodb').ObjectID;
 var sendgrid  = require('sendgrid')('robobetty', 'NoKcE0FGE4bd');
 var crypto = require('crypto');
+var baby = require('babyparse');
 // var session = require('express-session');
 
 
@@ -48,43 +49,47 @@ router.get('/formbuilder', function (req, res) {
 //Employee Signup
 
 router.get('/addemployees' ,function (req,res){
-
     var db =  req.db;
     var csvEmployees = db.get('csvEmployees');
-
-
-
     res.render('business/addemployees',{title: 'Express'});
 });
 
 
 
 
-router.post('addemployees',function (req,res){
+router.post('/addemployees',function (req,res){
 
+    console.log(req.body);
+    console.log(req.body.csvEmployees);
 
-    parsed = baby.parse(req.body)
+    parsed = baby.parse(req.body.csvEmployees,{header: true});
     rows = parsed.data;
 
+    //console.log(rows);
 
-    username = rows.data.name;
-    email = req.data.email;
+    rows.forEach(function (d){
+        console.log(d.name);
+        console.log(d.email);
+    })
 
-    var token = randomToken();
+    // username = rows.data.name;
+    // email = req.data.email;
+
+    // var token = randomToken();
 
 
-      sendgrid.send({
-        to: email,
-        from: 'test@localhost',
-        subject: 'Employee Signup',
-        text: 'Hello ' + body.req.username + ',\n\n' + 'Please click on the following link, or paste this into your browser to complete sign-up the process: \n\n' +
-        'http://robobetty/register/' + token 
-    }, function (err, json) {
-        if (err) {
-            return console.error(err);
-        }
-        console.log(json);
-    });
+    //   sendgrid.send({
+    //     to: email,
+    //     from: 'test@localhost',
+    //     subject: 'Employee Signup',
+    //     text: 'Hello ' + body.req.username + ',\n\n' + 'Please click on the following link, or paste this into your browser to complete sign-up the process: \n\n' +
+    //     'http://robobetty/register/' + token 
+    // }, function (err, json) {
+    //     if (err) {
+    //         return console.error(err);
+    //     }
+    //     console.log(json);
+    // });
 
 });
 

@@ -44,10 +44,8 @@
 
             <div class="row text-center" id="regis-container">
                 <form method="post" action="" enctype="application/x-www-form-urlencoded">
-                    <input class="add-email" type="text" name="csvEmployees" value="{{ csvEmployees }}" placeholder="CSV of Employees EMAILS" required>
-                    <div class="col-xs-1 text-small">
-                        <a type="submit" class="btn custom-button" href="/addemployees">Submit</a>
-                    </div>
+                    <textarea class="add-email" type="text" name="csvEmployees" placeholder="CSV of Employees EMAILS" required>name,email</textarea>
+                   <input class="btn custom-button" name="submit" type="submit" href="addemployees"value="Upload">
                 </form>
             
                 <div style="position:relative;top:50px;left:30px">
