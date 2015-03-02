@@ -99,13 +99,18 @@
 
                             json.fields.push(tempjson);
                         }
-                        else 
+                        else
                             json.fields.push({type: "textbox", label: $(this).find("input.fieldname").first().val()});
                     }
                 })
-
-                console.log(json);
+                //console.log(json);
+                var str = JSON.stringify(json);
                 console.log(JSON.stringify(json));
+                $.post('/api/m/form', str, function (data) {
+                console.log("success post");
+
+                });
+
             })
 });
     </script>
