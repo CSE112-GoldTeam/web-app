@@ -49,6 +49,11 @@ router.get('/formbuilder', function (req, res) {
 
 router.get('/addemployees' ,function (req,res){
 
+    var db =  req.db;
+    var csvEmployees = db.get('csvEmployees');
+
+
+
     res.render('business/addemployees',{title: 'Express'});
 });
 
@@ -58,8 +63,12 @@ router.get('/addemployees' ,function (req,res){
 router.post('addemployees',function (req,res){
 
 
-    username = req.body;
-    email = req.body;
+    parsed = baby.parse(req.body)
+    rows = parsed.data;
+
+
+    username = rows.data.name;
+    email = req.data.email;
 
     var token = randomToken();
 
