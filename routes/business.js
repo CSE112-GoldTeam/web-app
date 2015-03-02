@@ -2,8 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var router = express.Router();
 var ObjectID = require('mongodb').ObjectID;
-
 var sendgrid  = require('sendgrid')('robobetty', 'NoKcE0FGE4bd');
+var crypto = require('crypto');
 // var session = require('express-session');
 
 
@@ -57,6 +57,26 @@ router.get('/addemployees' ,function (req,res){
 
 router.post('addemployees',function (req,res){
 
+
+    username = req.body;
+    email = req.body;
+
+    var token = randomToken();
+
+
+      sendgrid.send({
+        to: email,
+        from: 'test@localhost',
+        subject: 'Employee Signup',
+        text: 'Hello ' + body.req.username + ',\n\n' + 'Please click on the following link, or paste this into your browser to complete sign-up the process: \n\n' +
+        'http://robobetty/register/' + token 
+    }, function (err, json) {
+        if (err) {
+            return console.error(err);
+        }
+        console.log(json);
+    });
+
 });
 
 
@@ -96,6 +116,11 @@ router.get('/api/employee/:eid/appointments/today', function (req, res) {
     });
 });
 
+
+
+function randomToken() {
+    return crypto.randomBytes(20).toString('hex');
+}
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
