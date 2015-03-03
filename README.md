@@ -30,5 +30,7 @@ Push to testing environment
 1. Install git and heroku toolbelt (https://toolbelt.heroku.com/)
 2. git config --global user.name "John Doe"
 3. git config --global user.email johndoe@example.com
-4. heroku login
-5. gulp stage OR gulp stage --test [stage number]
+4. if want to only temporarily be login to git (http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github)
+5. if want permanent storage of git password (https://help.github.com/articles/caching-your-github-password-in-git/)
+6. heroku login
+7. gulp stage OR gulp stage --test [stage number]
