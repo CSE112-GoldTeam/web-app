@@ -20,11 +20,16 @@
             var x = document.getElementById("drop" + dropcounter);
             var option = document.createElement("option");
             option.text = prompt ("Name your option");
-            //checks for null or undefined
+            //checks for null
+            if (option.text == "null"){
+              return;
+            }
+            //checks for input 
             if (option.text)
             {
                x.add(option);
             }
+
         }
         function removeOption(dropcounter) {
             var x = document.getElementById("drop" + dropcounter);
@@ -50,6 +55,8 @@
             $("#preview").click(function () {
                 dropCounter = 0;
                 $("#yourform").remove();
+
+
                 var fieldSet = $("<fieldset id=\"yourform\"><legend>Your Form</legend></fieldset>");
                 $("#buildyourform div").each(function () {
                     var id = "input" + $(this).attr("id").replace("field", "");
@@ -106,12 +113,12 @@
                             json.fields.push({type: "textbox", label: $(this).find("input.fieldname").first().val()});
                     }
                 })
-                console.log(JSON.stringify(json));
+                //console.log(JSON.stringify(json));
                 //var str = JSON.stringify(json);
                 //console.log(JSON.stringify(json));
                 $.post('/api/m/form',{ obj : JSON.stringify(json)}, function (data) {
-                console.log("success post");
-                console.log(data);
+                //console.log("success post");
+                //console.log(data);
                 });
 
             })
