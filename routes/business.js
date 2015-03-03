@@ -84,11 +84,21 @@ router.put('/api/appointments/:id/state', function (req, res, next) {
 	var db = req.db;
 	var appt = db.get('appointments');
 	// query the collection
-	appt.findAndModify({_id:req.params.id },{$set: {state : "roomed"}}, function(err, data) {
-		console.log("Success");
-	if (err) { return res.sendStatus(500, err); }
-		return res.json(200, data);
-	});
+    appt.find({_id:req.params.id},function(err,data){
+        var myState = {};
+        if (data[0].state == 'checkedIn'){
+            myState = {$set: {state : "roomed"}};
+        } else if (data[0].state == 'roomed'){
+            myState = {$set: {state : "done"}};
+        }
+
+        appt.findAndModify({_id:req.params.id }, myState, function(err, data) {
+            console.log("Success");
+            if (err) { return res.sendStatus(500, err); }
+            return res.json(200, data);
+        });
+    });
+
 });
 
 
