@@ -51,7 +51,31 @@ router.get('/formbuilder', function (req, res) {
 router.get('/addemployees' ,function (req,res){
     var db =  req.db;
     var csvEmployees = db.get('csvEmployees');
-    res.render('business/addemployees',{title: 'Express'});
+    csvEmployees.find({registrationToken: {$exists: false}},function (err,results){
+
+        if (err) { return res.sendStatus(500, err); }
+        if(!results) { return res.send(404,'User not found');}
+        
+      
+        employee = results[0];
+       
+    
+    });
+
+    csvEmployees.find({registrationToken: {$exists: true}}, function (err,results){
+
+
+        if (err) { return res.sendStatus(500, err); }
+        if(!results) { return res.send(404,'User not found');}
+        
+        notemployee = results[0];
+
+    });
+
+
+
+     res.render('business/addemployees',{title: 'Express',notsigned: notemployee, signed: employee});
+    
 });
 
 
@@ -59,38 +83,38 @@ router.get('/addemployees' ,function (req,res){
 
 router.post('/addemployees',function (req,res){
 
-    console.log(req.body);
-    console.log(req.body.csvEmployees);
-
-    parsed = baby.parse(req.body.csvEmployees,{header: true});
+    
+    parsed = baby.parse(req.body.csvEmployees);
     rows = parsed.data;
 
-    //console.log(rows);
+    
+    
 
-    rows.forEach(function (d){
-        console.log(d.name);
-        console.log(d.email);
-    })
+    username = rows[0][0];
+    email = rows[0][1];
 
-    // username = rows.data.name;
-    // email = req.data.email;
-
-    // var token = randomToken();
+    var token = randomToken();
 
 
-    //   sendgrid.send({
-    //     to: email,
-    //     from: 'test@localhost',
-    //     subject: 'Employee Signup',
-    //     text: 'Hello ' + body.req.username + ',\n\n' + 'Please click on the following link, or paste this into your browser to complete sign-up the process: \n\n' +
-    //     'http://robobetty/register/' + token 
-    // }, function (err, json) {
-    //     if (err) {
-    //         return console.error(err);
-    //     }
-    //     console.log(json);
-    // });
-
+      sendgrid.send({
+        to: email,
+        from: 'test@localhost',
+        subject: 'Employee Signup',
+        text: 'Hello ' + username + ',\n\n' + 'Please click on the following link, or paste this into your browser to complete sign-up the process: \n\n' +
+        'http://robobetty/register/' + token 
+    }, function (err, json) {
+        if (err) {
+            return console.error(err);
+        }
+        var db =  req.db;
+        var csvEmployees = db.get('csvEmployees');
+        csvEmployees.insert({
+            name: username,
+            email: email,
+            registrationToken : token,
+        });       
+    });
+      res.redirect('/addemployees');
 });
 
 
