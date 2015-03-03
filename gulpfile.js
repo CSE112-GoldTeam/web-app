@@ -100,8 +100,21 @@ gulp.task('mongorestore', function() {
   mongobackup.restore({
     host : 'localhost',
     drop : true,
-    path : './dumps/mongo/'
+    path : './dumps/mongo'
   });
+});
+
+gulp.task('default', ['browser-sync']);
+
+var karma = require('karma').server;
+/**
+ * Run test once and exit
+ */
+gulp.task('test', function (done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done);
 });
 
 
@@ -186,37 +199,6 @@ gulp.task('stage',['test'], function(){
         }); 
     } 
 })
-
-gulp.task('default', ['browser-sync']);
-
-
-var karma = require('karma').server;
-/**
- * Run test once and exit
- */
-gulp.task('test', function (done) {
-  karma.start({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  }, done);
-});
-
-// mongodump - dump all database on localhost
-gulp.task('mongodump', function() {
-  mongobackup.dump({
-    host : 'localhost',
-    out : './dumps/mongo'
-  });
-});
-
-// mongorestore - restore 'testdb' database to localhost
-gulp.task('mongorestore', function() {
-  mongobackup.restore({
-    host : 'localhost',
-    drop : true,
-    path : './dumps/mongo/testdb'
-  });
-});
 
 // check pages on dev
 gulp.task('checkDev', function(callback) {
