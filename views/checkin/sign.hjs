@@ -54,7 +54,7 @@
       <form action="sign" method="post">
         <img id="sigImg" src="/api/signature/" style="width:auto"/>
         <br>
-        <input type="text" id="sig" name="sig"/>
+        <input type="text" id="sig" name="sig" onkeyup="this.value=this.value.replace(/[^a-zA-Z0-9_ ' , \. -]/g, '')"  />
         <button class="btn btn-default" type="submit">Sign</button>
       </form>
     </div>
