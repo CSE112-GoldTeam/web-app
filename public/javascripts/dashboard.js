@@ -41,98 +41,99 @@ function checkTime(i) {
     if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
     return i;
 }
+
 function table() {
-    
+    $.get("/api/employee/"+"54ecaa24fb4974129dc2050d"+"/appointments/today", function( data ){
+        $('#tblBody').empty();
+        //current time to comare with database time to display in dashbaord
+        var currDate = new Date();
+        var curryear = currDate.getFullYear();
+        var currmonth = currDate.getMonth()+1;
+        var currdate =  currDate.getDate();
+        var count = 0;
+        //empty's the table 
+        $('#tblBody').empty();
+        //for loop to reload the table 
+        for(var i=0; i<data.length; i++){
+            $img = $('<img id="Image" src="http://placehold.it/50x50" />');
+            var dbDate = new Date(data[i].date);
+            //console.log("dbDate: "+dbDate.toISOString());
+            var year = dbDate.getFullYear();
+            var month = dbDate.getMonth()+1;
+            var date =  dbDate.getDate();
+            count++;
+            var appDate = new Date(data[i].date);
+            //parsing to get time
+            var fhours = appDate.getHours();
+            //console.log(fhours/12);
+            if(fhours/12 < 1){
+              var hours = ("0"+appDate.getHours()).slice(-2); //returns 0-
+              var minutes = ("0"+appDate.getMinutes()).slice(-2); //returns 0-59
+              var appTime = hours+":"+minutes + " AM";
+             } 
+             else{
+              var pmHours = appDate.getHours()%12;
 
-        
-        $.get("/api/employee/"+"54ecaa24fb4974129dc2050d"+"/appointments/today", function( data ){
-            $('#tblBody').empty();
-            //current time to comare with database time to display in dashbaord
-            var currDate = new Date();
-            //console.log("currDate: "+currDate.toISOString());
-            var curryear = currDate.getFullYear();
-            var currmonth = currDate.getMonth()+1;
-            var currdate =  currDate.getDate();
-            var count =0;
-      
-            console.log("Data results: " + data.length);
+              if(pmHours === 0)
+                pmHours = 12;
+
+              var hours = ("0"+pmHours).slice(-2); //returns 0-
+              var minutes = ("0"+appDate.getMinutes()).slice(-2); //returns 0-59
+              var appTime = hours+":"+minutes + " PM";
+            }   
             
-            $('#tblBody').empty();
-            for(var i=0; i<data.length; i++){
-                $img = $('<img id="Image" src="http://placehold.it/50x50" />');
-                var dbDate = new Date(data[i].date);
-                //console.log("dbDate: "+dbDate.toISOString());
-                var year = dbDate.getFullYear();
-                var month = dbDate.getMonth()+1;
-                var date =  dbDate.getDate();
-                 //if (year==curryear && month == currmonth && date == currdate){
-                    count++;
-                    var appDate = new Date(data[i].date);
-                    //parsing to get time
-                    var fhours = appDate.getHours();
-                    console.log(fhours/12);
-                    console.log("app date is " + appDate);
-                    console.log("fhours is " + fhours);
-                    if(fhours/12 < 1){
-                      var hours = ("0"+appDate.getHours()).slice(-2); //returns 0-
-                      var minutes = ("0"+appDate.getMinutes()).slice(-2); //returns 0-59
-                      var appTime = hours+":"+minutes + " AM";
-                     } 
-                     else{
-                      var pmHours = appDate.getHours()%12;
 
-                      if(pmHours === 0)
-                        pmHours = 12;
+            if (data[i].state == 'checkedIn' | data[i].state == 'roomed') {
 
-                      var hours = ("0"+pmHours).slice(-2); //returns 0-
-                      var minutes = ("0"+appDate.getMinutes()).slice(-2); //returns 0-59
-                      var appTime = hours+":"+minutes + " PM";
-                    }   
+                $form = $('<a href="/viewform/'+data[i]._id+'">View Forms</a>');
+
+                if (data[i].state == 'checkedIn'){
+                    $check = $('<input type="checkbox">').data("appid",data[i]._id);
+                    $check.change(function(){
+                        //console.log("updateState()");
+                         $appid = $(this).data('appid');
+
+                        $.ajax({
+                            url :  '/api/appointments/'+$appid+'/state',
+                            type : "PUT"
+                        }).done(function( data ){
+                            console.log("state changed: ");
+                        })
+
+
                     
+                    });
 
-                    if (data[i].state == 'checkedIn' | data[i].state == 'roomed') {
+                    var cols = [count,data[i].fname + " " + data[i].lname,$form,appTime,data[i].state,$check,$img];
+                }
+                /**/
+                else if(data[i].state == 'roomed') {    
+                    $btn = $('<button class="btn btn-primary"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></button>');
+                     $btn.click(function() { 
+                        console.log("this is not fun");
+                        $.ajax({
+                            url: '/api/appointments/'+data[i]._id+'/state',
+                            type: "PUT",
+                         }); 
+                    });
 
-                        $form = $('<a href="/viewform/'+data[i]._id+'">View Forms</a>');
+                    var cols = [count,data[i].fname + " " + data[i].lname,$form,appTime,data[i].state,$btn,$img];
 
-                        if (data[i].state == 'checkedIn'){
-                            $check = $('<input type="checkbox">').data("appid",data[i]._id);
-                            $check.change(function(){
-                                console.log("updateState()");
-                                 $appid = $(this).data('appid');
+                }/**/
+                else{
+                    cols = [count,data[i].fname + " " + data[i].lname,$form,appTime,data[i].state,,$img];
+                }
+            }
 
-                                $.ajax({
-                                    url :  '/api/appointments/'+$appid+'/state',
-                                    type : "PUT"
-                                }).done(function( data ){
-                                    console.log("state changed: ");
-                                })
-
-
-                            
-                            });
-
-                            var cols = [count,data[i].fname + " " + data[i].lname,$form,appTime,data[i].state,$check,,$img];
-                        }
-                        else{
-                            cols = [count,data[i].fname + " " + data[i].lname,$form,appTime,data[i].state,,,$img];
-                        }
-                    }
-                    else {
-                        if (data[i].state == 'checkedIn'){
-                            $check = $('<input type="checkbox">');
-                            cols = [count,data[i].fname + " " + data[i].lname,,appTime,data[i].state,$check,,$img];
-                        }
-                        else{
-                            cols = [count,data[i].fname + " " + data[i].lname,,appTime,data[i].state,,,$img];
-                        }
-                    }
-                    
-                    insRow(cols);
-                //}
-            }       
-              
-        });
-}
+            else {
+                cols = [count,data[i].fname + " " + data[i].lname,,appTime,data[i].state,,$img];
+            }
+            
+            insRow(cols);
+        }//end of for loop       
+          
+    });//end of $get()
+}//end of table()
 
 function poll() {
     setTimeout(function(){
