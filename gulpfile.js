@@ -122,6 +122,7 @@ gulp.task('test', function (done) {
 //               - must be authenticated with heroku
 //               - must have git installed and be in application root directory
 //               - must be authenticated with git so that password does not have to be entered on push
+//               - MUST commit before running cmd (just revert commit if there is an issue)
 // example cmd
 // gulp stage                                  "pushes to default stage test1"
 // gulp stage --test [stage number]            "push to a specific stage test 1 - 3"
