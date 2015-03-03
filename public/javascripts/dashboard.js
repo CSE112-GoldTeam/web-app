@@ -51,9 +51,9 @@ function table() {
         var currmonth = currDate.getMonth()+1;
         var currdate =  currDate.getDate();
         var count = 0;
-        //empty's the table 
+        //empty's the table
         $('#tblBody').empty();
-        //for loop to reload the table 
+        //for loop to reload the table
         for(var i=0; i<data.length; i++){
             $img = $('<img id="Image" src="http://placehold.it/50x50" />');
             var dbDate = new Date(data[i].date);
@@ -70,7 +70,7 @@ function table() {
               var hours = ("0"+appDate.getHours()).slice(-2); //returns 0-
               var minutes = ("0"+appDate.getMinutes()).slice(-2); //returns 0-59
               var appTime = hours+":"+minutes + " AM";
-             } 
+             }
              else{
               var pmHours = appDate.getHours()%12;
 
@@ -80,8 +80,8 @@ function table() {
               var hours = ("0"+pmHours).slice(-2); //returns 0-
               var minutes = ("0"+appDate.getMinutes()).slice(-2); //returns 0-59
               var appTime = hours+":"+minutes + " PM";
-            }   
-            
+            }
+
 
             if (data[i].state == 'checkedIn' | data[i].state == 'roomed') {
 
@@ -101,20 +101,21 @@ function table() {
                         })
 
 
-                    
+
                     });
 
                     var cols = [count,data[i].fname + " " + data[i].lname,$form,appTime,data[i].state,$check,$img];
                 }
                 /**/
-                else if(data[i].state == 'roomed') {    
+                else if(data[i].state == 'roomed') {
                     $btn = $('<button class="btn btn-primary"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></button>');
-                     $btn.click(function() { 
+                    var x = data[i]._id;
+                     $btn.click(function() {
                         console.log("this is not fun");
                         $.ajax({
-                            url: '/api/appointments/'+data[i]._id+'/state',
+                            url: '/api/appointments/'+x+'/state',
                             type: "PUT",
-                         }); 
+                         });
                     });
 
                     var cols = [count,data[i].fname + " " + data[i].lname,$form,appTime,data[i].state,$btn,$img];
@@ -128,10 +129,10 @@ function table() {
             else {
                 cols = [count,data[i].fname + " " + data[i].lname,,appTime,data[i].state,,$img];
             }
-            
+
             insRow(cols);
-        }//end of for loop       
-          
+        }//end of for loop
+
     });//end of $get()
 }//end of table()
 
