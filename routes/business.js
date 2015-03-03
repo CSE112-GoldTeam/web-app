@@ -56,8 +56,9 @@ router.get('/addemployees' ,function (req,res){
         if (err) { return res.sendStatus(500, err); }
         if(!results) { return res.send(404,'User not found');}
         
-      
-        employee = results[0];
+        //console.log(results);
+        employee = results;
+        
        
     
     });
@@ -68,7 +69,7 @@ router.get('/addemployees' ,function (req,res){
         if (err) { return res.sendStatus(500, err); }
         if(!results) { return res.send(404,'User not found');}
         
-        notemployee = results[0];
+        notemployee = results;
 
     });
 
@@ -101,7 +102,7 @@ router.post('/addemployees',function (req,res){
         from: 'test@localhost',
         subject: 'Employee Signup',
         text: 'Hello ' + username + ',\n\n' + 'Please click on the following link, or paste this into your browser to complete sign-up the process: \n\n' +
-        'http://robobetty/register/' + token 
+        'http://robobetty/register/?token=' + token 
     }, function (err, json) {
         if (err) {
             return console.error(err);
@@ -118,6 +119,25 @@ router.post('/addemployees',function (req,res){
 });
 
 
+
+
+router.get('/employeeregister',function(req,res){
+    res.render('business/registeremployees');
+});
+
+
+router.post('/employeeregister',function (req,res){
+
+    var db =req.db
+    var employee = db.get('csvEmployees');
+
+    employee.update({'token': req.query.token}, function (err,results){
+
+
+
+    });
+
+});
 
 
 router.post('/register', passport.authenticate('local-signup',{
