@@ -13,32 +13,59 @@ router.use(bodyParser.json()); // for parsing application/json
 router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 
-//Company Registration
+/**
+ * GET company registration
+ * @param {Object} req 
+ * @param {Object} res
+ */
 router.get('/register', function (req, res) {
     res.render('business/register');
 });
 
-//Landing Page
+/**
+ * GET company landing page
+ * @param {Object} req 
+ * @param {Object} res
+ */
 router.get('/', function (req, res) {
     res.render('business/landing', {title: 'Landing Page'});
 });
 
+/**
+ * GET company login
+ * @param {Object} req 
+ * @param {Object} res
+ */
 router.get('/login', function(req, res) {
     res.render('business/login.hjs');
 });
 
+/**
+ * POST the success of failure of user authetication
+ */
 router.post('/login', passport.authenticate('local-login', {
     successRedirect : '/config',
     failureRedirect : '/login'
 }));
 
-//Office Configuration
+/**
+ * GET company configuration
+ * @param {Object} req 
+ * @param {Object} res
+ */
 router.get('/config', isLoggedIn, function (req, res) {
     res.render('business/config', {title: 'Express'});
 });
-//dashboard form
+
+/**
+ * GET form responses from the id
+ * @param {Object} req 
+ * @param {Object} res
+ * @param {Object} next
+ * @returns the view form with the data that the user entered
+ */
 router.get('/viewform/:id', function (req, res, next) {
-     // grab our db object from the request
+     	// grab our db object from the request
 	var db = req.db;
 	var response = db.get('formResponses');
 	// query the collection
@@ -49,13 +76,25 @@ router.get('/viewform/:id', function (req, res, next) {
 			});
 });
 
-//Dashboard dashboard
+/**
+ * GET company dashboard
+ * @param {Object} req 
+ * @param {Object} res
+ * @param {Object} next
+ */
 router.get('/dashboard', function (req, res, next) {
     res.render('business/dashboard', {title: 'Express'});
 });
 
+/**
+ * GET company form appointment responses
+ * @param {Object} req 
+ * @param {Object} res
+ * @param {Object} next
+ * @returns the appointments of the user
+ */
 router.get('/api/formResponses/appointments/:id', function (req, res, next) {
-     // grab our db object from the request
+     	// grab our db object from the request
 	var db = req.db;
 	var response = db.get('formResponses');
 	// query the collection
@@ -65,10 +104,15 @@ router.get('/api/formResponses/appointments/:id', function (req, res, next) {
 	});
 });
 
-
+/**
+ * GET company appointments
+ * @param {Object} req 
+ * @param {Object} res
+ * @param {Object} next
+ * @returns the appointments
+ */
 router.get('/api/appointments', function (req, res, next) {
-     // grab our db object from the request
-
+     	// grab our db object from the request
 	var db = req.db;
 	var appt = db.get('appointments');
 	// query the collection
@@ -78,9 +122,16 @@ router.get('/api/appointments', function (req, res, next) {
 	});
 });
 
+/**
+ * PUT company appointments states
+ * @param {Object} req 
+ * @param {Object} res
+ * @param {Object} next
+ * @returns the state of the appointment
+ */
 router.put('/api/appointments/:id/state', function (req, res, next) {
 	console.log("Change State");
-     // grab our db object from the request
+	 // grab our db object from the request
 	var db = req.db;
 	var appt = db.get('appointments');
 	// query the collection
@@ -91,22 +142,29 @@ router.put('/api/appointments/:id/state', function (req, res, next) {
 	});
 });
 
-
-
-
-
-
-//Form Builder
+/**
+ * GET form builder
+ * @param {Object} req 
+ * @param {Object} res
+ */
 router.get('/formbuilder', function (req, res) {
     res.render('business/formbuilder', {title: 'Express'});
 });
 
-
+/**
+ * POST user regisration
+ */
 router.post('/register', passport.authenticate('local-signup',{
     successRedirect : '/config', // redirect to the secure profile section
     failureRedirect : '/register' // redirect back to the signup page if there is an error
 }));
 
+/**
+ * GET appointment for today
+ * @param {Object} req 
+ * @param {Object} res
+ * @returns the appointments for today
+ */
 router.get('/api/employee/:eid/appointments/today', function (req, res) {
     var db = req.db;
     var appointments = db.get('appointments');
@@ -134,7 +192,13 @@ router.get('/api/employee/:eid/appointments/today', function (req, res) {
 });
 
 
-// route middleware to make sure a user is logged in
+/**
+ * Makes sure that the user logged in is authenticated
+ * @param {Object} req 
+ * @param {Object} res
+ * @param {Object} next
+ * @returns the session if the user is authenticated if not redirects them to the home page.
+ */
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated()) {
@@ -146,7 +210,11 @@ function isLoggedIn(req, res, next) {
 }
 
 
-//Device Reg
+/**
+ * GET device regisration
+ * @param {Object} req 
+ * @param {Object} res
+ */
 router.get('/registerDevice', function (req,res) {
     res.render('business/registerDevice', {title: 'Express'});
 });
