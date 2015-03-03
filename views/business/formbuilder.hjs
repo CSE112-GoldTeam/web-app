@@ -16,22 +16,28 @@
         var fieldSet = $("<fieldset id=\"previewForm\"><legend>Your Form</legend></fieldset>");
         var json = [];
 
+        // Insert options into appropriate dropdown field
         function insertOption(dropcounter) {
             var x = document.getElementById("drop" + dropcounter);
             var option = document.createElement("option");
             option.text = prompt ("Name your option");
-            //checks for null or undefined
+          
+            // Checks for null or undefined
             if (option.text)
             {
                x.add(option);
             }
         }
+
+        // Remove option from appropriate dropdown field
         function removeOption(dropcounter) {
             var x = document.getElementById("drop" + dropcounter);
             x.remove(x.selectedIndex);
         }
 
         $(document).ready(function () {
+
+            // Add form creation buttons
             $("#add").click(function () {
                 var intId = $("#buildyourform div").length + 1;
                 var fieldWrapper = $("<div class=\"fieldwrapper\" id=\"field" + intId + "\"/>");
@@ -47,14 +53,19 @@
                 fieldWrapper.append(removeButton);
                 $("#buildyourform").append(fieldWrapper);
             });
+
+            // Add preview button and display fields
             $("#preview").click(function () {
                 dropCounter = 0;
                 $("#yourform").remove();
                 var fieldSet = $("<fieldset id=\"yourform\"><legend>Your Form</legend></fieldset>");
+
+                // Iterate through each field and append its HTML to the preview form
                 $("#buildyourform div").each(function () {
                     var id = "input" + $(this).attr("id").replace("field", "");
                     var label = $("<label for=\"" + id + "\">" + $(this).find("input.fieldname").first().val() + "</label>");
                     var input;
+
                     switch ($(this).find("select.fieldtype").first().val()) {
                         case "textbox":
                             input = $("<div class=\"previewForm\"><input type=\"text\" id=\"" + id + "\" name=\"" + id + "\" /></div>");
@@ -70,6 +81,7 @@
                 $("body").append(fieldSet);
             });
 
+            // Create JSON object and post to database
             $("#submit").click(function() {
                 var json = {
                     business: "temp",
@@ -81,37 +93,39 @@
                 var options;
                 dropCounter = 0;
                 var form = $("fieldset");
+
+                // Cyclye through each preview form field
                 form.children().each(function(i, elem){
+
+                    // Check field type and insert appropriate fields
                     if ($(this).find("select.fieldtype").first().val()) {
                         if ($(this).find("select.fieldtype").first().val() == 'dropdown') {
-                            temp = [];
-                            dropCounter += 1;
                             fieldname = $(this).find("input.fieldname").first().val();
+                            var dropJson = {
+                                type: "dropdown", 
+                                label: fieldname, 
+                                options: []
+                            };
+
+                            dropCounter ++;
                             var options = $("#drop" + dropCounter + " option");
+
+                            // Insert options from dropdown menu
                             var values = $.map(options ,function(option) {
-                                temp.push(option.value);
+                                dropJson.options.push(option.value);
                             });
 
-                            var tempjson = {type: "dropdown", label: fieldname, options: []};
-                            var tempArray = [];
-                            for(i = 0; i < temp.length; i++) {
-                                tempjson.options.push(temp[i]);
-                            }
-                            console.log(tempjson);
-                            //json.fields.push(tempjson);
-                            tempArray.push(tempjson);
-                            $.extend(json.fields,tempArray);
+                            json.fields.push(dropJson);
                         }
                         else
                             json.fields.push({type: "textbox", label: $(this).find("input.fieldname").first().val()});
                     }
                 })
                 console.log(JSON.stringify(json));
-                //var str = JSON.stringify(json);
-                //console.log(JSON.stringify(json));
+
                 $.post('/api/m/form',{ obj : JSON.stringify(json)}, function (data) {
-                console.log("success post");
-                console.log(data);
+                    console.log("success post");
+                    console.log(data);
                 });
 
             })
