@@ -26,10 +26,7 @@
             if (option.text == "null"){
               return;
             }
-            //checks for input 
-
-          
-            // Checks for null or undefined
+            //checks for input
 
             if (option.text)
             {
@@ -68,7 +65,6 @@
                 dropCounter = 0;
                 $("#yourform").remove();
 
-
                 var fieldSet = $("<fieldset id=\"yourform\"><legend>Your Form</legend></fieldset>");
 
                 // Iterate through each field and append its HTML to the preview form
@@ -105,7 +101,7 @@
                 dropCounter = 0;
                 var form = $("fieldset");
 
-                // Cyclye through each preview form field
+                // Cycle through each preview form field
                 form.children().each(function(i, elem){
 
                     // Check field type and insert appropriate fields
@@ -113,8 +109,8 @@
                         if ($(this).find("select.fieldtype").first().val() == 'dropdown') {
                             fieldname = $(this).find("input.fieldname").first().val();
                             var dropJson = {
-                                type: "dropdown", 
-                                label: fieldname, 
+                                type: "dropdown",
+                                label: fieldname,
                                 options: []
                             };
 
@@ -129,23 +125,12 @@
                             json.fields.push(dropJson);
                         }
                         else
-                            json.fields.push({type: "textbox", label: $(this).find("input.fieldname").first().val()});
+                            json.fields.push({type: "textfield", label: $(this).find("input.fieldname").first().val()});
                     }
                 })
 
-                //console.log(JSON.stringify(json));
-                //var str = JSON.stringify(json);
-                //console.log(JSON.stringify(json));
+                //post and saves the json object to the database   
                 $.post('/api/m/form',{ obj : JSON.stringify(json)}, function (data) {
-                //console.log("success post");
-                //console.log(data);
-
-                console.log(JSON.stringify(json));
-
-                $.post('/api/m/form',{ obj : JSON.stringify(json)}, function (data) {
-                    console.log("success post");
-                    console.log(data);
-
                 });
 
             })
