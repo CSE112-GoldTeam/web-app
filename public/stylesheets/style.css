@@ -4,7 +4,8 @@ html *
 }
 
 /* Begin: Changes made by William Huang 2/7/15 */
-/*html, body {
+/*
+html, body {
     height: 100%;
 }
 
@@ -24,21 +25,50 @@ body {
 /* shared class written to be shared across checkin and done page */
 .header {
 	text-align:center;
-	margin-top: 20px;
+	margin-top: 70px;
+  font-weight: bold;
 }
 
 /* shared class written to be shared across checkin and done page */
 .checkinphoto {
 	display:block;
+  width:500px;
+  height: 200px;
 	margin-left: auto;
 	margin-right:auto;
 	margin-top:2em;
+  z-index: 5;
 }
 
 .checkinbutton {
 	margin-top:2em;
 	width:180px;
 	height:40px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  z-index: 5;
+}
+
+.customBG {
+  width: 100%;
+  height: auto;
+   background: url(/images/background.jpg) no-repeat center center fixed;
+  background-size: cover;
+  z-index: -10;
+
+}
+
+.container-checkin {
+  margin-top: 100px;
+  width: 60%;
+  border-radius: 4px;
+  background: rgba(250,250,250,.5);
+  z-index: 1;
+
+}
+
+.btn-block{
+  margin-bottom: 10px;
 }
 
 /* Sabryna's navbar changes */
@@ -142,9 +172,10 @@ body {
 
 .custom-button {
   background-color: #21ca6b;
+  margin-bottom: 20px;
   color: #ffffff;
   font-family: 'Lato', sans-serif;
-  border-radius: 0 !important; /* Overrides bootstrap rounded corners*/
+  border-radius: 4px; /* Overrides bootstrap rounded corners*/
   width: 100px;
 }
 
@@ -159,7 +190,12 @@ body {
 
 /* Made navbar static so need to push container down*/
 .container-margin {
-  margin-top: 50px;
+  margin-top: 100px;
+  width: 90%;
+  height: auto;
+  border-radius: 4px;
+  background: rgba(250,250,250,.5);
+  z-index: 1;
 }
 
 #first-section {
@@ -275,12 +311,18 @@ a:hover {
 
 
 .nav-wizard-margins {
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 50px;
 }
 
-.containter-checkin {
-  margin-top: 200px;
-  margin-bottom: 200px;
+.innerInfo {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.bottomInfo {
+  margin-bottom: 20px;
 }
 
 #disclosure-text {

@@ -11,7 +11,7 @@
           window.setTimeout("location=('checkin');",7000);
     </script>
 </head>
-<body>
+<body class="customBG">
 
 <!-- this nav bar is consistent with PK's navbar -->
  <nav class="navbar navbar-default navbar-fixed-top">
@@ -25,7 +25,7 @@
 <!-- Took out all unnecessary divs to make consistent with checkin page design -->
 <div class="container container-margin containter-checkin">
     <h1 class="header"> Thank you! Someone will be with you shortly. </h1>
-    <img class="checkinphoto" src="http://placehold.it/500x200" alt="">
+    <img class="checkinphoto" src="/images/dentalLogo.jpg" alt="">
 </div>
 
 </body>
