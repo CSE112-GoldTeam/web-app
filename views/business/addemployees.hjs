@@ -44,8 +44,8 @@
 
             <div class="row text-center" id="regis-container">
                 <form method="post" action="" enctype="application/x-www-form-urlencoded">
-                    <textarea class="add-email" type="text" name="csvEmployees" placeholder="CSV of Employees EMAILS" required>name,email</textarea>
-                   <input class="btn custom-button" name="submit" type="submit" href="addemployees"value="Upload">
+                    <input class="add-email" type="text" name="csvEmployees" placeholder="CSV of Employees EMAILS" required>
+                    <input class="btn custom-button" name="submit" type="submit" value="Upload">
                 </form>
             
                 <div style="position:relative;top:50px;left:30px">
@@ -56,7 +56,9 @@
                         <tr>
                             <td>#</td>
                             <td>Name</td>
+                            {{signed.name}}
                             <td>Email</td>
+                            {{signed.email}}
                         </tr>
                         <tr>
                         </table>
@@ -69,7 +71,9 @@
                         <tr>
                             <td>#</td>
                             <td>Name</td>
+                            {{notsigned.name}}
                             <td>Email</td>
+                            {{notsigned.email}}
                         </tr>
                         <tr>
                         </table>
