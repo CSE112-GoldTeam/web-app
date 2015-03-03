@@ -1,3 +1,10 @@
+$(function(){
+    getDate();
+    $(startTime);
+    $(table);
+    $(poll);
+});
+
 
 function dateToString(date) {
 	var monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June',
