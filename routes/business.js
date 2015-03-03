@@ -70,10 +70,10 @@ router.get('/viewform/:id', function (req, res, next) {
 	var response = db.get('formResponses');
 	// query the collection
 	response.find({ appointment : req.params.id }, function(err, data) {
-	if (err) { return res.sendStatus(500, err); }
-		console.log(data);
-		return res.render('business/viewform', {title: req.params.id, formData : data[0].answers });
-			});
+	   if (err) { return res.sendStatus(500, err); }
+	   console.log(data);
+	   return res.render('business/viewform', {title: req.params.id, formData : data[0].answers });
+	});
 });
 
 /**
@@ -99,28 +99,11 @@ router.get('/api/formResponses/appointments/:id', function (req, res, next) {
 	var response = db.get('formResponses');
 	// query the collection
 	response.find({ appointments : req.params.id }, function(err, data) {
-	if (err) { return res.sendStatus(500, err); }
-		return res.json(200, data);
+	   if (err) { return res.sendStatus(500, err); }
+	   return res.json(200, data);
 	});
 });
 
-/**
- * GET company appointments
- * @param {Object} req 
- * @param {Object} res
- * @param {Object} next
- * @returns the appointments
- */
-router.get('/api/appointments', function (req, res, next) {
-     	// grab our db object from the request
-	var db = req.db;
-	var appt = db.get('appointments');
-	// query the collection
-	appt.find({ }, function(err, data) {
-	if (err) { return res.sendStatus(500, err); }
-		return res.json(200, data);
-	});
-});
 
 /**
  * PUT company appointments states
@@ -130,7 +113,7 @@ router.get('/api/appointments', function (req, res, next) {
  * @returns the state of the appointment
  */
 router.put('/api/appointments/:id/state', function (req, res, next) {
-	console.log("Change State");
+
 	 // grab our db object from the request
 	var db = req.db;
 	var appt = db.get('appointments');
@@ -144,7 +127,6 @@ router.put('/api/appointments/:id/state', function (req, res, next) {
         }
 
         appt.findAndModify({_id:req.params.id }, myState, function(err, data) {
-            console.log("Success");
             if (err) { return res.sendStatus(500, err); }
             return res.json(200, data);
         });
