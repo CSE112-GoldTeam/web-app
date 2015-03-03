@@ -11,3 +11,4 @@ npm-debug.log
 mongod.log
 mongo.log
 newrelic_agent.log
+*.sw?
