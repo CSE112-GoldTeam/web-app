@@ -93,22 +93,25 @@
                             });
 
                             var tempjson = {type: "dropdown", label: fieldname, options: []};
+                            var tempArray = [];
                             for(i = 0; i < temp.length; i++) {
                                 tempjson.options.push(temp[i]);
                             }
-
-                            json.fields.push(tempjson);
+                            console.log(tempjson);
+                            //json.fields.push(tempjson);
+                            tempArray.push(tempjson);
+                            $.extend(json.fields,tempArray);
                         }
                         else
                             json.fields.push({type: "textbox", label: $(this).find("input.fieldname").first().val()});
                     }
                 })
-                //console.log(json);
-                var str = JSON.stringify(json);
                 console.log(JSON.stringify(json));
-                $.post('/api/m/form', str, function (data) {
+                //var str = JSON.stringify(json);
+                //console.log(JSON.stringify(json));
+                $.post('/api/m/form',{ obj : JSON.stringify(json)}, function (data) {
                 console.log("success post");
-
+                console.log(data);
                 });
 
             })

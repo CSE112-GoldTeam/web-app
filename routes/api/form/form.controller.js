@@ -34,10 +34,12 @@ exports.createForm = function(req, res) {
     var collection = db.get('forms');
 
     // query to create entry in collection
-    collection.insert(req.body, function (err, doc) {
+    console.log(req.body);
+    var data = JSON.parse(req.body.obj);
+    collection.insert(data, function (err, doc) {
         if (err) { return handleError(res, err); }
         return res.json(201,doc);
-    });
+    })
 };
 
 // Create a formResponse
