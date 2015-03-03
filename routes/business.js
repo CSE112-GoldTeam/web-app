@@ -56,9 +56,8 @@ router.get('/addemployees' ,function (req,res){
         if (err) { return res.sendStatus(500, err); }
         if(!results) { return res.send(404,'User not found');}
         
-      
-        employee = results[0];
-       
+        employee = results;
+        console.log(employee);
     
     });
 
@@ -68,7 +67,7 @@ router.get('/addemployees' ,function (req,res){
         if (err) { return res.sendStatus(500, err); }
         if(!results) { return res.send(404,'User not found');}
         
-        notemployee = results[0];
+        notemployee = results;
 
     });
 

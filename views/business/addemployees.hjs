@@ -43,40 +43,52 @@
             </div>
 
             <div class="row text-center" id="regis-container">
-                <form method="post" action="" enctype="application/x-www-form-urlencoded">
+                <form method="post" action="addemployees" enctype="application/x-www-form-urlencoded">
                     <input class="add-email" type="text" name="csvEmployees" placeholder="CSV of Employees EMAILS" required>
-                    <input class="btn custom-button" name="submit" type="submit" value="Upload">
+                    <input class="btn custom-button" name="submit" type="submit" href="/addemployees" value="Upload">
                 </form>
             
-                <div style="position:relative;top:50px;left:30px">
-                    <h3 top="50px" align="left">Employees already registered</h2>
+                <div style="position:relative;top:50px" align = "center">
+
+                    <h3 style="position:relative;top:50px;right:135px">Employees already registered</h2>
+
                         <div style="position:relative;top:50px">
                         
-                        <table border="2" style="width:200%" id="registeredEmployees">
-                        <tr>
-                            <td>#</td>
-                            <td>Name</td>
-                            {{signed.name}}
-                            <td>Email</td>
-                            {{signed.email}}
-                        </tr>
-                        <tr>
-                        </table>
+                            <table border="2" style="width:50%" id="registeredEmployees">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                </tr>
+                                {{#signed}}
+                                <tr>
+                                    <td>{{name}}</td>
+                                    <td>{{email}}</td>
+                                </tr>
+                                {{/signed}}
+                            </table>
+
                         </div>
+                        
                 
-                    <h3 top="50px" align="left">Employees not yet registered</h2>
+                        <h3 style="position:relative;top:50px;right:135px">Employees not yet registered</h2>
+
                         <div style="position:relative;top:50px">
                         
-                        <table border="2" style="width:200%" id="unregisteredEmployees">
-                        <tr>
-                            <td>#</td>
-                            <td>Name</td>
-                            {{notsigned.name}}
-                            <td>Email</td>
-                            {{notsigned.email}}
-                        </tr>
-                        <tr>
-                        </table>
+                            <table border="2" style="width:50%" id="unregisteredEmployees">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                </tr>
+                                {{#notsigned}}
+                                <tr>
+                                    <td>{{name}}</td>
+                                    <td>{{email}}</td>
+                                </tr>
+                                {{/notsigned}}
+                            </table>
+
+                        </div>
+
                         </div>
                 </div>
             </div>
