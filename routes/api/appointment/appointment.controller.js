@@ -14,11 +14,14 @@ exports.confirm = function(req, res) {
     var db = req.db;
     var collection = db.get('appointments');
 
-    var businessid = "54eca953f2a2d47937757616";
-    var employeeid = "54ecaa24fb4974129dc2050d";
-
+    var businessid = collection.id("54eca953f2a2d47937757616");
+    //var employeeid = collection.id("54ecaa24fb4974129dc2050c");
+    var fname = req.query.fname.replace(/['"]+/g,'');
+    var lname = req.query.lname.replace(/['"]+/g,'');
+    var dob = req.query.dob.replace(/['"]+/g,'');
     //query the collection
-    collection.findOne({ "fname":req.query.fname.replace(/['"]+/g,''), "lname":req.query.lname.replace(/['"]+/g,''), "dob":req.query.dob.replace(/['"]+/g,'')/*, "business":businessid, "employee":employeeid */ }, function(err, users) {
+  collection.find({ "fname":fname, "lname":lname, "dob":dob,
+                    "business" : businessid }, function(err, users) {
         if (err) { return handleError(res, err); }
         return res.json(200, users);
     });
