@@ -95,5 +95,10 @@ router.get('/registerDevice', function (req,res) {
     res.render('business/registerDevice', {title: 'Express'});
 });
 
+//Account Settings
+router.get('/accountSettings', function (req, res) {
+		res.render('business/accountsettings', {title: 'Express'});
+});
+
  return router;
 };

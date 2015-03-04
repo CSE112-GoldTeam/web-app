@@ -16,6 +16,6 @@ router.get('/:id', auth.isAuthenticated, controller.retrieve);
 
 // Sign Disclosure Agreements
 // /api/appointments/:id
-router.post('/:id', auth.isAuthenticated, controller.sign);
+router.post('/:id/state', controller.sign);
 
 module.exports = router;
