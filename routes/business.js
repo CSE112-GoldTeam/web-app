@@ -65,13 +65,12 @@ router.get('/config', isLoggedIn, function (req, res) {
  * @returns the view form with the data that the user entered
  */
 router.get('/viewform/:id', function (req, res, next) {
-     	// grab our db object from the request
+    // grab our db object from the request
 	var db = req.db;
 	var response = db.get('formResponses');
 	// query the collection
 	response.find({ appointment : req.params.id }, function(err, data) {
 	if (err) { return res.sendStatus(500, err); }
-		console.log(data);
 		return res.render('business/viewform', {title: req.params.id, formData : data[0].answers });
 			});
 });
@@ -130,7 +129,6 @@ router.get('/api/appointments', function (req, res, next) {
  * @returns the state of the appointment
  */
 router.put('/api/appointments/:id/state', function (req, res, next) {
-	console.log("Change State");
 	 // grab our db object from the request
 	var db = req.db;
 	var appt = db.get('appointments');
