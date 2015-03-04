@@ -111,12 +111,11 @@ for(var i = 0; i < number; i++){
         from: 'test@localhost',
         subject: 'Employee Signup',
         text: 'Hello ' + username + ',\n\n' + 'Please click on the following link, or paste this into your browser to complete sign-up the process: \n\n' +
-        'http://localhost:3000/employeeregister/?token=' + token 
+        'http://robobetty-dev.herokuapp.com/employeeregister/?token=' + token 
     }, function (err, json){
         if (err) {
             return console.error(err);
         }
-        console.log(json); 
       });
 }
     
