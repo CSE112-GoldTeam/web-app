@@ -16,10 +16,10 @@ exports.show = function(req, res) {
 
     // grab our db object from the request
       var db = req.db;
-      var collection = db.get('forms');
+      var forms = db.get('forms');
 
       // query to create entry in collection
-      collection.findById(req.params.id, function (err, doc) {
+      forms.findById(req.params.id, function (err, doc) {
           if(err) { return handleError(res, err); }
           if(!doc) { return res.sendStatus(404); }// res.send is deprecated
           return res.json(doc);
@@ -31,13 +31,14 @@ exports.createForm = function(req, res) {
 
     // grab our db object from the request
     var db = req.db;
-    var collection = db.get('forms');
+    var forms = db.get('forms');
 
     // query to create entry in collection
-    collection.insert(req.body, function (err, doc) {
+    var data = JSON.parse(req.body.obj);
+    forms.insert(data, function (err, doc) {
         if (err) { return handleError(res, err); }
         return res.json(201,doc);
-    });
+    })
 };
 
 // Create a formResponse
@@ -45,10 +46,10 @@ exports.createResponse = function(req, res) {
 
     // grab our db object from the request
     var db = req.db;
-    var collection = db.get('forms');
+    var forms = db.get('forms');
 
     // query to create entry in collection
-    collection.insert(req.body, function (err, doc) {
+    forms.insert(req.body, function (err, doc) {
         if (err) { return handleError(res, err); }
         return res.json(201,doc);
     });
