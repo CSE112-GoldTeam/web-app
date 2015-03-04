@@ -43,18 +43,22 @@ exports.createForm = function(req, res) {
 
 // Create a formResponse
 exports.createResponse = function(req, res) {
-		//var businessId = "54eca953f2a2d47937757616";
-		var businessId = req.business;
-	
+
     // grab our db object from the request
     var db = req.db;
-		var forms = db.get('forms');
+    var forms = db.get('forms');
 
+		//var businessId = "54eca953f2a2d47937757616";
+
+		var businessId = req.business;
+    businessId = "54eca953f2a2d47937757616";
+
+    console.log(req.body);
 		forms.find({business: ObjectID(businessId)}, function (err, results)
 		{
 			var form = results[0];
-			
 			var valid = _.every(form.fields, function (field, index) {
+        console.log("Index: "+index);
 				var name = '_' + index;
 				return name in req.body && req.body[name].trim() !== '';
 			});
@@ -78,7 +82,7 @@ exports.createResponse = function(req, res) {
 				});
 			}
 		});
-    
+
 		/*
 		forms.insert(req.body, function (err, doc) {
         if (err) { return handleError(res, err); }
