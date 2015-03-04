@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="/javascripts/uploadLogo.js"></script>
+
+</head>
+
+<body>
+    <!--Holds the main tabs for the business-->
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+            <a href="#" style="color:white">RoboBetty
+            <a href="#" style="color:white">Dashboard</a>
+            <a href="#" style="color:white">Employees</a>
+            <a href="#" style="color:white">Settings</a>
+            <a href="#" style="color:white">Company Name</a>
+
+      </div>
+
+    </nav>
+
+    <!-- Holds the settings tabs -->
+    <nav class="navbar navbar-default" style="background-color:grey">
+        <div class="navbar-header">
+            <a href="#" style="color:white">Configurations</a>
+            <a href="#" style="color:white">Manage Forms</a>
+            <a href="#" style="color:white">UploadLogo</a>
+            <a href="#" style="color:white">More Settings</a>
+        </div>
+    </nav>
+
+    <!-- Container to hold instructions & upload form-->
+    <div class="container">
+
+        <h1>Uploading a Logo</h1>
+        <p style="color:grey">Upload your own logo to match your office.</p>
+        <br><br><br><br>
+        <h2>Click the upload button to browse for a picture</h2>
+        <br>
+
+        {{#error}}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {{/error}}
+
+        {{#success}}
+            <div class="alert alert-success" role="alert">
+                {{ success }}
+            </div>
+        {{/success}}
+
+        <form id        =  "uploadForm"
+             enctype   =  "multipart/form-data"
+             action    =  "/api/photo"
+             method    =  "post"
+        >
+
+            <input type="file"  name="userLogo" />
+            <br><br>
+            <input type="hidden" value="54eca953f2a2d47937757616" name="business"/>
+            <input type="submit" value="Upload Image" name="Upload Button"/>
+
+        </form>
+
+    </div>
+
+    <!--Footer to display the about info,etc-->
+    <footer class="footer navbar-fixed-bottom">
+        <div class="container">
+            <ul class="list-inline footer-links text-center">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Store</a></li>
+                <li><a href="#">Jobs</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+</body>
+
+ 
+</html>
