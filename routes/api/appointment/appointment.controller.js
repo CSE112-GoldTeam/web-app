@@ -14,8 +14,11 @@ exports.confirm = function(req, res) {
     var db = req.db;
     var collection = db.get('appointments');
 
-    // query the collection
-    collection.find({ }, function(err, users) {
+    var businessid = "54eca953f2a2d47937757616";
+    var employeeid = "54eca953f2a2d47937757616";
+    //query the collection
+    collection.findOne( {"fname":req.query.fname}, function(err, users) {
+        //TODO
         if (err) { return handleError(res, err); }
         return res.json(200, users);
     });
