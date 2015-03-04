@@ -119,9 +119,13 @@ $(document).ready(function () {
             }
         });
 
-        //post and saves the json object to the database   
-        $.post('/api/m/form',{ obj : JSON.stringify(json)}, function () {
+        $.ajax({
+            url:'/api/m/form',
+            type:'POST',
+            data: JSON.stringify(json),
+            contentType:'application/json',
+            dataType:'json',
+            success:function(){}
         });
-
     });
 });
