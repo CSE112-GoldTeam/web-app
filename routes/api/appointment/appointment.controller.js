@@ -36,9 +36,12 @@ exports.retrieve = function(req, res) {
     });
 };
 
-// Get list of things
-exports.sign = function(req, res) {
-
+/**
+ * PUT /api/appointment/:id/state/next
+ * Transitions the state to the next state
+ * scheduled -> formDone -> checkedIn -> roomed -> done
+ */
+exports.nextState = function(req, res) {
     // grab our db object from the request
     var db = req.db;
     var collection = db.get('appointments');
@@ -62,12 +65,39 @@ exports.sign = function(req, res) {
 				return res.json(200, data);
 			});
 		});
-		
-		// query the collection
-    //collection.find({_id: businessId}, function(err, users) {
-		//	if (err) { return handleError(res, err); }
-		//	return res.json(200, users);
-    //});
+};
+
+/**
+ * PUT /api/appointment/:id/state
+ * Set a specific state
+ * scheduled, formDone, checkedIn, roomed, done
+ */
+exports.updateState = function(req, res) {
+    // grab our db object from the request
+    var db = req.db;
+    var collection = db.get('appointments');
+    var validStates = ['scheduled','formDone','checkedIn','roomed','done'];
+    var isValid = false;
+
+    console.log(req.body.state);
+
+    // Determine if the state is a valid one
+    for(var i=0; i < validStates.length; i++){
+      if(validStates[i]==req.body.state){
+        isValid = true;
+      }
+    }
+
+    // Check if valid flag was set
+    if(!isValid){
+      return res.status(400).send('Malformed request, the state variable must be set to a valid state.');
+    }
+
+    // If all is good update the new state
+    collection.findAndModify({_id: req.params.id}, { $set:{state: req.body.state}}, function(err, data){
+      if (err) { return handleError(res, err);}
+      return res.json(200, data);
+    });
 };
 
 function handleError(res, err) {
