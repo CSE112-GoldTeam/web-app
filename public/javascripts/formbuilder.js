@@ -10,8 +10,8 @@ function insertOption(dropcounter) {
     if (option.text === 'null'){
       return;
     }
-    //checks for input
 
+    //checks for input
     if (option.text)
     {
        x.add(option);
@@ -27,25 +27,7 @@ function removeOption(dropcounter) {
 
 $(document).ready(function () {
 
-    // Add form creation buttons
-    $('#add').click(function () {
-        var intId = $('#buildyourform div').length + 1;
-        var fieldWrapper = $('<div class=\"fieldwrapper\" id=\"field' + intId + '\"/>');
-        var fName = $('<input type=\"text\" class=\"fieldname\" />');
-        var fType = $('<select class=\"fieldtype\"><option value=\"textbox\">Text</option><option value=\"dropdown\">Drop</option> </select>');
-
-        var removeButton = $('<input type=\"button\" class=\"remove\" value=Remove>');
-        removeButton.click(function () {
-            $(this).parent().remove();
-        });
-        fieldWrapper.append(fName);
-        fieldWrapper.append(fType);
-        fieldWrapper.append(removeButton);
-        $('#buildyourform').append(fieldWrapper);
-    });
-
-    // Add preview button and display fields
-    $('#preview').click(function () {
+    function preview() {
         var dropCounter = 0;
         $('#yourform').remove();
 
@@ -70,6 +52,33 @@ $(document).ready(function () {
             fieldSet.append(input);
         });
         $('body').append(fieldSet);
+    }
+
+    // Add form creation buttons
+    $('#add').click(function () {
+        var intId = $('#buildyourform div').length + 1;
+        var fieldWrapper = $('<div class=\"fieldwrapper\" id=\"field' + intId + '\"/>');
+        var fName = $('<input type=\"text\" class=\"fieldname\" />');
+        var fType = $('<select class=\"fieldtype\"><option value=\"textbox\">Text</option><option value=\"dropdown\">Drop</option> </select>');
+
+        var removeButton = $('<input type=\"button\" class=\"remove\" value=Remove>');
+        removeButton.click(function () {
+            $(this).parent().remove();
+        });
+        fieldWrapper.append(fName);
+        fieldWrapper.append(fType);
+        fieldWrapper.append(removeButton);
+        $('#buildyourform').append(fieldWrapper);
+
+        fType.change(function() {
+            preview();
+        });
+
+        fName.on('input', function() {
+            preview();
+        });
+
+        preview();
     });
 
     // Create JSON object and post to database
