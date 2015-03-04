@@ -54,7 +54,6 @@ function table() {
     var cols,$btn;
 
     $.get('/api/employee/'+'54ecaa24fb4974129dc2050d'+'/appointments/today', function( data ){
-        $('#tblBody').empty();
         var count = 0;
         //empty's the table
         $('#tblBody').empty();
@@ -128,7 +127,7 @@ function table() {
     });//end of $get()
 }//end of table()
   
-  
+
 function poll() {
     setTimeout(function(){
         table();
