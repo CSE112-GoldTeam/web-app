@@ -65,7 +65,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //but when using both or just app.use(session), the route works
 //note to j
 
-//required for passport
+// required for passport
 app.use(session({secret: '1234567890QWERTY'}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
