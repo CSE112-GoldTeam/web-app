@@ -16,6 +16,6 @@ router.post('/', controller.createForm);
 
 //Send form response
 //api/form/fromResponse
-router.post('/formResponse',  auth.isAuthenticated, controller.createResponse);
+router.post('/formResponse', controller.createResponse);
 
 module.exports = router;
