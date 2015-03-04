@@ -58,7 +58,7 @@ router.get('/addemployees' ,function (req,res){
         
         employee = results;
     
-    });
+    })
 
     csvEmployees.find({registrationToken: {$exists: true}}, function (err,results){
 
@@ -68,7 +68,7 @@ router.get('/addemployees' ,function (req,res){
         
         notemployee = results;
 
-    });
+    })
 
 
 
@@ -100,20 +100,28 @@ router.post('/addemployees',function (req,res){
         subject: 'Employee Signup',
         text: 'Hello ' + username + ',\n\n' + 'Please click on the following link, or paste this into your browser to complete sign-up the process: \n\n' +
         'http://robobetty/register/?token=' + token 
-    }, function (err, json) {
+    }, function (err, json){
         if (err) {
             return console.error(err);
         }
         var db =  req.db;
         var csvEmployees = db.get('csvEmployees');
         csvEmployees.insert({
-            name: username,
-            email: email,
-            registrationToken : token,
-        });       
+        name: username,
+        email: email,
+        registrationToken : token,
+    },{
+        w: 1
+    }, function (err){
+        if (err) {
+            return console.error(err);
+        }
+        res.redirect('/addemployees');  
+    })  
     });
-      res.redirect('/addemployees');
+           
 });
+      
 
 
 
