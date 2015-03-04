@@ -10,6 +10,10 @@ var auth = require('../../../lib/auth');
 //api/form/:id
 router.get('/:id',  auth.isAuthenticated, controller.show);
 
+//Send form
+//api/form/
+router.post('/', controller.createForm);
+
 //Send form response
 //api/form/fromResponse
 router.post('/formResponse',  auth.isAuthenticated, controller.createResponse);
