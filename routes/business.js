@@ -95,5 +95,23 @@ router.get('/registerDevice', function (req,res) {
     res.render('business/registerDevice', {title: 'Express'});
 });
 
- return router;
+router.get('/accountSettings', function (req,res) {
+		var eid = '54ecaa5cfb4974129dc2050f';
+		var db = req.db;
+		var employees = db.get('employees');
+
+		employees.find({_id: eid}, function (err, result) {
+			var emp = result[0];
+			var fname = emp.fname;
+			var lname = emp.lname;
+			var phone = emp.phone;
+		});
+
+		res.render('business/accountsettings', {title: 'Express', lname: 'Gordon'});
+});
+
+router.post('/accountSettings', function (req, res) {
+});
+
+return router;
 };
