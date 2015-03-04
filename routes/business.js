@@ -6,6 +6,7 @@ var sendgrid  = require('sendgrid')('robobetty', 'NoKcE0FGE4bd');
 var crypto = require('crypto');
 var baby = require('babyparse');
 var auth = require('../lib/auth');
+var async = require('async');
 
 // var session = require('express-session');
 
@@ -53,16 +54,22 @@ router.get('/formbuilder', function (req, res) {
 router.get('/addemployees' ,function (req,res){
     var db =  req.db;
     var csvEmployees = db.get('employees');
+    var employee
+    var notemployee;
+    
+
+    async.parallel({
+        employee: function(cb){
     csvEmployees.find({registrationToken: {$exists: false}},function (err,results){
 
         if (err) { return res.sendStatus(500, err); }
         if(!results) { return res.send(404,'User not found');}
          
-            employee = results;
-           
+            employeee = results;
+           cb();
     
-    });
-
+    })},
+        nonemployee: function(cb){
     csvEmployees.find({registrationToken: {$exists: true}}, function (err,results){
 
 
@@ -70,10 +77,16 @@ router.get('/addemployees' ,function (req,res){
         if(!results) { return res.send(404,'User not found');}
           
              notemployee = results;
+             cb();
+    })}},
+
+    function(err,results){
+
+        res.render('business/addemployees',{title: 'Express',notsigned: notemployee, signed: employeee});
+
     });
 
 
-     res.render('business/addemployees',{title: 'Express',notsigned: notemployee, signed: employee});
     
 });
 
