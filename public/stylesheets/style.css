@@ -310,6 +310,42 @@ a:hover {
 /***********************************************/
 
 
+/************* Add Employees Page *************/
+.add-email {
+  display: block;
+  height: 50px;
+  width: 300px;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.subtitle {
+  color: #808080;
+}
+
+.table.registeredTable {
+  font-size:11px;
+  color:#333333;
+  border-width: 1px solid #999;
+  border-color: #666666;
+  border-collapse: collapse;  
+  text-align: center;
+}
+
+.table.notRegisteredTable {
+  font-size:11px;
+  color:#333333;
+  border-width: 1px solid #999;
+  border-color: #666666;
+  border-collapse: collapse;  
+  text-align: center;
+}
+
+/**********************************************/
+
+
 .nav-wizard-margins {
   margin-left: auto;
   margin-right: auto;
