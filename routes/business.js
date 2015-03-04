@@ -2,6 +2,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var router = express.Router();
 var ObjectID = require('mongodb').ObjectID;
+var sendgrid  = require('sendgrid')('robobetty', 'NoKcE0FGE4bd');
+var crypto = require('crypto');
+var baby = require('babyparse');
 // var session = require('express-session');
 
 
@@ -43,6 +46,105 @@ router.get('/formbuilder', function (req, res) {
 });
 
 
+//Employee Signup
+
+router.get('/addemployees' ,function (req,res){
+    var db =  req.db;
+    var csvEmployees = db.get('csvEmployees');
+    csvEmployees.find({registrationToken: {$exists: false}},function (err,results){
+
+        if (err) { return res.sendStatus(500, err); }
+        if(!results) { return res.send(404,'User not found');}
+        
+        employee = results;
+    
+    })
+
+    csvEmployees.find({registrationToken: {$exists: true}}, function (err,results){
+
+
+        if (err) { return res.sendStatus(500, err); }
+        if(!results) { return res.send(404,'User not found');}
+        
+        notemployee = results;
+
+    })
+
+
+
+     res.render('business/addemployees',{title: 'Express',notsigned: notemployee, signed: employee});
+    
+});
+
+
+
+
+router.post('/addemployees',function (req,res){
+
+    
+    parsed = baby.parse(req.body.csvEmployees);
+    rows = parsed.data;
+
+    
+    
+
+    username = rows[0][0];
+    email = rows[0][1];
+
+    var token = randomToken();
+
+
+      sendgrid.send({
+        to: email,
+        from: 'test@localhost',
+        subject: 'Employee Signup',
+        text: 'Hello ' + username + ',\n\n' + 'Please click on the following link, or paste this into your browser to complete sign-up the process: \n\n' +
+        'http://robobetty/register/?token=' + token 
+    }, function (err, json){
+        if (err) {
+            return console.error(err);
+        }
+        var db =  req.db;
+        var csvEmployees = db.get('csvEmployees');
+        csvEmployees.insert({
+        name: username,
+        email: email,
+        registrationToken : token,
+    },{
+        w: 1
+    }, function (err){
+        if (err) {
+            return console.error(err);
+        }
+        res.redirect('/addemployees');  
+    })  
+    });
+           
+});
+      
+
+
+
+
+router.get('/employeeregister',function(req,res){
+    res.render('business/registeremployees');
+});
+
+
+router.post('/employeeregister',function (req,res){
+
+    var db =req.db
+    var employee = db.get('csvEmployees');
+
+    employee.update({'token': req.query.token}, function (err,results){
+
+
+
+    });
+
+});
+
+
 router.post('/register', passport.authenticate('local-signup',{
     successRedirect : '/config', // redirect to the secure profile section
     failureRedirect : '/register' // redirect back to the signup page if there is an error
@@ -77,6 +179,11 @@ router.get('/api/employee/:eid/appointments/today', function (req, res) {
     });
 });
 
+
+
+function randomToken() {
+    return crypto.randomBytes(20).toString('hex');
+}
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
