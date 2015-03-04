@@ -52,7 +52,7 @@ router.get('/formbuilder', function (req, res) {
 
 router.get('/addemployees' ,function (req,res){
     var db =  req.db;
-    var csvEmployees = db.get('csvEmployees');
+    var csvEmployees = db.get('employees');
     csvEmployees.find({registrationToken: {$exists: false}},function (err,results){
 
         if (err) { return res.sendStatus(500, err); }
@@ -92,7 +92,7 @@ router.post('/addemployees',function (req,res){
     });
 
     var db =  req.db;
-    var csvEmployees = db.get('csvEmployees');
+    var csvEmployees = db.get('employees');
 
 for(var i = 0; i < number; i++){
    var username = rows[i][0];
@@ -146,7 +146,7 @@ router.get('/employeeregister',function(req,res){
 router.post('/employeeregister',function (req,res){
 
     var db =req.db;
-    var employee = db.get('csvEmployees');
+    var employee = db.get('employees');
 
     console.log(req.query.token);
 
