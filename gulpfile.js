@@ -138,11 +138,24 @@ gulp.task('vendor', function() {
 
 //// end of additional plugins
 
+gulp.task('default', ['browser-sync']);
+
+var karma = require('karma').server;
+/**
+ * Run test once and exit
+ */
+gulp.task('test', function (done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done);
+});
 
 // prerequisites - must have heroku command line tools installed
 //               - must be authenticated with heroku
 //               - must have git installed and be in application root directory
 //               - must be authenticated with git so that password does not have to be entered on push
+//               - MUST commit before running cmd (just revert commit if there is an issue)
 // example cmd
 // gulp stage                                  "pushes to default stage test1"
 // gulp stage --test [stage number]            "push to a specific stage test 1 - 3"
@@ -220,20 +233,6 @@ gulp.task('stage',['test'], function(){
         });
     }
 })
-
-gulp.task('default', ['browser-sync']);
-
-
-var karma = require('karma').server;
-/**
- * Run test once and exit
- */
-gulp.task('test', function (done) {
-  karma.start({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  }, done);
-});
 
 // check pages on dev
 gulp.task('checkDev', function(callback) {
