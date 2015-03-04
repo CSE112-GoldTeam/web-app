@@ -27,14 +27,39 @@ var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var minifyCSS = require('gulp-minify-css');
 
 
 //// end of additional plugins
 
 
+//// begin of additional plugins
+gulp.task('clean', function () {
+  return gulp.src('build', {read: false})
+    .pipe(clean());
+});
+
+gulp.task('vendor', function() {
+  return gulp.src('./public/javascripts/*.js')
+    .pipe(concat('vendor.js'))
+    .pipe(gulp.dest('./public/javascripts/'))
+    .pipe(uglify())
+    .pipe(rename('vendor.min.js'))
+    .pipe(gulp.dest('./public/javascripts/'))
+    .on('error', gutil.log)
+});
+
+gulp.task('minify-css', function() {
+  return gulp.src('./public/stylesheets/*.css')
+    .pipe(minifyCSS({keepBreaks:false}))
+    .pipe(rename('style.min.css'))
+    .pipe(gulp.dest('./public/stylesheets/'))
+});
+
+//// end of additional plugins
 
 
-gulp.task('nodemon', function (cb) {
+gulp.task('nodemon', ['vendor', 'minify-css'], function (cb) {
   var called = false;
   return nodemon({
 
@@ -120,23 +145,7 @@ gulp.task('mongorestore', function() {
   });
 });
 
-//// begin of additional plugins
-gulp.task('clean', function () {
-  return gulp.src('build', {read: false})
-    .pipe(clean());
-});
 
-gulp.task('vendor', function() {
-  return gulp.src('vendor/*.js')
-    .pipe(concat('vendor.js'))
-    .pipe(gulp.dest('build'))
-    .pipe(uglify())
-    .pipe(rename('vendor.min.js'))
-    .pipe(gulp.dest('build'))
-    .on('error', gutil.log)
-});
-
-//// end of additional plugins
 
 gulp.task('default', ['browser-sync']);
 
