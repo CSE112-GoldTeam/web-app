@@ -7,8 +7,8 @@ var router = express.Router();
 var auth = require('../../../lib/auth');
 
 // Confirm Identity
-// /api/appointment?fname=John&lname="Doe"&dob="05/13/1965"
-router.get('/', auth.isAuthenticated, controller.confirm);
+// /api/m/appointment?fname=John&lname="Doe"&dob="05/13/1965"
+router.get('/', controller.confirm);
 
 // Retrieve Appointment Information
 // /api/appointment/:id/
