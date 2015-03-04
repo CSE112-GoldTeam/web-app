@@ -59,11 +59,11 @@ router.post('/api/photo',function(req,res){
             _id:businessID
         },{ 
             $set: {
-                logo: "/static/images/"+req.files.userLogo.name
+                logo: '/static/images/'+req.files.userLogo.name
             }
         },{ 
             upsert: true
-        }, function (err, results){
+        }, function (err){
 
             if (err) {
                 console.error('MongoDB Error in /api/photo: ' + err);
@@ -71,7 +71,7 @@ router.post('/api/photo',function(req,res){
             }
 
             res.render('business/uploadLogo',{
-                success:"Succesfully uploaded file: "+req.files.userLogo.originalname
+                success:'Succesfully uploaded file: '+req.files.userLogo.originalname
             });
 
         });
@@ -79,7 +79,7 @@ router.post('/api/photo',function(req,res){
     }
     else{
         res.render('business/uploadLogo',{
-            error:"Please select a valid image(png,jpg) file to upload."
+            error:'Please select a valid image(png,jpg) file to upload.'
         });
     }
    
