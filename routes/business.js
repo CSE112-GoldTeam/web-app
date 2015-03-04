@@ -2,6 +2,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var router = express.Router();
 var ObjectID = require('mongodb').ObjectID;
+var sendgrid  = require('sendgrid')('robobetty', 'NoKcE0FGE4bd');
+var crypto = require('crypto');
+var baby = require('babyparse');
 // var session = require('express-session');
 
 
@@ -15,7 +18,7 @@ router.use(bodyParser.urlencoded({ extended: true })); // for parsing applicatio
 
 /**
  * GET company registration
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  */
 router.get('/register', function (req, res) {
@@ -24,7 +27,7 @@ router.get('/register', function (req, res) {
 
 /**
  * GET company landing page
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  */
 router.get('/', function (req, res) {
@@ -33,7 +36,7 @@ router.get('/', function (req, res) {
 
 /**
  * GET company login
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  */
 router.get('/login', function(req, res) {
@@ -50,7 +53,7 @@ router.post('/login', passport.authenticate('local-login', {
 
 /**
  * GET company configuration
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  */
 router.get('/config', isLoggedIn, function (req, res) {
@@ -59,7 +62,7 @@ router.get('/config', isLoggedIn, function (req, res) {
 
 /**
  * GET form responses from the id
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  * @param {Object} next
  * @returns the view form with the data that the user entered
@@ -77,7 +80,7 @@ router.get('/viewform/:id', function (req, res, next) {
 
 /**
  * GET company dashboard
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  * @param {Object} next
  */
@@ -87,7 +90,7 @@ router.get('/dashboard', function (req, res, next) {
 
 /**
  * GET company form appointment responses
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  * @param {Object} next
  * @returns the appointments of the user
@@ -106,13 +109,13 @@ router.get('/api/formResponses/appointments/:id', function (req, res, next) {
 
 /**
  * PUT company appointments states
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  * @param {Object} next
  * @returns the state of the appointment
  */
 router.put('/api/appointments/:id/state', function (req, res, next) {
-	
+
 	 // grab our db object from the request
 	var db = req.db;
 	var appt = db.get('appointments');
@@ -135,12 +138,112 @@ router.put('/api/appointments/:id/state', function (req, res, next) {
 
 /**
  * GET form builder
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  */
 router.get('/formbuilder', function (req, res) {
     res.render('business/formbuilder', {title: 'Express'});
 });
+
+
+//Employee Signup
+
+router.get('/addemployees' ,function (req,res){
+    var db =  req.db;
+    var csvEmployees = db.get('csvEmployees');
+    csvEmployees.find({registrationToken: {$exists: false}},function (err,results){
+
+        if (err) { return res.sendStatus(500, err); }
+        if(!results) { return res.send(404,'User not found');}
+
+        employee = results;
+
+    })
+
+    csvEmployees.find({registrationToken: {$exists: true}}, function (err,results){
+
+
+        if (err) { return res.sendStatus(500, err); }
+        if(!results) { return res.send(404,'User not found');}
+
+        notemployee = results;
+
+    })
+
+
+
+     res.render('business/addemployees',{title: 'Express',notsigned: notemployee, signed: employee});
+
+});
+
+
+
+
+router.post('/addemployees',function (req,res){
+
+
+    parsed = baby.parse(req.body.csvEmployees);
+    rows = parsed.data;
+
+
+
+
+    username = rows[0][0];
+    email = rows[0][1];
+
+    var token = randomToken();
+
+
+      sendgrid.send({
+        to: email,
+        from: 'test@localhost',
+        subject: 'Employee Signup',
+        text: 'Hello ' + username + ',\n\n' + 'Please click on the following link, or paste this into your browser to complete sign-up the process: \n\n' +
+        'http://robobetty/register/?token=' + token
+    }, function (err, json){
+        if (err) {
+            return console.error(err);
+        }
+        var db =  req.db;
+        var csvEmployees = db.get('csvEmployees');
+        csvEmployees.insert({
+        name: username,
+        email: email,
+        registrationToken : token,
+    },{
+        w: 1
+    }, function (err){
+        if (err) {
+            return console.error(err);
+        }
+        res.redirect('/addemployees');
+    })
+    });
+
+});
+
+
+
+
+
+router.get('/employeeregister',function(req,res){
+    res.render('business/registeremployees');
+});
+
+
+router.post('/employeeregister',function (req,res){
+
+    var db =req.db
+    var employee = db.get('csvEmployees');
+
+    employee.update({'token': req.query.token}, function (err,results){
+
+
+
+    });
+
+});
+
 
 /**
  * POST user regisration
@@ -152,7 +255,7 @@ router.post('/register', passport.authenticate('local-signup',{
 
 /**
  * GET appointment for today
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  * @returns the appointments for today
  */
@@ -183,9 +286,14 @@ router.get('/api/employee/:eid/appointments/today', function (req, res) {
 });
 
 
+
+function randomToken() {
+    return crypto.randomBytes(20).toString('hex');
+}
+
 /**
  * Makes sure that the user logged in is authenticated
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  * @param {Object} next
  * @returns the session if the user is authenticated if not redirects them to the home page.
@@ -203,7 +311,7 @@ function isLoggedIn(req, res, next) {
 
 /**
  * GET device regisration
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  */
 router.get('/registerDevice', function (req,res) {
