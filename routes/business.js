@@ -55,22 +55,20 @@ router.get('/addemployees' ,function (req,res){
 
         if (err) { return res.sendStatus(500, err); }
         if(!results) { return res.send(404,'User not found');}
-        else{
+         
             employee = results;
-        }
+           
     
-    })
+    });
 
     csvEmployees.find({registrationToken: {$exists: true}}, function (err,results){
 
 
         if (err) { return res.sendStatus(500, err); }
         if(!results) { return res.send(404,'User not found');}
-        else{
-            notemployee = results;
-        }
-
-    })
+          
+             notemployee = results;
+    });
 
 
      res.render('business/addemployees',{title: 'Express',notsigned: notemployee, signed: employee});
@@ -83,8 +81,8 @@ router.get('/addemployees' ,function (req,res){
 router.post('/addemployees',function (req,res){
 
     
-    parsed = baby.parse(req.body.csvEmployees);
-    rows = parsed.data;
+    var parsed = baby.parse(req.body.csvEmployees);
+    var rows = parsed.data;
 
     var number = 0;
     rows.forEach(function (d){
@@ -94,9 +92,9 @@ router.post('/addemployees',function (req,res){
     var db =  req.db;
     var csvEmployees = db.get('csvEmployees');
 
-for(i = 0; i < number; i++){
-   username = rows[i][0];
-   email = rows[i][1];
+for(var i = 0; i < number; i++){
+   var username = rows[i][0];
+   var email = rows[i][1];
 
     var token = randomToken();
     csvEmployees.insert({
@@ -115,7 +113,8 @@ for(i = 0; i < number; i++){
     }, function (err, json){
         if (err) {
             return console.error(err);
-        } 
+        }
+        console.log(json); 
       });
 }
     
@@ -144,7 +143,7 @@ router.get('/employeeregister',function(req,res){
 
 router.post('/employeeregister',function (req,res){
 
-    var db =req.db
+    var db =req.db;
     var employee = db.get('csvEmployees');
 
     employee.update({'token': req.query.token}, function (err,results){
