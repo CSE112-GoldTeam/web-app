@@ -11,6 +11,19 @@
 
 </head>
 <body>
+  <!--Holds the main tabs for the business-->
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+            <text style="color:white">RoboBetty</text>
+            <a href="#" style="color:white">Dashboard</a>
+            <a href="#" style="color:white">Employees</a>
+            <a href="#" style="color:white">Settings</a>
+            <text style="color:white">Company Name</text>
+
+      </div>
+
+    </nav>
+
   <div class="container" style ="vertical-align: top;">
     <div class="panel panel-default">
       <h4><strong>Hey there! </strong>Your patient, <strong>Test, </strong>just checked in and is now waiting in the lobby       <button class="btn btn-info">Click when the patient has been roomed</button></h4>
@@ -53,12 +66,16 @@
       </table>
     </div>
   </div>
-  <script>
-    getDate();
-    $(startTime);
-    $(table);
-    $(poll);
-  </script>
+  <footer class="footer navbar-fixed-bottom">
+        <div class="container">
+            <ul class="list-inline footer-links text-center">
+                
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </div>
+    </footer>
 </body>
 </html>
 
