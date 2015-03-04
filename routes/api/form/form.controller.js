@@ -34,8 +34,7 @@ exports.createForm = function(req, res) {
     var forms = db.get('forms');
 
     // query to create entry in collection
-    var data = JSON.parse(req.body.obj);
-    forms.insert(data, function (err, doc) {
+    forms.insert(req.body, function (err, doc) {
         if (err) { return handleError(res, err); }
         return res.json(201,doc);
     })
