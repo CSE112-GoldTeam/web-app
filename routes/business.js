@@ -55,8 +55,9 @@ router.get('/addemployees' ,function (req,res){
 
         if (err) { return res.sendStatus(500, err); }
         if(!results) { return res.send(404,'User not found');}
-        
-        employee = results;
+        else{
+            employee = results;
+        }
     
     })
 
@@ -65,11 +66,11 @@ router.get('/addemployees' ,function (req,res){
 
         if (err) { return res.sendStatus(500, err); }
         if(!results) { return res.send(404,'User not found');}
-        
-        notemployee = results;
+        else{
+            notemployee = results;
+        }
 
     })
-
 
 
      res.render('business/addemployees',{title: 'Express',notsigned: notemployee, signed: employee});
@@ -85,13 +86,24 @@ router.post('/addemployees',function (req,res){
     parsed = baby.parse(req.body.csvEmployees);
     rows = parsed.data;
 
-    
-    
+    var number = 0;
+    rows.forEach(function (d){
+        number += 1;
+    });
 
-    username = rows[0][0];
-    email = rows[0][1];
+    var db =  req.db;
+    var csvEmployees = db.get('csvEmployees');
+
+for(i = 0; i < number; i++){
+   username = rows[i][0];
+   email = rows[i][1];
 
     var token = randomToken();
+    csvEmployees.insert({
+    name: username,
+    email: email,
+    registrationToken : token,
+    });
 
 
       sendgrid.send({
@@ -103,23 +115,22 @@ router.post('/addemployees',function (req,res){
     }, function (err, json){
         if (err) {
             return console.error(err);
-        }
-        var db =  req.db;
-        var csvEmployees = db.get('csvEmployees');
-        csvEmployees.insert({
-        name: username,
-        email: email,
-        registrationToken : token,
-    },{
-        w: 1
-    }, function (err){
-        if (err) {
-            return console.error(err);
-        }
-        res.redirect('/addemployees');  
-    })  
-    });
-           
+        } 
+      });
+}
+    
+
+
+    res.redirect('/addemployees');
+
+   // },{
+   //      w: 1
+   //  }, function (err){
+   //      if (err) {
+   //          return console.error(err);
+   //      }
+   //      res.redirect('/addemployees');  
+   //  })  
 });
       
 
