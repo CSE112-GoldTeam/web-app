@@ -14,8 +14,11 @@ router.get('/', controller.confirm);
 // /api/appointment/:id/
 router.get('/:id', auth.isAuthenticated, controller.retrieve);
 
-// Sign Disclosure Agreements
-// /api/appointments/:id
-router.post('/:id', auth.isAuthenticated, controller.sign);
+// Transition states
+router.put('/:id/state/next', controller.nextState);
+
+// Setting states
+router.put('/:id/state', controller.updateState);
+
 
 module.exports = router;
