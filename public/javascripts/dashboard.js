@@ -16,7 +16,7 @@ function getDate(){
 	var datetime= '';
 	datetime += dateToString(currentdate );
 
-	console.log('Date: ' + datetime);
+	
 	var $header = $('<h1/>');
 	 $header.append(datetime);
 	$('#currentDate').replaceWith($header);
@@ -57,7 +57,6 @@ function table() {
             var appDate = new Date(data[i].date);
             //parsing to get time
             var fhours = appDate.getHours();
-            //console.log(fhours/12);
             var appTime;
             if(fhours/12 < 1){
               var hours = ('0'+appDate.getHours()).slice(-2); //returns 0-
@@ -82,7 +81,6 @@ function table() {
                 if (data[i].state === 'checkedIn'){
                     var $check = $('<input type="checkbox">').data('appid',data[i]._id);
                     $check.change(function(){
-                        //console.log("updateState()");
                         var $appid = $(this).data('appid');
 
                         $.ajax({
@@ -93,7 +91,6 @@ function table() {
 
                      cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$check,$img];
                 }
-                /**/
                 else if(data[i].state === 'roomed') {
                     $btn = $('<button class="btn btn-primary"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></button>');
                     var x = data[i]._id;
@@ -106,7 +103,7 @@ function table() {
 
                      cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$btn,$img];
 
-                }/**/
+                }
                 else{
                     cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$btn = false,$img];
                 }
