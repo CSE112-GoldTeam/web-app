@@ -15,10 +15,10 @@ exports.confirm = function(req, res) {
     var collection = db.get('appointments');
 
     var businessid = "54eca953f2a2d47937757616";
-    var employeeid = "54eca953f2a2d47937757616";
+    var employeeid = "54ecaa24fb4974129dc2050d";
+
     //query the collection
-    collection.findOne( {"fname":req.query.fname}, function(err, users) {
-        //TODO
+    collection.findOne({ "fname":req.query.fname.replace(/['"]+/g,''), "lname":req.query.lname.replace(/['"]+/g,''), "dob":req.query.dob.replace(/['"]+/g,'')/*, "business":businessid, "employee":employeeid */ }, function(err, users) {
         if (err) { return handleError(res, err); }
         return res.json(200, users);
     });
