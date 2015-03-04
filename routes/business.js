@@ -5,6 +5,8 @@ var ObjectID = require('mongodb').ObjectID;
 var sendgrid  = require('sendgrid')('robobetty', 'NoKcE0FGE4bd');
 var crypto = require('crypto');
 var baby = require('babyparse');
+var auth = require('../lib/auth');
+
 // var session = require('express-session');
 
 
@@ -109,7 +111,7 @@ for(var i = 0; i < number; i++){
         from: 'test@localhost',
         subject: 'Employee Signup',
         text: 'Hello ' + username + ',\n\n' + 'Please click on the following link, or paste this into your browser to complete sign-up the process: \n\n' +
-        'http://robobetty/register/?token=' + token 
+        'http://localhost:3000/employeeregister/?token=' + token 
     }, function (err, json){
         if (err) {
             return console.error(err);
@@ -146,10 +148,14 @@ router.post('/employeeregister',function (req,res){
     var db =req.db;
     var employee = db.get('csvEmployees');
 
-    employee.update({'token': req.query.token}, function (err,results){
+    console.log(req.query.token);
 
+    var password = auth.hashPassword(req.body.password);
 
-
+    employee.update({registrationToken: req.query.token},{ $unset: {registrationToken: 1},$set: {password: password} }, function (err,results){
+        if (err) { return res.sendStatus(500, err); }
+      
+        res.redirect('/config');
     });
 
 });
@@ -192,7 +198,7 @@ router.get('/api/employee/:eid/appointments/today', function (req, res) {
 
 
 function randomToken() {
-    return crypto.randomBytes(20).toString('hex');
+    return crypto.randomBytes(24).toString('hex');
 }
 
 // route middleware to make sure a user is logged in
