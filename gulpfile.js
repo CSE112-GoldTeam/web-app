@@ -15,7 +15,14 @@ var shell = require('gulp-shell');
 
 var exec = require('child_process').exec;
 function execute(command, callback){
-    exec(command, function(error, stdout, stderr){callback(stdout);});
+    exec(command, function(error, stdout, stderr){
+        //if function hasnt succeeded in 5 seconds, kill it
+        setTimeout(function(){
+            console.log('Please Authenticate with Heroku and Git before using this command.');
+           // child.kill();
+        }, 5000);
+        callback(stdout);
+    });
 };    
 
 gulp.task('nodemon', function (cb) {
@@ -110,78 +117,28 @@ gulp.task('mongorestore', function() {
 //               - must have git installed and be in application root directory
 //               - must be authenticated with git so that password does not have to be entered on push
 gulp.task('stage', function(){ 
-    if (argv.test == null){ 
-        execute('git symbolic-ref --short HEAD', function(br){
-            console.log('deploying current branch: ' + br);
-            return gulp.src('')
-                    .pipe(shell([
-                        'heroku git:remote -a robobetty-test1 -r test1',
-                        'git push -f test1 <%= determineBranch() %>'
-                    ], {
-                        templateData: {
-                            determineBranch: function() {
-                                var n_remote = br.trim() + ':master';
-                                return n_remote;
+    execute('git symbolic-ref --short HEAD', function(br){
+        console.log('deploying current branch: ' + br);
+        return gulp.src('')
+                .pipe(shell([
+                    'heroku git:remote -a robobetty-test<%= getArg()%> -r test<%= getArg() %>',
+                    'git push -f test<%= getArg() %> <%= determineBranch() %>'
+                ], {
+                    templateData: {
+                        determineBranch: function() {
+                            var n_remote = br.trim() + ':master';
+                            return n_remote;
+                        },
+                        getArg: function() {
+                            var n = argv.test;
+                            if (n == null) {
+                                n = "1";
                             }
+                            return n;
                         }
-                    }));
-        }); 
-    }
-
-    if (argv.test == 1){ 
-        execute('git symbolic-ref --short HEAD', function(br){
-            console.log('deploying current branch: ' + br);
-            return gulp.src('')
-                    .pipe(shell([
-                        'heroku git:remote -a robobetty-test1 -r test1',
-                        'git push -f test1 <%= determineBranch() %>'
-                    ], {
-                        templateData: {
-                            determineBranch: function() {
-                                var n_remote = br.trim() + ':master';
-                                return n_remote;
-                            }
-                        }
-                    }));
-        }); 
-    }
-
-    if (argv.test == 2){ 
-        execute('git symbolic-ref --short HEAD', function(br){
-            console.log('deploying current branch: ' + br);
-            return gulp.src('')
-                    .pipe(shell([
-                        'heroku git:remote -a robobetty-test2 -r test2',
-                        'git push -f test2 <%= determineBranch() %>'
-                    ], {
-                        templateData: {
-                            determineBranch: function() {
-                                var n_remote = br.trim() + ':master';
-                                return n_remote;
-                            }
-                        }
-                    }));
-        }); 
-    }
-
-
-    if (argv.test == 3){ 
-        execute('git symbolic-ref --short HEAD', function(br){
-            console.log('deploying current branch: ' + br);
-            return gulp.src('')
-                    .pipe(shell([
-                        'heroku git:remote -a robobetty-test3 -r test3',
-                        'git push -f test3 <%= determineBranch() %>'
-                    ], {
-                        templateData: {
-                            determineBranch: function() {
-                                var n_remote = br.trim() + ':master';
-                                return n_remote;
-                            }
-                        }
-                    }));
-        }); 
-    } 
+                    }
+                }));
+    }); 
 })
 
 gulp.task('default', ['browser-sync']);
