@@ -1,3 +1,11 @@
+$(function(){
+
+  getDate();
+  $(startTime);
+  $(table);
+  $(poll);
+
+});
 
 function dateToString(date) {
 	var monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June',
@@ -119,7 +127,8 @@ function table() {
 
     });//end of $get()
 }//end of table()
-
+  
+  
 function poll() {
     setTimeout(function(){
         table();

@@ -72,7 +72,7 @@ router.get('/viewform/:id', function (req, res, next) {
 	response.find({ appointment : req.params.id }, function(err, data) {
 	if (err) { return res.sendStatus(500, err); }
 		return res.render('business/viewform', {title: req.params.id, formData : data[0].answers });
-			});
+	});
 });
 
 /**
@@ -98,28 +98,11 @@ router.get('/api/formResponses/appointments/:id', function (req, res, next) {
 	var response = db.get('formResponses');
 	// query the collection
 	response.find({ appointments : req.params.id }, function(err, data) {
-	if (err) { return res.sendStatus(500, err); }
+        if (err) { return res.sendStatus(500, err); }
 		return res.json(200, data);
 	});
 });
 
-/**
- * GET company appointments
- * @param {Object} req 
- * @param {Object} res
- * @param {Object} next
- * @returns the appointments
- */
-router.get('/api/appointments', function (req, res, next) {
-     	// grab our db object from the request
-	var db = req.db;
-	var appt = db.get('appointments');
-	// query the collection
-	appt.find({ }, function(err, data) {
-	if (err) { return res.sendStatus(500, err); }
-		return res.json(200, data);
-	});
-});
 
 /**
  * PUT company appointments states
@@ -143,7 +126,6 @@ router.put('/api/appointments/:id/state', function (req, res, next) {
         }
 
         appt.findAndModify({_id:req.params.id }, myState, function(err, data) {
-            console.log("Success");
             if (err) { return res.sendStatus(500, err); }
             return res.json(200, data);
         });
