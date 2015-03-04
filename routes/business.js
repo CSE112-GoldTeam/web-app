@@ -70,8 +70,8 @@ router.get('/viewform/:id', function (req, res, next) {
 	var response = db.get('formResponses');
 	// query the collection
 	response.find({ appointment : req.params.id }, function(err, data) {
-	if (err) { return res.sendStatus(500, err); }
-		return res.render('business/viewform', {title: req.params.id, formData : data[0].answers });
+        if (err) { return res.sendStatus(500, err); }
+        return res.render('business/viewform', {title: req.params.id, formData : data[0].answers });
 	});
 });
 
@@ -112,7 +112,7 @@ router.get('/api/formResponses/appointments/:id', function (req, res, next) {
  * @returns the state of the appointment
  */
 router.put('/api/appointments/:id/state', function (req, res, next) {
-	console.log("Change State");
+	
 	 // grab our db object from the request
 	var db = req.db;
 	var appt = db.get('appointments');
