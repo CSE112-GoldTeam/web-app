@@ -8,10 +8,17 @@
 </head>
 <body>
 
-<h1><strong>Form Results</strong></h1>
-{{#formData}}
-    <li><strong>{{label}}:{{response}}</strong></li>
-{{/formData}}
+<h1 class="form-response-header">Form Results for {{ name }}</h1>
+
+<table>
+    {{#formData}}
+        <tr>
+            <td class="form-response-label">{{ label }}</td>
+            <td class="form-response">{{ response }}</td>
+        </tr>
+    {{/formData}}
+</table>
+
 
 </body>
 </html>
