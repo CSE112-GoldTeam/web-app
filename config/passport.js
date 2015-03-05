@@ -31,6 +31,8 @@ module.exports = function (passport) {
             var username = req.body.username;
             var phone = req.body.phone;
 
+            console.log("am i here");
+
 
             // Check if any field has been left blank
             if (companyName === '' || username === '' || email === ''
@@ -91,6 +93,33 @@ module.exports = function (passport) {
         }));
 
 
+    passport.use('local-signup-employee',new LocalStrategy({
+
+        passwordField: 'password',
+        passReqToCallback: true
+    },
+    function (req,password,done) {
+
+        console.log(req);
+
+        var db =req.db;
+        var employee = db.get('employees');
+
+        password = auth.hashPassword(password);
+
+        employee.update({
+            registrationToken: req.query.token},
+            { $unset: {registrationToken: 1},
+            $set: {password: password} }, 
+            function (err,user){
+            if (err) { 
+                 throw err; }
+            return done(null,user);
+   
+        });
+    }));
+
+
     // =========================================================================
     // LOCAL LOGIN =============================================================
     // =========================================================================
@@ -104,11 +133,11 @@ module.exports = function (passport) {
             passReqToCallback: true // allows us to pass back the entire request to the callback
         },
         function (req, email, password, done) { // callback with email and password from our form
-            auth.validateLogin(req.db, email, password, function (business) {
-                if (!business) {
+            auth.validateLogin(req.db, email, password, function (user) {
+                if (!user) {
                     done(null, false);
                 } else {
-                    done(null, business);
+                    done(null, user);
                 }
             });
         }));

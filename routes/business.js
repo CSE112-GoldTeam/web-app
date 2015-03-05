@@ -124,7 +124,7 @@ for(var i = 0; i < number; i++){
         from: 'test@localhost',
         subject: 'Employee Signup',
         text: 'Hello ' + username + ',\n\n' + 'Please click on the following link, or paste this into your browser to complete sign-up the process: \n\n' +
-        'http://robobetty-dev.herokuapp.com/employeeregister/?token=' + token 
+        'http://localhost:3000/employeeregister?token=' + token 
     }, function (err, json){
         if (err) {
             return console.error(err);
@@ -150,27 +150,15 @@ for(var i = 0; i < number; i++){
 
 
 
-router.get('/employeeregister',function(req,res){
+router.get('/employeeregister',function (req,res){
     res.render('business/registeremployees');
 });
 
 
-router.post('/employeeregister',function (req,res){
-
-    var db =req.db;
-    var employee = db.get('employees');
-
-    console.log(req.query.token);
-
-    var password = auth.hashPassword(req.body.password);
-
-    employee.update({registrationToken: req.query.token},{ $unset: {registrationToken: 1},$set: {password: password} }, function (err,results){
-        if (err) { return res.sendStatus(500, err); }
-      
-        res.redirect('/config');
-    });
-
-});
+router.post('/employeeregister', passport.authenticate('local-signup-employee',{
+    successRedirect : '/config', // redirect to the secure profile section
+    failureRedirect : '/' // redirect back to the signup page if there is an error
+}));
 
 
 router.post('/register', passport.authenticate('local-signup',{
