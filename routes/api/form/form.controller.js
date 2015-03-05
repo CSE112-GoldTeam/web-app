@@ -18,7 +18,6 @@ exports.show = function(req, res) {
     var db = req.db;
     var forms = db.get('forms');
 
-    // TODO: req.business needs to work first for the business parameter to work
     var business = forms.id(req.mobileToken.business);
 
     forms.find({ "_id" : req.params.id, "business" : business }, function (err, doc) {
