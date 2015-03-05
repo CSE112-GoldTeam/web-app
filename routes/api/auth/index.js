@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var auth = require('../lib/auth');
+var auth = require('../../../lib/auth');
 
 /**
  * Takes an HTTP Basic Auth String and returns the username and password parts of it.
@@ -63,7 +63,7 @@ router.post('/api/auth', function (req, res) {
 
             var mobileTokens = req.db.get('mobileTokens');
             mobileTokens.insert({
-                business: user._id,
+                business: result._id,
                 name: name
             }, function (err, result) {
                 if (err) {
