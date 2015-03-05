@@ -14,12 +14,13 @@ $(document).ready(function () {
 
         $activePage.slideUp(500, function () {
             $targetPage.slideDown(500);
+            $activePage.hide();
         });
     });
 
     //Changing BG picture
     $themeToolbar.find('.bg-image').click(function () {
         var bg = $(this).data('bg');
-        $('.customBG').css('background-image', ' url(images/bg/full/'+bg+')')
+        $('.customBG').css('background-image', ' url(images/bg/full/'+bg+')');
     });
 });
