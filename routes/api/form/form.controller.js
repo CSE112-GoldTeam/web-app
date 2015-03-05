@@ -19,9 +19,9 @@ exports.show = function(req, res) {
     var forms = db.get('forms');
 
     // TODO: req.business needs to work first for the business parameter to work
-    // var business = forms.id(req.business);
+    var business = forms.id(req.mobileToken.business);
 
-    forms.find({ "_id" : req.params.id }, function (err, doc) {
+    forms.find({ "_id" : req.params.id, "business" : business }, function (err, doc) {
         if(err) { return handleError(res, err); }
         if(!doc) { return res.sendStatus(404); }// res.send is deprecated
         return res.json(doc);
