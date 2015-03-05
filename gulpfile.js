@@ -49,7 +49,7 @@ gulp.task('vendor', function() {
     .on('error', gutil.log)
 });
 
-gulp.task('minify-css', function() {
+gulp.task('build', ['vendor'], function() {
   return gulp.src('./public/stylesheets/*.css')
     .pipe(minifyCSS({keepBreaks:false}))
     .pipe(rename('style.min.css'))
@@ -59,7 +59,7 @@ gulp.task('minify-css', function() {
 //// end of additional plugins
 
 
-gulp.task('nodemon', ['vendor', 'minify-css'], function (cb) {
+gulp.task('nodemon', function (cb) {
   var called = false;
   return nodemon({
 
