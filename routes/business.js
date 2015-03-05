@@ -35,6 +35,13 @@ router.get('/register', function (req, res) {
  * @param {Object} res
  */
 router.get('/', function (req, res) {
+    
+    req.session.destroy(function (err) {
+        if (err) {
+            console.error('Error destroying session:', err);
+        }
+    });
+
     res.render('business/landing');
 });
 
