@@ -14,18 +14,45 @@
 
 <body>
     <!--Holds the main tabs for the business-->
-    <nav class="navbar navbar-default">
-      <div class="navbar-header">
-            <a href="#" style="color:white">RoboBetty
-            <a href="#" style="color:white">Dashboard</a>
-            <a href="#" style="color:white">Employees</a>
-            <a href="#" style="color:white">Settings</a>
-            <a href="#" style="color:white">Company Name</a>
-
-      </div>
-
-    </nav>
-
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+          <div id="company-logo">RoboBetty</div>
+      </a>
+    </div>
+    <div class="navbar-padding-right">
+      <ul class="nav navbar-nav navbar-right navbar-padding">
+          <li class="active">
+              <a href="#">Dashboard</a>
+          </li>
+          <li>
+              <a href="#">Employees</a>
+          </li>
+          <li>
+              <a href="#">Settings</a>
+          </li>
+          <li>
+              <a href="#">Company Name</a>
+          </li>
+      </ul>
+    </div>
+    <div class="navbar-secondary navbar-tabs">
+      <ul>
+          <li>
+              <a href="#">Configurations</a>
+          </li>
+          <li>
+              <a href="#">Manage Forms</a>
+          </li>
+          <li class="active">
+              <a href="#">Upload Logo</a>
+          </li>
+          <li>
+              <a href="#">More Settings</a>
+          </li>
+      </ul>
+    </div>
+  </nav>
     <!-- Holds the settings tabs -->
     <nav class="navbar navbar-default" style="background-color:grey">
         <div class="navbar-header">
@@ -37,7 +64,7 @@
     </nav>
 
     <!-- Container to hold instructions & upload form-->
-    <div class="container">
+    <div class="container container-margin">
 
         <h1>Uploading a Logo</h1>
         <p style="color:grey">Upload your own logo to match your office.</p>
@@ -85,8 +112,8 @@
             </ul>
         </div>
     </footer>
-    
+
 </body>
 
- 
+
 </html>
