@@ -19,9 +19,7 @@ exports.show = function(req, res) {
     var forms = db.get('forms');
 
     // TODO: req.business needs to work first for the business parameter to work
-    //var business = forms.id(req.business);
-    //Use this to test form id 54ecb5a6fb4974129dc20634
-    //business = forms.id("54eca979f2a2d47937757617");
+    // var business = forms.id(req.business);
 
     forms.find({ "_id" : req.params.id }, function (err, doc) {
         if(err) { return handleError(res, err); }
