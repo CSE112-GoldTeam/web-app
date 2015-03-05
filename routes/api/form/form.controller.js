@@ -10,7 +10,6 @@
 'use strict';
 
 var _ = require('underscore');
-var ObjectID = require('mongodb').ObjectID;
 
 // Request a form
 exports.show = function(req, res) {
@@ -47,48 +46,57 @@ exports.createResponse = function(req, res) {
     // grab our db object from the request
     var db = req.db;
     var forms = db.get('forms');
+    try {
+      var businessId = req.mobileToken.business;
+    }
+    catch (e) {
+      return res.status(500).send('The mobileToken not set! ' + e);
+    }
 
-		//var businessId = "54eca953f2a2d47937757616";
+forms.find({business: forms.id(businessId)}, function (err, results)
+{
+    if (err) { return res.sendStatus(500, err);}
+    console.log("forms.find() return "+ JSON.stringify(results[0].fields));
 
-		var businessId = req.business;
-    businessId = "54eca953f2a2d47937757616";
+    var form = results[0];
 
-    console.log(req.body);
-		forms.find({business: ObjectID(businessId)}, function (err, results)
-		{
-			var form = results[0];
-			var valid = _.every(form.fields, function (field, index) {
-        console.log("Index: "+index);
-				var name = '_' + index;
-				return name in req.body && req.body[name].trim() !== '';
-			});
+      var formList = [];
+      _.each(form.fields, function(value, index) {
+         console.log("Value " + JSON.stringify(value));
+         formList.push(value.label);
+      });
 
-			if(!valid) {
-			} else {
-				var formResponses = db.get('formResponses');
-				var formResponse = {answers: []};
+      var responseList = [];
+      _.each(req.body.answers, function(value, index) {
+         console.log("Value " + JSON.stringify(value));
+         responseList.push(value.label);
+      });
 
-				_.each(form.fields, function (field, index) {
-					var name = '_' + index;
-					formResponse.answers.push({
-						label: field.label,
-						response: req.body[name]
-					});
-				});
+      var unionList =  _.union(_.difference(formList, responseList), _.difference(responseList, formList))
+      console.log(JSON.stringify(unionList));
+    if(unionList.length > 0) {
+        return res.status(400).send("Malformed Requests, fields from formResponse is different from the actual form.");
+    } else {
+        var formResponses = db.get('formResponses');
+        var formResponse = {answers: []};
 
-				formResponses.insert(formResponse, function(err, data) {
-					if (err) { return res.sendStatus(500, err);}
-					return res.json(200, data);
-				});
-			}
-		});
+        _.each(form.fields, function (field, index) {
+            var name = '_' + index;
 
-		/*
-		forms.insert(req.body, function (err, doc) {
-        if (err) { return handleError(res, err); }
-        return res.json(201,doc);
+            formResponse.answers.push({
+                label: field.label,
+                response: req.body.answers[index].response
+            });
+        });
+            formResponses.insert(formResponse, function(err, data) {
+                if (err) { return res.sendStatus(500, err);}
+                return res.json(200, data);
+            });
+
+        }
     });
-		*/
+
+
 };
 
 function handleError(res, err) {
