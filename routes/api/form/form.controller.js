@@ -13,17 +13,18 @@ var _ = require('underscore');
 
 // Request a form
 exports.show = function(req, res) {
-
     // grab our db object from the request
-      var db = req.db;
-      var collection = db.get('forms');
 
-      // query to create entry in collection
-      collection.findById(req.params.id, function (err, doc) {
-          if(err) { return handleError(res, err); }
-          if(!doc) { return res.sendStatus(404); }// res.send is deprecated
-          return res.json(doc);
-      });
+    var db = req.db;
+    var forms = db.get('forms');
+
+    var business = forms.id(req.mobileToken.business);
+
+    forms.find({ "_id" : req.params.id, "business" : business }, function (err, doc) {
+        if(err) { return handleError(res, err); }
+        if(!doc) { return res.sendStatus(404); }// res.send is deprecated
+        return res.json(doc);
+    });
 };
 
 // Create a form
@@ -31,13 +32,13 @@ exports.createForm = function(req, res) {
 
     // grab our db object from the request
     var db = req.db;
-    var collection = db.get('forms');
+    var forms = db.get('forms');
 
     // query to create entry in collection
-    collection.insert(req.body, function (err, doc) {
+    forms.insert(req.body, function (err, doc) {
         if (err) { return handleError(res, err); }
         return res.json(201,doc);
-    });
+    })
 };
 
 // Create a formResponse
@@ -45,10 +46,10 @@ exports.createResponse = function(req, res) {
 
     // grab our db object from the request
     var db = req.db;
-    var collection = db.get('forms');
+    var forms = db.get('forms');
 
     // query to create entry in collection
-    collection.insert(req.body, function (err, doc) {
+    forms.insert(req.body, function (err, doc) {
         if (err) { return handleError(res, err); }
         return res.json(201,doc);
     });

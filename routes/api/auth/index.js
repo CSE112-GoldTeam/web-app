@@ -63,7 +63,7 @@ router.post('/api/auth', function (req, res) {
 
             var mobileTokens = req.db.get('mobileTokens');
             mobileTokens.insert({
-                business: user._id,
+                business: result._id,
                 name: name
             }, function (err, result) {
                 if (err) {

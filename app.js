@@ -57,7 +57,29 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(multer());
+
+
+app.use(multer({
+  dest: __dirname + '/static/images/',
+  onFileUploadStart: function (file) {
+    console.log(file.mimetype);
+    if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg' && file.mimetype !== 'image/jpeg') {
+      return false;
+    } else {
+      console.log(file.fieldname + ' is starting ...');
+    }
+  },
+  onFileUploadData: function (file, data) {
+    console.log(data.length + ' of ' + file.fieldname + ' arrived');
+  },
+  onFileUploadComplete: function (file) {
+    console.log(file.fieldname + ' uploaded to  ' + file.path);
+  }
+}));
+
+
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -96,6 +118,7 @@ app.use('/', signature);
 app.use('/', mobileAuth);
 app.use('/api/m/form', mobileForm);
 app.use('/api/m/appointment', mobileAppointment);
+app.use('/api/m/example', require('./routes/api/example'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

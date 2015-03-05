@@ -7,15 +7,18 @@ var router = express.Router();
 var auth = require('../../../lib/auth');
 
 // Confirm Identity
-// /api/appointment?fname=John&lname="Doe"&dob="05/13/1965"
-router.get('/', auth.isAuthenticated, controller.confirm);
+// /api/m/appointment?fname=John&lname="Doe"&dob="05/13/1965"
+router.get('/', controller.confirm);
 
 // Retrieve Appointment Information
 // /api/appointment/:id/
 router.get('/:id', auth.isAuthenticated, controller.retrieve);
 
-// Sign Disclosure Agreements
-// /api/appointments/:id
-router.post('/:id', auth.isAuthenticated, controller.sign);
+// Transition states
+router.put('/:id/state/next', controller.nextState);
+
+// Setting states
+router.put('/:id/state', controller.updateState);
+
 
 module.exports = router;
