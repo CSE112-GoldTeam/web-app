@@ -1,33 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{{ title }}</title>
+    <head>
+        <title>{{ title }}</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-</head>
-<body>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel='stylesheet' href='/stylesheets/style.css'/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    </head>
+    <body class = "customBG">
+        <!-- this nav bar is consistent with PK's navbar 
+        <header role="banner" class="navbar navbar-fixed-top navbar-custom">
+          <div class="container">
+            <div class="navbar-inverse side-collapse in">
+                <ul class="nav navbar-nav">
+                    <li><a class="navbar-brand" href="#">Company Logo</a></li>
+                </ul>
+            </div>
+          </div>
+        </header> -->
 
-<!-- this nav bar is consistent with PK's navbar -->
-<header role="banner" class="navbar navbar-fixed-top navbar-custom">
-  <div class="container">
-    <div class="navbar-inverse side-collapse in">
-        <ul class="nav navbar-nav">
-            <li><a class="navbar-brand" href="#">Company Logo</a></li>
-        </ul>
-    </div>
-  </div>
-</header>
-
-<div class="container containter-checkin">
-    <h1 class ="header">Welcome to Company!</h1>
-    <img class="checkinphoto" src="http://placehold.it/500x200" alt="...">
-    <a type="button" class="btn custom-button checkinbutton" href="nocode"
-            style="display:block;margin-left:auto;margin-right:auto">Check In
-    </a>
-</div>
-</body>
+        <div class="container container-checkin">
+            <h1 class ="header">Welcome to Northwood Dental!</h1>
+            <img class="checkinphoto" src="/images/dentalLogo.jpg" alt="...">
+            <a type="button" class="btn custom-button checkinbutton" href="nocode"
+                    style="display:block;margin-left:auto;margin-right:auto">Check In
+            </a>
+        </div>
+    </body>
 </html>
 

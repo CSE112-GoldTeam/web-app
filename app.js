@@ -36,11 +36,15 @@ passport.deserializeUser(function(id, done) {
 
 require('./config/passport')(passport); // pass passport for configuration
 
+// Load Routes for Webapp
 var business = require('./routes/business')(passport);
 var checkin = require('./routes/checkin');
 var signature = require('./routes/signature');
-var mobile = require('./routes/mobile');
 
+// Load Routes for Mobile
+var mobileAuth = require('./routes/api/auth');
+var mobileForm = require('./routes/api/form');
+var mobileAppointment = require('./routes/api/appointment');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -53,7 +57,29 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(multer());
+
+
+app.use(multer({
+  dest: __dirname + '/static/images/',
+  onFileUploadStart: function (file) {
+    console.log(file.mimetype);
+    if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg' && file.mimetype !== 'image/jpeg') {
+      return false;
+    } else {
+      console.log(file.fieldname + ' is starting ...');
+    }
+  },
+  onFileUploadData: function (file, data) {
+    console.log(data.length + ' of ' + file.fieldname + ' arrived');
+  },
+  onFileUploadComplete: function (file) {
+    console.log(file.fieldname + ' uploaded to  ' + file.path);
+  }
+}));
+
+
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -82,12 +108,17 @@ app.use(function(req, res, next) {
     next();
 });
 
+
+// Set Webapp Routes
 app.use('/', business);
 app.use('/', checkin);
 app.use('/', signature);
-app.use('/', mobile);
 
-
+// Set Mobile Routes
+app.use('/', mobileAuth);
+app.use('/api/m/form', mobileForm);
+app.use('/api/m/appointment', mobileAppointment);
+app.use('/api/m/example', require('./routes/api/example'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -121,4 +152,4 @@ app.use(function (err, req, res) {
 });
 
 
-module.exports = app;
+exports = module.exports = app;
