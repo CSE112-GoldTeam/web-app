@@ -98,7 +98,15 @@
     <div id="toolbar-content-container" class="hidden-page">
         <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-main">Main Menu</button>
 
-        logo
+        <p>
+            <label for="content-container-color">Content Container BG Color</label>
+            <input type="text" id="content-container-color"/>
+        </p>
+
+        <p>
+            <label for="content-container-font-color">Content Container Font Color</label>
+            <input type="text" id="content-container-font-color"/>
+        </p>
     </div>
 </div>
 
