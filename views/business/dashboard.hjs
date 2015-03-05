@@ -15,7 +15,7 @@
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
       <a class="navbar-brand" href="/">
-          <div id="company-logo">RoboBetty</div>
+          <div id="company-logo">iReceptionist</div>
       </a>
     </div>
     <div class="navbar-padding-right">
@@ -35,18 +35,19 @@
       </ul>
     </div>
   </nav>
-  <div class="container container-margin-secondary">
+  <div class="container container-margin-no-secondary">
     <div class="panel panel-default text-center">
       <h4><strong>Hey there! </strong>Your patient, <strong>Test, </strong>just checked in and is now waiting in the lobby       <button class="btn btn-info">Click when the patient has been roomed</button></h4>
     </div>
   </div>
 <div class="container">
-      <h1><strong>Hello, Dr. Jane!</strong></h1>
-      <h1>Today</h1>
-      <h1 id="currentDate"></h1>
-      <body>
-
-      <div id="txt"></div>
+  <h1><strong>Hello, Dr. Jane!</strong></h1>
+  <div class="dashboardTopInfo text-center">
+      
+      <h1 class="text-center">Today</h1>
+      <h1 class="text-center" id="currentDate" ></h1>
+      <div id="txt" class="text-center"></div>
+    </div>
       <p></p>
       <div class="row">
       <table class="table table-striped">

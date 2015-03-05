@@ -386,6 +386,11 @@ a:hover {
   margin-top: 120px;
 }
 
+/* For pages without the secondary nav bar */
+.container-margin-no-secondary {
+  margin-top: 80px;
+}
+
 .navbar-secondary {
   height: 50px;
   margin-top: 50px;
@@ -411,6 +416,22 @@ a:hover {
 .navbar-default .navbar-tabs ul > .active > a, .navbar-default .navbar-tabs ul > .active > a:hover, .navbar-default .navbar-tabs ul > .active > a:focus {
   color: #ffffff;
   background-color: #555765;
+}
+
+/**********************************************/
+
+/*************** Dashboard Page ***************/
+
+#currentDate {
+  text-align: center;
+}
+
+/**********************************************/
+
+/*************** Upload Logo Page ***************/
+
+.uploadFormCenterHack {
+  margin-left: 500px;
 }
 
 /**********************************************/
