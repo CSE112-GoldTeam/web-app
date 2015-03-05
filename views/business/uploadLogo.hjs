@@ -14,63 +14,45 @@
 
 <body>
     <!--Holds the main tabs for the business-->
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">
-          <div id="company-logo">RoboBetty</div>
-      </a>
-    </div>
-    <div class="navbar-padding-right">
-      <ul class="nav navbar-nav navbar-right navbar-padding">
-          <li class="active">
-              <a href="#">Dashboard</a>
-          </li>
-          <li>
-              <a href="#">Employees</a>
-          </li>
-          <li>
-              <a href="#">Settings</a>
-          </li>
-          <li>
-              <a href="#">Company Name</a>
-          </li>
-      </ul>
-    </div>
-    <div class="navbar-secondary navbar-tabs">
-      <ul>
-          <li>
-              <a href="#">Configurations</a>
-          </li>
-          <li>
-              <a href="#">Manage Forms</a>
-          </li>
-          <li class="active">
-              <a href="#">Upload Logo</a>
-          </li>
-          <li>
-              <a href="#">More Settings</a>
-          </li>
-      </ul>
-    </div>
-  </nav>
-    <!-- Holds the settings tabs -->
-    <nav class="navbar navbar-default" style="background-color:grey">
+    <nav class="navbar navbar-default navbar-static-top">
         <div class="navbar-header">
-            <a href="#" style="color:white">Configurations</a>
-            <a href="#" style="color:white">Manage Forms</a>
-            <a href="#" style="color:white">UploadLogo</a>
-            <a href="#" style="color:white">More Settings</a>
+            <a class="navbar-brand" href="/">
+                <div id="company-logo">iReceptionist</div>
+            </a>
+        </div>
+        <div class="navbar-padding-right">
+            <ul class="nav navbar-nav navbar-right navbar-padding">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Employees</a></li>
+                <li class="active">
+                    <a href="#">Settings</a>
+                </li>
+                <li><a href="#">Company Name</a></li>
+            </ul>
+        </div>
+        <!--Secondary navbar for the Settings tab-->
+        <div class="navbar-secondary navbar-tabs">
+            <ul>
+                <li><a href="#">Configurations</a></li>
+                <li><a href="#">Manage Forms</a></li>
+                <li class="active">
+                    <a href="#">Upload Logo</a>
+                </li>
+                <li><a href="#">More Settings</a></li>
+            </ul>
         </div>
     </nav>
 
     <!-- Container to hold instructions & upload form-->
-    <div class="container container-margin">
+    <div class="container">
 
         <h1>Uploading a Logo</h1>
         <p style="color:grey">Upload your own logo to match your office.</p>
         <br><br><br><br>
-        <h2>Click the upload button to browse for a picture</h2>
+        <p style="margin-bottom:50px"> </p>
+        <h2 style = "text-align:center;">Click the upload button to browse for a picture</h2>
         <br>
+
 
         {{#error}}
             <div class="alert alert-danger" role="alert">
@@ -88,13 +70,12 @@
              enctype   =  "multipart/form-data"
              action    =  "/api/photo"
              method    =  "post"
+             style="text-align:center" 
         >
-
-            <input type="file"  name="userLogo" />
+            <input type="file" name="userLogo" style="text-align:center" />
             <br><br>
-            <input type="hidden" value="54eca953f2a2d47937757616" name="business"/>
-            <input type="submit" value="Upload Image" name="Upload Button"/>
-
+            <input type="hidden" value="54eca953f2a2d47937757616" name="business" style="text-align:center"/>
+            <input class ="btn custom-button" style = "width:120px" type="submit" value="Upload Image" name="Upload Button"/>
         </form>
 
     </div>
@@ -112,8 +93,8 @@
             </ul>
         </div>
     </footer>
-
+    
 </body>
 
-
+ 
 </html>
