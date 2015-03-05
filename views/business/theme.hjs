@@ -58,13 +58,15 @@
         <h3>What would you like to change?</h3>
 
         <div class="btn-group-vertical" role="group" aria-label="..." style="margin: 0 auto; width:155px; display: block;">
-            <button type="button" class="btn btn-default change-toolbar-page" id="btn-change-bg-img" data-to="toolbar-bg-img">Background Image</button>
-            <button type="button" class="btn btn-default change-toolbar-page" id="btn-change-buttons" data-to="toolbar-buttons">Buttons</button>
-            <button type="button" class="btn btn-default change-toolbar-page" id="btn-change-logo" data-to="toolbar-logo">Logo</button>
+            <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-bg-img">Background Image</button>
+            <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-buttons">Buttons</button>
+            <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-content-container">Content Container</button>
         </div>
     </div>
 
     <div id="toolbar-bg-img" class="hidden-page">
+        <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-main">Main Menu</button>
+
         <h4>Choose a BG image:</h4>
         <img src="images/bg/thumb/bg1.jpg" data-bg="bg1.jpg" class="bg-image" />
         <img src="images/bg/thumb/bg2.jpg" data-bg="bg2.jpg" class="bg-image" />
@@ -80,6 +82,8 @@
     </div>
 
     <div id="toolbar-buttons" class="hidden-page">
+        <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-main">Main Menu</button>
+
         <p>
             <label for="button-bg-color">Button BG Color</label>
             <input type="text" id="button-bg-color"/>
@@ -91,7 +95,9 @@
         </p>
     </div>
 
-    <div id="toolbar-logo" class="hidden-page">
+    <div id="toolbar-content-container" class="hidden-page">
+        <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-main">Main Menu</button>
+
         logo
     </div>
 </div>
