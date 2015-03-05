@@ -14,7 +14,7 @@ var _ = require('underscore');
 // Request a form
 exports.show = function(req, res) {
 
-    // grab our db object from the request
+      // grab our db object from the request
       var db = req.db;
       var forms = db.get('forms');
 
