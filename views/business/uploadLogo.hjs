@@ -22,7 +22,7 @@
         </div>
         <div class="navbar-padding-right">
             <ul class="nav navbar-nav navbar-right navbar-padding">
-                <li><a href="#">Dashboard</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
                 <li><a href="#">Employees</a></li>
                 <li class="active">
                     <a href="#">Settings</a>
@@ -36,7 +36,7 @@
                 <li><a href="#">Configurations</a></li>
                 <li><a href="#">Manage Forms</a></li>
                 <li class="active">
-                    <a href="#">Upload Logo</a>
+                    <a href="/uploadLogo">Upload Logo</a>
                 </li>
                 <li><a href="#">More Settings</a></li>
             </ul>
@@ -48,9 +48,8 @@
 
         <h1>Uploading a Logo</h1>
         <p style="color:grey">Upload your own logo to match your office.</p>
-        <br><br><br><br>
-        <p style="margin-bottom:50px"> </p>
-        <h2 style = "text-align:center;">Click the upload button to browse for a picture</h2>
+        <br><br><br>
+        <h2 class = "text-center">Click the upload button to browse for a picture</h2>
         <br>
 
 
@@ -70,11 +69,11 @@
              enctype   =  "multipart/form-data"
              action    =  "/api/photo"
              method    =  "post"
-             style="text-align:center" 
+             class="uploadFormCenterHack" 
         >
-            <input type="file" name="userLogo" style="text-align:center" />
+            <input type="file" name="userLogo" class="text-center" />
             <br><br>
-            <input type="hidden" value="54eca953f2a2d47937757616" name="business" style="text-align:center"/>
+            <input type="hidden" value="54eca953f2a2d47937757616" name="business" class="text-center"/>
             <input class ="btn custom-button" style = "width:120px" type="submit" value="Upload Image" name="Upload Button"/>
         </form>
 
