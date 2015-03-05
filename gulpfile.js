@@ -16,7 +16,7 @@ var shell = require('gulp-shell');
 var exec = require('child_process').exec;
 function execute(command, callback){
     exec(command, function(error, stdout, stderr){callback(stdout);});
-};    
+};
 
 gulp.task('nodemon', function (cb) {
   var called = false;
@@ -26,7 +26,7 @@ gulp.task('nodemon', function (cb) {
     script: 'bin/www',
 
     // watch core server file(s) that require server restart on change
-    watch: ['./'],
+    watch: ['./routes/'],
 
     ext: 'html js',
     env: { 'NODE_ENV': 'development' }
@@ -70,7 +70,7 @@ gulp.task('browser-sync', ['nodemon', 'mongostart'], function () {
   browserSync.init({
 
     // watch the following files; changes will be injected (css & images) or cause browser to refresh
-    files: ['public/**/*.*', 'views/**/*.*'],
+    files: ['public/**/*.*', 'views/**/*.*', 'public/javascripts/*.js'],
 
     // informs browser-sync to proxy our expressjs app which would run at the following location
     proxy: 'http://localhost:3000',
@@ -126,8 +126,8 @@ gulp.task('test', function (done) {
 // example cmd
 // gulp stage                                  "pushes to default stage test1"
 // gulp stage --test [stage number]            "push to a specific stage test 1 - 3"
-gulp.task('stage',['test'], function(){ 
-    if (argv.test == null){ 
+gulp.task('stage',['test'], function(){
+    if (argv.test == null){
         execute('git symbolic-ref --short HEAD', function(br){
             console.log('deploying current branch: ' + br);
             return gulp.src('')
@@ -142,10 +142,10 @@ gulp.task('stage',['test'], function(){
                             }
                         }
                     }));
-        }); 
+        });
     }
 
-    if (argv.test == 1){ 
+    if (argv.test == 1){
         execute('git symbolic-ref --short HEAD', function(br){
             console.log('deploying current branch: ' + br);
             return gulp.src('')
@@ -160,10 +160,10 @@ gulp.task('stage',['test'], function(){
                             }
                         }
                     }));
-        }); 
+        });
     }
 
-    if (argv.test == 2){ 
+    if (argv.test == 2){
         execute('git symbolic-ref --short HEAD', function(br){
             console.log('deploying current branch: ' + br);
             return gulp.src('')
@@ -178,11 +178,11 @@ gulp.task('stage',['test'], function(){
                             }
                         }
                     }));
-        }); 
+        });
     }
 
 
-    if (argv.test == 3){ 
+    if (argv.test == 3){
         execute('git symbolic-ref --short HEAD', function(br){
             console.log('deploying current branch: ' + br);
             return gulp.src('')
@@ -197,8 +197,8 @@ gulp.task('stage',['test'], function(){
                             }
                         }
                     }));
-        }); 
-    } 
+        });
+    }
 })
 
 // check pages on dev
