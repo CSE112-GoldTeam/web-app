@@ -9,13 +9,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body class="customBG">
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <!-- <nav class="navbar navbar-default navbar-fixed-top">
           <div class="navbar-header">
             <a class="navbar-brand" href="/">
                 <div id="company-logo">Company Logo</div>
             </a>
           </div>
-    </nav>
+    </nav> -->
 
     <div class="container container-margin">
         <div class="row innerInfo">
