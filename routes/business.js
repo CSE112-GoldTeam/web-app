@@ -69,10 +69,23 @@ router.get('/viewform/:id', function (req, res, next) {
      	// grab our db object from the request
 	var db = req.db;
 	var response = db.get('formResponses');
+    var appointments = db.get('appointments');
 	// query the collection
-	response.find({ appointment : req.params.id }, function(err, data) {
-        if (err) { return res.sendStatus(500, err); }
-        return res.render('business/viewform', {title: req.params.id, formData : data[0].answers });
+	response.findOne({ appointment : req.params.id }, function(err, formResponse) {
+        if (err) {
+            return res.sendStatus(500, err);
+        }
+        appointments.findById(req.params.id, function (err, appt) {
+            if (err) {
+                return res.sendStatus(500, err);
+            }
+
+            return res.render('business/viewform', {
+                title: 'Form for ' + appt.fname + ' ' + appt.lname,
+                name: appt.fname + ' ' + appt.lname,
+                formData: formResponse.answers
+            });
+        });
 	});
 });
 
@@ -160,11 +173,11 @@ router.post('/api/photo',function(req,res){
         businesses.update(
         {
             _id:businessID
-        },{ 
+        },{
             $set: {
                 logo: '/static/images/'+req.files.userLogo.name
             }
-        },{ 
+        },{
             upsert: true
         }, function (err){
 
@@ -178,14 +191,14 @@ router.post('/api/photo',function(req,res){
             });
 
         });
-        
+
     }
     else{
         res.render('business/uploadLogo',{
             error:'Please select a valid image(png,jpg) file to upload.'
         });
     }
-   
+
 });
 
 
@@ -364,6 +377,10 @@ router.get('/registerDevice', function (req,res) {
 //Account Settings
 router.get('/accountSettings', function (req, res) {
 		res.render('business/accountsettings', {title: 'Express'});
+});
+
+router.get('/theming', function (req, res) {
+    res.render('business/theme');
 });
 
  return router;

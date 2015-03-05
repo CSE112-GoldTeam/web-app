@@ -9,7 +9,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     </head>
     <body class = "customBG">
-        <!-- this nav bar is consistent with PK's navbar -->
+        <!-- this nav bar is consistent with PK's navbar 
         <header role="banner" class="navbar navbar-fixed-top navbar-custom">
           <div class="container">
             <div class="navbar-inverse side-collapse in">
@@ -18,10 +18,10 @@
                 </ul>
             </div>
           </div>
-        </header>
+        </header> -->
 
         <div class="container container-checkin">
-            <h1 class ="header">Welcome to Company!</h1>
+            <h1 class ="header">Welcome to Northwood Dental!</h1>
             <img class="checkinphoto" src="/images/dentalLogo.jpg" alt="...">
             <a type="button" class="btn custom-button checkinbutton" href="nocode"
                     style="display:block;margin-left:auto;margin-right:auto">Check In
