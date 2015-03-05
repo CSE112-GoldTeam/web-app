@@ -53,7 +53,7 @@ body {
 .customBG {
   width: 100%;
   height: auto;
-   background: url(/images/background.jpg) no-repeat center center fixed;
+   background: url(/images/bg/full/bg10.jpg) no-repeat center center fixed;
   background-size: cover;
   z-index: -10;
 
