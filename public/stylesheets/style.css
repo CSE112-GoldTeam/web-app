@@ -269,15 +269,15 @@ body {
 }
 
 a:link {
-  color: #0099FF;
+  color: #999999;
 }
 
 a:visited {
-  color: #0099FF;
+  color: #999999;
 }
 
 a:hover {
-  color: #004C80;
+  color: #ffffff;
 }
 
 /***********************************************/
@@ -330,7 +330,7 @@ a:hover {
   color:#333333;
   border-width: 1px solid #999;
   border-color: #666666;
-  border-collapse: collapse;  
+  border-collapse: collapse;
   text-align: center;
 }
 
@@ -339,7 +339,7 @@ a:hover {
   color:#333333;
   border-width: 1px solid #999;
   border-color: #666666;
-  border-collapse: collapse;  
+  border-collapse: collapse;
   text-align: center;
 }
 
@@ -372,3 +372,38 @@ a:hover {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+
+/************* Nav Bar Secondary *************/
+
+.navbar-padding {
+  padding-right: 100px;
+}
+
+.container-margin-secondary {
+  margin-top: 120px;
+}
+
+.navbar-secondary {
+  height: 50px;
+  margin-top: 50px;
+  padding-left: 100px;
+  background-color: #555765;}
+
+.navbar-tabs ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  padding-top: 12px;
+}
+
+.navbar-tabs ul li {
+  display: inline;
+}
+
+.navbar-tabs ul li a {
+  text-decoration: none;
+  padding-left: 60px;
+}
+
+/**********************************************/
