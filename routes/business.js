@@ -379,5 +379,9 @@ router.get('/accountSettings', function (req, res) {
 		res.render('business/accountsettings', {title: 'Express'});
 });
 
+router.get('/theming', function (req, res) {
+    res.render('business/theme');
+});
+
  return router;
 };
