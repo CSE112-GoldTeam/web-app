@@ -434,4 +434,20 @@ a:hover {
   margin-left: 500px;
 }
 
-/**********************************************/
+/**********************************************/}
+
+/**** Styling for viewform page ***/
+.form-response-label {
+    text-align: right;
+    font-weight: bold;
+    max-width: 150px;
+}
+
+.form-response {
+    padding-left: 10px;
+    max-width: 450px;
+}
+
+.form-response-header {
+    max-width: 600px;
+}
