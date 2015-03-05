@@ -24,7 +24,7 @@ function getDate(){
 	var datetime= '';
 	datetime += dateToString(currentdate );
 
-	
+
 	var $header = $('<h1/>');
 	 $header.append(datetime);
 	$('#currentDate').replaceWith($header);
@@ -76,14 +76,15 @@ function table() {
               if(pmHours === 0) {
                  pmHours = 12;
               }
-               
+
               var hoursPM = ('0'+pmHours).slice(-2); //returns 0-
               var minutesPM = ('0'+appDate.getMinutes()).slice(-2); //returns 0-59
               appTime = hoursPM+':'+minutesPM + ' PM';
             }
             if (data[i].state === 'checkedIn' || data[i].state === 'roomed' || data[i].state === 'done') {
 
-                var $form = $('<a href="/viewform/'+data[i]._id+'">View Forms</a>');
+                var url = '/viewform/' + data[i]._id;
+                var $form = $('<a href="'+url+'" onclick="window.open(\''+url+'\', \'newwindow\', \'width=600, height=400\'); return false;" >View Forms</a>');
 
                 if (data[i].state === 'checkedIn'){
                     var $check = $('<input type="checkbox">').data('appid',data[i]._id);
@@ -98,7 +99,7 @@ function table() {
 
                      cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$check,$img];
                 }
-                
+
                 else if(data[i].state === 'roomed') {
                     $btn = $('<button class="btn btn-primary"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></button>');
                     var x = data[i]._id;
@@ -126,7 +127,7 @@ function table() {
 
     });//end of $get()
 }//end of table()
-  
+
 
 function poll() {
     setTimeout(function(){

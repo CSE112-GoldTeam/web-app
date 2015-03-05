@@ -330,7 +330,7 @@ a:hover {
   color:#333333;
   border-width: 1px solid #999;
   border-color: #666666;
-  border-collapse: collapse;  
+  border-collapse: collapse;
   text-align: center;
 }
 
@@ -339,7 +339,7 @@ a:hover {
   color:#333333;
   border-width: 1px solid #999;
   border-color: #666666;
-  border-collapse: collapse;  
+  border-collapse: collapse;
   text-align: center;
 }
 
@@ -371,4 +371,20 @@ a:hover {
 #sigImg {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+/**** Styling for viewform page ***/
+.form-response-label {
+    text-align: right;
+    font-weight: bold;
+    max-width: 150px;
+}
+
+.form-response {
+    padding-left: 10px;
+    max-width: 450px;
+}
+
+.form-response-header {
+    max-width: 600px;
 }
