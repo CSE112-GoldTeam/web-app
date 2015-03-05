@@ -35,14 +35,14 @@
             <div id="intro" class="col-xs-7">
                 <h3 class="bold text-center">The old rules of waiting are over.</h3>
                 <p class="text-center">Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor. Cum Sociees natoque panatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, null luctus pharetra vulputate, felix tellus mellis orci, sed rhoncus sapien nunc eget odio.</p>
-                <div class="form-group">
+                <form class="form-group" action="" method="post">
                     <div class="col-xs-9">
-                        <input type="company" class="small form-control" id="inputCompany" placeholder="Step 1: Enter company name">
+                        <input type="text" class="small form-control" id="companyName" name="companyName" value="{{companyName}}" method="post" placeholder="Step 1: Enter company name">
                     </div>
                     <div class="col-xs-1 text-small">
-                        <a type="submit" class="btn custom-button" href="/register">Submit</a>
+                        <button type="submit" class="btn custom-button">Submit</button>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="col-xs-4">
                 <img id="intro-image" src="http://placehold.it/270x370"/>

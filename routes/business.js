@@ -20,8 +20,14 @@ router.use(bodyParser.urlencoded({ extended: true })); // for parsing applicatio
  * @param {Object} res
  */
 router.get('/register', function (req, res) {
-    res.render('business/register');
+
+    if (!req.session.companyName) {
+        res.render('business/register');
+    } else {
+        res.render('business/register', {title: 'Express', companyName: req.session.companyName});
+    }
 });
+
 
 /**
  * GET company landing page
@@ -29,8 +35,30 @@ router.get('/register', function (req, res) {
  * @param {Object} res
  */
 router.get('/', function (req, res) {
-    res.render('business/landing', {title: 'Landing Page'});
+    res.render('business/landing');
 });
+
+
+router.post('/', function (req, res) {
+
+    var companyName = req.body.companyName;
+
+    if (companyName === '') {
+        res.redirect('/register');
+    } else {
+        req.session.companyName = companyName;
+
+        req.session.save(function (err) {
+            if (err) {
+                console.error('Error saving session', err);
+            }
+        });
+
+        res.redirect('/register');
+    }
+
+});
+
 
 /**
  * GET company login
