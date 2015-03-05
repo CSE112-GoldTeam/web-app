@@ -12,33 +12,43 @@
 </head>
 <body>
   <!--Holds the main tabs for the business-->
-    <nav class="navbar navbar-default">
-      <div class="navbar-header">
-            <text style="color:white">RoboBetty</text>
-            <a href="#" style="color:white">Dashboard</a>
-            <a href="#" style="color:white">Employees</a>
-            <a href="#" style="color:white">Settings</a>
-            <text style="color:white">Company Name</text>
-
-      </div>
-
-    </nav>
-
-  <div class="container" style ="vertical-align: top;">
-    <div class="panel panel-default">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+          <div id="company-logo">RoboBetty</div>
+      </a>
+    </div>
+    <div class="navbar-padding-right">
+      <ul class="nav navbar-nav navbar-right navbar-padding">
+          <li class="active">
+              <a href="#">Dashboard</a>
+          </li>
+          <li>
+              <a href="#">Employees</a>
+          </li>
+          <li>
+              <a href="#">Settings</a>
+          </li>
+          <li>
+              <a href="#">Company Name</a>
+          </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container container-margin-secondary">
+    <div class="panel panel-default text-center">
       <h4><strong>Hey there! </strong>Your patient, <strong>Test, </strong>just checked in and is now waiting in the lobby       <button class="btn btn-info">Click when the patient has been roomed</button></h4>
     </div>
   </div>
-  <h1 style ="vertical-align: top;text-align: left;"><strong>Hello, Dr. Jane!</strong></h1>
-  <br>
 <div class="container">
+      <h1><strong>Hello, Dr. Jane!</strong></h1>
       <h1>Today</h1>
       <h1 id="currentDate"></h1>
       <body>
 
       <div id="txt"></div>
-      <p></p>                                                                                      
-      <div class="row">          
+      <p></p>
+      <div class="row">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -61,16 +71,16 @@
             <td></td>
             <td></td>
             <td></td>
-            
+
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <footer class="footer navbar-fixed-bottom">
+  <footer class="footer">
         <div class="container">
             <ul class="list-inline footer-links text-center">
-                
+
                 <li><a href="#">Privacy</a></li>
                 <li><a href="#">Terms</a></li>
                 <li><a href="#">Support</a></li>
