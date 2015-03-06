@@ -13,7 +13,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-header">
         <a class="navbar-brand" href="/">
-            <div id="company-logo">RoboBetty</div>
+            <div id="company-logo">iReceptionist</div>
         </a>
       </div>
       <div class="navbar-padding-right">
@@ -48,17 +48,19 @@
                     <input class="btn custom-button" name="submit" type="submit" href="/addemployees" value="Upload">
                 </form>
             
-                <div style="position:relative;top:50px" align = "center">
+                <div style="position:relative;" align = "center">
 
-                    <h3 style="position:relative;top:50px;right:135px">Employees already registered</h2>
+                    <h3 style="position:relative;top:50px;">Employees already registered</h2>
 
                         <div style="position:relative;top:50px">
                         
-                            <table border="2" style="width:50%" id="registeredEmployees">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                </tr>
+                            <table class="table table-hover" style="width:50%" id="registeredEmployees">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
                                 {{#signed}}
                                 <tr>
                                     <td>{{name}}</td>
@@ -70,15 +72,17 @@
                         </div>
                         
                 
-                        <h3 style="position:relative;top:50px;right:135px">Employees not yet registered</h2>
+                        <h3 style="position:relative;top:50px;">Employees not yet registered</h2>
 
                         <div style="position:relative;top:50px">
                         
-                            <table border="2" style="width:50%" id="unregisteredEmployees">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                </tr>
+                            <table class="table table-hover" style="width:50%" id="unregisteredEmployees">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
                                 {{#notsigned}}
                                 <tr>
                                     <td>{{name}}</td>
