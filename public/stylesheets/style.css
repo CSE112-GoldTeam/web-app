@@ -428,6 +428,24 @@ a:hover {
 
 /**********************************************/
 
+/************* Employee Register Page *************/
+.password{
+  padding-left: 100px;
+  padding-top:15px;
+}
+
+.employee-submit{
+  margin-right: 40%;
+}
+
+.employee-register-pic{
+  margin-top: -15%;
+}
+
+
+/**************************************************/
+
+
 /*************** Upload Logo Page ***************/
 
 .uploadFormCenterHack {
