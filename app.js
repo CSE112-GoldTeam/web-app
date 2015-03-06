@@ -113,7 +113,7 @@ app.use(function(req, res, next) {
 app.use('/', business);
 app.use('/', checkin);
 app.use('/', signature);
-app.use('/', require('./routes/webapp'));
+app.use('/office/:id', require('./routes/webapp/checkin'));
 
 // Set Mobile Routes
 app.use('/', mobileAuth);
