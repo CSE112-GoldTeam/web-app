@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="col-xs-4">
-                <img id="intro-image" src="http://placehold.it/270x370"/>
+                <img id="intro-image" alt="introduction image for company" src="http://placehold.it/270x370"/>
             </div>
         </div>
         <div class="row" id="second-section">
