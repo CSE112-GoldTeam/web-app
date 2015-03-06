@@ -18,6 +18,47 @@ function execute(command, callback){
     exec(command, function(error, stdout, stderr){callback(stdout);});
 };
 
+//// these plugins are added first, but still need for
+//// dev team to group files by types to make it happen
+//// such as .js folder, .css folder, build folder
+
+var gutil = require('gulp-util');
+var clean = require('gulp-clean');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
+var minifyCSS = require('gulp-minify-css');
+
+
+//// end of additional plugins
+
+
+//// begin of additional plugins
+gulp.task('clean', function () {
+  return gulp.src('build', {read: false})
+    .pipe(clean());
+});
+
+gulp.task('vendor', function() {
+  return gulp.src('./public/javascripts/*.js')
+    .pipe(concat('vendor.js'))
+    .pipe(gulp.dest('./public/javascripts/'))
+    .pipe(uglify())
+    .pipe(rename('vendor.min.js'))
+    .pipe(gulp.dest('./public/javascripts/'))
+    .on('error', gutil.log)
+});
+
+gulp.task('build', ['vendor'], function() {
+  return gulp.src('./public/stylesheets/*.css')
+    .pipe(minifyCSS({keepBreaks:false}))
+    .pipe(rename('style.min.css'))
+    .pipe(gulp.dest('./public/stylesheets/'))
+});
+
+//// end of additional plugins
+
+
 gulp.task('nodemon', function (cb) {
   var called = false;
   return nodemon({
@@ -104,6 +145,8 @@ gulp.task('mongorestore', function() {
   });
 });
 
+
+
 gulp.task('default', ['browser-sync']);
 
 var karma = require('karma').server;
@@ -116,7 +159,6 @@ gulp.task('test', function (done) {
     singleRun: true
   }, done);
 });
-
 
 // prerequisites - must have heroku command line tools installed
 //               - must be authenticated with heroku
