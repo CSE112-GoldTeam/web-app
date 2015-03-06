@@ -67,7 +67,7 @@ gulp.task('nodemon', function (cb) {
     script: 'bin/www',
 
     // watch core server file(s) that require server restart on change
-    watch: ['./'],
+    watch: ['./routes/'],
 
     ext: 'html js',
     env: { 'NODE_ENV': 'development' }
@@ -111,7 +111,7 @@ gulp.task('browser-sync', ['nodemon', 'mongostart'], function () {
   browserSync.init({
 
     // watch the following files; changes will be injected (css & images) or cause browser to refresh
-    files: ['public/**/*.*', 'views/**/*.*'],
+    files: ['public/**/*.*', 'views/**/*.*', 'public/javascripts/*.js'],
 
     // informs browser-sync to proxy our expressjs app which would run at the following location
     proxy: 'http://localhost:3000',

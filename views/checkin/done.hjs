@@ -11,17 +11,17 @@
 </head>
 <body class="customBG">
 
-<!-- this nav bar is consistent with PK's navbar -->
+<!-- this nav bar is consistent with PK's navbar
  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
         <a class="navbar-brand" href="/">
             <div id="company-logo">Company Logo</div>
         </a>
     </div>
-</nav>
+</nav> -->
 
 <!-- Took out all unnecessary divs to make consistent with checkin page design -->
-<div class="container container-margin containter-checkin">
+<div class="container container-margin container-checkin">
     <h1 class="header"> Thank you! Someone will be with you shortly. </h1>
     <img class="checkinphoto" src="/images/dentalLogo.jpg" alt="">
 </div>
