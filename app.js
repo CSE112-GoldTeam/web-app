@@ -10,6 +10,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var passport = require('passport');
+
 var app = express();
 
 //Database
@@ -19,7 +20,10 @@ console.log('Connecting to DB: ' + mongoURI);
 var db = monk(mongoURI);
 
 //login config
-var collect = db.get('businesses');
+var businesses = db.get('businesses');
+var employee = db.get('employees');
+
+
 
 //passport functions to Serialize and Deserialize users
 
@@ -28,9 +32,20 @@ passport.serializeUser(function(user, done) {
     });
 
 // used to deserialize the user
-passport.deserializeUser(function(id, done) {
-    collect.findById(id, function(err, user) {
-        done(err, user);
+passport.deserializeUser(function (id, done) {
+
+    // console.log(business);
+
+    businesses.find({_id: id}, function (err, user) {
+        if(err) done(err);
+        if(user){
+            done(null,user);
+        }else{
+            employee.find({_id: id}, function (err, user){
+                if(err) done(err);
+                done(null,user);
+            });
+        }
     });
 });
 

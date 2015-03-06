@@ -31,7 +31,7 @@ module.exports = function (passport) {
             var username = req.body.username;
             var phone = req.body.phone;
 
-            console.log("am i here");
+           
 
 
             // Check if any field has been left blank
@@ -94,29 +94,29 @@ module.exports = function (passport) {
 
 
     passport.use('local-signup-employee',new LocalStrategy({
-
+        usernameField: 'email',
         passwordField: 'password',
         passReqToCallback: true
     },
-    function (req,password,done) {
-
-        console.log(req);
+    function (req,email,password,done) {
 
         var db =req.db;
         var employee = db.get('employees');
 
         password = auth.hashPassword(password);
 
-        employee.update({
-            registrationToken: req.query.token},
-            { $unset: {registrationToken: 1},
-            $set: {password: password} }, 
-            function (err,user){
+        employee.findAndModify({
+         query: {registrationToken: req.query.token},
+         update: { $unset: {registrationToken: 1},
+            $set: {password: password} },
+         new: true},    
+            function (err,user){   
             if (err) { 
                  throw err; }
             return done(null,user);
    
-        });
+             }
+        )
     }));
 
 
@@ -142,4 +142,8 @@ module.exports = function (passport) {
             });
         }));
 };
+
+
+
+
 

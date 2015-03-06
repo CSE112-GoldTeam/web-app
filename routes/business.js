@@ -54,7 +54,7 @@ router.get('/formbuilder', function (req, res) {
 router.get('/addemployees' ,function (req,res){
     var db =  req.db;
     var csvEmployees = db.get('employees');
-    var employee
+    var employee;
     var notemployee;
     
 
@@ -82,6 +82,9 @@ router.get('/addemployees' ,function (req,res){
 
     function(err,results){
 
+        if(err){
+            throw err;
+        }
         res.render('business/addemployees',{title: 'Express',notsigned: notemployee, signed: employeee});
 
     });
@@ -98,6 +101,8 @@ router.post('/addemployees',function (req,res){
     
     var parsed = baby.parse(req.body.csvEmployees);
     var rows = parsed.data;
+
+    console.log(rows.length);
 
     var number = 0;
     rows.forEach(function (d){
@@ -155,10 +160,16 @@ router.get('/employeeregister',function (req,res){
 });
 
 
-router.post('/employeeregister', passport.authenticate('local-signup-employee',{
+router.post('/employeeregister',passport.authenticate('local-signup-employee',{
     successRedirect : '/config', // redirect to the secure profile section
     failureRedirect : '/' // redirect back to the signup page if there is an error
 }));
+
+
+// router.post('/employeeregister', passport.authenticate('local-signup-employee',{
+//     successRedirect : '/config', // redirect to the secure profile section
+//     failureRedirect : '/' // redirect back to the signup page if there is an error
+// }));
 
 
 router.post('/register', passport.authenticate('local-signup',{
@@ -203,6 +214,8 @@ function randomToken() {
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
+
+    console.log(req.isAuthenticated());
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated()) {
         return next();
