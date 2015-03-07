@@ -105,7 +105,7 @@ gulp.task('mongoend', function() {
     });
 })
 
-gulp.task('browser-sync', ['nodemon', 'mongostart'], function () {
+gulp.task('browser-sync', ['nodemon', 'mongostart', 'watch-check'], function () {
 
   // for more browser-sync config options: http://www.browsersync.io/docs/options/
   browserSync.init({
@@ -243,8 +243,16 @@ gulp.task('stage',['test'], function(){
     }
 })
 
+// watch for js/css changes and run checkDev on changes
+gulp.task('watch-check', function() {
+    gulp.watch('public/**/*.*', ['checkDev']);
+    gulp.watch('views/**/*.*', ['checkDev']);
+    gulp.watch('public/javascripts/*.js', ['checkDev']);
+});
+
 // check pages on development
 gulp.task('checkDev', function(callback) {
+
   var options = {
     pageUrls: [
       'http://localhost:4000/',
