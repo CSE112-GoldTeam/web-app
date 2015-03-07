@@ -85,8 +85,6 @@ exports.updateState = function(req, res) {
     var validStates = ['scheduled','formDone','checkedIn','roomed','done'];
     var isValid = false;
 
-    console.log(req.body.state);
-
     // Determine if the state is a valid one
     for(var i=0; i < validStates.length; i++){
       if(validStates[i]==req.body.state){

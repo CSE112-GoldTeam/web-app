@@ -47,7 +47,7 @@ exports.createResponse = function(req, res) {
     // grab our db object from the request
     var db = req.db;
     var forms = db.get('forms');
-    
+
     try {
         var businessId = req.mobileToken.business;
     }
@@ -58,24 +58,20 @@ exports.createResponse = function(req, res) {
     forms.find({business: forms.id(businessId)}, function (err, results)
     {
         if (err) { return res.sendStatus(500, err);}
-        console.log("forms.find() return "+ JSON.stringify(results[0].fields));
 
         var form = results[0];
 
         var formList = [];
         _.each(form.fields, function(value, index) {
-            console.log("Value " + JSON.stringify(value));
             formList.push(value.label);
         });
 
         var responseList = [];
         _.each(req.body.answers, function(value, index) {
-            console.log("Value " + JSON.stringify(value));
             responseList.push(value.label);
         });
 
         var unionList =  _.union(_.difference(formList, responseList), _.difference(responseList, formList))
-        console.log(JSON.stringify(unionList));
         if(unionList.length > 0) {
             return res.status(400).send("Malformed Requests, fields from formResponse is different from the actual form.");
         } else {

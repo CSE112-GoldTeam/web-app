@@ -12,7 +12,6 @@ var auth = require('../../../lib/auth');
 function decodeAuthString(authString) {
     var buffer = new Buffer(authString, 'base64');
     var s = buffer.toString();
-    console.log(s);
 
     //Split into 2 parts at the first instance of the : . We know that the first
     //: will be the separator since emails cannot contain ports
