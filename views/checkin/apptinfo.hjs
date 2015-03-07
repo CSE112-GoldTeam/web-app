@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }}</title>
+    <title>Confirm</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
@@ -57,7 +57,7 @@
             </div>
         </div>
         </div>
-        
+
         <!-- /.container -->
         <div class="row innerInfo">
             <div class="col-md-4"></div>
