@@ -74,9 +74,11 @@
                     <p class="testimonial-author">Betty Johnson | <span>Stockholm, Sweden</span></p>
                 </div>
                 <div>
-                    <blockquote class="testimonial"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <blockquote class="testimonial">
+                        <p>I can’t believe how much time I saved using iReceptionist. It was truly a breathe of fresh air. Never again will I have to deal with the hassle of a grumpy receptionist and a clipboard!</p>
+                    </blockquote>
                     <div class="arrow-down"></div>
-                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                    <p class="testimonial-author">Joel Spolsky | <span>Kathmandu, Nepal</span></p>
                 </div>
             </div>
         </div>
