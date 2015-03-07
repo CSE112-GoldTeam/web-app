@@ -73,8 +73,6 @@ router.post('/api/auth', function (req, res) {
                     api_token: result._id
                 });
             });
-
-            //res.json(200, req.body);
         } else {
             res.send(401);
         }
