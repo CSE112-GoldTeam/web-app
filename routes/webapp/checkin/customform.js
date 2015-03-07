@@ -55,10 +55,21 @@ function makeForm(db, businessId, body, fn) {
     var forms = db.get('forms');
 
     //Find the business and get their form
-    businesses.find({_id: businessId}, function (err, results) {
-        var business = results[0]; //TODO: This assumes there is a result
-        forms.find({business: business._id}, function (err, results) {
-            var form = results[0]; //TODO: This also assumes there is a result
+    businesses.findById(businessId, function (err, business) {
+        if (err) {
+            return fn(err);
+        }
+        if (!business) {
+            return fn(new Error('Business not found: ' + businessId));
+        }
+        forms.findOne({business: business._id}, function (err, form) {
+            if (err) {
+                return fn(err);
+            }
+            if (!form) {
+                return fn(new Error('Form not found for business: ' + businessId));
+            }
+
             var formHtml = '<form class="form-horizontal" method="post" action="customform" enctype="application/x-www-form-urlencoded">';
 
             _.each(form.fields, function (field, index) {
@@ -69,13 +80,16 @@ function makeForm(db, businessId, body, fn) {
 
             formHtml += '</form>';
 
-            fn(formHtml);
+            fn(null, formHtml);
         });
     });
 }
 
-exports.get = function (req, res) {
-    var db = req.db; makeForm(db, req.params.id, {}, function (formHtml) {
+exports.get = function (req, res, next) {
+    makeForm(req.db, req.params.id, {}, function (err, formHtml) {
+        if (err) {
+            return next(err);
+        }
         res.render('checkin/customform', {
             title: 'Express',
             formHtml: formHtml
@@ -83,16 +97,26 @@ exports.get = function (req, res) {
     });
 };
 
-exports.post = function (req, res) {
-    //Get the DB
+exports.post = function (req, res, next) {
     var db = req.db;
     var businesses = db.get('businesses');
     var forms = db.get('forms');
 
-    businesses.find({_id: req.params.id}, function (err, results) {
-        var business = results[0]; //TODO: This assumes there is a result
-        forms.find({business: business._id}, function (err, results) {
-            var form = results[0]; //TODO: This assumes there is a result
+    businesses.findById(req.params.id, function (err, business) {
+        if (err) {
+            return next(err);
+        }
+        if (!business) {
+            return next(new Error('Business not found: ' + req.params.id));
+        }
+
+        forms.findOne({business: business._id}, function (err, form) {
+            if (err) {
+                return next(err);
+            }
+            if (!form) {
+                return next(new Error('Form for business not found: ' + business._id));
+            }
 
             //Ensure that there are all the responses
             var valid = _.every(form.fields, function (field, index) {
@@ -124,8 +148,10 @@ exports.post = function (req, res) {
                     });
                 });
 
-                formResponses.insert(formResponse, function () {
-                    //TODO: Error checking
+                formResponses.insert(formResponse, function (err) {
+                    if (err) {
+                        return next(err);
+                    }
 
                     //Update the state of the appointment
                     var appointmentId = req.session.appointmentId;
