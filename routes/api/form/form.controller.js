@@ -12,7 +12,7 @@
 var _ = require('underscore');
 
 // Request a form
-exports.show = function (req, res) {
+exports.show = function (req, res, next) {
     // grab our db object from the request
 
     var db = req.db;
@@ -22,7 +22,7 @@ exports.show = function (req, res) {
 
     forms.find({'_id': req.params.id, 'business': business}, function (err, doc) {
         if (err) {
-            return handleError(res, err);
+            return next(err);
         }
         if (!doc) {
             return res.sendStatus(404);
@@ -32,7 +32,7 @@ exports.show = function (req, res) {
 };
 
 // Create a form
-exports.createForm = function (req, res) {
+exports.createForm = function (req, res, next) {
 
     // grab our db object from the request
     var db = req.db;
@@ -41,28 +41,28 @@ exports.createForm = function (req, res) {
     // query to create entry in collection
     forms.insert(req.body, function (err, doc) {
         if (err) {
-            return handleError(res, err);
+            return next(err);
         }
         return res.json(201, doc);
     });
 };
 
 // Create a formResponse
-exports.createResponse = function (req, res) {
+exports.createResponse = function (req, res, next) {
 
     // grab our db object from the request
     var db = req.db;
     var forms = db.get('forms');
 
     if (!req.mobileToken.business) {
-        return res.status(500).send('The mobileToken not set! ' + e);
+        return res.status(500).send('The mobileToken not set!');
     }
 
     var businessId = req.mobileToken.business;
 
     forms.find({business: forms.id(businessId)}, function (err, results) {
         if (err) {
-            return res.sendStatus(500, err);
+            return next(err);
         }
 
         var form = results[0];
@@ -94,14 +94,10 @@ exports.createResponse = function (req, res) {
             });
             formResponses.insert(formResponse, function (err, data) {
                 if (err) {
-                    return res.sendStatus(500, err);
+                    return next(err);
                 }
                 return res.json(200, data);
             });
         }
     });
 };
-
-function handleError(res, err) {
-    return res.sendStatus(500, err);
-}

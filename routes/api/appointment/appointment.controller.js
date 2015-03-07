@@ -6,7 +6,7 @@
 'use strict';
 
 // Get list of things
-exports.confirm = function (req, res) {
+exports.confirm = function (req, res, next) {
     var db = req.db;
     var appointments = db.get('appointments');
 
@@ -21,20 +21,20 @@ exports.confirm = function (req, res) {
         'business': businessid
     }, function (err, users) {
         if (err) {
-            return handleError(res, err);
+            return next(err);
         }
         return res.json(200, users);
     });
 };
 
 // Get list of things
-exports.retrieve = function (req, res) {
+exports.retrieve = function (req, res, next) {
     var db = req.db;
     var appointments = db.get('appointments');
 
     appointments.findById(req.params.id, function (err, doc) {
         if (err) {
-            return handleError(res, err);
+            return next(err);
         }
         if (!doc) {
             return res.sendStatus(404);
@@ -48,7 +48,7 @@ exports.retrieve = function (req, res) {
  * Transitions the state to the next state
  * scheduled -> formDone -> checkedIn -> roomed -> done
  */
-exports.nextState = function (req, res) {
+exports.nextState = function (req, res, next) {
     var db = req.db;
     var appointments = db.get('appointments');
 
@@ -57,7 +57,7 @@ exports.nextState = function (req, res) {
         if (data[0].state === 'scheduled') {
             currState = {$set: {state: 'formDone'}};
         } else if (data[0].state === 'formDone') {
-            currState = {$set: {state: "checkedIn"}};
+            currState = {$set: {state: 'checkedIn'}};
         } else if (data[0].state === 'checkedIn') {
             currState = {$set: {state: 'roomed'}};
         } else if (data[0].state === 'roomed') {
@@ -68,7 +68,7 @@ exports.nextState = function (req, res) {
 
         appointments.findAndModify({_id: req.params.id}, currState, function (err, data) {
             if (err) {
-                return res.sendStatus(500, err);
+                return next(err);
             }
             return res.json(200, data);
         });
@@ -80,7 +80,7 @@ exports.nextState = function (req, res) {
  * Set a specific state
  * scheduled, formDone, checkedIn, roomed, done
  */
-exports.updateState = function (req, res) {
+exports.updateState = function (req, res, next) {
     // grab our db object from the request
     var db = req.db;
     var collection = db.get('appointments');
@@ -102,12 +102,8 @@ exports.updateState = function (req, res) {
     // If all is good update the new state
     collection.findAndModify({_id: req.params.id}, {$set: {state: req.body.state}}, function (err, data) {
         if (err) {
-            return handleError(res, err);
+            return next(err);
         }
         return res.json(200, data);
     });
 };
-
-function handleError(res, err) {
-    return res.sendStatus(500, err);
-}
