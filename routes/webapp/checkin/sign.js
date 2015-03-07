@@ -1,12 +1,16 @@
-var ObjectID = require('mongodb').ObjectID;
-
-exports.get = function(req, res) {
+exports.get = function(req, res, next) {
     var db = req.db;
     var businesses = db.get('businesses');
 
-    businesses.find({_id: ObjectID(req.params.id)}, function (err, results) {
+    businesses.findById(req.params.id, function (err, business) {
+        if (err) {
+            return next(err);
+        }
+        if (!business) {
+            return next(new Error('Error finding business: ' + req.params.id));
+        }
+
         //TODO: Verify that there are results and no errors
-        var business = results[0];
         res.render('checkin/sign', {
             title: 'Express',
             disclosure: business.disclosure
@@ -14,15 +18,20 @@ exports.get = function(req, res) {
     });
 };
 
-exports.post = function (req, res) {
+exports.post = function (req, res, next) {
     var sig = req.body.sig.trim();
     if (sig === '') {
         var db = req.db;
         var businesses = db.get('businesses');
 
-        businesses.find({_id: ObjectID(req.params.id)}, function (err, results) {
-            //TODO: Verify that there are results and no errors
-            var business = results[0];
+        businesses.findById(req.params.id, function (err, business) {
+            if (err) {
+                return next(err);
+            }
+            if (!business) {
+                return next(new Error('Error finding business: ' + req.params.id));
+            }
+
             res.render('checkin/sign', {
                 title: 'Express',
                 disclosure: business.disclosure,
@@ -31,12 +40,14 @@ exports.post = function (req, res) {
         });
     } else {
         //Update the state of the appointment
-        var appointmentId = req.session.appointmentId;
-        req.db.get('appointments').update({_id: ObjectID(appointmentId)}, {
+        req.db.get('appointments').updateById(req.session.appointmentId, {
             $set: {
                 state: 'checkedIn'
             }
-        }, function () {
+        }, function (err) {
+            if (err) {
+                return next(err);
+            }
             res.redirect('done');
         });
     }

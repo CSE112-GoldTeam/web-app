@@ -1,13 +1,19 @@
-exports.get = function (req, res) {
+exports.get = function (req, res, next) {
     var db = req.db;
-    var appointments = db.get('appointments'); //This gets the collection
-    appointments.findById(req.session.appointmentId, function(err, result) {
-        if (err) { return res.sendStatus(500, err); }
-        if(!result) { return res.send(404,'User not found');}
+    var appointments = db.get('appointments');
+
+    appointments.findById(req.session.appointmentId, function(err, appointment) {
+        if (err) {
+            return next(err);
+        }
+        if(!appointment) {
+            return next(new Error('Appointment from session not found: ' + req.session.appointmentId));
+        }
+
         res.render('checkin/apptinfo', {
-            name: result.fname,
-            DOB: result.dob,
-            email: result.email
+            name: appointment.fname,
+            DOB: appointment.dob,
+            email: appointment.email
         });
 
     });
