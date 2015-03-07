@@ -65,6 +65,7 @@
             </div>
         {{/success}}
 
+
         <form id        =  "uploadForm"
              enctype   =  "multipart/form-data"
              action    =  "/uploadlogo"
