@@ -58,9 +58,11 @@
                     <p class="testimonial-author">Dr. Jennifer Kim, DDS | <span>San Francisco, California</span></p>
                 </div>
                 <div>
-                    <blockquote class="testimonial testimonial-grey"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <blockquote class="testimonial testimonial-grey">
+                        <p>Wow! iReceptionist was the perfect addition to our offices! It’s elegant, fast, and our customers absolutely love it! The team’s continued support and commitment to excellence has made me a life-long customer. Definitely the GOLD standard for check-in apps!</p>
+                    </blockquote>
                     <div class="arrow-down arrow-down-grey"></div>
-                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                    <p class="testimonial-author">Dr. Leonard McCoy, M.D. | <span>Riverside, California</span></p>
                 </div>
             </div>
             <div class="col-xs-6">
