@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-nav-wizard.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body class="customBG">
+    <!-- <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <div id="company-logo">Company Logo</div>
+            </a>
+          </div>
+    </nav> -->
+
+    <div class="container container-margin">
+        <div class="row innerInfo">
+            <div class="nav-wizard-margins">
+                <h3>Your checkin process:</h3>
+                <ul class="nav nav-wizard">
+                    <li><a href="#">Step 1: Identification</a></li>
+                    <li><a href="#">Step 2: Confirm Appointment</a></li>
+                    <li class="active"><a href="#">Step 3: Additional Information</a></li>
+                    <li><a href="#">Step 4: Sign Disclosure Agreement</a></li>
+                    <li><a href="#">Step 5: Checked In!</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row innerInfo">
+            <h3>Tell us a little bit more about yourself: </h3>
+            {{#formError}}
+                <div class="alert alert-danger" role="alert">{{formError}}</div>
+            {{/formError}}
+            {{{ formHtml }}}
+        </div>
+    </div>
+
+</body>
+</html>
+

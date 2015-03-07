@@ -39,17 +39,17 @@
 
             <div class="row text-center" id="regis-container">
                 <div class="col-xs-offset-1 col-xs-4" id="form-separator">
-                    <form>
-                        <input class="regis" type="text" name="companyname" placeholder="COMPANY NAME">
-                        <input class="regis" type="text" name="fullname" placeholder="YOUR FULL NAME">
-                        <input class="regis" type="text" name="email" placeholder="EMAIL">
-                        <input class="regis" type="tel" name="number" placeholder="PHONE NUMBER">
-                        <input class="regis" type="password" name="pw" placeholder="PASSWORD">
-                        <input class="btn custom-button" type="submit" value="SignUp">
+                    <form method="post" action="" enctype="application/x-www-form-urlencoded">
+                        <input class="regis" type="text" name="companyName" value="{{ companyName }}" placeholder="COMPANY NAME" required>
+                        <input class="regis" type="text" name="username" value="{{ username }}" placeholder="YOUR FULL NAME" required>
+                        <input class="regis" type="email" name="email" value="{{ email }}" placeholder="EMAIL" required>
+                        <input class="regis" type="tel" name="phone" value="{{ phone }}" placeholder="PHONE NUMBER" required>
+                        <input class="regis" type="password" name="password" value="{{ password }}" placeholder="PASSWORD" required>
+                        <input class="btn custom-button" name="submit" type="submit" value="SignUp">
                     </form>
                 </div>
                 <div class="col-xs-7">
-                    <img class="center-image" src="http://placehold.it/500x420"/>
+                    <img class="custom-center" src="http://placehold.it/500x420"/>
                 </div>
             </div>
     </div>

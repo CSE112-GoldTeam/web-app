@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <fieldset id="buildyourform"></fieldset>
+    <input type="button" value="Add a field" class="add" id="add" />
+    <input type="button" value="Submit" class="add" id="submit" />
+    <script src="/javascripts/lib/jquery/jquery-2.1.3.min.js"></script>
+    <script src="/javascripts/formbuilder.js"></script>
+</head>
+
+</html>
