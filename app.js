@@ -38,7 +38,6 @@ require('./config/passport')(passport); // pass passport for configuration
 
 // Load Routes for Webapp
 var business = require('./routes/business')(passport);
-var checkin = require('./routes/checkin');
 var signature = require('./routes/signature');
 
 // Load Routes for Mobile
@@ -112,7 +111,6 @@ var businessRoutes = require('./routes/webapp/business')(passport);
 
 // Set Webapp Routes
 app.use('/', business);
-app.use('/', checkin);
 app.use('/', signature);
 app.use('/office/:id', require('./routes/webapp/checkin'));
 app.use('/', businessRoutes);
