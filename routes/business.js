@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var router = express.Router();
-var ObjectID = require('mongodb').ObjectID;
 var crypto = require('crypto');
 
 
@@ -38,86 +37,6 @@ router.get('/viewform/:id', function (req, res, next) {
             });
         });
 	});
-});
-
-    /**
- * GET company form appointment responses
- * @param {Object} req
- * @param {Object} res
- * @param {Object} next
- * @returns the appointments of the user
- */
-router.get('/api/formResponses/appointments/:id', function (req, res, next) {
-     	// grab our db object from the request
-	var db = req.db;
-	var response = db.get('formResponses');
-	// query the collection
-	response.find({ appointments : req.params.id }, function(err, data) {
-        if (err) { return res.sendStatus(500, err); }
-		return res.json(200, data);
-	});
-});
-
-
-/**
- * PUT company appointments states
- * @param {Object} req
- * @param {Object} res
- * @param {Object} next
- * @returns the state of the appointment
- */
-router.put('/api/appointments/:id/state', function (req, res, next) {
-
-	 // grab our db object from the request
-	var db = req.db;
-	var appt = db.get('appointments');
-	// query the collection
-    appt.find({_id:req.params.id},function(err,data){
-        var myState = {};
-        if (data[0].state == 'checkedIn'){
-            myState = {$set: {state : "roomed"}};
-        } else if (data[0].state == 'roomed'){
-            myState = {$set: {state : "done"}};
-        }
-
-        appt.findAndModify({_id:req.params.id }, myState, function(err, data) {
-            if (err) { return res.sendStatus(500, err); }
-            return res.json(200, data);
-        });
-    });
-
-});
-
-/**
- * GET appointment for today
- * @param {Object} req
- * @param {Object} res
- * @returns the appointments for today
- */
-router.get('/api/employee/:eid/appointments/today', function (req, res) {
-    var db = req.db;
-    var appointments = db.get('appointments');
-
-    //Get the start and end of today
-    var begin = new Date();
-    begin.setHours(0,0,0,0);
-
-    var end = new Date();
-    end.setHours(23, 59, 59, 999);
-
-    appointments.find({
-        employee: ObjectID(req.params.eid),
-        date: {
-            $gte: begin,
-            $lte: end
-        }
-    },{sort : {date: 1}}, function (err, results) {
-        if (err) {
-            console.error('MongoDB Error in /api/employee/:eid/appointments/today: ' + err);
-            return res.send(500);
-        }
-        res.json(results);
-    });
 });
 
 
