@@ -39,7 +39,7 @@ router.post('/api/authTest', function (req, res) {
     });
 });
 
-router.post('/api/auth', function (req, res) {
+router.post('/api/auth', function (req, res, next) {
     if (!req.headers.authorization) {
         return res.send(400, 'Basic HTTP Auth required');
     }
@@ -66,7 +66,7 @@ router.post('/api/auth', function (req, res) {
                 name: name
             }, function (err, result) {
                 if (err) {
-                    return console.error('Mongo Error: ' + err);
+                    return next(err);
                 }
 
                 res.json(200, {
