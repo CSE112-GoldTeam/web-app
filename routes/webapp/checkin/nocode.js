@@ -8,6 +8,7 @@ exports.post = function (req, res) {
     var db = req.db;
     var appointments = db.get('appointments');
     var dobFormatErr = 'Please enter your Date of Birth in MM/DD/YYYY format';
+		var dobFormatErr2 = 'YO'
     var monthValErr = 'Please enter MM value between 01 and 12';
     var dayValErr = 'Please enter DD value between 01 and 31';
 
@@ -15,40 +16,43 @@ exports.post = function (req, res) {
     var inputLast = req.body.inputLast;
     var inputDOB = req.body.inputDOB;
     var dobSubStr = req.body.inputDOB;
-    var numSlash = inputDOB.match(/\//g).length;
+    var numSlash = inputDOB.match(/\//g);
 
-    if (numSlash !== 2) {
+    if (numSlash != null && numSlash.length !== 2) {
         res.render('checkin/nocode', {
             error: dobFormatErr,
             inputFirst: inputFirst,
             inputLast: inputLast,
             inputDOB: inputDOB
         });
+				return;
     }
 
     var firstSep = dobSubStr.indexOf('/');
     var inputMonth = dobSubStr.substring(0, firstSep);
 
-    if (inputMonth.length > 2) {
+    if (inputMonth.length > 2 || inputMonth.length <= 0) {
         res.render('checkin/nocode', {
             error: dobFormatErr,
             inputFirst: inputFirst,
             inputLast: inputLast,
             inputDOB: inputDOB
         });
+				return;
     }
 
     dobSubStr = dobSubStr.substring(firstSep+1);
     var secondSep = dobSubStr.indexOf('/');
     var inputDay = dobSubStr.substring(0, secondSep);
 
-    if (inputDay.length > 2) {
+    if (inputDay.length > 2 || inputDay.length <= 0) {
         res.render('checkin/nocode', {
             error: dobFormatErr,
             inputFirst: inputFirst,
             inputLast: inputLast,
             inputDOB: inputDOB
         });
+				return;
     }
 
     var inputYear = dobSubStr.substring(secondSep+1);
@@ -61,9 +65,20 @@ exports.post = function (req, res) {
             inputLast: inputLast,
             inputDOB: inputDOB
         });
+				return;
     }
 
-    var monthInt = parseInt(inputMonth);
+    try {
+			var monthInt = parseInt(inputMonth);
+		} catch (e) {
+				res.render('checkin/nocode', {
+            error: monthValErr,
+            inputFirst: inputFirst,
+            inputLast: inputLast,
+            inputDOB: inputDOB
+        });
+				return;
+		}
 
     if (monthInt < 1 || monthInt > 12)
     {
@@ -73,13 +88,24 @@ exports.post = function (req, res) {
             inputLast: inputLast,
             inputDOB: inputDOB
         });
+				return;
     }
     else if (monthInt < 10 && inputMonth.length === 1)
     {
         inputMonth = '0' + inputMonth;
     }
 
-    var dayInt = parseInt(inputDay);
+    try {
+			var dayInt = parseInt(inputDay);
+		} catch (e) {
+				res.render('checkin/nocode', {
+            error: dayValErr,
+            inputFirst: inputFirst,
+            inputLast: inputLast,
+            inputDOB: inputDOB
+        });
+				return;
+		}
 
     if (dayInt < 1 || dayInt > 31)
     {
@@ -89,6 +115,7 @@ exports.post = function (req, res) {
             inputLast: inputLast,
             inputDOB: inputDOB
         });
+				return;
     }
     else if (dayInt < 10 && inputDay.length === 1)
     {
@@ -106,6 +133,7 @@ exports.post = function (req, res) {
                 inputLast: inputLast,
                 inputDOB: inputDOB
             });
+						return;
         }
         else {
             var appt = result[0];
