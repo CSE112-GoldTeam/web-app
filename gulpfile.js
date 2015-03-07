@@ -243,7 +243,7 @@ gulp.task('stage',['test'], function(){
     }
 })
 
-// check pages on dev
+// check pages on development
 gulp.task('checkDev', function(callback) {
   var options = {
     pageUrls: [
@@ -267,7 +267,27 @@ gulp.task('checkDev', function(callback) {
   };
 
   var callback = function() {
-    console.log('Done checking dev.');
+    console.log('Done checking development.');
+  };
+
+  checkPages(console, options, callback);
+});
+
+// check pages on production
+gulp.task('checkProd', function(callback) {
+  var options = {
+    pageUrls: [
+      'http://robobetty.com/',
+      'http://robobetty.com/register',
+      'http://robobetty.com/login'
+    ],
+    checkLinks: true,
+    maxResponseTime: 500,
+    summary: true
+  };
+
+  var callback = function() {
+    console.log('Done checking production.');
   };
 
   checkPages(console, options, callback);
