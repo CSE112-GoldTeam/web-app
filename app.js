@@ -108,12 +108,14 @@ app.use(function(req, res, next) {
     next();
 });
 
+var businessRoutes = require('./routes/webapp/business')(passport);
 
 // Set Webapp Routes
 app.use('/', business);
 app.use('/', checkin);
 app.use('/', signature);
 app.use('/office/:id', require('./routes/webapp/checkin'));
+app.use('/', businessRoutes);
 
 // Set Mobile Routes
 app.use('/', mobileAuth);
