@@ -247,7 +247,9 @@ gulp.task('stage',['test'], function(){
 gulp.task('checkDev', function(callback) {
   var options = {
     pageUrls: [
-      'http://localhost:4000/'
+      'http://localhost:4000/',
+      'http://localhost:4000/register',
+      'http://localhost:4000/login'
     ],
     checkLinks: true,
     onlySameDomain: true,
