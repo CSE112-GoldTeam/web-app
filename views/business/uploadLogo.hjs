@@ -67,9 +67,9 @@
 
         <form id        =  "uploadForm"
              enctype   =  "multipart/form-data"
-             action    =  "/api/photo"
+             action    =  "/uploadlogo"
              method    =  "post"
-             class="uploadFormCenterHack" 
+             class="uploadFormCenterHack"
         >
             <input type="file" name="userLogo" class="text-center" />
             <br><br>
@@ -92,8 +92,8 @@
             </ul>
         </div>
     </footer>
-    
+
 </body>
 
- 
+
 </html>
