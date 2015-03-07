@@ -37,7 +37,6 @@ passport.deserializeUser(function(id, done) {
 require('./config/passport')(passport); // pass passport for configuration
 
 // Load Routes for Webapp
-var business = require('./routes/business')(passport);
 var signature = require('./routes/signature');
 
 // Load Routes for Mobile
@@ -110,7 +109,6 @@ app.use(function(req, res, next) {
 var businessRoutes = require('./routes/webapp/business')(passport);
 
 // Set Webapp Routes
-app.use('/', business);
 app.use('/', signature);
 app.use('/office/:id', require('./routes/webapp/checkin'));
 app.use('/', businessRoutes);

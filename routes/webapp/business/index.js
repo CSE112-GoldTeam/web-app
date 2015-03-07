@@ -13,6 +13,7 @@ var dashboard = require('./dashboard');
 var registerDevice = require('./registerdevice');
 var addEmployees = require('./addemployees');
 var employeeRegister = require('./employeeregister');
+var viewForm = require('./viewform');
 
 module.exports = function (passport) {
     //Pass in passport
@@ -47,6 +48,8 @@ module.exports = function (passport) {
 
     router.get('/employeeregister', employeeRegister.get);
     router.post('/employeeregister', employeeRegister.post);
+
+    router.get('/viewform/:id', viewForm.get);
 
 
     return router;
