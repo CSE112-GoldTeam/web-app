@@ -51,9 +51,11 @@
         <div class="row" id="second-section">
             <div class="col-xs-6">
                 <div>
-                    <blockquote class="testimonial"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <blockquote class="testimonial">
+                        <p>With a limited budget and tight schedule, this check-in app really saved me time and cost to run the dental clinic I just opened up. Thank you, iReceptionist. You’re a life-saver.</p>
+                    </blockquote>
                     <div class="arrow-down"></div>
-                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                    <p class="testimonial-author">Dr. Jennifer Kim, DDS | <span>San Francisco, California</span></p>
                 </div>
                 <div>
                     <blockquote class="testimonial testimonial-grey"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
