@@ -3,15 +3,9 @@ exports.get = function(req,res){
 };
 
 
-exports.post = function (req,res){
-
-    var db =req.db
+exports.post = function (req){
+    var db =req.db;
     var employee = db.get('csvEmployees');
-
     employee.update({'token': req.query.token}, function (err,results){
-
-
-
     });
-
 };

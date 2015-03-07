@@ -7,20 +7,15 @@ exports.post = function(req,res){
     var businesses = db.get('businesses');
 
     if(req.files.userLogo){
-
         var businessID = req.body.business;
 
-        businesses.update(
-            {
-                _id:businessID
-            },{
+        businesses.updateById(businessID, {
                 $set: {
-                    logo: '/static/images/'+req.files.userLogo.name
+                    logo: '/static/images/' + req.files.userLogo.name
                 }
             },{
                 upsert: true
             }, function (err){
-
                 if (err) {
                     console.error('MongoDB Error in /api/photo: ' + err);
                     return res.send(500);
@@ -31,7 +26,6 @@ exports.post = function(req,res){
                 });
 
             });
-
     }
     else{
         res.render('business/uploadLogo',{
