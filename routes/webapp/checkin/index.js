@@ -10,19 +10,19 @@ var sign = require('./sign');
 var done = require('./done');
 
 //Setup the routes
-router.get('/checkin', checkin.get);
+router.get('/:id/checkin', checkin.get);
 
-router.get('/nocode', nocode.get);
-router.post('/nocode', nocode.post);
+router.get('/:id/nocode', nocode.get);
+router.post('/:id/nocode', nocode.post);
 
-router.get('/apptinfo', apptinfo.get);
+router.get('/:id/apptinfo', apptinfo.get);
 
-router.get('/customform', customform.get);
-router.post('/customform', customform.post);
+router.get('/:id/customform', customform.get);
+router.post('/:id/customform', customform.post);
 
-router.get('/sign', sign.get);
-router.post('/sign', sign.post);
+router.get('/:id/sign', sign.get);
+router.post('/:id/sign', sign.post);
 
-router.get('/done', done.get);
+router.get('/:id/done', done.get);
 
 module.exports = router;
