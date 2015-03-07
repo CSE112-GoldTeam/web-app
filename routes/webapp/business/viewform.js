@@ -1,16 +1,22 @@
-exports.get = function (req, res) {
-    // grab our db object from the request
+exports.get = function (req, res, next) {
     var db = req.db;
-    var response = db.get('formResponses');
+    var formResponses = db.get('formResponses');
     var appointments = db.get('appointments');
-    // query the collection
-    response.findOne({ appointment : req.params.id }, function(err, formResponse) {
+
+    formResponses.findOne({ appointment: req.params.id }, function(err, formResponse) {
         if (err) {
-            return res.sendStatus(500, err);
+            return next(err);
         }
+        if (!formResponse) {
+            return next(new Error('Error finding form response for appointment: ' + req.params.id));
+        }
+
         appointments.findById(req.params.id, function (err, appt) {
             if (err) {
-                return res.sendStatus(500, err);
+                return next(err);
+            }
+            if (!appt) {
+                return next(new Error('Error finding appointment: ' + req.params.id));
             }
 
             return res.render('business/viewform', {

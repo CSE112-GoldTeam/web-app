@@ -1,8 +1,8 @@
-exports.get = function(req,res){
+exports.get = function(req, res, next){
     res.render('business/uploadLogo',{title:'Upload Logo'});
 };
 
-exports.post = function(req,res){
+exports.post = function(req, res, next){
     var db = req.db;
     var businesses = db.get('businesses');
 
@@ -17,8 +17,7 @@ exports.post = function(req,res){
                 upsert: true
             }, function (err){
                 if (err) {
-                    console.error('MongoDB Error in /api/photo: ' + err);
-                    return res.send(500);
+                    return next(err);
                 }
 
                 res.render('business/uploadLogo',{
