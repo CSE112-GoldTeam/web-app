@@ -10,40 +10,17 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">
-            <div id="company-logo">RoboBetty</div>
-        </a>
-      </div>
-      <div class="navbar-padding-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a href="#">Features</a>
-            </li>
-            <li>
-                <a href="#">About Us</a>
-            </li>
-            <li>
-                <button type="button" class="btn custom-button" id="login-btn-navbar">Log In</button>
-            </li>
-        </ul>
-      </div>
-    </nav>
+   
     <div class="container container-margin">
             <div class="row">
                 <div class="col-xs-offset-1 col-xs-4">
-                    <h2>Create an Account</h2>
+                    <h2>Employee Signup</h2>
                 </div>
             </div>
 
             <div class="row text-center" id="regis-container">
                 <div class="col-xs-offset-1 col-xs-4" id="form-separator">
                     <form method="post" action="" enctype="application/x-www-form-urlencoded">
-                        <input class="regis" type="text" name="companyName" value="{{ companyName }}" placeholder="COMPANY NAME" required>
-                        <input class="regis" type="text" name="username" value="{{ username }}" placeholder="YOUR FULL NAME" required>
-                        <input class="regis" type="email" name="email" value="{{ email }}" placeholder="EMAIL" required>
-                        <input class="regis" type="tel" name="phone" value="{{ phone }}" placeholder="PHONE NUMBER" required>
                         <input class="regis" type="password" name="password" value="{{ password }}" placeholder="PASSWORD" required>
                         <input class="btn custom-button" name="submit" type="submit" value="SignUp">
                     </form>

@@ -4,5 +4,11 @@ node_modules
 client/bower_components
 dist
 /server/config/local.env.js
-db
+db/
+dumps/
 .DS_Store
+npm-debug.log
+mongod.log
+mongo.log
+newrelic_agent.log
+*.sw?
