@@ -16,7 +16,48 @@ var shell = require('gulp-shell');
 var exec = require('child_process').exec;
 function execute(command, callback){
     exec(command, function(error, stdout, stderr){callback(stdout);});
-};    
+};
+
+//// these plugins are added first, but still need for
+//// dev team to group files by types to make it happen
+//// such as .js folder, .css folder, build folder
+
+var gutil = require('gulp-util');
+var clean = require('gulp-clean');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
+var minifyCSS = require('gulp-minify-css');
+
+
+//// end of additional plugins
+
+
+//// begin of additional plugins
+gulp.task('clean', function () {
+  return gulp.src('build', {read: false})
+    .pipe(clean());
+});
+
+gulp.task('vendor', function() {
+  return gulp.src('./public/javascripts/*.js')
+    .pipe(concat('vendor.js'))
+    .pipe(gulp.dest('./public/javascripts/'))
+    .pipe(uglify())
+    .pipe(rename('vendor.min.js'))
+    .pipe(gulp.dest('./public/javascripts/'))
+    .on('error', gutil.log)
+});
+
+gulp.task('build', ['vendor'], function() {
+  return gulp.src('./public/stylesheets/*.css')
+    .pipe(minifyCSS({keepBreaks:false}))
+    .pipe(rename('style.min.css'))
+    .pipe(gulp.dest('./public/stylesheets/'))
+});
+
+//// end of additional plugins
+
 
 gulp.task('nodemon', function (cb) {
   var called = false;
@@ -26,7 +67,7 @@ gulp.task('nodemon', function (cb) {
     script: 'bin/www',
 
     // watch core server file(s) that require server restart on change
-    watch: ['./'],
+    watch: ['./routes/'],
 
     ext: 'html js',
     env: { 'NODE_ENV': 'development' }
@@ -70,7 +111,7 @@ gulp.task('browser-sync', ['nodemon', 'mongostart'], function () {
   browserSync.init({
 
     // watch the following files; changes will be injected (css & images) or cause browser to refresh
-    files: ['public/**/*.*', 'views/**/*.*'],
+    files: ['public/**/*.*', 'views/**/*.*', 'public/javascripts/*.js'],
 
     // informs browser-sync to proxy our expressjs app which would run at the following location
     proxy: 'http://localhost:3000',
@@ -100,20 +141,35 @@ gulp.task('mongorestore', function() {
   mongobackup.restore({
     host : 'localhost',
     drop : true,
-    path : './dumps/mongo/'
+    path : './dumps/mongo'
   });
 });
 
+
+
+gulp.task('default', ['browser-sync']);
+
+var karma = require('karma').server;
+/**
+ * Run test once and exit
+ */
+gulp.task('test', function (done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done);
+});
 
 // prerequisites - must have heroku command line tools installed
 //               - must be authenticated with heroku
 //               - must have git installed and be in application root directory
 //               - must be authenticated with git so that password does not have to be entered on push
+//               - MUST commit before running cmd (just revert commit if there is an issue)
 // example cmd
 // gulp stage                                  "pushes to default stage test1"
 // gulp stage --test [stage number]            "push to a specific stage test 1 - 3"
-gulp.task('stage',['test'], function(){ 
-    if (argv.test == null){ 
+gulp.task('stage',['test'], function(){
+    if (argv.test == null){
         execute('git symbolic-ref --short HEAD', function(br){
             console.log('deploying current branch: ' + br);
             return gulp.src('')
@@ -128,10 +184,10 @@ gulp.task('stage',['test'], function(){
                             }
                         }
                     }));
-        }); 
+        });
     }
 
-    if (argv.test == 1){ 
+    if (argv.test == 1){
         execute('git symbolic-ref --short HEAD', function(br){
             console.log('deploying current branch: ' + br);
             return gulp.src('')
@@ -146,10 +202,10 @@ gulp.task('stage',['test'], function(){
                             }
                         }
                     }));
-        }); 
+        });
     }
 
-    if (argv.test == 2){ 
+    if (argv.test == 2){
         execute('git symbolic-ref --short HEAD', function(br){
             console.log('deploying current branch: ' + br);
             return gulp.src('')
@@ -164,11 +220,11 @@ gulp.task('stage',['test'], function(){
                             }
                         }
                     }));
-        }); 
+        });
     }
 
 
-    if (argv.test == 3){ 
+    if (argv.test == 3){
         execute('git symbolic-ref --short HEAD', function(br){
             console.log('deploying current branch: ' + br);
             return gulp.src('')
@@ -183,40 +239,9 @@ gulp.task('stage',['test'], function(){
                             }
                         }
                     }));
-        }); 
-    } 
+        });
+    }
 })
-
-gulp.task('default', ['browser-sync']);
-
-
-var karma = require('karma').server;
-/**
- * Run test once and exit
- */
-gulp.task('test', function (done) {
-  karma.start({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  }, done);
-});
-
-// mongodump - dump all database on localhost
-gulp.task('mongodump', function() {
-  mongobackup.dump({
-    host : 'localhost',
-    out : './dumps/mongo'
-  });
-});
-
-// mongorestore - restore 'testdb' database to localhost
-gulp.task('mongorestore', function() {
-  mongobackup.restore({
-    host : 'localhost',
-    drop : true,
-    path : './dumps/mongo/testdb'
-  });
-});
 
 // check pages on dev
 gulp.task('checkDev', function(callback) {
