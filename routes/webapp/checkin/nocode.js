@@ -1,7 +1,7 @@
 var ObjectID = require('mongodb').ObjectID;
 
 exports.get = function (req, res) {
-    res.render('checkin/nocode', {title: 'Express'});
+    res.render('checkin/nocode');
 };
 
 exports.post = function (req, res) {

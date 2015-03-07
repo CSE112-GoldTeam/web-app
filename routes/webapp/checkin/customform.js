@@ -91,7 +91,6 @@ exports.get = function (req, res, next) {
             return next(err);
         }
         res.render('checkin/customform', {
-            title: 'Express',
             formHtml: formHtml
         });
     });
@@ -128,7 +127,6 @@ exports.post = function (req, res, next) {
             if (!valid) {
                 makeForm(db, req.params.id, req.body, function (formHtml) {
                     res.render('checkin/customform', {
-                        title: 'Express',
                         formHtml: formHtml,
                         formError: 'You are missing required fields.'
                     });
