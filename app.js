@@ -107,7 +107,7 @@ app.use(function(req, res, next) {
 var businessRoutes = require('./routes/webapp/business')(passport);
 
 // Set Webapp Routes
-app.use('/office/:id', require('./routes/webapp/checkin'));
+app.use('/office', require('./routes/webapp/checkin'));
 app.use('/', businessRoutes);
 
 // Set Mobile Routes

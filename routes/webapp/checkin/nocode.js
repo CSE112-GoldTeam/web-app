@@ -98,6 +98,7 @@ exports.post = function (req, res) {
     inputDOB = inputMonth + '/' + inputDay + '/' + inputYear;
 
     appointments.find({business: ObjectID(req.params.id), fname: inputFirst, lname: inputLast, dob: inputDOB}, function(err, result) {
+        console.log(req.params.id, inputFirst, inputLast, inputDOB);
         if (result.length === 0) {
             res.render('checkin/nocode', {
                 error: 'No appointment found',
