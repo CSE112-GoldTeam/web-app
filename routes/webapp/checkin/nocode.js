@@ -8,7 +8,6 @@ exports.post = function (req, res) {
     var db = req.db;
     var appointments = db.get('appointments');
     var dobFormatErr = 'Please enter your Date of Birth in MM/DD/YYYY format';
-		var dobFormatErr2 = 'YO'
     var monthValErr = 'Please enter MM value between 01 and 12';
     var dayValErr = 'Please enter DD value between 01 and 31';
 
