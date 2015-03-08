@@ -53,7 +53,7 @@ body {
 .customBG {
   width: 100%;
   height: auto;
-   background: url(/images/bg/full/bg10.jpg) no-repeat center center fixed;
+   background: url(/images/background.jpg) no-repeat center center fixed;
   background-size: cover;
   z-index: -10;
 
@@ -453,6 +453,23 @@ a:hover {
 }
 /**********************************************/
 
+/*************** Form Builder ***************/
+#formContent {
+  padding-left: 50px;
+  padding-right: 100px;
+  padding-bottom: 50px;
+}
 
+.previewForm {
+  margin-bottom: 15px;
+}
 
+.fieldwrapper {
+  margin-bottom: 15px;
+}
 
+.add {
+  margin-top: 10px;
+}
+
+/********************************************/
