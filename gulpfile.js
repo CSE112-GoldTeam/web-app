@@ -14,13 +14,9 @@ var shell = require('gulp-shell');
 
 
 var exec = require('child_process').exec;
-function execute(command, callback){
+function execute(command, callback){  
     exec(command, function(error, stdout, stderr){
         //if function hasnt succeeded in 5 seconds, kill it
-        setTimeout(function(){
-            console.log('Please Authenticate with Heroku and Git before using this command.');
-           // child.kill();
-        }, 5000);
         callback(stdout);
     });
 };    
@@ -119,9 +115,12 @@ gulp.task('mongorestore', function() {
 gulp.task('stage', function(){ 
     execute('git symbolic-ref --short HEAD', function(br){
         console.log('deploying current branch: ' + br);
+        var timer; 
         return gulp.src('')
                 .pipe(shell([
+                    '<%= setKillTimer() %>',
                     'heroku git:remote -a robobetty-test<%= getArg()%> -r test<%= getArg() %>',
+                    '<%= clearKillTimer() %>',
                     'git push -f test<%= getArg() %> <%= determineBranch() %>'
                 ], {
                     templateData: {
@@ -135,6 +134,17 @@ gulp.task('stage', function(){
                                 n = "1";
                             }
                             return n;
+                        },
+                        setKillTimer: function() {
+                            timer = setTimeout(function(){
+                            console.error('ERROR: Wasn\'t able to deploy server.  Are you logged in? Please run "heroku login" and authenticate with Git.');
+                            process.exit(1);
+                            }, 5000);
+                            return "";
+                        },
+                        clearKillTimer: function() {
+                            clearTimeout(timer);
+                            return "";
                         }
                     }
                 }));
