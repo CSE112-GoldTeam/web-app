@@ -32,6 +32,12 @@ var minifyCSS = require('gulp-minify-css');
 
 //// end of additional plugins
 
+gulp.task('lint', function() {
+  return gulp.src('./lib/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
+});
+
 
 //// begin of additional plugins
 gulp.task('clean', function () {
@@ -57,7 +63,7 @@ gulp.task('build', ['vendor'], function() {
 });
 
 //// end of additional plugins
-gulp.task('nodemon', function (cb) {
+gulp.task('nodemon', ['lint'], function (cb) {
   var called = false;
   return nodemon({
 
