@@ -86,8 +86,8 @@
         <h3>Form Builder</h3>
 
         <fieldset id="buildyourform"></fieldset>
-        <input type="button" value="Add a field" class="add" id="add" />
-        <input type="button" value="Submit" class="add" id="submit" />
+        <input type="button" value="Add a field" class="add btn btn-default" id="add" />
+        <input type="button" value="Submit" class="add btn btn-default" id="submit" />
     </div>
   </div>
 </body>

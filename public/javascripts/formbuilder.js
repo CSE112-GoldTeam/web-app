@@ -45,7 +45,7 @@ $(document).ready(function () {
                     break;
                 case 'dropdown':
                     dropCounter ++;
-                    input = $('<div class=\"previewForm col-md-10\"><select class=\"form-control\" id=\"drop' + dropCounter + '\">  </select> <button type=\"button\" onclick=\"insertOption(' + dropCounter +')\">Insert option</button> <button type=\"button\" onclick=\"removeOption(' + dropCounter + ')\">Remove option</button></div>');
+                    input = $('<div class=\"previewForm col-md-10\"><select class=\"form-control\" id=\"drop' + dropCounter + '\">  </select> <button class=\"btn btn-default\" type=\"button\" onclick=\"insertOption(' + dropCounter +')\">Insert option</button> <button class=\"btn btn-default\" type=\"button\" onclick=\"removeOption(' + dropCounter + ')\">Remove option</button></div>');
                     break;
             }
             fieldSet.append(label);
@@ -58,10 +58,10 @@ $(document).ready(function () {
     $('#add').click(function () {
         var intId = $('#buildyourform div').length + 1;
         var fieldWrapper = $('<div class=\"fieldwrapper\" id=\"field' + intId + '\"/>');
-        var fName = $('<input type=\"text\" class=\"fieldname\" />');
-        var fType = $('<select class=\"fieldtype\"><option value=\"textbox\">Text</option><option value=\"dropdown\">Drop</option> </select>');
+        var fName = $('<input type=\"text\" class=\"fieldname form-control\" placeholder=\"Field Title\" />');
+        var fType = $('<select class=\"fieldtype form-control\"><option value=\"textbox\">Text</option><option value=\"dropdown\">Drop</option> </select>');
 
-        var removeButton = $('<input type=\"button\" class=\"remove\" value=Remove>');
+        var removeButton = $('<input type=\"button\" class=\"remove btn btn-danger \" value=Remove>');
         removeButton.click(function () {
             $(this).parent().remove();
         });
