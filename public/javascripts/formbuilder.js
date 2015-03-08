@@ -45,7 +45,7 @@ $(document).ready(function () {
                     break;
                 case 'dropdown':
                     dropCounter ++;
-                    input = $('<div class=\"previewForm col-md-10\"><select id=\"drop' + dropCounter + '\">  </select> <button type=\"button\" onclick=\"insertOption(' + dropCounter +')\">Insert option</button> <button type=\"button\" onclick=\"removeOption(' + dropCounter + ')\">Remove option</button></div>');
+                    input = $('<div class=\"previewForm col-md-10\"><select class=\"form-control\" id=\"drop' + dropCounter + '\">  </select> <button type=\"button\" onclick=\"insertOption(' + dropCounter +')\">Insert option</button> <button type=\"button\" onclick=\"removeOption(' + dropCounter + ')\">Remove option</button></div>');
                     break;
             }
             fieldSet.append(label);

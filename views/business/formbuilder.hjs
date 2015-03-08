@@ -57,6 +57,10 @@
           width: 300px;
         }
 
+        .previewForm select {
+          width: 300px;
+        }
+
     </style>
 </head>
 <body class="customBG">
