@@ -36,22 +36,22 @@ $(document).ready(function () {
         // Iterate through each field and append its HTML to the preview form
         $('#buildyourform div').each(function () {
             var id = 'input' + $(this).attr('id').replace('field', '');
-            var label = $('<label for=\"' + id + '\">' + $(this).find('input.fieldname').first().val() + '</label>');
+            var label = $('<label class=\"col-md-2\" for=\"' + id + '\">' + $(this).find('input.fieldname').first().val() + '</label>');
             var input;
 
             switch ($(this).find('select.fieldtype').first().val()) {
                 case 'textbox':
-                    input = $('<div class=\"previewForm\"><input type=\"text\" id=\"' + id + '\" name=\"' + id + '\" /></div>');
+                    input = $('<div class=\"previewForm col-md-10\"><input type=\"text\" id=\"' + id + '\" name=\"' + id + '\" /></div>');
                     break;
                 case 'dropdown':
                     dropCounter ++;
-                    input = $('<div class=\"previewForm\"><select id=\"drop' + dropCounter + '\">  </select> <button type=\"button\" onclick=\"insertOption(' + dropCounter +')\">Insert option</button> <button type=\"button\" onclick=\"removeOption(' + dropCounter + ')\">Remove option</button></div>');
+                    input = $('<div class=\"previewForm col-md-10\"><select id=\"drop' + dropCounter + '\">  </select> <button type=\"button\" onclick=\"insertOption(' + dropCounter +')\">Insert option</button> <button type=\"button\" onclick=\"removeOption(' + dropCounter + ')\">Remove option</button></div>');
                     break;
             }
             fieldSet.append(label);
             fieldSet.append(input);
         });
-        $('body').append(fieldSet);
+        $('#formContent').append(fieldSet);
     }
 
     // Add form creation buttons
