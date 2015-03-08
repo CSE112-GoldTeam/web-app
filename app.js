@@ -36,10 +36,6 @@ passport.deserializeUser(function(id, done) {
 
 require('./config/passport')(passport); // pass passport for configuration
 
-// Load Routes for Webapp
-var business = require('./routes/business')(passport);
-var checkin = require('./routes/checkin');
-var signature = require('./routes/signature');
 
 // Load Routes for Mobile
 var mobileAuth = require('./routes/api/auth');
@@ -108,17 +104,18 @@ app.use(function(req, res, next) {
     next();
 });
 
+var businessRoutes = require('./routes/webapp/business')(passport);
 
 // Set Webapp Routes
-app.use('/', business);
-app.use('/', checkin);
-app.use('/', signature);
+app.use('/office', require('./routes/webapp/checkin'));
+app.use('/', businessRoutes);
 
 // Set Mobile Routes
 app.use('/', mobileAuth);
 app.use('/api/m/form', mobileForm);
 app.use('/api/m/appointment', mobileAppointment);
 app.use('/api/m/example', require('./routes/api/example'));
+app.use('/api', require('./routes/webapi'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
