@@ -41,7 +41,7 @@ $(document).ready(function () {
 
             switch ($(this).find('select.fieldtype').first().val()) {
                 case 'textbox':
-                    input = $('<div class=\"previewForm col-md-10\"><input type=\"text\" id=\"' + id + '\" name=\"' + id + '\" /></div>');
+                    input = $('<div class=\"previewForm col-md-10\"><input class=\"form-control\" type=\"text\" id=\"' + id + '\" name=\"' + id + '\" /></div>');
                     break;
                 case 'dropdown':
                     dropCounter ++;
