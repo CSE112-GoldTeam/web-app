@@ -17,16 +17,16 @@
       });
   </script>
 </head>
-<body>
-  <nav class="navbar navbar-default navbar-fixed-top">
+<body class="customBG">
+  <!-- <nav class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
         <a class="navbar-brand" href="/">
             <div id="company-logo">Company Logo</div>
         </a>
     </div>
-  </nav>
+  </nav> -->
   <div class="container container-margin">
-    <div class="row">
+    <div class="row innerInfo">
       <div class="nav-wizard-margins">
         <h3>Your checkin process:</h3>
         <ul class="nav nav-wizard">
@@ -38,7 +38,7 @@
         </ul>
       </div>
     </div>
-    <div class="row">
+    <div class="row innerInfo">
       {{#error}}
         <div class="alert alert-danger" role="alert">
           {{ error }}
@@ -49,12 +49,12 @@
         {{{ disclosure }}}
       </div>
     </div>
-    <div class="row text-center">
+    <div class="row text-center bottomInfo">
       <h3>SIGN HERE</h3>
       <form action="sign" method="post">
         <img id="sigImg" src="/api/signature/" style="width:auto"/>
         <br>
-        <input type="text" id="sig" name="sig"/>
+        <input type="text" id="sig" name="sig" onkeyup="this.value=this.value.replace(/[^a-zA-Z0-9_ ' , \. -]/g, '')"  />
         <button class="btn btn-default" type="submit">Sign</button>
       </form>
     </div>

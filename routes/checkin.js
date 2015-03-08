@@ -190,7 +190,10 @@ router.post('/office/:id/customform', function (req, res) {
                 });
             } else { //Form is valid, let's put it into the DB
                 var formResponses = db.get('formResponses');
-                var formResponse = {answers: []};
+                var formResponse = {
+                    appointment: req.session.appointmentId,
+                    answers: []
+                };
 
                 _.each(form.fields, function (field, index) {
                     var name = '_' + index;

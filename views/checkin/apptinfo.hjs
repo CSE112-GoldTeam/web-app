@@ -10,16 +10,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 
-<body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+<body class="customBG">
+    <!--<nav class="navbar navbar-default navbar-fixed-top">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">
                 <div id="company-logo">Company Logo</div>
             </a>
          </div>
-    </nav>
+    </nav>-->
     <div class="container container-margin centeredz">
-        <div>
+        <div class="row innerInfo">
             <div class="nav-wizard-margins">
                 <h3>Your checkin process:</h3>
                 <ul class="nav nav-wizard">
@@ -31,8 +31,9 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
+        <div class="row innerInfo">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
             <h1>
                 <img src="http://placehold.it/140x100">
                 Hi, {{name}}
@@ -55,14 +56,21 @@
                 <p><b>{{email}}</b></p>
             </div>
         </div>
-    </div>
-<!-- /.container -->
-<div class="col-md-4"></div>
-<div class="col-md-2">
+        </div>
+        
+        <!-- /.container -->
+        <div class="row innerInfo">
+            <div class="col-md-4"></div>
+            <div class="col-md-2">
     <a class="btn btn-lg btn-danger btn-block" type="submit" href="entercode">Not you?</a>
 </div>
 <div class="col-md-2">
     <a class="btn btn-lg btn-success btn-block" type="submit" href="customform">Next</a>
 </div>
+        </div>
+
+
+    </div>
+
 </body>
 </html>
