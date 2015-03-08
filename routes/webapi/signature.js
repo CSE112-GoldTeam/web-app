@@ -1,12 +1,10 @@
-var express = require('express'),
-    gm = require('gm');
-var router = express.Router();
+var gm = require('gm');
 
-router.get('/api/signature', function (req, res) {
+exports.getDefault = function (req, res) {
     res.redirect('%20');
-});
+};
 
-router.get('/api/signature/:text', function (req, res) {
+exports.get = function (req, res) {
     var text = req.params.text;
 
     // creating an image
@@ -23,6 +21,4 @@ router.get('/api/signature/:text', function (req, res) {
             res.send(buffer);
         });
 
-});
-
-module.exports = router;
+};
