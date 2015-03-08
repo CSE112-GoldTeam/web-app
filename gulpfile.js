@@ -49,11 +49,30 @@ gulp.task('vendor', function() {
     .on('error', gutil.log)
 });
 
-gulp.task('build', ['vendor'], function() {
+gulp.task('build-old', ['vendor'], function() {
   return gulp.src('./public/stylesheets/*.css')
     .pipe(minifyCSS({keepBreaks:false}))
     .pipe(rename('style.min.css'))
     .pipe(gulp.dest('./public/stylesheets/'))
+});
+
+
+gulp.task('compress', function() {
+  gulp.src('./public/javascripts/*.js')
+    .pipe(uglify())
+    .pipe(rename(function (path) {
+        path.basename += ".min";
+    }))
+    .pipe(gulp.dest('./build/js'))
+});
+
+gulp.task('build', ['compress'], function() {
+  return gulp.src('./public/stylesheets/*.css')
+    .pipe(minifyCSS({keepBreaks:false}))
+    .pipe(rename(function (path) {
+        path.basename += ".min";
+    }))
+    .pipe(gulp.dest('./build/css'))
 });
 
 //// end of additional plugins
