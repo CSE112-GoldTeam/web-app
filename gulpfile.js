@@ -103,7 +103,7 @@ gulp.task('mongoend', function() {
     });
 })
 
-gulp.task('browser-sync', ['nodemon', 'mongostart'], function () {
+gulp.task('browser-sync', ['nodemon', 'mongostart', 'watch-check'], function () {
 
   // for more browser-sync config options: http://www.browsersync.io/docs/options/
   browserSync.init({
@@ -201,11 +201,21 @@ gulp.task('stage', ['test'], function(){
     }); 
 })
 
-// check pages on dev
+// watch for js/css changes and run checkDev on changes
+gulp.task('watch-check', function() {
+    gulp.watch('public/**/*.*', ['checkDev']);
+    gulp.watch('views/**/*.*', ['checkDev']);
+    gulp.watch('public/javascripts/*.js', ['checkDev']);
+});
+
+// check pages on development
 gulp.task('checkDev', function(callback) {
+
   var options = {
     pageUrls: [
-      'http://localhost:4000/'
+      'http://localhost:4000/',
+      'http://localhost:4000/register',
+      'http://localhost:4000/login'
     ],
     checkLinks: true,
     onlySameDomain: true,
@@ -223,7 +233,27 @@ gulp.task('checkDev', function(callback) {
   };
 
   var callback = function() {
-    console.log('Done checking dev.');
+    console.log('Done checking development.');
+  };
+
+  checkPages(console, options, callback);
+});
+
+// check pages on production
+gulp.task('checkProd', function(callback) {
+  var options = {
+    pageUrls: [
+      'http://robobetty.com/',
+      'http://robobetty.com/register',
+      'http://robobetty.com/login'
+    ],
+    checkLinks: true,
+    maxResponseTime: 500,
+    summary: true
+  };
+
+  var callback = function() {
+    console.log('Done checking production.');
   };
 
   checkPages(console, options, callback);
