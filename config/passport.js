@@ -137,7 +137,10 @@ module.exports = function (passport) {
                 if (!user) {
                     done(null, false);
                 } else {
-                    done(null, user);
+                    if(user.employee == null)
+                        done(null, user.business);
+                    else
+                        done(null,user.employee);
                 }
             });
         }));
