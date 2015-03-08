@@ -203,13 +203,13 @@ gulp.task('stage', ['test'], function(){
 
 // watch for js/css changes and run checkDev on changes
 gulp.task('watch-check', function() {
-    gulp.watch('public/**/*.*', ['checkDev']);
-    gulp.watch('views/**/*.*', ['checkDev']);
-    gulp.watch('public/javascripts/*.js', ['checkDev']);
+    gulp.watch('public/**/*.*', ['checkLocal']);
+    gulp.watch('views/**/*.*', ['checkLocal']);
+    gulp.watch('public/javascripts/*.js', ['checkLocal']);
 });
 
-// check pages on development
-gulp.task('checkDev', function(callback) {
+// check pages on local
+gulp.task('checkLocal', function(callback) {
 
   var options = {
     pageUrls: [
@@ -234,6 +234,26 @@ gulp.task('checkDev', function(callback) {
 
   var callback = function() {
     console.log('Done checking development.');
+  };
+
+  checkPages(console, options, callback);
+});
+
+// check pages on development
+gulp.task('checkDev', function(callback) {
+  var options = {
+    pageUrls: [
+      'http://robobetty-dev.herokuapp.com/',
+      'http://robobetty-dev.herokuapp.com/register',
+      'http://robobetty-dev.herokuapp.com/login'
+    ],
+    checkLinks: true,
+    maxResponseTime: 500,
+    summary: true
+  };
+
+  var callback = function() {
+    console.log('Done checking production.');
   };
 
   checkPages(console, options, callback);
