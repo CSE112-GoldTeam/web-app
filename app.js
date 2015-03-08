@@ -10,6 +10,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var passport = require('passport');
+var async = require('async');
 
 var app = express();
 
@@ -28,25 +29,40 @@ var employee = db.get('employees');
 //passport functions to Serialize and Deserialize users
 
 passport.serializeUser(function(user, done) {
+        // console.log(user);
         done(null, user._id);
     });
 
 // used to deserialize the user
 passport.deserializeUser(function (id, done) {
 
+    var theemployee;
+    var thebusiness;
     // console.log(business);
-
-    businesses.find({_id: id}, function (err, user) {
-        if(err) done(err);
-        if(user){
-            done(null,user);
-        }else{
+    async.parallel({
+        Employee: function(cb){
             employee.find({_id: id}, function (err, user){
-                if(err) done(err);
-                done(null,user);
+                    if(err){ done(err);}
+                    if(user){
+                        theemployee = user;
+                    }
+                    cb();
+            });
+        },
+        Business: function(cb){
+            businesses.find({_id: id}, function (err, user) {
+                    if(err){ done(err);}
+                    if(user){
+                        thebusiness = user;
+                    }
+                    cb();        
             });
         }
-    });
+    }, function (err,results){
+        results.Employee = theemployee;
+        results.Business = thebusiness;
+        done(null,results);
+    });    
 });
 
 require('./config/passport')(passport); // pass passport for configuration

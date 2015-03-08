@@ -137,13 +137,16 @@ module.exports = function (passport) {
                 if (!user) {
                     done(null, false);
                 } else {
-                    if(user.employee == null)
+                    if(user.employee === null){
                         done(null, user.business);
-                    else
+                    }
+                    else{
                         done(null,user.employee);
+                    }
                 }
             });
-        }));
+        }
+    ));
 };
 
 
