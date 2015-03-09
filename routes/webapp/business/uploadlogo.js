@@ -26,11 +26,24 @@ exports.get = function(req, res, next){
 };
 
 exports.post = function(req, res, next){
+
+    var fs = require('fs');
     var db = req.db;
     var businesses = db.get('businesses');
     var businessID = "54eca979f2a2d47937757617";
 
     if(req.files.userLogo){
+
+        businesses.findById(businessID,
+            function (err, results){
+
+                if(err){
+                    return next(err);
+                }
+
+                fs.unlink('public/'+results.logo);
+            }    
+        );
 
         businesses.updateById(businessID, {
                 $set: {
