@@ -1,3 +1,6 @@
+/*
+Gets the details for the various employees specified
+*/
 exports.get = function (req,res) {
     var eid = '54ecaa5cfb4974129dc2050f';
     var db = req.db;
@@ -8,7 +11,6 @@ exports.get = function (req,res) {
     var phone;
     var sms;
     var email;
-
     employees.find({_id: eid}, function (err, result) {
         var emp = result[0];
         var phone = emp.phone;
@@ -26,7 +28,9 @@ exports.get = function (req,res) {
         });
     });
 };
-
+/*
+Edits the chosen employees details 
+*/
 exports.post = function (req, res) {
     var db = req.db;
     var employees = db.get('employees');
