@@ -181,10 +181,10 @@ gulp.task('test', function (done) {
 //               - must be authenticated with heroku
 //               - must have git installed and be in application root directory
 //               - must be authenticated with git so that password does not have to be entered on push
-gulp.task('stage', ['test'], function(){ 
+gulp.task('stage', ['test'], function(){
     execute('git symbolic-ref --short HEAD', function(br){
         console.log('deploying current branch: ' + br);
-        var timer; 
+        var timer;
         return gulp.src('')
                 .pipe(shell([
                     '<%= setKillTimer() %>',
@@ -217,7 +217,7 @@ gulp.task('stage', ['test'], function(){
                         }
                     }
                 }));
-    }); 
+    });
 })
 
 // watch for js/css changes and run checkDev on changes
