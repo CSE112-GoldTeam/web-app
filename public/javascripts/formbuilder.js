@@ -80,8 +80,12 @@ $(document).ready(function () {
 
         var removeButton = $('<input type=\"button\" class=\"remove\" value=Remove>');
         removeButton.click(function () {
+        var confirmRemove = confirm("Are you sure?");
+        if (confirmRemove)
+        {
             $(this).parent().remove();
             preview();
+        }
         });
 
         fieldWrapper.append(fName);
