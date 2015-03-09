@@ -12,7 +12,8 @@ exports.get = function (req,res) {
     employees.find({_id: eid}, function (err, result) {
         var emp = result[0];
         var phone = emp.phone;
-        phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
+        phone = phone.replace("1", "");
+				phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
         res.render('business/accountsettings', {
             title: 'Express',
             fname: emp.fname,
@@ -46,7 +47,8 @@ exports.post = function (req, res) {
             employees.find({_id: eid}, function (err, result) {
                 var emp = result[0];
                 var phone = emp.phone;
-                phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
+                phone = phone.replace("1", "");
+								phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
                 res.render('business/accountsettings', {
                     title: 'Express',
                     fname: emp.fname,
@@ -71,7 +73,8 @@ exports.post = function (req, res) {
             employees.find({_id: eid}, function (err, result) {
                 var emp = result[0];
                 var phone = emp.phone;
-                phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
+                phone = phone.replace("1", "");
+								phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
                 res.render('business/accountsettings', {
                     title: 'Express',
                     fname: emp.fname,
@@ -93,14 +96,16 @@ exports.post = function (req, res) {
 
         if (inputPhone.length === 10)
         {
-            employees.findAndModify({_id: eid}, { $set: {phone: inputPhone}}, function(err, data)
+            inputPhone = "1" + inputPhone;
+						employees.findAndModify({_id: eid}, { $set: {phone: inputPhone}}, function(err, data)
             {
                 if (err) { return handleError(res, err);}
 
                 employees.find({_id: eid}, function (err, result) {
                     var emp = result[0];
                     var phone = emp.phone;
-                    phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
+                    phone = phone.replace("1", "");
+										phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
                     res.render('business/accountsettings', {
                         title: 'Express',
                         fname: emp.fname,
@@ -120,7 +125,8 @@ exports.post = function (req, res) {
             employees.find({_id: eid}, function (err, result) {
                 var emp = result[0];
                 var phone = emp.phone;
-                phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
+                phone = phone.replace("1", "");
+								phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
                 res.render('business/accountsettings', {
                     title: 'Express',
                     fname: emp.fname,
@@ -154,7 +160,8 @@ exports.post = function (req, res) {
             employees.find({_id: eid}, function (err, result) {
                 var emp = result[0];
                 var phone = emp.phone;
-                phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
+                phone = phone.replace("1", "");
+								phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
                 res.render('business/accountsettings', {
                     title: 'Express',
                     fname: emp.fname,
@@ -188,7 +195,8 @@ exports.post = function (req, res) {
             employees.find({_id: eid}, function (err, result) {
                 var emp = result[0];
                 var phone = emp.phone;
-                phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
+                phone = phone.replace("1", "");
+								phone = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6);
                 res.render('business/accountsettings', {
                     title: 'Express',
                     fname: emp.fname,
