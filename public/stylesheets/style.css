@@ -345,6 +345,29 @@ a:hover {
   text-align: center;
 }
 
+.tableheader {
+  position: relative;
+  top: 50px;
+}
+
+.tablecontainer {
+  position: relative;
+}
+
+.tablewidth {
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: left;
+}
+
+.outerAlign {
+  position: relative;
+  text-align: center;
+}
+
+
+
 /**********************************************/
 
 
