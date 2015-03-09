@@ -3,7 +3,7 @@ exports.get = function(req, res, next){
     var db = req.db;
     var businesses = db.get('businesses');
 
-    var businessID = "54eca979f2a2d47937757617";
+    var businessID = '54eca979f2a2d47937757617';
 
     businesses.findById(businessID,
         function (err, results){
@@ -30,7 +30,7 @@ exports.post = function(req, res, next){
     var fs = require('fs');
     var db = req.db;
     var businesses = db.get('businesses');
-    var businessID = "54eca979f2a2d47937757617";
+    var businessID = '54eca979f2a2d47937757617';
 
     if(req.files.userLogo){
 
@@ -51,13 +51,11 @@ exports.post = function(req, res, next){
                 }
             },{
                 upsert: true
-            }, function (err, results){
+            }, function (err){
                 if (err) {
                     return next(err);
                 }
 
-                console.log(results);
-                console.log("HELLOOOOO");
                 res.render('business/uploadLogo',{
                     success:'Succesfully uploaded file: '+req.files.userLogo.originalname,
                     logo:'/images/uploads/'+req.files.userLogo.name
