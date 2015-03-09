@@ -1,10 +1,17 @@
 // Script to add, remove, preview and submit form elements
 
+var options = [];
+var x;
+
 // Insert options into appropriate dropdown field
 function insertOption(dropcounter) {
-    var x = document.getElementById('drop' + dropcounter);
+    var dropdown = document.getElementById('drop' + dropcounter);
     var option = document.createElement('option');
     option.text = prompt ('Name your option');
+
+    if(! options[dropcounter]) {
+       options[dropcounter] = [];
+    }
 
     //checks for null
     if (option.text === 'null'){
@@ -14,9 +21,9 @@ function insertOption(dropcounter) {
     //checks for input
     if (option.text)
     {
-       x.add(option);
+       dropdown.add(option);
+       options[dropcounter].push(option);
     }
-
 }
 
 // Remove option from appropriate dropdown field
@@ -51,7 +58,17 @@ $(document).ready(function () {
             fieldSet.append(label);
             fieldSet.append(input);
         });
+
         $('body').append(fieldSet);
+
+        for (i = 1; i <= dropCounter; i++) {
+            if(options[i] !== undefined) {
+                for (j = 0; j < options[i].length; j++) {
+                    x = document.getElementById('drop' + i.toString());
+                    x.add(options[i][j]);
+                }
+            }
+        }
     }
 
     // Add form creation buttons
@@ -64,7 +81,9 @@ $(document).ready(function () {
         var removeButton = $('<input type=\"button\" class=\"remove\" value=Remove>');
         removeButton.click(function () {
             $(this).parent().remove();
+            preview();
         });
+
         fieldWrapper.append(fName);
         fieldWrapper.append(fType);
         fieldWrapper.append(removeButton);
@@ -125,7 +144,9 @@ $(document).ready(function () {
             data: JSON.stringify(json),
             contentType:'application/json',
             dataType:'json',
-            success:function(){}
+            success:function(){
+                alert("Form Submitted!");
+            }
         });
     });
 });
