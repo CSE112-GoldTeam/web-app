@@ -29,6 +29,13 @@ function decodeAuthString(authString) {
     };
 }
 
+
+/**
+ * Checks if the user is authorized.
+ * @param req
+ * @param res
+ * @returns `401` Unauthorized and `200` if authorized.
+ */
 router.post('/api/authTest', function (req, res) {
     auth.isValidToken(req.db, req.headers.authorization, function (result) {
         if (!result) {
@@ -39,6 +46,13 @@ router.post('/api/authTest', function (req, res) {
     });
 });
 
+/**
+ * Checks if user has basic http authentication
+ * @param req
+ * @param res
+ * @param next
+ * @returns `400` bad request
+ */
 router.post('/api/auth', function (req, res, next) {
     if (!req.headers.authorization) {
         return res.send(400, 'Basic HTTP Auth required');
@@ -53,9 +67,11 @@ router.post('/api/auth', function (req, res, next) {
     }
 
     var user = decodeAuthString(matches[1]);
+    // Validates user's email and password
     auth.validateLogin(req.db, user.email, user.password, function (result) {
         if (result) {
             var name = req.body.name;
+            // Checks if name field is blank
             if (name === '') {
                 return res.send(400, 'Name field required');
             }
