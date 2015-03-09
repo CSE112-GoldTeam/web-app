@@ -13,7 +13,7 @@
     <style>
         #theme-toolbar {
             position: fixed;
-            width: 200px;
+            width: 200px !important;
             height: 100%;
             top: 0;
             right: 0;
@@ -53,70 +53,80 @@
 
 <body class="customBG">
 
-<div id="theme-toolbar">
-    <div id="toolbar-main" class="active-page">
-        <h3>What would you like to change?</h3>
+<div class="container">
 
-        <div class="btn-group-vertical" role="group" aria-label="..." style="margin: 0 auto; width:155px; display: block;">
-            <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-bg-img">Background Image</button>
-            <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-buttons">Buttons</button>
-            <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-content-container">Content Container</button>
+    <div class="row">
+
+        <div class="col-md-10 container-checkin">
+            <h1 class ="header">Welcome to Company!</h1>
+            <img class="checkinphoto" src="/images/dentalLogo.jpg">
+            <a type="button" class="btn custom-button checkinbutton" href="#"
+               style="display:block;margin-left:auto;margin-right:auto">Check In
+            </a>
         </div>
+
+        <div id="theme-toolbar" class="col-md-2">
+            <div id="toolbar-main" class="active-page">
+                <h3>What would you like to change?</h3>
+
+                <div class="btn-group-vertical" role="group" aria-label="..." style="margin: 0 auto; width:155px; display: block;">
+                    <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-bg-img">Background Image</button>
+                    <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-buttons">Buttons</button>
+                    <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-content-container">Content Container</button>
+                </div>
+            </div>
+
+            <div id="toolbar-bg-img" class="hidden-page">
+                <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-main">Main Menu</button>
+
+                <h4>Choose a BG image:</h4>
+                <img src="images/bg/thumb/bg1.jpg" data-bg="bg1.jpg" class="bg-image" />
+                <img src="images/bg/thumb/bg2.jpg" data-bg="bg2.jpg" class="bg-image" />
+                <img src="images/bg/thumb/bg3.jpg" data-bg="bg3.jpg" class="bg-image" />
+                <img src="images/bg/thumb/bg4.jpg" data-bg="bg4.jpg" class="bg-image" />
+                <img src="images/bg/thumb/bg5.jpg" data-bg="bg5.jpg" class="bg-image" />
+                <img src="images/bg/thumb/bg6.jpg" data-bg="bg6.jpg" class="bg-image" />
+                <img src="images/bg/thumb/bg7.jpg" data-bg="bg7.jpg" class="bg-image" />
+                <img src="images/bg/thumb/bg8.jpg" data-bg="bg8.jpg" class="bg-image" />
+                <img src="images/bg/thumb/bg9.jpg" data-bg="bg9.jpg" class="bg-image" />
+                <img src="images/bg/thumb/bg10.jpg" data-bg="bg10.jpg" class="bg-image" />
+
+            </div>
+
+            <div id="toolbar-buttons" class="hidden-page">
+                <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-main">Main Menu</button>
+
+                <p>
+                    <label for="button-bg-color">Button BG Color</label>
+                    <input type="text" id="button-bg-color"/>
+                </p>
+
+                <p>
+                    <label for="button-font-color">Button Text Color</label>
+                    <input type="text" id="button-font-color"/>
+                </p>
+            </div>
+
+            <div id="toolbar-content-container" class="hidden-page">
+                <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-main">Main Menu</button>
+
+                <p>
+                    <label for="content-container-color">Content Container BG Color</label>
+                    <input type="text" id="content-container-color"/>
+                </p>
+
+                <p>
+                    <label for="content-container-font-color">Content Container Font Color</label>
+                    <input type="text" id="content-container-font-color"/>
+                </p>
+            </div>
+        </div>
+
     </div>
 
-    <div id="toolbar-bg-img" class="hidden-page">
-        <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-main">Main Menu</button>
-
-        <h4>Choose a BG image:</h4>
-        <img src="images/bg/thumb/bg1.jpg" data-bg="bg1.jpg" class="bg-image" />
-        <img src="images/bg/thumb/bg2.jpg" data-bg="bg2.jpg" class="bg-image" />
-        <img src="images/bg/thumb/bg3.jpg" data-bg="bg3.jpg" class="bg-image" />
-        <img src="images/bg/thumb/bg4.jpg" data-bg="bg4.jpg" class="bg-image" />
-        <img src="images/bg/thumb/bg5.jpg" data-bg="bg5.jpg" class="bg-image" />
-        <img src="images/bg/thumb/bg6.jpg" data-bg="bg6.jpg" class="bg-image" />
-        <img src="images/bg/thumb/bg7.jpg" data-bg="bg7.jpg" class="bg-image" />
-        <img src="images/bg/thumb/bg8.jpg" data-bg="bg8.jpg" class="bg-image" />
-        <img src="images/bg/thumb/bg9.jpg" data-bg="bg9.jpg" class="bg-image" />
-        <img src="images/bg/thumb/bg10.jpg" data-bg="bg10.jpg" class="bg-image" />
-
-    </div>
-
-    <div id="toolbar-buttons" class="hidden-page">
-        <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-main">Main Menu</button>
-
-        <p>
-            <label for="button-bg-color">Button BG Color</label>
-            <input type="text" id="button-bg-color"/>
-        </p>
-
-        <p>
-            <label for="button-font-color">Button Text Color</label>
-            <input type="text" id="button-font-color"/>
-        </p>
-    </div>
-
-    <div id="toolbar-content-container" class="hidden-page">
-        <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-main">Main Menu</button>
-
-        <p>
-            <label for="content-container-color">Content Container BG Color</label>
-            <input type="text" id="content-container-color"/>
-        </p>
-
-        <p>
-            <label for="content-container-font-color">Content Container Font Color</label>
-            <input type="text" id="content-container-font-color"/>
-        </p>
-    </div>
 </div>
 
-<div class="container container-checkin">
-    <h1 class ="header">Welcome to Company!</h1>
-    <img class="checkinphoto" src="/images/dentalLogo.jpg">
-    <a type="button" class="btn custom-button checkinbutton" href="#"
-       style="display:block;margin-left:auto;margin-right:auto">Check In
-    </a>
-</div>
+
 
 
 
