@@ -14,6 +14,7 @@ var registerDevice = require('./registerdevice');
 var addEmployees = require('./addemployees');
 var employeeRegister = require('./employeeregister');
 var viewForm = require('./viewform');
+var businessSettings = require('./businesssettings');
 
 module.exports = function (passport) {
     //Pass in passport
@@ -50,6 +51,9 @@ module.exports = function (passport) {
     router.post('/employeeregister', employeeRegister.post);
 
     router.get('/viewform/:id', viewForm.get);
+
+    router.get('/businesssettings', businessSettings.get);
+    router.post('/businesssettings', businessSettings.post);
 
 
     return router;
