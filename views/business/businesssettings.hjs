@@ -21,14 +21,6 @@
           <div class="panel-heading" style=" background-color:#708090">
             <h1 style="text-align:center"><font style="color:white">Account Settings</font></h1>
             <p style="text-align:center"><font style="color:white">Configure other parts of your account</font></p>
-            <!-- {{#error}} -->
-                <div class="alert alert-danger" role="alert">
-                    <p id = "error"></p>
-                </div>
-            <!-- {{/error}} -->
-            <div>
-                <label style="color:white; text-align:center"> this is error</label>
-              </div>
           </div>
           <div class="panel-body"style=" background-color: #708090">
             <form role="form">
