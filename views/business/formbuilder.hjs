@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }}</title>
-    <fieldset id="buildyourform"></fieldset>
-    <input type="button" value="Add a field" class="add" id="add" />
-    <input type="button" value="Submit" class="add" id="submit" />
-    <script src="/javascripts/lib/jquery/jquery-2.1.3.min.js"></script>
-    <script src="/javascripts/formbuilder.js"></script>
+  <title>{{ title }}</title>
+  <fieldset id="buildyourform"></fieldset>
+  <input type="button" value="Add a field" class="add" id="add" />
+  <input type="button" value="Submit" class="add" id="submit" />
+  <script src="/javascripts/lib/jquery/jquery-2.1.3.min.js"></script>
+  <script src = "/javascripts/underscore.js"></script>
+  <script>
+  form = {{{form}}};
+  </script>
+  <script src="/javascripts/formbuilder.js"></script>
 </head>
+<body>
+  <pre>
+    {{{form}}}
+  </pre>
+</body>
+
 
 </html>
