@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }}</title>
+    <title>Checkin</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-nav-wizard.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
-<body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+<body class="customBG">
+    <!-- <nav class="navbar navbar-default navbar-fixed-top">
           <div class="navbar-header">
             <a class="navbar-brand" href="/">
                 <div id="company-logo">Company Logo</div>
             </a>
           </div>
-    </nav>
+    </nav> -->
 
     <div class="container container-margin">
-        <div class="row">
+        <div class="row innerInfo">
             <div class="nav-wizard-margins">
                 <h3>Your checkin process:</h3>
                 <ul class="nav nav-wizard">
@@ -30,7 +30,7 @@
                 </ul>
             </div>
         </div>
-        <div class="row">
+        <div class="row innerInfo">
             {{#error}}
                 <div class="alert alert-danger" role="alert">
                     {{ error }}
@@ -57,6 +57,7 @@
                     </div>
                 </div>
                <button class="btn btn-lg btn-block custom-button custom-center" type="submit">Next</button>
+
             </form>
         </div>
     </div>
