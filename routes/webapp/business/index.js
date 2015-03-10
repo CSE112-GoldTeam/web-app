@@ -19,7 +19,7 @@ module.exports = function (passport) {
     //Pass in passport
     login.init(passport);
     register.init(passport);
-    employeeRegister.init(passport);
+    
 
     //Setup the routes
     router.get('/', landing.get);
@@ -48,10 +48,12 @@ module.exports = function (passport) {
     router.post('/addemployees', addEmployees.post);
 
     router.get('/employeeregister', employeeRegister.get);
-    router.post('/employeeregister', employeeRegister.post);
+    router.post('/employeeregister', passport.authenticate('local-signup-employee',{
+        successRedirect : '/config', // redirect to the secure profile section
+        failureRedirect : '/register' // redirect back to the signup page if there is an error
+    }));
 
     router.get('/viewform/:id', viewForm.get);
-
 
     return router;
 };
