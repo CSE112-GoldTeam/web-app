@@ -6,18 +6,25 @@ var controller = require('./appointment.controller');
 var router = express.Router();
 var auth = require('../../../lib/auth');
 
-// Confirm Identity
-// /api/m/appointment?fname=John&lname="Doe"&dob="05/13/1965"
+
+/**
+ * GET identity
+ */
 router.get('/', controller.confirm);
 
-// Retrieve Appointment Information
-// /api/appointment/:id/
+/**
+ * GET appointment information
+ */
 router.get('/:id', auth.isAuthenticated, controller.retrieve);
 
-// Transition states
+/**
+ * PUT transistion states
+ */
 router.put('/:id/state/next', controller.nextState);
 
-// Setting states
+/**
+ * PUT setting sates
+ */
 router.put('/:id/state', controller.updateState);
 
 
