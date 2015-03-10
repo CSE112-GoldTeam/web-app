@@ -19,6 +19,7 @@ module.exports = function (passport) {
     //Pass in passport
     login.init(passport);
     register.init(passport);
+    employeeRegister.init(passport);
 
     //Setup the routes
     router.get('/', landing.get);

@@ -8,7 +8,8 @@ exports.get = function(req, res) {
 };
 
 exports.post = function () {
-    return passport.authenticate('local-login', {
+	console.log("am i here?");
+    return passport.authenticate('local-login',{
         successRedirect : '/config',
         failureRedirect : '/login'
     });
