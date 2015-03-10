@@ -46,6 +46,13 @@ exports.show = function (req, res, next) {
 
 /**
  * Create a form.
+ * PUT /api/m/form/
+ *
+ * @param req req.body The form in JSON format
+ * @param res Respond with '201' upon successful insert.
+ * @param next Used to handle any errors encountered when querying the
+ *        database.
+ * @returns {JSON} A JSON object containing the created form.
  */
 exports.createForm = function (req, res, next) {
 
@@ -70,8 +77,8 @@ exports.createForm = function (req, res, next) {
  * @param req req.mobileToken.business An id associated with a business.
  * @param req req.body.answers A fieldObject containing the user's responses
  *        to the form.
- * @param res Respond with a '400' (malformed response) or a '200'(everything
-          is OK).
+ * @param res Respond with a '500' (no business id), '400' (malformed response)
+ *         or a '200'(everything is OK).
  * @param next Used to handle any errors encountered when querying the 
  *        database.
  * @returns N/A
@@ -82,12 +89,13 @@ exports.createResponse = function (req, res, next) {
     var db = req.db;
     var forms = db.get('forms');
 
+    // make sure that we have a business id
     if (!req.mobileToken.business) {
         return res.status(500).send('The mobileToken not set!');
     }
-
     var businessId = req.mobileToken.business;
 
+    // query the database for the business using the business's id
     forms.find({business: forms.id(businessId)}, function (err, results) {
         if (err) {
             return next(err);
@@ -95,16 +103,19 @@ exports.createResponse = function (req, res, next) {
 
         var form = results[0];
 
+        // create array of form fields
         var formList = [];
         _.each(form.fields, function (value) {
             formList.push(value.label);
         });
 
+        // create array of user responses to form
         var responseList = [];
         _.each(req.body.answers, function (value) {
             responseList.push(value.label);
         });
 
+        // make sure that fields from formResponse match with the actual form
         var unionList = _.union(_.difference(formList, responseList), _.difference(responseList, formList));
         if (unionList.length > 0) {
             return res.status(400).send('Malformed Requests, fields from formResponse is different from the actual form.');
@@ -120,6 +131,8 @@ exports.createResponse = function (req, res, next) {
                     response: req.body.answers[index].response
                 });
             });
+
+            // insert the user's responses into the database
             formResponses.insert(formResponse, function (err, data) {
                 if (err) {
                     return next(err);
