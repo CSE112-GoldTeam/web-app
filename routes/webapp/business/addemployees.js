@@ -1,7 +1,9 @@
 var baby = require('babyparse');
 var sendgrid  = require('sendgrid')('robobetty', 'NoKcE0FGE4bd');
 
-
+/*
+Gets employee/user information else returns not found
+*/
 exports.get = function (req,res){
     var db =  req.db;
     var csvEmployees = db.get('csvEmployees');
@@ -29,7 +31,9 @@ exports.get = function (req,res){
     res.render('business/addemployees',{title: 'Express',notsigned: notemployee, signed: employee});
 
 };
-
+/*
+Sends employee/user information in an email as confirmation of signup
+*/
 exports.post = function (req,res){
 
 
