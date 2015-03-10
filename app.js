@@ -36,10 +36,6 @@ passport.deserializeUser(function(id, done) {
 
 require('./config/passport')(passport); // pass passport for configuration
 
-// Load Routes for Webapp
-var business = require('./routes/business')(passport);
-var checkin = require('./routes/checkin');
-var signature = require('./routes/signature');
 
 // Load Routes for Mobile
 var mobileAuth = require('./routes/api/auth');
@@ -57,8 +53,31 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(multer());
+
+
+app.use(multer({
+  dest: __dirname + '/public/images/uploads/',
+  onFileUploadStart: function (file) {
+    console.log(file.mimetype);
+    if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg' && file.mimetype !== 'image/jpeg') {
+      return false;
+    } else {
+      console.log(file.fieldname + ' is starting ...');
+    }
+  },
+  onFileUploadData: function (file, data) {
+    console.log(data.length + ' of ' + file.fieldname + ' arrived');
+  },
+  onFileUploadComplete: function (file) {
+    console.log(file.fieldname + ' uploaded to  ' + file.path);
+  }
+}));
+
+
+
+
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'static')));
 
 
 //so... when only using router, for some reason deserialize wont work
@@ -86,16 +105,18 @@ app.use(function(req, res, next) {
     next();
 });
 
+var businessRoutes = require('./routes/webapp/business')(passport);
 
 // Set Webapp Routes
-app.use('/', business);
-app.use('/', checkin);
-app.use('/', signature);
+app.use('/office', require('./routes/webapp/checkin'));
+app.use('/', businessRoutes);
 
 // Set Mobile Routes
 app.use('/', mobileAuth);
 app.use('/api/m/form', mobileForm);
 app.use('/api/m/appointment', mobileAppointment);
+app.use('/api/m/example', require('./routes/api/example'));
+app.use('/api', require('./routes/webapi'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

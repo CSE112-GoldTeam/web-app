@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+
+<h1 class="form-response-header">Form Results for {{ name }}</h1>
+
+<table>
+    {{#formData}}
+        <tr>
+            <td class="form-response-label">{{ label }}</td>
+            <td class="form-response">{{ response }}</td>
+        </tr>
+    {{/formData}}
+</table>
+
+
+</body>
+</html>

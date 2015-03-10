@@ -12,7 +12,6 @@ var auth = require('../../../lib/auth');
 function decodeAuthString(authString) {
     var buffer = new Buffer(authString, 'base64');
     var s = buffer.toString();
-    console.log(s);
 
     //Split into 2 parts at the first instance of the : . We know that the first
     //: will be the separator since emails cannot contain ports
@@ -30,6 +29,13 @@ function decodeAuthString(authString) {
     };
 }
 
+
+/**
+ * Checks if the user is authorized.
+ * @param req
+ * @param res
+ * @returns `401` Unauthorized and `200` if authorized.
+ */
 router.post('/api/authTest', function (req, res) {
     auth.isValidToken(req.db, req.headers.authorization, function (result) {
         if (!result) {
@@ -40,7 +46,14 @@ router.post('/api/authTest', function (req, res) {
     });
 });
 
-router.post('/api/auth', function (req, res) {
+/**
+ * Checks if user has basic http authentication
+ * @param req
+ * @param res
+ * @param next
+ * @returns `400` bad request
+ */
+router.post('/api/auth', function (req, res, next) {
     if (!req.headers.authorization) {
         return res.send(400, 'Basic HTTP Auth required');
     }
@@ -54,28 +67,28 @@ router.post('/api/auth', function (req, res) {
     }
 
     var user = decodeAuthString(matches[1]);
+    // Validates user's email and password
     auth.validateLogin(req.db, user.email, user.password, function (result) {
         if (result) {
             var name = req.body.name;
+            // Checks if name field is blank
             if (name === '') {
                 return res.send(400, 'Name field required');
             }
 
             var mobileTokens = req.db.get('mobileTokens');
             mobileTokens.insert({
-                business: user._id,
+                business: result._id,
                 name: name
             }, function (err, result) {
                 if (err) {
-                    return console.error('Mongo Error: ' + err);
+                    return next(err);
                 }
 
                 res.json(200, {
                     api_token: result._id
                 });
             });
-
-            //res.json(200, req.body);
         } else {
             res.send(401);
         }
