@@ -18,7 +18,7 @@ var viewForm = require('./viewform');
 module.exports = function (passport) {
     //Pass in passport
     login.init(passport);
-    register.init(passport);
+
     
 
     //Setup the routes
@@ -38,7 +38,10 @@ module.exports = function (passport) {
     router.post('/uploadlogo', uploadLogo.post);
 
     router.get('/register', register.get);
-    router.post('/register', register.post);
+    router.post('/register',passport.authenticate('local-signup',{
+        successRedirect : '/config', // redirect to the secure profile section
+        failureRedirect : '/register' // redirect back to the signup page if there is an error
+    }));
 
     router.get('/dashboard', dashboard.get);
 
