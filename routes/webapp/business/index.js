@@ -16,10 +16,7 @@ var employeeRegister = require('./employeeregister');
 var viewForm = require('./viewform');
 
 module.exports = function (passport) {
-    //Pass in passport
-    login.init(passport);
-
-    
+    //Pass in passport    
 
     //Setup the routes
     router.get('/', landing.get);
@@ -27,7 +24,10 @@ module.exports = function (passport) {
     router.get('/theming', theming.get);
 
     router.get('/login', login.get);
-    router.post('/login', login.post);
+    router.post('/login',passport.authenticate('local-login',{
+        successRedirect : '/accountsettings',
+        failureRedirect : '/login'
+    }));
 
     router.get('/formbuilder', formbuilder.get);
 
@@ -39,7 +39,7 @@ module.exports = function (passport) {
 
     router.get('/register', register.get);
     router.post('/register',passport.authenticate('local-signup',{
-        successRedirect : '/config', // redirect to the secure profile section
+        successRedirect : '/accountsettings', // redirect to the secure profile section
         failureRedirect : '/register' // redirect back to the signup page if there is an error
     }));
 
@@ -52,7 +52,7 @@ module.exports = function (passport) {
 
     router.get('/employeeregister', employeeRegister.get);
     router.post('/employeeregister', passport.authenticate('local-signup-employee',{
-        successRedirect : '/config', // redirect to the secure profile section
+        successRedirect : '/accountsettings', // redirect to the secure profile section
         failureRedirect : '/register' // redirect back to the signup page if there is an error
     }));
 
