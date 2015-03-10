@@ -53,7 +53,7 @@
                 </div>
             </div>
     </div>
-    <footer class="footer navbar-fixed-bottom">
+    <footer class="footer">
         <div class="container">
             <ul class="list-inline footer-links text-center">
                 <li><a href="">About Us</a></li>
