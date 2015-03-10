@@ -11,15 +11,28 @@
 
 var _ = require('underscore');
 
-// Request a form
+/**
+ * Request a form.
+ * GET /api/m/form/:id
+ *
+ * @param req req.db A database object.
+ * @param req req.mobileToken.business An id associated with a business.
+ * @param req req.params.id An id associated with a form.
+ * @param res Respond with '404' (form not found) or a JSON representation of
+ *        the form.
+ * @param next Used to handle any errors encountered when querying the 
+ *        database.
+ * @returns {JSON} An array of fieldObjects representing the form.
+ */
 exports.show = function (req, res, next) {
     // grab our db object from the request
-
     var db = req.db;
     var forms = db.get('forms');
 
+    // acquire the token for the appropriate business
     var business = forms.id(req.mobileToken.business);
 
+    // query the database for the correct forms
     forms.find({'_id': req.params.id, 'business': business}, function (err, doc) {
         if (err) {
             return next(err);
@@ -31,7 +44,9 @@ exports.show = function (req, res, next) {
     });
 };
 
-// Create a form
+/**
+ * Create a form.
+ */
 exports.createForm = function (req, res, next) {
 
     // grab our db object from the request
@@ -47,7 +62,20 @@ exports.createForm = function (req, res, next) {
     });
 };
 
-// Create a formResponse
+/**
+ * Send a form response.
+ * POST /api/m/form/formResponse/
+ *
+ * @param req req.db A database object.
+ * @param req req.mobileToken.business An id associated with a business.
+ * @param req req.body.answers A fieldObject containing the user's responses
+ *        to the form.
+ * @param res Respond with a '400' (malformed response) or a '200'(everything
+          is OK).
+ * @param next Used to handle any errors encountered when querying the 
+ *        database.
+ * @returns N/A
+ */
 exports.createResponse = function (req, res, next) {
 
     // grab our db object from the request
