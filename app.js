@@ -56,7 +56,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 
 app.use(multer({
-  dest: __dirname + '/static/images/',
+  dest: __dirname + '/public/images/uploads/',
   onFileUploadStart: function (file) {
     console.log(file.mimetype);
     if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg' && file.mimetype !== 'image/jpeg') {
@@ -77,6 +77,7 @@ app.use(multer({
 
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'static')));
 
 
 //so... when only using router, for some reason deserialize wont work
