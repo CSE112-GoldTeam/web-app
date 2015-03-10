@@ -1,5 +1,6 @@
 // Script to add, remove, preview and submit form elements
 
+
 var options = [];
 var x;
 
@@ -33,7 +34,11 @@ function removeOption(dropcounter) {
 }
 
 $(document).ready(function () {
-
+makeForm(form,function (err, formHtml) {
+  if (err) {
+    return next(err);
+  }
+});
     function preview() {
         var dropCounter = 0;
         $('#yourform').remove();
@@ -83,7 +88,7 @@ $(document).ready(function () {
         var confirmRemove = confirm("Are you sure?");
         if (confirmRemove)
         {
-            $(this).parent().remove();
+          $(this).parent().remove();
             preview();
         }
         });
@@ -152,5 +157,53 @@ $(document).ready(function () {
                 alert("Form Submitted!");
             }
         });
+
     });
 });
+
+function makeForm(form, fn) {
+  console.log(form.fields);
+  var body = {};
+  var formHtml = '<form class="form-horizontal" method="post" action="#" enctype="application/x-www-form-urlencoded">';
+  _.each(form.fields, function (field, index) {
+    console.log("inside for");
+    formHtml += makeFormGroup(field, index, body);
+  });
+
+  formHtml += '</form>';
+
+  fn(null, formHtml);
+  $('body').append(formHtml);
+}
+
+function makeFormGroup(field, index, body) {
+  console.log("makeFormGroup");
+  var name = '_' + index;
+
+  var s = '<div class="form-group">';
+  s += '<label for="' + name + '" class="col-md-2 control-label">' + field.label + '</label>';
+
+  s += '<div class="col-md-10">';
+  if (field.type === 'textfield') {
+    s += makeTextfield(name, body);
+  } else if (field.type === 'dropdown') {
+    s += makeDropdown(field.options, name, body);
+  }
+  s += '</div>';
+
+  s += '</div>';
+  return s;
+}
+
+function makeDropdown(options, name, body) {
+  var s = '<select class="form-control" name="'+name+'" id="'+name+'">';
+  _.each(options, function (option) {
+    s += '<option value="'+option+'" ' + (body[name] === option ? 'selected' : '') + '>'+option+'</option> ';
+  });
+  s+= '</select>';
+  return s;
+}
+
+function makeTextfield(name, body) {
+  return'<input type="text" class="form-control" name="'+name+'" id="' + name + '"value="' + (body[name] || '') + '">';
+}
