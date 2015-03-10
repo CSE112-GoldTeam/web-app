@@ -28,11 +28,13 @@ var employee = db.get('employees');
 //passport functions to Serialize and Deserialize users
 
 passport.serializeUser(function(user, done) {
+        console.log("serialize here?");
         done(null, user._id);
     });
 
 // used to deserialize the user
 passport.deserializeUser(function (id, done) {
+    console.log("deserialize here?");
 
     var theemployee;
     var thebusiness;
@@ -65,6 +67,8 @@ passport.deserializeUser(function (id, done) {
 
 require('./config/passport')(passport); // pass passport for configuration
 
+
+var businessRoutes = require('./routes/webapp/business')(passport);
 
 // Load Routes for Mobile
 var mobileAuth = require('./routes/api/auth');
@@ -133,7 +137,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-var businessRoutes = require('./routes/webapp/business')(passport);
+
 
 // Set Webapp Routes
 app.use('/office', require('./routes/webapp/checkin'));

@@ -30,8 +30,6 @@ module.exports = function (passport) {
             var companyName = req.body.companyName;
             var username = req.body.username;
             var phone = req.body.phone;
-
-
             // Check if any field has been left blank
             if (companyName === '' || username === '' || email === ''
                 || phone === '' || password === '') {
@@ -100,6 +98,8 @@ module.exports = function (passport) {
     },
         function (req,email,password,done) {
 
+       
+
             var db =req.db;
             var employee = db.get('employees');
 
@@ -110,7 +110,7 @@ module.exports = function (passport) {
              update: { $unset: {registrationToken: 1},
                 $set: {password: password} },
              new: true},    
-                function (err,user){   
+                function (err,user){  
                 if (err) { 
                      throw err; }
                 return done(null,user);
@@ -135,6 +135,7 @@ module.exports = function (passport) {
             passReqToCallback: true // allows us to pass back the entire request to the callback
         },
         function (req, email, password, done) { // callback with email and password from our form
+
             auth.validateLogin(req.db, email, password, function (user) {
                 if (!user) {
                     done(null, false);
