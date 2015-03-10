@@ -3,6 +3,14 @@
  */
 var gm = require('gm');
 
+/**
+ * Redirects to an empty space. Otherwise, attempting to render empty text
+ * would cause an error.
+ *
+ * @param req
+ * @param res
+ * @returns N/A
+ */
 exports.getDefault = function (req, res) {
     res.redirect('%20');
 };
