@@ -1,17 +1,54 @@
-exports.get = function(req, res, next){
-    res.render('business/uploadLogo',{title:'Upload Logo'});
-};
+var fs = require('fs');
 
-exports.post = function(req, res, next){
+exports.get = function(req, res, next){
+    
     var db = req.db;
     var businesses = db.get('businesses');
 
+    var businessID = '54eca979f2a2d47937757617';
+
+    businesses.findById(businessID,
+        function (err, results){
+            if(err){
+                return next(err);
+            }
+
+            if(results.logo){
+
+                res.render('business/uploadLogo',
+                    {title:'Upload Logo',logo: results.logo});
+            }
+            else{
+                res.render('business/uploadLogo',
+                    {title:'Upload Logo'});
+            }
+        }    
+    );
+
+};
+
+exports.post = function(req, res, next){
+
+    var db = req.db;
+    var businesses = db.get('businesses');
+    var businessID = '54eca979f2a2d47937757617';
+
     if(req.files.userLogo){
-        var businessID = req.body.business;
+
+        businesses.findById(businessID,
+            function (err, results){
+
+                if(err){
+                    return next(err);
+                }
+
+                fs.unlink('public/'+results.logo);
+            }    
+        );
 
         businesses.updateById(businessID, {
                 $set: {
-                    logo: '/static/images/' + req.files.userLogo.name
+                    logo: '/images/uploads/' + req.files.userLogo.name
                 }
             },{
                 upsert: true
@@ -21,15 +58,38 @@ exports.post = function(req, res, next){
                 }
 
                 res.render('business/uploadLogo',{
-                    success:'Succesfully uploaded file: '+req.files.userLogo.originalname
+                    success:'Succesfully uploaded file: '+req.files.userLogo.originalname,
+                    logo:'/images/uploads/'+req.files.userLogo.name
                 });
 
-            });
+            }
+
+        );
     }
     else{
-        res.render('business/uploadLogo',{
-            error:'Please select a valid image(png,jpg) file to upload.'
-        });
+
+        businesses.findById(businessID,
+            function (err, results){
+                if(err){
+                    return next(err);
+                }
+
+                if(results.logo){
+
+                    res.render('business/uploadLogo',{
+                        title:'Upload Logo',
+                        logo:results.logo,
+                        error:'Please select a valid image(png,jpg) file to upload.'
+                    });
+                }
+                else{
+                    res.render('business/uploadLogo',{
+                        title:'Upload Logo',
+                        error:'Please select a valid image(png,jpg) file to upload.'
+                    });
+                }
+            }    
+        );
     }
 
 };
