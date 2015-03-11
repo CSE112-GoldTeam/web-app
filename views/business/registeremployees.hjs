@@ -21,6 +21,7 @@
             <div class="row text-center" id="regis-container">
                 <div class="col-xs-offset-1 col-xs-4" id="form-separator">
                     <form method="post" action="" enctype="application/x-www-form-urlencoded">
+                        <input class="hidden" type="email" name="email" value="fake@gmail.com">
                         <input class="regis" type="password" name="password" value="{{ password }}" placeholder="PASSWORD" required>
                         <input class="btn custom-button" name="submit" type="submit" value="SignUp">
                     </form>
