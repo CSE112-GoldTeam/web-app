@@ -59,6 +59,12 @@ function table() {
         $('#tblBody').empty();
         //for loop to reload the table
         for(var i=0; i<data.length; i++){
+
+            if(data[i].state == 'done'){
+              continue;
+            }
+
+
             var $img = $('<img id="Image" src="http://placehold.it/50x50" />');
             count++;
             var appDate = new Date(data[i].date);
@@ -97,7 +103,7 @@ function table() {
                         });
                     });
 
-                     cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$check,$img];
+                     cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$check,$img,""];
                 }
 
                 else if(data[i].state === 'roomed') {
@@ -110,16 +116,16 @@ function table() {
                          });
                     });
 
-                     cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$btn,$img];
+                     cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$btn,$img,""];
 
                 }
                 else{
-                    cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$btn = false,$img];
+                    cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$btn = false,$img,""];
                 }
             }
 
             else {
-                cols = [count,data[i].fname + ' ' + data[i].lname,$btn = false,appTime,data[i].state,$btn = false,$img];
+                cols = [count,data[i].fname + ' ' + data[i].lname,$btn = false,appTime,data[i].state,$btn = false,$img,""];
             }
 
             insRow(cols);
@@ -143,7 +149,14 @@ function insRow(cols) {
 
   // Loop through data
   for (var i = 0; i < cols.length; i++) {
-    var $col = $('<td/>'); // Create a column
+    var $col;
+
+    if(i===cols.length-1 && cols[4]=="checkedIn"){
+      $col = $('<td/style="background-color:#00FF00;width:1px">'); // Create a column
+    } else{
+      $col=$('<td/>');
+    }
+
     $col.append(cols[i]); // Append column data to column
     $row.append($col); // Append column to row
   }
