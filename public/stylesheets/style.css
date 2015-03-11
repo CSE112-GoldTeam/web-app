@@ -53,7 +53,7 @@ body {
 .customBG {
   width: 100%;
   height: auto;
-   background: url(/images/bg/full/bg10.jpg) no-repeat center center fixed;
+   background: url(/images/background.jpg) no-repeat center center fixed;
   background-size: cover;
   z-index: -10;
 
@@ -345,6 +345,29 @@ a:hover {
   text-align: center;
 }
 
+.tableheader {
+  position: relative;
+  top: 50px;
+}
+
+.tablecontainer {
+  position: relative;
+}
+
+.tablewidth {
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: left;
+}
+
+.outerAlign {
+  position: relative;
+  text-align: center;
+}
+
+
+
 /**********************************************/
 
 
@@ -428,13 +451,31 @@ a:hover {
 
 /**********************************************/
 
+/************* Employee Register Page *************/
+.password{
+  padding-left: 100px;
+  padding-top:15px;
+}
+
+.employee-submit{
+  margin-right: 40%;
+}
+
+.employee-register-pic{
+  margin-top: -15%;
+}
+
+
+/**************************************************/
+
+
 /*************** Upload Logo Page ***************/
 
 .uploadFormCenterHack {
   margin-left: 500px;
 }
 
-/**********************************************/}
+/**********************************************/
 
 /**** Styling for viewform page ***/
 .form-response-label {
@@ -451,3 +492,25 @@ a:hover {
 .form-response-header {
     max-width: 600px;
 }
+/**********************************************/
+
+/*************** Form Builder ***************/
+#formContent {
+  padding-left: 50px;
+  padding-right: 100px;
+  padding-bottom: 50px;
+}
+
+.previewForm {
+  margin-bottom: 15px;
+}
+
+.fieldwrapper {
+  margin-bottom: 15px;
+}
+
+.add {
+  margin-top: 10px;
+}
+
+/********************************************/

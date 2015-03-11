@@ -13,7 +13,9 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-header">
         <a class="navbar-brand" href="/">
-            <div id="company-logo">RoboBetty</div>
+            <div id="company-logo">
+                iReceptionist
+            </div>
         </a>
       </div>
       <div class="navbar-padding-right">
@@ -38,7 +40,7 @@
             <div class="row">
                 <div class="col-xs-offset-1 col-xs-4">
                     <h2>Register Employees</h2>
-                    <h4 align="left">Register all your employee(s) through a CSV file!</h4>
+                    <h4>Register all your employee(s) through a CSV file!</h4>
                 </div>
             </div>
 
@@ -48,17 +50,19 @@
                     <input class="btn custom-button" name="submit" type="submit" href="/addemployees" value="Upload">
                 </form>
             
-                <div style="position:relative;top:50px" align = "center">
+                <div class="outerAlign" >
 
-                    <h3 style="position:relative;top:50px;right:135px">Employees already registered</h2>
+                    <h3 class="tableheader">Employees already registered</h2>
 
-                        <div style="position:relative;top:50px">
+                        <div class="tableheader">
                         
-                            <table border="2" style="width:50%" id="registeredEmployees">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                </tr>
+                            <table class="table table-hover tablewidth" id="registeredEmployees">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
                                 {{#signed}}
                                 <tr>
                                     <td>{{name}}</td>
@@ -70,15 +74,18 @@
                         </div>
                         
                 
-                        <h3 style="position:relative;top:50px;right:135px">Employees not yet registered</h2>
+                        <h3 class="tableheader">Employees not yet registered</h2>
 
-                        <div style="position:relative;top:50px">
+                        <div class="tableheader">
                         
-                            <table border="2" style="width:50%" id="unregisteredEmployees">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                </tr>
+                            <table class="table table-hover tablewidth" id="unregisteredEmployees">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+
                                 {{#notsigned}}
                                 <tr>
                                     <td>{{name}}</td>
