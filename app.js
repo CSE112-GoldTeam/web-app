@@ -10,6 +10,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var passport = require('passport');
+var async = require('async');
 var app = express();
 
 //Database
@@ -19,7 +20,10 @@ console.log('Connecting to DB: ' + mongoURI);
 var db = monk(mongoURI);
 
 //login config
-var collect = db.get('businesses');
+var businesses = db.get('businesses');
+var employee = db.get('employees');
+
+
 
 //passport functions to Serialize and Deserialize users
 
@@ -28,14 +32,39 @@ passport.serializeUser(function(user, done) {
     });
 
 // used to deserialize the user
-passport.deserializeUser(function(id, done) {
-    collect.findById(id, function(err, user) {
-        done(err, user);
-    });
+passport.deserializeUser(function (id, done) {
+    var theemployee;
+    var thebusiness;
+    async.parallel({
+        Employee: function(cb){
+            employee.find({_id: id}, function (err, user){
+                    if(err){ done(err);}
+                    if(user){
+                        theemployee = user;
+                    }
+                    cb();
+            });
+        },
+        Business: function(cb){
+            businesses.find({_id: id}, function (err, user) {
+                    if(err){ done(err);}
+                    if(user){
+                        thebusiness = user;
+                    }
+                    cb();        
+            });
+        }
+    }, function (err,results){
+        results.Employee = theemployee;
+        results.Business = thebusiness;
+        done(null,results);
+    });    
 });
 
 require('./config/passport')(passport); // pass passport for configuration
 
+
+var businessRoutes = require('./routes/webapp/business')(passport);
 
 // Load Routes for Mobile
 var mobileAuth = require('./routes/api/auth');
@@ -105,7 +134,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-var businessRoutes = require('./routes/webapp/business')(passport);
+
 
 // Set Webapp Routes
 app.use('/office', require('./routes/webapp/checkin'));
