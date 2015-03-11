@@ -61,6 +61,7 @@
             <th>Status</th>
             <th></th>
             <th>Picture</th>
+          
           </tr>
         </thead>
         <tbody id="tblBody">
