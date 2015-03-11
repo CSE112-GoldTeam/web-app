@@ -1,8 +1,7 @@
 // Script to add, remove, preview and submit form elements
 
-
-var options = [];
-var x;
+var dropOptions = [];
+var dropCounter = 0;
 
 // Insert options into appropriate dropdown field
 function insertOption(dropcounter) {
@@ -10,8 +9,8 @@ function insertOption(dropcounter) {
     var option = document.createElement('option');
     option.text = prompt ('Name your option');
 
-    if(! options[dropcounter]) {
-       options[dropcounter] = [];
+    if(! dropOptions[dropcounter]) {
+       dropOptions[dropcounter] = [];
     }
 
     //checks for null
@@ -23,7 +22,7 @@ function insertOption(dropcounter) {
     if (option.text)
     {
        dropdown.add(option);
-       options[dropcounter].push(option);
+       dropOptions[dropcounter].push(option);
     }
 }
 
@@ -32,65 +31,42 @@ function removeOption(dropcounter) {
     var x = document.getElementById('drop' + dropcounter);
     x.remove(x.selectedIndex);
 }
-
+    
 $(document).ready(function () {
-makeForm(form,function (err, formHtml) {
-  if (err) {
-    return next(err);
-  }
-});
-    function preview() {
-        var dropCounter = 0;
-        $('#yourform').remove();
-
-        var fieldSet = $('<fieldset id=\"yourform\"><legend>Your Form</legend></fieldset>');
-
-        // Iterate through each field and append its HTML to the preview form
-        $('#buildyourform div').each(function () {
-            var id = 'input' + $(this).attr('id').replace('field', '');
-            var label = $('<label for=\"' + id + '\">' + $(this).find('input.fieldname').first().val() + '</label>');
-            var input;
-
-            switch ($(this).find('select.fieldtype').first().val()) {
-                case 'textbox':
-                    input = $('<div class=\"previewForm\"><input type=\"text\" id=\"' + id + '\" name=\"' + id + '\" /></div>');
-                    break;
-                case 'dropdown':
-                    dropCounter ++;
-                    input = $('<div class=\"previewForm\"><select id=\"drop' + dropCounter + '\">  </select> <button type=\"button\" onclick=\"insertOption(' + dropCounter +')\">Insert option</button> <button type=\"button\" onclick=\"removeOption(' + dropCounter + ')\">Remove option</button></div>');
-                    break;
-            }
-            fieldSet.append(label);
-            fieldSet.append(input);
-        });
-
-        $('body').append(fieldSet);
-
-        for (i = 1; i <= dropCounter; i++) {
-            if(options[i] !== undefined) {
-                for (j = 0; j < options[i].length; j++) {
-                    x = document.getElementById('drop' + i.toString());
-                    x.add(options[i][j]);
-                }
-            }
+    makeForm(form,function (err, formHtml) {
+        if (err) {
+            return next(err);
         }
-    }
+    });
 
-    // Add form creation buttons
-    $('#add').click(function () {
+    function addField(label, type) {
         var intId = $('#buildyourform div').length + 1;
         var fieldWrapper = $('<div class=\"fieldwrapper\" id=\"field' + intId + '\"/>');
-        var fName = $('<input type=\"text\" class=\"fieldname\" />');
-        var fType = $('<select class=\"fieldtype\"><option value=\"textbox\">Text</option><option value=\"dropdown\">Drop</option> </select>');
+        var fName;
+        var fType;
+
+        if(label) {
+            fName = $('<input type=\"text\" value=\"' + label + '\" class=\"fieldname\" />');
+        }
+        else {
+            fName = $('<input type=\"text\" class=\"fieldname\" />');
+        }
+
+        if(type === 'dropdown') {
+            fType = $('<select class=\"fieldtype\"><option selected=\"selected\" value=\"dropdown\">Drop</option> <option value=\"textbox\">Text</option></select>');
+        }
+        else {
+            fType = $('<select class=\"fieldtype\"><option selected=\"dropdown\" value=\"textbox\">Text</option><option value=\"dropdown\">Drop</option> </select>');
+        }
 
         var removeButton = $('<input type=\"button\" class=\"remove\" value=Remove>');
         removeButton.click(function () {
-        var confirmRemove = confirm("Are you sure?");
-        if (confirmRemove)
-        {
-          $(this).parent().remove();
-            preview();
-        }
+            var confirmRemove = confirm("Are you sure?");
+            if (confirmRemove)
+            {
+              $(this).parent().remove();
+                preview();
+            }
         });
 
         fieldWrapper.append(fName);
@@ -107,6 +83,50 @@ makeForm(form,function (err, formHtml) {
         });
 
         preview();
+    }
+
+    function preview() {
+        $('#yourform').remove();
+
+        var counter = 0;
+
+        var fieldSet = $('<fieldset id=\"yourform\"><legend>Your Form</legend></fieldset>');
+
+        // Iterate through each field and append its HTML to the preview form
+        $('#buildyourform div').each(function () {
+            var id = 'input' + $(this).attr('id').replace('field', '');
+            var label = $('<label for=\"' + id + '\">' + $(this).find('input.fieldname').first().val() + '</label>');
+            var input;
+
+            switch ($(this).find('select.fieldtype').first().val()) {
+                case 'textbox':
+                    input = $('<div class=\"previewForm\"><input type=\"text\" id=\"' + id + '\" name=\"' + id + '\" /></div>');
+                    break;
+                case 'dropdown':
+                    counter++;
+                    input = $('<div class=\"previewForm\"><select id=\"drop' + counter + '\">  </select> <button type=\"button\" onclick=\"insertOption(' + counter +')\">Insert option</button> <button type=\"button\" onclick=\"removeOption(' + counter + ')\">Remove option</button></div>');
+                    break;
+            }
+            fieldSet.append(label);
+            fieldSet.append(input);
+        });
+
+        $('body').append(fieldSet);
+
+        for (i = 1; i <= counter; i++) {
+            if(dropOptions[i] !== undefined) {
+                for (j = 0; j < dropOptions[i].length; j++) {
+                    x = document.getElementById('drop' + i.toString());
+                    console.log(dropOptions[i][j])
+                    x.add(dropOptions[i][j]);
+                }
+            }
+        }
+    }
+
+    // Add form creation buttons
+    $('#add').click(function () {
+        addField();
     });
 
     // Create JSON object and post to database
@@ -116,7 +136,7 @@ makeForm(form,function (err, formHtml) {
             fields: [
             ]
         };
-        var dropCounter = 0;
+        var counter = 0;
         var form = $('fieldset');
 
         // Cycle through each preview form field
@@ -133,7 +153,7 @@ makeForm(form,function (err, formHtml) {
                     };
 
                     dropCounter ++;
-                    var options = $('#drop' + dropCounter + ' option');
+                    var options = $('#drop' + counter + ' option');
 
                     $.map(options ,function(option) {
                         dropJson.options.push(option.value);
@@ -159,51 +179,63 @@ makeForm(form,function (err, formHtml) {
         });
 
     });
-});
 
 function makeForm(form, fn) {
-  console.log(form.fields);
-  var body = {};
-  var formHtml = '<form class="form-horizontal" method="post" action="#" enctype="application/x-www-form-urlencoded">';
-  _.each(form.fields, function (field, index) {
-    console.log("inside for");
-    formHtml += makeFormGroup(field, index, body);
-  });
+    var body = {};
+    var formHtml = '<form class="form-horizontal" method="post" action="#" enctype="application/x-www-form-urlencoded">';
+    _.each(form.fields, function (field, index) {
+        formHtml += makeFormGroup(field, index, body);
+    });
 
-  formHtml += '</form>';
-
-  fn(null, formHtml);
-  $('body').append(formHtml);
+    formHtml += '</form>';
+    fn(null, formHtml);
 }
 
 function makeFormGroup(field, index, body) {
-  console.log("makeFormGroup");
-  var name = '_' + index;
+    var name = '_' + index;
 
-  var s = '<div class="form-group">';
-  s += '<label for="' + name + '" class="col-md-2 control-label">' + field.label + '</label>';
+    var s = '<div class="form-group">';
+    s += '<label for="' + name + '" class="col-md-2 control-label">' + field.label + '</label>';
 
-  s += '<div class="col-md-10">';
-  if (field.type === 'textfield') {
-    s += makeTextfield(name, body);
-  } else if (field.type === 'dropdown') {
-    s += makeDropdown(field.options, name, body);
-  }
-  s += '</div>';
+    s += '<div class="col-md-10">';
+    if (field.type === 'textfield') {
+        s += makeTextfield(name, body);
+        addField(field.label, field.type);
+    } else if (field.type === 'dropdown') {
+        dropCounter++;
+        s += makeDropdown(field.options, name, body);
+        console.log(dropOptions[1]);
+        addField(field.label, field.type);
+    }
+    s += '</div>';
 
-  s += '</div>';
-  return s;
+    s += '</div>';
+    return s;
 }
 
 function makeDropdown(options, name, body) {
-  var s = '<select class="form-control" name="'+name+'" id="'+name+'">';
-  _.each(options, function (option) {
-    s += '<option value="'+option+'" ' + (body[name] === option ? 'selected' : '') + '>'+option+'</option> ';
-  });
-  s+= '</select>';
-  return s;
+    var s = '<select class="form-control" name="'+ name +'" id="'+ name +'">';
+    _.each(options, function (option) {
+        var optionText = document.createElement('option');
+
+        if(! dropOptions[dropCounter]) {
+            dropOptions[dropCounter] = [];
+        }
+
+        optionText.text = option;
+        dropOptions[dropCounter].push(optionText);
+
+        s += '<option value="'+option+'" ' + (body[name] === option ? 'selected' : '') + '>'+option+'</option> ';
+    });
+
+    s+= '</select>';
+    return s;
 }
 
 function makeTextfield(name, body) {
-  return'<input type="text" class="form-control" name="'+name+'" id="' + name + '"value="' + (body[name] || '') + '">';
+
+    return'<input type="text" class="form-control" name="'+name+'" id="' + name + '"value="' + (body[name] || '') + '">';
 }
+
+});
+

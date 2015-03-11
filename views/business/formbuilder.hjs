@@ -12,11 +12,5 @@
   </script>
   <script src="/javascripts/formbuilder.js"></script>
 </head>
-<body>
-  <pre>
-    {{{form}}}
-  </pre>
-</body>
-
 
 </html>
