@@ -47,7 +47,7 @@ module.exports = function (passport) {
         failureRedirect : '/register' // redirect back to the signup page if there is an error
     }));
 
-    router.get('/dashboard', dashboard.get);
+    router.get('/dashboard', isLoggedInBusiness, dashboard.get);
 
     router.get('/registerdevice', registerDevice.get);
 
@@ -63,6 +63,25 @@ module.exports = function (passport) {
     router.get('/viewform/:id', viewForm.get);
 
 
+function isLoggedIn(req,res,next){
+        if(req.isAuthenticated()){
+            return next();
+        }
+
+        res.redirect('/');
+    }
+
+// route middleware to make sure a user is logged in
+function isLoggedInBusiness(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if ((req.isAuthenticated()&& (req.user.Business.length === 1))) {
+        return next();
+    }
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
    
 
     return router;
