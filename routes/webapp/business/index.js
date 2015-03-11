@@ -15,12 +15,14 @@ var registerDevice = require('./registerdevice');
 var addEmployees = require('./addemployees');
 var employeeRegister = require('./employeeregister');
 var viewForm = require('./viewform');
+var customizeTheme = require('./customize_theme');
+var manageForms = require('./manage_forms');
 
 module.exports = function (passport) {
 
-   
 
-    //Pass in passport    
+
+    //Pass in passport
 
     //Setup the routes
     router.get('/', landing.get);
@@ -52,7 +54,11 @@ module.exports = function (passport) {
     router.get('/registerdevice', registerDevice.get);
 
     router.get('/addemployees',isLoggedInBusiness, addEmployees.get);
-    router.post('/addemployees',isLoggedInBusiness, addEmployees.post);    
+    router.post('/addemployees',isLoggedInBusiness, addEmployees.post);
+
+    router.get('/customizetheme', customizeTheme.get);
+
+    router.get('/manageforms', manageForms.get);
 
     router.get('/employeeregister', employeeRegister.get);
     router.post('/employeeregister', passport.authenticate('local-signup-employee',{
@@ -82,7 +88,7 @@ function isLoggedInBusiness(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
-   
+
 
     return router;
 };
