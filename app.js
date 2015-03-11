@@ -28,7 +28,6 @@ var employee = db.get('employees');
 //passport functions to Serialize and Deserialize users
 
 passport.serializeUser(function(user, done) {
-        console.log("serialize here?");
         done(null, user._id);
     });
 
@@ -38,7 +37,6 @@ passport.deserializeUser(function (id, done) {
 
     var theemployee;
     var thebusiness;
-    // console.log(business);
     async.parallel({
         Employee: function(cb){
             employee.find({_id: id}, function (err, user){
