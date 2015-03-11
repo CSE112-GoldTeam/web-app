@@ -1,3 +1,5 @@
+var ObjectID = require('mongodb').ObjectID;
+
 exports.get = function (req, res) {
     var db = req.db;
     var appointments = db.get('appointments');
