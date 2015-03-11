@@ -30,8 +30,6 @@ module.exports = function (passport) {
             var companyName = req.body.companyName;
             var username = req.body.username;
             var phone = req.body.phone;
-
-
             // Check if any field has been left blank
             if (companyName === '' || username === '' || email === ''
                 || phone === '' || password === '') {
@@ -88,7 +86,40 @@ module.exports = function (passport) {
                 });
             }
 
-        }));
+        }
+    ));
+
+
+
+    passport.use('local-signup-employee',new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password',
+        passReqToCallback: true
+    },
+        function (req,email,password,done) {
+
+       
+
+            var db =req.db;
+            var employee = db.get('employees');
+
+            password = auth.hashPassword(password);
+
+            employee.findAndModify({
+             query: {registrationToken: req.query.token},
+             update: { $unset: {registrationToken: 1},
+                $set: {password: password} },
+             new: true},    
+                function (err,user){  
+                if (err) { 
+                     throw err; }
+                return done(null,user);
+       
+                 }
+            );
+        }
+    ));
+
 
 
     // =========================================================================
@@ -104,13 +135,20 @@ module.exports = function (passport) {
             passReqToCallback: true // allows us to pass back the entire request to the callback
         },
         function (req, email, password, done) { // callback with email and password from our form
-            auth.validateLogin(req.db, email, password, function (business) {
-                if (!business) {
+
+            auth.validateLogin(req.db, email, password, function (user) {
+                if (!user) {
                     done(null, false);
                 } else {
-                    done(null, business);
+                    if(user.employee === null){
+                        done(null, user.business);
+                    }
+                    else{
+                        done(null,user.employee);
+                    }
                 }
             });
-        }));
+        }
+    ));
 };
 

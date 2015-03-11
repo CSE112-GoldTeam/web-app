@@ -46,7 +46,7 @@
 
             <div class="row text-center" id="regis-container">
                 <form method="post" action="addemployees" enctype="application/x-www-form-urlencoded">
-                    <input class="add-email" type="text" name="csvEmployees" placeholder="CSV of Employees EMAILS" required>
+                    <textarea class="add-email" type="text" name="csvEmployees" placeholder="CSV of Employees EMAILS" required></textarea>
                     <input class="btn custom-button" name="submit" type="submit" href="/addemployees" value="Upload">
                 </form>
             
