@@ -43,7 +43,7 @@ function startTime() {
 	}
     m = checkTime(m);
     s = checkTime(s);
-    document.getElementById('txt').innerHTML = 'Current Time: ' +h+':'+m+':'+s+ ' '+ dn;
+    $('#txt').html('Current Time: ' +h+':'+m+':'+s+ ' '+ dn);
     setTimeout(function(){startTime();},500);
 }
 
@@ -74,7 +74,7 @@ function table() {
             var appTime = getAppDate(data[i].date);
 
 
-            if (data[i].state === 'checkedIn' || data[i].state === 'roomed' || data[i].state === 'done') {
+            if (data[i].state === 'checkedIn' || data[i].state === 'roomed') {
 
                 var url = '/viewform/' + data[i]._id;
                 var $form = $('<a href="'+url+'" onclick="window.open(\''+url+'\', \'newwindow\', \'width=600, height=400\'); return false;" >View Forms</a>');
