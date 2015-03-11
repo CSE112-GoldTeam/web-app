@@ -39,6 +39,24 @@ gulp.task('clean', function () {
     .pipe(clean());
 });
 
+gulp.task('vendor', function() {
+  return gulp.src('./public/javascripts/*.js')
+    .pipe(concat('vendor.js'))
+    .pipe(gulp.dest('./build/concat/javascripts/'))
+    .pipe(uglify())
+    .pipe(rename('vendor.min.js'))
+    .pipe(gulp.dest('./build/concat/javascripts/'))
+    .on('error', gutil.log)
+});
+
+gulp.task('build-concat', ['vendor'], function() {
+  return gulp.src('./public/stylesheets/*.css')
+    .pipe(minifyCSS({keepBreaks:false}))
+    .pipe(rename('style.min.css'))
+    .pipe(gulp.dest('./build/concat/stylesheets/'))
+});
+
+
 gulp.task('compress', function() {
   gulp.src('./public/javascripts/*.js')
     .pipe(uglify())
