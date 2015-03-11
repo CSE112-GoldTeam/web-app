@@ -33,7 +33,7 @@ module.exports = function (passport) {
         failureRedirect : '/login'
     }));
 
-    router.get('/formbuilder', formbuilder.get);
+    router.get('/formbuilder',isLoggedInBusiness, formbuilder.get);
 
     router.get('/accountSettings', accountSettings.get);
     router.post('/accountSettings', accountSettings.post);
@@ -51,8 +51,8 @@ module.exports = function (passport) {
 
     router.get('/registerdevice', registerDevice.get);
 
-    router.get('/addemployees', addEmployees.get);
-    router.post('/addemployees',addEmployees.post);    
+    router.get('/addemployees',isLoggedInBusiness, addEmployees.get);
+    router.post('/addemployees',isLoggedInBusiness, addEmployees.post);    
 
     router.get('/employeeregister', employeeRegister.get);
     router.post('/employeeregister', passport.authenticate('local-signup-employee',{
