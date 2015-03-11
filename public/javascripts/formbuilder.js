@@ -57,11 +57,11 @@ $(document).ready(function () {
     // Add form creation buttons
     $('#add').click(function () {
         var intId = $('#buildyourform div').length + 1;
-        var fieldWrapper = $('<div class=\"fieldwrapper\" id=\"field' + intId + '\"/>');
-        var fName = $('<input type=\"text\" class=\"fieldname form-control\" placeholder=\"Field Title\" />');
-        var fType = $('<select class=\"fieldtype form-control\"><option value=\"textbox\">Text</option><option value=\"dropdown\">Drop</option> </select>');
+        var fieldWrapper = $('<div class=\"builderForm fieldwrapper form-group\" id=\"field' + intId + '\"/>');
+        var fName = $('<input type=\"text\" class=\"fieldname form-control col-xs-4\" placeholder=\"Field Title\" />');
+        var fType = $('<select class=\"fieldtype form-control col-xs-3\"><option value=\"textbox\">Text</option><option value=\"dropdown\">Drop</option> </select>');
 
-        var removeButton = $('<input type=\"button\" class=\"remove btn btn-danger \" value=Remove>');
+        var removeButton = $('<button type="button" class="remove btn btn-default btn-danger col-xs-1s" aria-label="Left Align"><span class="glyphicon glyphicon-remove white" aria-hidden="true"></span></button>');
         removeButton.click(function () {
             $(this).parent().remove();
         });
