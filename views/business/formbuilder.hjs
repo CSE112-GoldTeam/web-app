@@ -76,11 +76,6 @@
     <div class="navbar-header preview-nav">
       <h2>Form Preview</h2>
     </div>
-    <div class="sidebar-nav">
-      <ul class="nav navbar-nav navbar-right navbar-padding">
-        <h2>Form Builder</h2>
-      </ul>
-    </div>
   </div>
   <div class="container">
 
@@ -90,7 +85,11 @@
         </div>
       </div>
       <div class="col-md-2" id="theme-toolbar">
-
+      <div class="sidebar-nav navbar-fixed-top">
+          <ul class="nav navbar-nav navbar-right navbar-padding">
+            <h2>Form Builder</h2>
+          </ul>
+        </div>
         <div id="toolbar-main" class="active-page container-margin toolbar-bgcolor">
             <fieldset id="buildyourform" class="builderForm"></fieldset>
             <input type="button" value="Add a field" class="add btn btn-default" id="add" />
