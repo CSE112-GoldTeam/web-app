@@ -33,13 +33,12 @@ passport.serializeUser(function(user, done) {
 
 // used to deserialize the user
 passport.deserializeUser(function (id, done) {
-    console.log("deserialize here?");
 
     var theemployee;
     var thebusiness;
     async.parallel({
         Employee: function(cb){
-            employee.find({_id: id}, function (err, user){
+            employee.findById({_id: id}, function (err, user){
                     if(err){ done(err);}
                     if(user){
                         theemployee = user;
@@ -48,7 +47,7 @@ passport.deserializeUser(function (id, done) {
             });
         },
         Business: function(cb){
-            businesses.find({_id: id}, function (err, user) {
+            businesses.findById({_id: id}, function (err, user) {
                     if(err){ done(err);}
                     if(user){
                         thebusiness = user;
