@@ -44,14 +44,8 @@ var auth = require('../../../lib/auth');
  *  }
  * ]
  *
- * @apiError NoAccessRight Only authenticated Admins can access the data.
- * @apiError ApptNotFound  The <code>id</code> of the User was not found.
- *
  * @apiErrorExample Error (example):
  *     HTTP/1.1 401 Not Authenticated
- *     {
- *       "error": "NoAccessRight"
- *     }
  */
 router.get('/', controller.confirm);
 
@@ -66,17 +60,33 @@ router.get('/', controller.confirm);
  *
  *
  * @apiExample Example usage:
- * http://localhost/api/m/appointment/123456789
+ * curl -i http://localhost/api/m/appointment/123456789
  *
- * @apiSuccess {String} fname Firstname of the User.
- *
- * @apiSuccessExample Success-Response (example):
- * HTTP/1.1 200 OK
- * {
- *  "appointment": [
- *     "appointmentObject"
- *  ]
- * }
+* @apiSuccess { ObjectID } business Business ID
+* @apiSuccess { ObjectID } employee Employee ID
+* @apiSuccess { Date } date Date of the appointment
+* @apiSuccess { String } lname Last name
+* @apiSuccess { String } fname First name
+* @apiSuccess { String } dob Date of birth MM/DD/YYYY
+* @apiSuccess { String } email Email
+* @apiSuccess { String } state See db scheme for possible states
+*
+* @apiSuccessExample {json} Success-Response (example):
+* HTTP/1.1 200 OK
+* [
+*  {
+*  	"business" : ObjectId("54eca953f2a2d47937757616"),
+*  	"employee" : ObjectId("54ecaa24fb4974129dc2050c"),
+*  	"date" : ISODate("2015-02-26T21:00:00Z"),
+*  	"fname" : "Emily",
+*  	"lname" : "Lee",
+*  	"dob" : "03/25/1968",
+*  	"email" : "Emily.Lee@example.com",
+*  	"state" : "scheduled"
+*  }
+* ]
+* @apiErrorExample Error (example):
+*     HTTP/1.1 401 Not Authenticated
  */
 router.get('/:id', auth.isAuthenticated, controller.retrieve);
 
@@ -85,6 +95,10 @@ router.get('/:id', auth.isAuthenticated, controller.retrieve);
  * @apiName controller.nextState
  * @apiGroup Appointment
  * @apiPermission admin
+ *
+ * @apiParam {String} id Appointment id
+ * @apiSuccessExample Success-Response (example):
+ * HTTP/1.1 200 OK
  */
 router.put('/:id/state/next', controller.nextState);
 
@@ -93,6 +107,11 @@ router.put('/:id/state/next', controller.nextState);
  * @apiName controller.updateState
  * @apiGroup Appointment
  * @apiPermission admin
+ *
+ * @apiParam {String} id Appointment id
+ *
+ * @apiSuccessExample Success-Response (example):
+ * HTTP/1.1 200 OK
  */
 router.put('/:id/state', controller.updateState);
 
