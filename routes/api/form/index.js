@@ -7,26 +7,91 @@ var router = express.Router();
 var auth = require('../../../lib/auth');
 
 /**
- * Requests a form after authenticating the user.
- * GET /api/m/form/:id
+ * @api {get} /m/form/:id Get a form
+ * @apiName controller.show
+ * @apiGroup Form
+ * @apiPermission Admin
  *
- * See form.controller.show().
+ * @apiExample Example usage:
+ * curl -i http://localhost/api/m/form/:id
+ *
+ * @apiParam {String} id The id for a form.
+ *
+ * @apiSuccessExample {json} Success-Response (example):
+ *      HTTP/1.1 200 OK
+ *      {
+ *          business: 1293182391203,
+ *          fields: [ {
+ *              type: "textfield",
+ *              label: "Name"
+ *      },
+ *      {
+ *              type: "dropdown",
+ *              label: "Gender",
+ *              options: ["Male", "Female"]
+ *      },
+ *      {
+ *              type: "textfield",
+ *              label: "Email"
+ *      },
+ *      {
+ *              type: "dropdown",
+ *              label: "Favorite Color",
+ *              options: ["Blue", "Yellow", "Green", "Pink"]
+ *      }]
+ *      }
+ *
+ * @apiError NoAccessRight Only authenticated Admins can access the data.
+ * @apiError ApptNotFound  The <code>id</code> of the User was not found.
+ *
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 401 Not Authenticated
+ *     {
+ *       "error": "NoAccessRight"
+ *     }
  */
 router.get('/:id', auth.isAuthenticated, controller.show);
 
+
 /**
- * Creates a form.
- * PUT /api/m/form/
+ * @api {post} /m/form/:id Create a form
+ * @apiName controller.createForm
+ * @apiGroup Form
+ * @apiPermission Admin
  *
- * See form.controller.createForm().
+ * @apiParam {String} id The id for a form.
+ * @apiParam {String} id The id for a form.
+ *
+ * @apiParamExample {json} Request-Example:
+ * {
+ *  "answers": [
+ *    {
+ *      "label": "Name",
+ *      "response": "John Doe"
+ *    },
+ *    {
+ *      "label": "Gender",
+ *      "response": "Female"
+ *    },
+ *    {
+ *      "label": "Email",
+ *      "response": "john.doe@example.com"
+ *    },
+ *    {
+ *      "label": "Favorite Color",
+ *      "response": "Blue"
+ *    }
+ *  ]
+ * }
  */
 router.post('/', controller.createForm);
 
 /**
- * Sends a form response. after authenticating the user.
- * POST /api/m/form/formResponse
+ * @api {post} /m/form/ Create a form response
+ * @apiName controller.createResponse
+ * @apiGroup Form
+ * @apiPermission Admin
  *
- * See form.controller.createResponse().
  */
 router.post('/formResponse', auth.isAuthenticated, controller.createResponse);
 
