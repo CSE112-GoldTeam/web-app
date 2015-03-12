@@ -13,19 +13,15 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-header">
         <a class="navbar-brand" href="/">
-            <div id="company-logo">RoboBetty</div>
+            <img id = "company-logo" src="images/logo.png">
         </a>
       </div>
       <div class="navbar-padding-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="#">Features</a>
-            </li>
-            <li>
-                <a href="#">About Us</a>
-            </li>
-            <li>
-                <button type="button" class="btn custom-button" id="login-btn-navbar">Log In</button>
+                <p class="navbar-btn">
+                   <a href="/login" class="btn custom-button" id="login-btn-navbar">Log In</a>
+               </p>
             </li>
         </ul>
       </div>
@@ -45,7 +41,7 @@
                         <input class="regis" type="email" name="email" value="{{ email }}" placeholder="EMAIL" required>
                         <input class="regis" type="tel" name="phone" value="{{ phone }}" placeholder="PHONE NUMBER" required>
                         <input class="regis" type="password" name="password" value="{{ password }}" placeholder="PASSWORD" required>
-                        <input class="btn custom-button" name="submit" type="submit" value="SignUp">
+                        <input class="btn custom-button" name="submit" type="submit" value="Sign Up">
                     </form>
                 </div>
                 <div class="col-xs-7">
@@ -53,7 +49,7 @@
                 </div>
             </div>
     </div>
-    <footer class="footer navbar-fixed-bottom">
+    <footer class="footer">
         <div class="container">
             <ul class="list-inline footer-links text-center">
                 <li><a href="">About Us</a></li>

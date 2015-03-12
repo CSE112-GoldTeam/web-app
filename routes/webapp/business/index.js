@@ -15,28 +15,31 @@ var registerDevice = require('./registerdevice');
 var addEmployees = require('./addemployees');
 var employeeRegister = require('./employeeregister');
 var viewForm = require('./viewform');
+var customizeTheme = require('./customize_theme');
+var manageForms = require('./manage_forms');
 
 module.exports = function (passport) {
 
-   
 
-    //Pass in passport    
+
+    //Pass in passport
 
     //Setup the routes
     router.get('/', landing.get);
+    router.post('/', landing.post);
 
-    router.get('/theming', theming.get);
+    router.get('/theming', isLoggedInBusiness, theming.get);
 
     router.get('/login', login.get);
     router.post('/login',passport.authenticate('local-login',{
-        successRedirect : '/dashboard',
+        successRedirect : '/addemployees',
         failureRedirect : '/login'
     }));
 
-    router.get('/formbuilder',isLoggedInBusiness, formbuilder.get);
+    router.get('/formbuilder',isLoggedInEmployee, formbuilder.get);
 
-    router.get('/accountSettings', accountSettings.get);
-    router.post('/accountSettings', accountSettings.post);
+    router.get('/accountSettings', isLoggedInEmployee, accountSettings.get);
+    router.post('/accountSettings', isLoggedInEmployee, accountSettings.post);
 
     router.get('/uploadlogo', uploadLogo.get);
     router.post('/uploadlogo', uploadLogo.post);
@@ -47,12 +50,16 @@ module.exports = function (passport) {
         failureRedirect : '/register' // redirect back to the signup page if there is an error
     }));
 
-    router.get('/dashboard', isLoggedInBusiness, dashboard.get);
+    router.get('/dashboard', isLoggedInEmployee, dashboard.get);
 
     router.get('/registerdevice', registerDevice.get);
 
     router.get('/addemployees',isLoggedInBusiness, addEmployees.get);
-    router.post('/addemployees',isLoggedInBusiness, addEmployees.post);    
+    router.post('/addemployees',isLoggedInBusiness, addEmployees.post);
+
+    router.get('/customizetheme', customizeTheme.get);
+
+    router.get('/manageforms', manageForms.get);
 
     router.get('/employeeregister', employeeRegister.get);
     router.post('/employeeregister', passport.authenticate('local-signup-employee',{
@@ -63,8 +70,8 @@ module.exports = function (passport) {
     router.get('/viewform/:id', viewForm.get);
 
 
-function isLoggedIn(req,res,next){
-        if(req.isAuthenticated()){
+function isLoggedInEmployee(req,res,next){
+        if((req.isAuthenticated() && (req.user.Employee.length === 1))){
             return next();
         }
 
@@ -82,7 +89,7 @@ function isLoggedInBusiness(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
-   
+
 
     return router;
 };

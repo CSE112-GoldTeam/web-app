@@ -1,5 +1,6 @@
 var ObjectID = require('mongodb').ObjectID;
 var _ = require('underscore');
+var style = require('./../../../lib/style.js');
 
 //Custom Form
 function makeDropdown(options, name, body) {
@@ -86,12 +87,25 @@ function makeForm(db, businessId, body, fn) {
 }
 
 exports.get = function (req, res, next) {
-    makeForm(req.db, req.params.id, {}, function (err, formHtml) {
+    req.db.get('businesses').findById(req.params.id, function (err, business) {
         if (err) {
             return next(err);
         }
-        res.render('checkin/customform', {
-            formHtml: formHtml
+
+        makeForm(req.db, req.params.id, {}, function (err, formHtml) {
+            if (err) {
+                return next(err);
+            }
+            res.render('checkin/customform', {
+                formHtml: formHtml,
+                companyName: business.companyName,
+                bg: business.style.bg,
+                logo: business.logo,
+                buttonBg: style.rgbObjectToCSS(business.style.buttonBg),
+                buttonText: style.rgbObjectToCSS(business.style.buttonText),
+                containerText: style.rgbObjectToCSS(business.style.containerText),
+                containerBg: style.rgbObjectToCSS(business.style.containerBg)
+            });
         });
     });
 };

@@ -278,3 +278,43 @@ gulp.task('checkProd', function(callback) {
 
   checkPages(console, options, callback);
 });
+// Generate API Doc
+var gulp = require('gulp'),
+    apidoc = require('gulp-apidoc');
+
+gulp.task('apidoc', function(){
+          apidoc.exec({
+            src: "routes/api",
+            dest: "apidoc/"
+          });
+});
+
+// Deploy API Docs to gh pages
+var deploy = require('gulp-gh-pages');
+
+gulp.task('deploy-gh', function () {
+    var currentdate = new Date()
+    var timeString = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getFullYear() + " @ "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+    var options = {
+        message :  "Update API Doc --skip-ci"
+    };
+    return gulp.src('./apidoc/**/*')
+        .pipe(deploy(options));
+});
+
+var open = require('gulp-open');
+
+// Open API Docs
+gulp.task('apidoc-url', function(){
+  var options = {
+    url: 'http://cse112-goldteam.github.io/web-app/'
+  };
+  return gulp.src('./README.md')
+  .pipe(open('', options));
+});
+gulp.task('doc-deploy', ['apidoc','deploy-gh','apidoc-url']);

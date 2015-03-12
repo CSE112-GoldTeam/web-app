@@ -7,7 +7,7 @@
 
 /**
  * Confirms the users first name, last name, date of birth and business id
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  * @param {Object} next
  * @returns `200` Ok or `404` error depedning if id was found
@@ -16,7 +16,7 @@ exports.confirm = function (req, res, next) {
     var db = req.db;
     var appointments = db.get('appointments');
 
-    var businessid = appointments.id('54eca953f2a2d47937757616');
+    var business = forms.id(req.mobileToken.business);
     var fname = req.query.fname.replace(/['"]+/g, '');
     var lname = req.query.lname.replace(/['"]+/g, '');
     var dob = req.query.dob.replace(/['"]+/g, '');
@@ -24,7 +24,7 @@ exports.confirm = function (req, res, next) {
         'fname': fname,
         'lname': lname,
         'dob': dob,
-        'business': businessid
+        'business': business
     }, function (err, users) {
         if (err) {
             return next(err);
@@ -35,7 +35,7 @@ exports.confirm = function (req, res, next) {
 
 /**
  * Retrieves the list of appointments
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  * @param {Object} next
  * @returns `200` Ok or `404` error depedning if id was found
@@ -57,7 +57,7 @@ exports.retrieve = function (req, res, next) {
 
 /**
  * Transitions the state to the next state
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  * @param {Object} next
  * @returns `200` Ok or error depending if the state update was successful
@@ -91,10 +91,10 @@ exports.nextState = function (req, res, next) {
 
 /**
  * PUT an updated state
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  * @param {Object} next
- * @returns if the state was valid 
+ * @returns if the state was valid
  */
 exports.updateState = function (req, res, next) {
     // grab our db object from the request
