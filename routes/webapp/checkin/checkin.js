@@ -5,9 +5,7 @@ exports.get = function (req, res, next) {
         if (err) {
             return next(err);
         }
-
-
-
+        
         res.render('checkin/checkin', {
             companyName: business.companyName,
             bg: business.style.bg,
