@@ -1,0 +1,8 @@
+How to use:
+
+Move the `dumps` folder to the /web-app directory.
+Start up everything with the `gulp` command
+Open up a new terminal and run:
+	mongo --eval 'db.dropDatabase()' robobetty
+Now import the new data with:
+	gulp mongorestore
