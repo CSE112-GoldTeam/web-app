@@ -1,12 +1,20 @@
 var fs = require('fs');
+var auth = require('../../../lib/auth');
 
 exports.get = function(req, res, next){
     
+    console.log(req.user);
     var db = req.db;
     var businesses = db.get('businesses');
+    var businessID;
 
-    var businessID = '54eca979f2a2d47937757617';
-
+    if(req.user.Business.length!=0){
+        businessID = req.user.Business[0]._id;
+    }
+    else{
+        businessID = req.user.Employee[0].business;
+    }
+    
     businesses.findById(businessID,
         function (err, results){
             if(err){
@@ -31,7 +39,14 @@ exports.post = function(req, res, next){
 
     var db = req.db;
     var businesses = db.get('businesses');
-    var businessID = '54eca979f2a2d47937757617';
+   
+    
+    if(req.user.Business.length!=0){
+        businessID = req.user.Business[0]._id;
+    }
+    else{
+        businessID = req.user.Employee[0].business;
+    }
 
     if(req.files.userLogo){
 
