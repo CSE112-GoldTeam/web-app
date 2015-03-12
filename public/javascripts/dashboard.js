@@ -19,6 +19,7 @@ function dateToString(date) {
 
 
 }
+
 function getDate(){
 	var currentdate = new Date();
 	var datetime= '';
@@ -28,7 +29,9 @@ function getDate(){
 	var $header = $('<h1/>');
 	 $header.append(datetime);
 	$('#currentDate').replaceWith($header);
+
 }
+
 function startTime() {
     var today=new Date();
     var h=today.getHours();
@@ -41,7 +44,7 @@ function startTime() {
 	}
     m = checkTime(m);
     s = checkTime(s);
-    document.getElementById('txt').innerHTML = 'Current Time: ' +h+':'+m+':'+s+ ' '+ dn;
+    $('#txt').html('Current Time: ' +h+':'+m+':'+s+ ' '+ dn);
     setTimeout(function(){startTime();},500);
 }
 
@@ -51,37 +54,30 @@ function checkTime(i) {
 }
 
 function table() {
+  
     var cols,$btn;
 
-    $.get('/api/employee/'+'54ecaa24fb4974129dc2050d'+'/appointments/today', function( data ){
+    $.get('/api/employee/'+'5500e8527ac4b1b508657e6d'+'/appointments/today', function( data ){
+        
+        $('#empName').html("Hello, "+ data[0].fname + ' '+data[0].lname );
         var count = 0;
         //empty's the table
         $('#tblBody').empty();
         //for loop to reload the table
         for(var i=0; i<data.length; i++){
+
+            if(data[i].state == 'done'){
+              continue;
+            }
+
+
             var $img = $('<img id="Image" src="http://placehold.it/50x50" />');
             count++;
-            var appDate = new Date(data[i].date);
-            //parsing to get time
-            var fhours = appDate.getHours();
-            var appTime;
-            if(fhours/12 < 1){
-              var hours = ('0'+appDate.getHours()).slice(-2); //returns 0-
-              var minutes = ('0'+appDate.getMinutes()).slice(-2); //returns 0-59
-              appTime = hours+':'+minutes + ' AM';
-             }
-             else{
-              var pmHours = appDate.getHours()%12;
 
-              if(pmHours === 0) {
-                 pmHours = 12;
-              }
+            var appTime = getAppDate(data[i].date);
 
-              var hoursPM = ('0'+pmHours).slice(-2); //returns 0-
-              var minutesPM = ('0'+appDate.getMinutes()).slice(-2); //returns 0-59
-              appTime = hoursPM+':'+minutesPM + ' PM';
-            }
-            if (data[i].state === 'checkedIn' || data[i].state === 'roomed' || data[i].state === 'done') {
+
+            if (data[i].state === 'checkedIn' || data[i].state === 'roomed') {
 
                 var url = '/viewform/' + data[i]._id;
                 var $form = $('<a href="'+url+'" onclick="window.open(\''+url+'\', \'newwindow\', \'width=600, height=400\'); return false;" >View Forms</a>');
@@ -97,7 +93,7 @@ function table() {
                         });
                     });
 
-                     cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$check,$img];
+                     cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$check,$img,""];
                 }
 
                 else if(data[i].state === 'roomed') {
@@ -110,16 +106,13 @@ function table() {
                          });
                     });
 
-                     cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$btn,$img];
+                     cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$btn,$img,""];
 
-                }
-                else{
-                    cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$btn = false,$img];
                 }
             }
 
             else {
-                cols = [count,data[i].fname + ' ' + data[i].lname,$btn = false,appTime,data[i].state,$btn = false,$img];
+                cols = [count,data[i].fname + ' ' + data[i].lname,$btn = false,appTime,data[i].state,$btn = false,$img,""];
             }
 
             insRow(cols);
@@ -137,13 +130,46 @@ function poll() {
     },1000);//checks every 1000 millisecond
 }
 
+//function to get the appointment's time in a formatted string
+function getAppDate(date){
+  var appDate = new Date(date);
+  //parsing to get time
+  var fhours = appDate.getHours();
+  var appTime;
+  if(fhours/12 < 1){
+    var hours = ('0'+appDate.getHours()).slice(-2); //returns 0-
+    var minutes = ('0'+appDate.getMinutes()).slice(-2); //returns 0-59
+    appTime = hours+':'+minutes + ' AM';
+  }
+  else{
+    var pmHours = appDate.getHours()%12;
+
+    if(pmHours === 0) {
+       pmHours = 12;
+    }
+
+    var hoursPM = ('0'+pmHours).slice(-2); //returns 0-
+    var minutesPM = ('0'+appDate.getMinutes()).slice(-2); //returns 0-59
+    appTime = hoursPM+':'+minutesPM + ' PM';
+  }
+
+  return appTime;  
+}
+
 // JQuery Insert Row
 function insRow(cols) {
   var $row = $('<tr/>'); // Create a r
 
   // Loop through data
   for (var i = 0; i < cols.length; i++) {
-    var $col = $('<td/>'); // Create a column
+    var $col;
+
+    if(i===cols.length-1 && cols[4]=="checkedIn"){
+        $col = $('<td/style="background-color:#00FF00;width:1px">'); // Create a column
+    } else{
+        $col= $('<td/>');
+    }
+
     $col.append(cols[i]); // Append column data to column
     $row.append($col); // Append column to row
   }
