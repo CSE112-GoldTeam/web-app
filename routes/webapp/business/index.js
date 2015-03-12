@@ -42,6 +42,7 @@ module.exports = function (passport) {
     router.get('/dashboard', dashboard.get);
 
     router.get('/registerdevice', registerDevice.get);
+    router.get('/registerdevice', register.post);
 
     router.get('/addemployees', addEmployees.get);
     router.post('/addemployees', addEmployees.post);

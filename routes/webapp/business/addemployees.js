@@ -24,10 +24,7 @@ exports.get = function (req,res){
 
     });
 
-
-
-    res.render('business/addemployees',{title: 'Express',notsigned: notemployee, signed: employee});
-
+    res.render('business/addemployees',{title: 'Express', notsigned: notemployee, signed: employee});
 };
 
 exports.post = function (req,res){
