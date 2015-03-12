@@ -32,7 +32,7 @@ module.exports = function (passport) {
 
     router.get('/login', login.get);
     router.post('/login',passport.authenticate('local-login',{
-        successRedirect : '/dashboard',
+        successRedirect : '/addemployees',
         failureRedirect : '/login'
     }));
 
