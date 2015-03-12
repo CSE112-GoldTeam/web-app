@@ -243,9 +243,15 @@ gulp.task('apidoc', function(){
 var deploy = require('gulp-gh-pages');
 
 gulp.task('deploy-gh', function () {
-    var timeString = Date.now().toTimeString();
+    var currentdate = new Date()
+    var timeString = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getFullYear() + " @ "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
     var options = {
-        message :  "Update"+ timeString +" --skip-ci"
+        message :  "Update "+ timeString +" --skip-ci"
     };
     return gulp.src('./apidoc/**/*')
         .pipe(deploy(options));
