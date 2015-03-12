@@ -9,6 +9,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="javascripts/spectrum.js"></script>
+    <script>
+        var style = {{{style}}};
+    </script>
     <script src="javascripts/theme.js"></script>
     <style>
         #theme-toolbar {
@@ -30,7 +33,7 @@
         .customBG {
             width: 100%;
             height: auto;
-            background: url(images/bg/full/bg1.jpg) no-repeat center center fixed;
+            background: url(/images/bg/full/{{bg}}) no-repeat center center fixed;
             background-size: cover;
             z-index: -10;
         }
@@ -50,7 +53,27 @@
         }
 
         .change-toolbar-page {
-            margin-top: 70px;
+            margin-top: 5px;
+        }
+
+        .container-checkin,
+        .container-checkin h1,
+        .container-checkin h2,
+        .container-checkin h3,
+        .container-checkin h4,
+        .container-checkin h5,
+        .container-checkin h6 {
+            color: {{containerText}};
+        }
+
+        .container-checkin .btn {
+            background-color: {{buttonBg}};
+            border-color: {{buttonBg}};
+            color: {{buttonText}}
+        }
+
+        .container-checkin {
+            background-color: {{containerBg}};
         }
 
     </style>
@@ -62,8 +85,8 @@
 
     <div class="row">
         <div class="col-md-10 container-preview">
-            <h1 class ="header">Welcome to Company!</h1>
-            <img class="checkinphoto" src="/images/dentalLogo.jpg">
+            <h1 class ="header">Welcome to {{companyName}}!</h1>
+            <img class="checkinphoto" src="{{logo}}">
             <a type="button" class="btn custom-button checkinbutton" href="#"
                style="display:block;margin-left:auto;margin-right:auto">Check In
             </a>
@@ -71,6 +94,8 @@
 
         <div id="theme-toolbar" class="col-md-2">
             <div id="toolbar-main" class="active-page">
+                <button type="button" class="btn btn-success" id="save">Save Changes</button>
+
                 <h3>What would you like to change?</h3>
 
                 <div class="btn-group-vertical" role="group" aria-label="..." style="margin: 0 auto; width:155px; display: block;">
