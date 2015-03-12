@@ -2,7 +2,7 @@ var ObjectID = require('mongodb').ObjectID;
 var style = require('./../../../lib/style.js');
 
 
-exports.get = function (req, res) {
+exports.get = function (req, res, next) {
     req.db.get('businesses').findById(req.params.id, function (err, business) {
         if (err) {
             return next(err);
