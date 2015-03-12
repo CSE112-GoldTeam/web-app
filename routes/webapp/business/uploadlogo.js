@@ -3,7 +3,6 @@ var auth = require('../../../lib/auth');
 
 exports.get = function(req, res, next){
     
-    console.log(req.user);
     var db = req.db;
     var businesses = db.get('businesses');
     var businessID;
