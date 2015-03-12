@@ -6,17 +6,6 @@
 'use strict';
 
 /**
- * @api {get} /user/:id Request User information
- * @apiName GetUser
- * @apiGroup User
- *
- * @apiParam {Number} id Users unique ID.
- *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- */
-
-/**
  * Confirms the users first name, last name, date of birth and business id
  * @param {Object} req
  * @param {Object} res
@@ -27,7 +16,7 @@ exports.confirm = function (req, res, next) {
     var db = req.db;
     var appointments = db.get('appointments');
 
-    var businessid = appointments.id('54eca953f2a2d47937757616');
+    var business = forms.id(req.mobileToken.business);
     var fname = req.query.fname.replace(/['"]+/g, '');
     var lname = req.query.lname.replace(/['"]+/g, '');
     var dob = req.query.dob.replace(/['"]+/g, '');
@@ -35,7 +24,7 @@ exports.confirm = function (req, res, next) {
         'fname': fname,
         'lname': lname,
         'dob': dob,
-        'business': businessid
+        'business': business
     }, function (err, users) {
         if (err) {
             return next(err);

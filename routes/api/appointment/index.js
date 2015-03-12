@@ -8,7 +8,14 @@ var auth = require('../../../lib/auth');
 
 
 /**
- * GET identity
+ * @api {get} /api/m/appointment?fname=John&lname="Doe"&dob="05/13/1965"
+ * @apiName GetAppointmentConfirm
+ * @apiGroup Appointment
+ *
+ * @apiParam {String} fname Firstname of the User.
+ * @apiParam {String} lname Lastname of the User.
+ *
+ * @apiSuccess {String} fname Firstname of the User.
  */
 router.get('/', controller.confirm);
 
