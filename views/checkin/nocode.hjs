@@ -7,6 +7,25 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-nav-wizard.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            color: {{containerText}} !important;
+        }
+
+        .customBG {
+            background-image: url(/images/bg/full/{{bg}});
+        }
+
+        .btn {
+            background-color: {{buttonBg}};
+            border-color: {{buttonBg}};
+            color: {{buttonText}}
+        }
+
+        .container {
+            background-color: {{containerBg}};
+        }
+    </style>
 </head>
 <body class="customBG">
     <!-- <nav class="navbar navbar-default navbar-fixed-top">
@@ -37,7 +56,7 @@
                 </div>
             {{/error}}
             <h3 class="form-signin-heading">Please enter the following information:</h3>
-            <form class="form-horizontal" action="apptinfo" method="post">
+            <form class="form-horizontal" action="nocode" method="post">
                 <div class="form-group">
                     <label class="col-md-2 control-label inputFirst">First Name</label>
                     <div class="col-md-10">
