@@ -12,7 +12,6 @@ exports.get = function(req, res, next) {
 
         //TODO: Verify that there are results and no errors
         res.render('checkin/sign', {
-            title: 'Express',
             disclosure: business.disclosure
         });
     });
@@ -33,7 +32,6 @@ exports.post = function (req, res, next) {
             }
 
             res.render('checkin/sign', {
-                title: 'Express',
                 disclosure: business.disclosure,
                 error: 'You must provide a signature'
             });
