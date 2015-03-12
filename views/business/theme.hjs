@@ -30,7 +30,7 @@
         .customBG {
             width: 100%;
             height: auto;
-            background: url(images/bg/full/bg1.jpg) no-repeat center center fixed;
+            background: url(/images/bg/full/{{bg}}) no-repeat center center fixed;
             background-size: cover;
             z-index: -10;
         }
@@ -51,6 +51,26 @@
 
         .change-toolbar-page {
             margin-top: 70px;
+        }
+
+        .container-checkin,
+        .container-checkin h1,
+        .container-checkin h2,
+        .container-checkin h3,
+        .container-checkin h4,
+        .container-checkin h5,
+        .container-checkin h6 {
+            color: {{containerText}} !important;
+        }
+
+        .container-checkin .btn {
+            background-color: {{buttonBg}};
+            border-color: {{buttonBg}};
+            color: {{buttonText}}
+        }
+
+        .container-checkin {
+            background-color: {{containerBg}};
         }
 
     </style>
