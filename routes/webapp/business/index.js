@@ -38,8 +38,8 @@ module.exports = function (passport) {
 
     router.get('/formbuilder',isLoggedInBusiness, formbuilder.get);
 
-    router.get('/accountSettings', accountSettings.get);
-    router.post('/accountSettings', accountSettings.post);
+    router.get('/accountSettings', isLoggedInEmployee, accountSettings.get);
+    router.post('/accountSettings', isLoggedInEmployee, accountSettings.post);
 
     router.get('/uploadlogo', uploadLogo.get);
     router.post('/uploadlogo', uploadLogo.post);
@@ -70,8 +70,8 @@ module.exports = function (passport) {
     router.get('/viewform/:id', viewForm.get);
 
 
-function isLoggedIn(req,res,next){
-        if(req.isAuthenticated()){
+function isLoggedInEmployee(req,res,next){
+        if((req.isAuthenticated() && (req.user.Employee.length === 1))){
             return next();
         }
 
