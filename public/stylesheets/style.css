@@ -158,8 +158,9 @@ body {
 }
 
 #company-logo {
-  margin-left: 50px;
-  color: #ffffff;
+  height:75px;
+  margin-left:10%;
+  margin-top:-15%;
 }
 
 #login-btn-navbar {
@@ -504,5 +505,6 @@ a:hover {
 .form-response-header {
     max-width: 600px;
 }
+
 
 
