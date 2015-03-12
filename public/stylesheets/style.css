@@ -24,27 +24,27 @@ body {
 
 /* shared class written to be shared across checkin and done page */
 .header {
-	text-align:center;
-	margin-top: 70px;
+  text-align:center;
+  margin-top: 70px;
   font-weight: bold;
 }
 
 /* shared class written to be shared across checkin and done page */
 .checkinphoto {
-	display:block;
+  display:block;
   width:500px;
   height: 200px;
-	margin-left: auto;
-	margin-right:auto;
+  margin-left: auto;
+  margin-right:auto;
   margin-bottom: 60px;
-	margin-top:2em;
+  margin-top:2em;
   z-index: 5;
 }
 
 .checkinbutton {
-	margin-top:2em;
-	width:180px;
-	height:40px;
+  margin-top:2em;
+  width:180px;
+  height:40px;
   margin-bottom: 20px;
   border-radius: 4px;
   z-index: 5;
@@ -173,7 +173,6 @@ body {
 
 .custom-button {
   background-color: #21ca6b;
-  margin-bottom: 20px;
   color: #ffffff;
   font-family: 'Lato', sans-serif;
   border-radius: 4px; /* Overrides bootstrap rounded corners*/
@@ -190,6 +189,15 @@ body {
 }
 
 /* Made navbar static so need to push container down*/
+.container-margin-landing {
+  margin-bottom: 20px;
+  width: 90%;
+  height: auto;
+  border-radius: 4px;
+  background: rgba(250,250,250,.5);
+  z-index: 1;
+}
+
 .container-margin {
   margin-top: 100px;
   margin-bottom: 20px;
@@ -201,20 +209,42 @@ body {
 }
 
 #first-section {
-  background-color: #999999;
-  height: 70vh;
+  background-image: url('../images/bg.jpg');
+  height: 100vh;
   padding-top: 160px;
+  background-repeat: no-repeat;
+  background-size:100%;
+  margin-top:0px;
+}
+
+.heading {
+  color:#42444F;
+  font-weight: bolder;
+}
+
+.info-text{
+  color:#42444F;
+  font-size: 20px;
 }
 
 #intro {
   width: 40%;
   margin-left: 130px;
-  margin-top: -20px;
+  margin-top:10%;
+  background: rgba(256,256,256,0.8);
+  padding-bottom:20px;
+  padding-top:20px;
 }
 
 #intro-image {
     margin-left: 100px;
-    margin-top: -60px;
+    margin-top: 10%;
+    width:500px;
+}
+.landing-pic {
+  margin-left: 0px;
+  margin-right: 0px;
+  width:100%;
 }
 
 #second-section {
@@ -345,6 +375,29 @@ a:hover {
   text-align: center;
 }
 
+.tableheader {
+  position: relative;
+  top: 50px;
+}
+
+.tablecontainer {
+  position: relative;
+}
+
+.tablewidth {
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: left;
+}
+
+.outerAlign {
+  position: relative;
+  text-align: center;
+}
+
+
+
 /**********************************************/
 
 
@@ -428,24 +481,6 @@ a:hover {
 
 /**********************************************/
 
-/************* Employee Register Page *************/
-.password{
-  padding-left: 100px;
-  padding-top:15px;
-}
-
-.employee-submit{
-  margin-right: 40%;
-}
-
-.employee-register-pic{
-  margin-top: -15%;
-}
-
-
-/**************************************************/
-
-
 /*************** Upload Logo Page ***************/
 
 .uploadFormCenterHack {
@@ -469,3 +504,5 @@ a:hover {
 .form-response-header {
     max-width: 600px;
 }
+
+
