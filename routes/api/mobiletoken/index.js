@@ -6,7 +6,7 @@ var controller = require('./mobileToken.controller');
 var router = express.Router();
 
 /**
- * @api {get} /api/m/appointment/ Get A Mobile Token
+ * @api {get} /m/appointment/ Get A Mobile Token
  * @apiName GetToken
  * @apiGroup MobileToken
  * @apiPermission Admin
@@ -34,7 +34,7 @@ var router = express.Router();
 router.get('/', controller.index);
 
 /**
- * @api {delete} /api/m/appointment/:id Delete A Mobile Token
+ * @api {delete} /m/appointment/:id Delete A Mobile Token
  * @apiName DeleteToken
  * @apiGroup MobileToken
  * @apiPermission Admin
