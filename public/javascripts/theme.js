@@ -79,6 +79,12 @@ $(document).ready(function () {
 
     //Save button
     $('#save').click(function () {
-
+        $.ajax({
+            method: 'put',
+            url: '/api/style',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(style)
+        });
     });
 });
