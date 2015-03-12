@@ -29,6 +29,7 @@ function getDate(){
 	var $header = $('<h1/>');
 	 $header.append(datetime);
 	$('#currentDate').replaceWith($header);
+
 }
 
 function startTime() {
@@ -56,7 +57,9 @@ function table() {
   
     var cols,$btn;
 
-    $.get('/api/employee/'+'54ecaa24fb4974129dc2050d'+'/appointments/today', function( data ){
+    $.get('/api/employee/'+'5500e8527ac4b1b508657e6d'+'/appointments/today', function( data ){
+        
+        $('#empName').html("Hello, "+ data[0].fname + ' '+data[0].lname );
         var count = 0;
         //empty's the table
         $('#tblBody').empty();
@@ -105,9 +108,6 @@ function table() {
 
                      cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$btn,$img,""];
 
-                }
-                else{
-                    cols = [count,data[i].fname + ' ' + data[i].lname,$form,appTime,data[i].state,$btn = false,$img,""];
                 }
             }
 
