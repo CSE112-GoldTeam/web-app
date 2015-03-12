@@ -57,7 +57,7 @@
                                 </thead>
                                 {{#signed}}
                                 <tr>
-                                    <td>{{name}}</td>
+                                    <td>{{fname}} {{lname}}</td>
                                     <td>{{email}}</td>
                                 </tr>
                                 {{/signed}}
@@ -80,7 +80,7 @@
 
                                 {{#notsigned}}
                                 <tr>
-                                    <td>{{name}}</td>
+                                    <td>{{fname}} {{lname}}</td>
                                     <td>{{email}}</td>
                                 </tr>
                                 {{/notsigned}}
