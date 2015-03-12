@@ -51,14 +51,14 @@ passport.deserializeUser(function (id, done) {
                     if(user){
                         thebusiness = user;
                     }
-                    cb();        
+                    cb();
             });
         }
     }, function (err,results){
         results.Employee = theemployee;
         results.Business = thebusiness;
         done(null,results);
-    });    
+    });
 });
 
 require('./config/passport')(passport); // pass passport for configuration
@@ -70,6 +70,7 @@ var businessRoutes = require('./routes/webapp/business')(passport);
 var mobileAuth = require('./routes/api/auth');
 var mobileForm = require('./routes/api/form');
 var mobileAppointment = require('./routes/api/appointment');
+var mobileToken = require('./routes/api/mobiletoken');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -144,6 +145,7 @@ app.use('/', businessRoutes);
 app.use('/', mobileAuth);
 app.use('/api/m/form', mobileForm);
 app.use('/api/m/appointment', mobileAppointment);
+app.use('/api/m/mobiletoken', mobileToken);
 app.use('/api/m/example', require('./routes/api/example'));
 app.use('/api', require('./routes/webapi'));
 

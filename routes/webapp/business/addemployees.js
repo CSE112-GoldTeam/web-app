@@ -50,15 +50,18 @@ exports.post = function(req,res){
 	   var parsed = baby.parse(req.body.csvEmployees);
        var rows = parsed.data;
        var database =  req.db;
-       var employeeDB = db.get('employees');
+       var employeeDB = database.get('employees');
 
         for(var i = 0; i < rows.length; i++){
            var username = rows[i][0];
            var email = rows[i][1];
-
+					 var nameArr = username.split(' ');
+					 var fname = nameArr[0];
+					 var lname = nameArr[1];
             var token = randomToken();
             employeeDB.insert({
-                name: username,
+                fname: fname,
+								lname: lname,
                 email: email,
                 registrationToken : token,
             });
@@ -69,7 +72,7 @@ exports.post = function(req,res){
                 from: 'test@localhost',
                 subject: 'Employee Signup',
                 text: 'Hello ' + username + ',\n\n' + 'Please click on the following link, or paste this into your browser to complete sign-up the process: \n\n' +
-                'http://robobetty-dev.herokuapp.com/employeeregister?token=' + token 
+                'http://localhost:3000/employeeregister?token=' + token 
             }, function (err){
                 if (err) {
                     return next(err);
