@@ -451,7 +451,7 @@
   },
   {
     "type": "delete",
-    "url": "/m/appointment/:id",
+    "url": "/m/mobileToken/:id",
     "title": "Delete A Mobile Token",
     "name": "DeleteToken",
     "group": "MobileToken",
@@ -520,7 +520,7 @@
   },
   {
     "type": "get",
-    "url": "/m/appointment/",
+    "url": "/m/mobileToken/",
     "title": "Get A Mobile Token",
     "name": "GetToken",
     "group": "MobileToken",
