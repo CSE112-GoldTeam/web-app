@@ -42,7 +42,7 @@
 <!-- Took out all unnecessary divs to make consistent with checkin page design -->
 <div class="container container-margin container-checkin">
     <h1 class="header"> Thank you! Someone will be with you shortly. </h1>
-    <img class="checkinphoto" src="/images/dentalLogo.jpg" alt="">
+    <img class="checkinphoto" src="{{logo}}" alt="">
 </div>
 
 </body>
