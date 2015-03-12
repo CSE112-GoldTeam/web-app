@@ -243,8 +243,12 @@ gulp.task('apidoc', function(){
 var deploy = require('gulp-gh-pages');
 
 gulp.task('deploy-gh', function () {
+    var timeString = Date.now().toTimeString();
+    var options = {
+        message :  "Update"+ timeString +" --skip-ci"
+    };
     return gulp.src('./apidoc/**/*')
-        .pipe(deploy());
+        .pipe(deploy(options));
 });
 
-gulp.task('apidoc-deploy', ['apidoc','deploy-gh']);
+gulp.task('doc-deploy', ['apidoc','deploy-gh']);
