@@ -22,6 +22,7 @@ $(document).ready(function () {
     $themeToolbar.find('.bg-image').click(function () {
         var bg = $(this).data('bg');
         $('.customBG').css('background-image', ' url(images/bg/full/' + bg + ')');
+        style.bg = bg;
     });
 
     //Colorpicker for buttons
