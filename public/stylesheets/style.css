@@ -521,5 +521,9 @@ a:hover {
     max-width: 600px;
 }
 
-
+.ipad {
+    background: rgba(256,256,256,0.8);
+  padding-bottom:20px;
+  padding-top:20px;
+}
 
