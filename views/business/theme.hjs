@@ -61,7 +61,7 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-md-10 container-checkin container-customize">
+        <div class="col-md-10 container-preview">
             <h1 class ="header">Welcome to Company!</h1>
             <img class="checkinphoto" src="/images/dentalLogo.jpg">
             <a type="button" class="btn custom-button checkinbutton" href="#"
