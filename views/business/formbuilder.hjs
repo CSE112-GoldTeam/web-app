@@ -14,13 +14,14 @@
     <style>
         #theme-toolbar {
             position: fixed;
-            width: 200px;
+            width: 350px;
             height: 100%;
             top: 0;
             right: 0;
-            border-left: 2px solid #232323;
-            background-color: white;
+            border-left: 2px solid #42444f;
+            background-color: #42444f;
             overflow-y: scroll;
+            color: #fff;
         }
 
         html, body {
@@ -30,23 +31,9 @@
         .customBG {
             width: 100%;
             height: auto;
-            background: url(images/bg/full/bg1.jpg) no-repeat center center fixed;
+            background: url(images/bg/full/bg10.jpg) no-repeat center center fixed;
             background-size: cover;
             z-index: -10;
-        }
-
-        .bg-image {
-            width: 150px;
-            margin: 0 auto;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .bg-image:hover {
-            border: 1px solid black;
-            width: 152px;
-            margin-bottom: 9px;
-            margin-top: -1px;
         }
 
         label {
@@ -61,34 +48,54 @@
           width: 300px;
         }
 
+        .builderForm {
+            width: 280px;
+        }
+
+        .builderForm input {
+            width: 150px;
+            margin-bottom: 10px;
+            margin-right: 5px;
+            margin-left: 10px;
+
+        }
+
+        .builderForm select {
+            width: 70px;
+            margin-bottom: 10px;
+        }
+
+        .add {
+            margin-left: 10px;
+        }
+
     </style>
 </head>
 <body class="customBG">
-  <div class="container-margin">
-    <div class="row innerInfo">
-        <div class="nav-wizard-margins">
-            <h3>Your checkin process:</h3>
-            <ul class="nav nav-wizard">
-                <li><a href="#">Step 1: Identification</a></li>
-                <li><a href="#">Step 2: Confirm Appointment</a></li>
-                <li class="active"><a href="#">Step 3: Additional Information</a></li>
-                <li><a href="#">Step 4: Sign Disclosure Agreement</a></li>
-                <li><a href="#">Step 5: Checked In!</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="row innerInfo" id="formContent">
-
+  <div class="navbar-fixed-top">
+    <div class="navbar-header preview-nav">
+      <h2>Form Preview</h2>
     </div>
   </div>
-  <div class="container" id="theme-toolbar">
-    <div id="toolbar-main" class="active-page container-margin">
-        <h3>Form Builder</h3>
+  <div class="container">
 
-        <fieldset id="buildyourform"></fieldset>
-        <input type="button" value="Add a field" class="add btn btn-default" id="add" />
-        <input type="button" value="Submit" class="add btn btn-default" id="submit" />
-    </div>
+      <div class="container-preview col-md-10">
+        <div class="row innerInfo" id="formContent">
+
+        </div>
+      </div>
+      <div class="col-md-2" id="theme-toolbar">
+      <div class="sidebar-nav navbar-fixed-top">
+          <ul class="nav navbar-nav navbar-right navbar-padding">
+            <h2>Form Builder</h2>
+          </ul>
+        </div>
+        <div id="toolbar-main" class="active-page container-margin toolbar-bgcolor">
+            <fieldset id="buildyourform" class="builderForm"></fieldset>
+            <input type="button" value="Add a field" class="add btn btn-default" id="add" />
+            <input type="button" value="Submit" class="add btn btn-default" id="submit" />
+        </div>
+      </div>
   </div>
 </body>
 </html>
