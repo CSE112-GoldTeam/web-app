@@ -35,14 +35,14 @@
             <div id="intro" class="col-xs-7">
                 <h3 class="bold text-center">Patient Check-In. Made Easy.</h3>
                 <p class="text-center">Effortless check-in, form management, arrival notification, and appointment integration for your office.</p>
-                <div class="form-group">
+                <form class="form-group" action="" method="post">
                     <div class="col-xs-9">
-                        <input type="company" class="small form-control" id="inputCompany" placeholder="Step 1: Enter company name">
+                        <input type="company" class="small form-control" id="companyName" name="companyName" value="{{companyName}}" method="post" placeholder="Step 1: Enter company name">
                     </div>
                     <div class="col-xs-1 text-small">
-                        <a type="submit" class="btn custom-button" href="/register">Submit</a>
+                        <button type="submit" class="btn custom-button">Submit</button>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="col-xs-4">
                 <img id="intro-image" src="images/landing_page_cover.png"/>
