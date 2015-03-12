@@ -50,7 +50,7 @@ exports.post = function(req,res){
 	   var parsed = baby.parse(req.body.csvEmployees);
        var rows = parsed.data;
        var database =  req.db;
-       var employeeDB = db.get('employees');
+       var employeeDB = database.get('employees');
 
         for(var i = 0; i < rows.length; i++){
            var username = rows[i][0];
