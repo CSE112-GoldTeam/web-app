@@ -1,19 +1,26 @@
 define({ "api": [
   {
     "type": "get",
-    "url": "/user/:id",
-    "title": "Request User information",
-    "name": "GetUser",
-    "group": "User",
+    "url": "/api/m/appointment?fname=John&lname=\"Doe\"&dob=\"05/13/1965\"",
+    "title": "",
+    "name": "GetAppointmentConfirm",
+    "group": "Appointment",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>Users unique ID.</p> "
+            "field": "fname",
+            "description": "<p>Firstname of the User.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "lname",
+            "description": "<p>Lastname of the User.</p> "
           }
         ]
       }
@@ -25,21 +32,14 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "firstname",
+            "field": "fname",
             "description": "<p>Firstname of the User.</p> "
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "lastname",
-            "description": "<p>Lastname of the User.</p> "
           }
         ]
       }
     },
     "version": "0.0.0",
-    "filename": "routes/api/appointment/appointment.controller.js",
-    "groupTitle": "User"
+    "filename": "routes/api/appointment/index.js",
+    "groupTitle": "Appointment"
   }
 ] });
