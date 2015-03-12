@@ -1,5 +1,7 @@
+var newrelic = false;
+
 if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
-    require('newrelic');
+    newrelic = require('newrelic');
 }
 
 var express = require('express');
@@ -23,7 +25,9 @@ var db = monk(mongoURI);
 var businesses = db.get('businesses');
 var employee = db.get('employees');
 
-
+if (newrelic) {
+    app.locals.newrelic = newrelic;
+}
 
 //passport functions to Serialize and Deserialize users
 
