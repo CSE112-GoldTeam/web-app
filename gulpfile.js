@@ -228,3 +228,21 @@ gulp.task('checkDev', function(callback) {
 
   checkPages(console, options, callback);
 });
+// Generate API Doc
+var gulp = require('gulp'),
+    apidoc = require('gulp-apidoc');
+
+gulp.task('apidoc', function(){
+          apidoc.exec({
+            src: "routes/api",
+            dest: "apidoc/"
+          });
+});
+
+// Deploy API Docs to gh pages
+var deploy = require('gulp-gh-pages');
+
+gulp.task('deploy-gh', function () {
+    return gulp.src('./apidoc/**/*')
+        .pipe(deploy(options));
+});
