@@ -15,7 +15,7 @@
 <nav class="navbar navbar-default navbar-static-top">
     <div class="navbar-header">
         <a class="navbar-brand" href="/">
-            <div id="company-logo">iReceptionist</div>
+            <img id = "company-logo" src="images/logo.png">
         </a>
     </div>
     <div class="navbar-padding-right">
@@ -36,7 +36,7 @@
             <li>
                 <a href="/customizetheme">Customize Theme</a>
             </li>
-            <li><a href="/accountsettings">More Settings</a></li>
+            <li><a href="/accountSettings">More Settings</a></li>
         </ul>
     </div>
 </nav>
