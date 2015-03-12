@@ -18,7 +18,9 @@
       <div class="navbar-padding-right">
         <ul class="nav navbar-nav navbar-right">
            <li>
-               <button type="button" class="btn custom-button" id="login-btn-navbar">Log In</button>
+               <p class="navbar-btn">
+                   <a href="/login" class="btn custom-button" id="login-btn-navbar">Log In</a>
+               </p>
            </li>
         </ul>
       </div>
@@ -29,53 +31,57 @@
             <div id="intro" class="col-xs-7">
                 <h1 class="heading bold text-center">The old rules of waiting are over.</h3>
                 <p class="text-center info-text"> Let us help you revolutionize your customer waiting experience.</p>
-                <div class="form-group">
+                <form class="form-group" action="" method="post">
                     <div class="col-xs-9">
-                        <input type="company" class="small form-control" id="inputCompany" placeholder="Step 1: Enter company name">
+                        <input type="company" class="small form-control" id="companyName" name="companyName" value="{{companyName}}" method="post" placeholder="Step 1: Enter company name">
                     </div>
                     <div class="col-xs-1 text-small">
-                        <a type="submit" class="btn custom-button" href="/register">Submit</a>
+                        <button type="submit" class="btn custom-button">Submit</button>
                     </div>
-                </div>
+                </form>
             </div>
+
             <div class="col-xs-4 ">
                 <img id="intro-image" src="images/ipad.png">
             </div>
         </div>
+        
         <div class="row" id="second-section">
-           <div class="col-xs-6">
-               <div>
-                   <blockquote class="testimonial">
-                       <p>With a limited budget and tight schedule, this check-in app really saved me time and cost to run the dental clinic I just opened up. Thank you, iReceptionist. You’re a life-saver.</p>
-                   </blockquote>
-                   <div class="arrow-down"></div>
-                   <p class="testimonial-author">Dr. Jennifer Kim, DDS | <span>San Francisco, California</span></p>
-               </div>
-               <div>
-                   <blockquote class="testimonial testimonial-grey">
-                       <p>Wow! iReceptionist was the perfect addition to our offices! It’s elegant, fast, and our customers absolutely love it! The team’s continued support and commitment to excellence has made me a life-long customer. Definitely the GOLD standard for check-in apps!</p>
-                   </blockquote>
-                   <div class="arrow-down arrow-down-grey"></div>
-                   <p class="testimonial-author">Dr. Leonard McCoy, M.D. | <span>Riverside, California</span></p>
-               </div>
-           </div>
-           <div class="col-xs-6">
-               <div>
-                   <blockquote class="testimonial testimonial-grey">
-                       <p>iReceptionist is truly an aesthetic experience, I love how intuitive and modern the design is. Making appointments and checking in has never been easier.</p>
-                   </blockquote>
-                   <div class="arrow-down arrow-down-grey"></div>
-                   <p class="testimonial-author">Betty Johnson | <span>Stockholm, Sweden</span></p>
-               </div>
-               <div>
-                   <blockquote class="testimonial">
-                       <p>I can’t believe how much time I saved using iReceptionist. It was truly a breathe of fresh air. Never again will I have to deal with the hassle of a grumpy receptionist and a clipboard!</p>
-                   </blockquote>
-                   <div class="arrow-down"></div>
-                   <p class="testimonial-author">Joel Spolsky | <span>Kathmandu, Nepal</span></p>
-               </div>
-           </div>
-       </div>
+            <div class="col-xs-6">
+                <div>
+                    <blockquote class="testimonial">
+                        <p>With a limited budget and tight schedule, this check-in app really saved me time and cost to run the dental clinic I just opened up. Thank you, iReceptionist. You’re a life-saver.</p>
+                    </blockquote>
+                    <div class="arrow-down"></div>
+                    <p class="testimonial-author">Dr. Jennifer Kim, DDS | <span>San Francisco, California</span></p>
+                </div>
+                <div>
+                    <blockquote class="testimonial testimonial-grey">
+                        <p>Wow! iReceptionist was the perfect addition to our offices! It’s elegant, fast, and our customers absolutely love it! The team’s continued support and commitment to excellence has made me a life-long customer. Definitely the GOLD standard for check-in apps!</p>
+                    </blockquote>
+                    <div class="arrow-down arrow-down-grey"></div>
+                    <p class="testimonial-author">Dr. Leonard McCoy, M.D. | <span>Riverside, California</span></p>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div>
+                    <blockquote class="testimonial testimonial-grey">
+                        <p>iReceptionist is truly an aesthetic experience, I love how intuitive and modern the design is. Making appointments and checking in has never been easier.</p>
+                    </blockquote>
+                    <div class="arrow-down arrow-down-grey"></div>
+                    <p class="testimonial-author">Betty Johnson | <span>Stockholm, Sweden</span></p>
+                </div>
+                <div>
+                    <blockquote class="testimonial">
+                        <p>I can’t believe how much time I saved using iReceptionist. It was truly a breathe of fresh air. Never again will I have to deal with the hassle of a grumpy receptionist and a clipboard!</p>
+                    </blockquote>
+                    <div class="arrow-down"></div>
+                    <p class="testimonial-author">Joel Spolsky | <span>Kathmandu, Nepal</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+>>>>>>> develop
     <footer class="footer navbar-bottom">
         <div class="container">
             <ul class="list-inline footer-links text-center">

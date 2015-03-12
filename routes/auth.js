@@ -30,6 +30,19 @@ router.post('/signup', passport.authenticate('local-signup', {
 
 
 
+router.get('/employeeregister',function (req,res){
+    res.render('business/registeremployees');
+});
+
+
+router.post('/employeeregister',passport.authenticate('local-signup-employee',{
+    successRedirect : '/config', // redirect to the secure profile section
+    failureRedirect : '/' // redirect back to the signup page if there is an error
+}));
+
+
+
+
 
 router.get('/profile', isLoggedIn, function(req, res) {
     res.render('auth/profile.hjs', {
@@ -53,6 +66,17 @@ function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
+
+function isLoggedInBusiness(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if ((req.isAuthenticated()&& req.user.Business.length) === 1) {
+        return next();
+    }
 
     // if they aren't redirect them to the home page
     res.redirect('/');
