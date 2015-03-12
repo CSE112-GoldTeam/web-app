@@ -63,7 +63,7 @@
         .container-checkin h4,
         .container-checkin h5,
         .container-checkin h6 {
-            color: {{containerText}} !important;
+            color: {{containerText}};
         }
 
         .container-checkin .btn {
