@@ -36,32 +36,32 @@ $(document).ready(function () {
         // Iterate through each field and append its HTML to the preview form
         $('#buildyourform div').each(function () {
             var id = 'input' + $(this).attr('id').replace('field', '');
-            var label = $('<label for=\"' + id + '\">' + $(this).find('input.fieldname').first().val() + '</label>');
+            var label = $('<label class=\"col-md-4\" for=\"' + id + '\">' + $(this).find('input.fieldname').first().val() + '</label>');
             var input;
 
             switch ($(this).find('select.fieldtype').first().val()) {
                 case 'textbox':
-                    input = $('<div class=\"previewForm\"><input type=\"text\" id=\"' + id + '\" name=\"' + id + '\" /></div>');
+                    input = $('<div class=\"previewForm col-md-8\"><input class=\"form-control\" type=\"text\" id=\"' + id + '\" name=\"' + id + '\" /></div>');
                     break;
                 case 'dropdown':
                     dropCounter ++;
-                    input = $('<div class=\"previewForm\"><select id=\"drop' + dropCounter + '\">  </select> <button type=\"button\" onclick=\"insertOption(' + dropCounter +')\">Insert option</button> <button type=\"button\" onclick=\"removeOption(' + dropCounter + ')\">Remove option</button></div>');
+                    input = $('<div class=\"previewForm col-md-8\"><select class=\"form-control\" id=\"drop' + dropCounter + '\">  </select> <button class=\"btn btn-default\" type=\"button\" onclick=\"insertOption(' + dropCounter +')\">Insert option</button> <button class=\"btn btn-default btn-danger\" type=\"button\" onclick=\"removeOption(' + dropCounter + ')\">Remove option</button></div>');
                     break;
             }
             fieldSet.append(label);
             fieldSet.append(input);
         });
-        $('body').append(fieldSet);
+        $('#formContent').append(fieldSet);
     }
 
     // Add form creation buttons
     $('#add').click(function () {
         var intId = $('#buildyourform div').length + 1;
-        var fieldWrapper = $('<div class=\"fieldwrapper\" id=\"field' + intId + '\"/>');
-        var fName = $('<input type=\"text\" class=\"fieldname\" />');
-        var fType = $('<select class=\"fieldtype\"><option value=\"textbox\">Text</option><option value=\"dropdown\">Drop</option> </select>');
+        var fieldWrapper = $('<div class=\"builderForm fieldwrapper form-group\" id=\"field' + intId + '\"/>');
+        var fName = $('<input type=\"text\" class=\"fieldname form-control col-xs-4\" placeholder=\"Field Title\" />');
+        var fType = $('<select class=\"fieldtype form-control col-xs-3\"><option value=\"textbox\">Text</option><option value=\"dropdown\">Drop</option> </select>');
 
-        var removeButton = $('<input type=\"button\" class=\"remove\" value=Remove>');
+        var removeButton = $('<button type="button" class="remove btn btn-default btn-danger col-xs-1s" aria-label="Left Align"><span class="glyphicon glyphicon-remove white" aria-hidden="true"></span></button>');
         removeButton.click(function () {
             $(this).parent().remove();
         });

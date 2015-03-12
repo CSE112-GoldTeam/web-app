@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }}</title>
+    <title>Checkin</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-nav-wizard.css">
@@ -37,7 +37,7 @@
                 </div>
             {{/error}}
             <h3 class="form-signin-heading">Please enter the following information:</h3>
-            <form class="form-horizontal" action="" method="post">
+            <form class="form-horizontal" action="apptinfo" method="post">
                 <div class="form-group">
                     <label class="col-md-2 control-label inputFirst">First Name</label>
                     <div class="col-md-10">
@@ -57,6 +57,7 @@
                     </div>
                 </div>
                <button class="btn btn-lg btn-block custom-button custom-center" type="submit">Next</button>
+
             </form>
         </div>
     </div>

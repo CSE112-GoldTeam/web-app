@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+	    <div class="navbar-header">
+	        <a class="navbar-brand" href="/">
+	            <div id="company-logo">iReceptionist</div>
+	        </a>
+	    </div>
+	    <div class="navbar-padding-right">
+        <ul class="nav navbar-nav navbar-right navbar-padding">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/addemployees">Employees</a></li>
+            <li class="active">
+                <a href="/customizetheme">Settings</a>
+            </li>
+            <li><a href="/companySettings">Company Name</a></li>
+        </ul>
+	    </div>
+	    <!--Secondary navbar for the Settings tab-->
+	    <div class="navbar-secondary navbar-tabs">
+	        <ul>
+	            <li><a href="/registerDevice">Configurations</a></li>
+	            <li><a href="/manageforms">Manage Forms</a></li>
+	            <li>
+	                <a href="/customizetheme">Customize Theme</a>
+	            </li>
+	            <li class="active"><a href="/accountsettings">More Settings</a></li>
+	        </ul>
+	    </div>
+	</nav>
+
+
+	<div class="container container-margin">
+		<div class="row">
+			{{#edited}}
+				<div class="alert alert-success" role="alert">
+					{{edited}}
+				</div>
+			{{/edited}}
+			{{#alert}}
+				<div class="alert alert-error" role="alert">
+					{{alert}}
+				</div>
+			{{/alert}}
+			<div class="col-md-3">
+				<h2>Hello, Dr. {{ lname }}!</h2>
+			</div>
+		</div>
+		<div class="form-inline">
+			<!--<div class="col-md-2 col-md-offset-2">
+				<h4>Name</h4>
+			</div>-->
+			<form class="form-horizontal" action="" method="post">
+				<label class="col-md-2 col-md-offset-2 control-label editName">Name</label>
+
+				<div class="col-md-6">
+					<input type="text" style = "margin-bottom: 20px" id="editName" name="editName" value="{{ fname }} {{lname}}" class="form-control" readonly>
+				</div>
+
+			</form>
+		</div>
+
+		<div class="form-inline">
+			<form class="form-horizontal" action="" method="post">
+				<label class="col-md-2 col-md-offset-2 control-label editPassword">Password</label>
+				<div class="col-md-3">
+					<input type="password" id="editPassword" name="editPassword" value="{{ password }}" class="form-control">
+				</div>
+				<div class="col-md-2">
+					<button type="password" class="btn custom-button" type="submit">Update</button>
+				</div>
+			</form>
+		</div>
+		<div class="form-inline">
+			<form class="form-horizontal" action="" method="post">
+				<label class="col-md-2 col-md-offset-2 control-label editEmail">Email Address</label>
+				<div class="col-md-3">
+					<input type="email" id="editEmail" name="editEmail" value="{{ email }}" class="form-control">
+				</div>
+				<div class="col-md-2">
+					<button type="email" class="btn custom-button">Update</button>
+				</div>
+			</form>
+		</div>
+		<div class="form-inline">
+			<form class="form-horizontal" action="" method="post">
+				<label class="col-md-2 col-md-offset-2 control-label editPhone">Phone Number</label>
+				<div class="col-md-3">
+					<input type="phone" id="editPhone" name="editPhone" value="{{ phone }}" class="form-control">
+				</div>
+				<div class="col-md-2">
+					<button type="phone" class="btn custom-button">Update</button>
+				</div>
+			</form>
+		</div>
+		<div class="form-inline">
+			<form class = "form-horizontal" action = "" method = "">
+				
+				<label class="col-md-2 col-md-offset-2 control-label editNotify">Notification Settings</label>
+
+				<div class="col-md-2 col-md-offset-3">
+					 <br><br>
+				</div>
+			
+			</form>
+		</div>
+		<div  class="column">
+			<div class="row">
+				<div class="col-md-2 col-md-offset-3">
+					<h5>When Patient Checked-in:</h5>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-inline">
+					<label class="col-md-3 col-md-offset-3 control-label inApp">Send me a text (sms rate may apply)</label>
+					<div class="col-md-2 col-md-offset-1">
+						{{#smsNotify}}
+						<form class="form-horizontal" action="" method="post">
+							<input type="hidden" name="sendText" value="0">
+							<input type="checkbox" name="sendText" onchange="this.form.submit();" checked />
+						</form>
+						{{/smsNotify}}
+						{{^smsNotify}}
+						<form class="form-horizontal" action="" method="post">
+							<input type="checkbox" name="sendText" value="1" onchange="this.form.submit();" />
+						</form>
+						{{/smsNotify}}
+					</div>
+				</div>
+				<div class="form-inline">
+					<label class="col-md-3 col-md-offset-3 control-label inApp">Send me an email</label>
+					<div class="col-md-2 col-md-offset-1">
+						{{#emailNotify}}
+						<form class="form-hozirontal" action="" method="post">
+							<input type="hidden" name="sendEmail" value="0">
+							<input type="checkbox" name="sendEmail" onchange="this.form.submit();" checked />
+						</form>
+						{{/emailNotify}}
+						{{^emailNotify}}
+						<form class="form-horizontal" action="" method="post">
+							<input type="checkbox" name="sendEmail" value="1" onchange="this.form.submit();" />
+						</form>
+						{{/emailNotify}}
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <footer class="footer navbar-fixed-bottom">
+        <div class="container">
+            <ul class="list-inline footer-links text-center">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Store</a></li>
+                <li><a href="#">Jobs</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+</html>
+
