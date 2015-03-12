@@ -39,6 +39,7 @@
     "gulp-gh-pages": "^0.4.0",
     "gulp-jshint": "^1.9.2",
     "gulp-nodemon": "^1.0.5",
+    "gulp-open": "^0.3.2",
     "gulp-shell": "^0.3.0",
     "jasmine-core": "^2.2.0",
     "karma": "^0.12.31",
