@@ -7,41 +7,43 @@
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script>
+      // eid = {{eid}};
+      // employeeName = {{employeeName}}
+    </script>
     <script src="/javascripts/dashboard.js"></script>
 
 </head>
 <body>
+
   <!--Holds the main tabs for the business-->
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
       <a class="navbar-brand" href="/">
-          <div id="company-logo">iReceptionist</div>
-      </a>
+            <img id = "company-logo" src="images/logo.png">
+        </a>
     </div>
     <div class="navbar-padding-right">
-      <ul class="nav navbar-nav navbar-right navbar-padding">
-          <li class="active">
-              <a href="#">Dashboard</a>
-          </li>
-          <li>
-              <a href="#">Employees</a>
-          </li>
-          <li>
-              <a href="#">Settings</a>
-          </li>
-          <li>
-              <a href="#">Company Name</a>
-          </li>
-      </ul>
-    </div>
+        <ul class="nav navbar-nav navbar-right navbar-padding">
+            <li class="active"><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/addemployees">Employees</a></li>
+            <li>
+                <a href="/customizetheme">Settings</a>
+            </li>
+            <li><a href="/companySettings">Company Name</a></li>
+        </ul>
+      </div>
   </nav>
   <div class="container container-margin-no-secondary">
-    <div class="panel panel-default text-center">
-      <h4><strong>Hey there! </strong>Your patient, <strong>Test, </strong>just checked in and is now waiting in the lobby       <button class="btn btn-info">Click when the patient has been roomed</button></h4>
-    </div>
+
   </div>
-<div class="container">
-  <h1><strong>Hello, Dr. Jane!</strong></h1>
+
+<div class="container"style=" box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 15px -4px rgba(31, 73, 125, 0.8);;">
+
+  
+  
+  <h1><strong><div id="empName"></div></strong></h1>
+
   <div class="dashboardTopInfo text-center">
       
       <h1 class="text-center">Today</h1>
@@ -60,11 +62,13 @@
             <th>Status</th>
             <th></th>
             <th>Picture</th>
+            <th></th>
           </tr>
         </thead>
         <tbody id="tblBody">
           <tr>
 
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

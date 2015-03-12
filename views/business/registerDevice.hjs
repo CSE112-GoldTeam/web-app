@@ -10,34 +10,63 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
-  <div style="position:absolute;top:150px;left:80px">
-    <h2 top="50px" align="left">Setting Up</h2>
-    <h4 align="left">Register all of your devices and generate activation keys</h4>
-        <div style="position:relative;top:50px;left:30px">
-             <h3 top="50px" align="left">Registered Devices</h2>
-             <h4 align="left">Lorem ipsum explanations</h4>
-             <div style="position:relative;top:50px">
-             <table border="2" style="width:200%">
-               <tr>
-                 <td>#      Location</td>
-                 <td>Description</td>
-                 <td>Device Type</td>
-                 <td>Activated</td>
-               </tr>
-             </table>
-             <div style="position:relative;top:50px">
-                <h3 top="50px" align="left">Add a New Device</h2>
-                <h4 align="left">You have X devices left in your subscription plan</h4>
-                <a style="position:relative;right:-225px;top:-30px;href=">Upgrade my Plan</a>
-                <div align="left">
-                    <input placeholder="Location">
-                    <input placeholder="Description">
-                    <input placeholder="Device Type">
-                    <button type="button" class="btn btn-success">Get Key</button>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <img id = "company-logo" src="images/logo.png">
+            </a>
+        </div>
+        <div class="navbar-padding-right">
+            <ul class="nav navbar-nav navbar-right navbar-padding">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/addemployees">Employees</a></li>
+                <li class="active">
+                    <a href="/customizetheme">Settings</a>
+                </li>
+                <li><a href="/companySettings">Company Name</a></li>
+            </ul>
+        </div>
+        <!--Secondary navbar for the Settings tab-->
+        <div class="navbar-secondary navbar-tabs">
+            <ul>
+                <li class="active"><a href="/registerDevice">Configurations</a></li>
+                <li><a href="/manageforms">Manage Forms</a></li>
+                <li>
+                    <a href="/customizetheme">Customize Theme</a>
+                </li>
+                <li><a href="/accountSettings">More Settings</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+      <div style="position:absolute;top:150px;left:80px">
+        <h2 top="50px" align="left">Setting Up</h2>
+        <h4 align="left">Register all of your devices and generate activation keys</h4>
+            <div style="position:relative;top:50px;left:30px">
+                 <h3 align="left">Registered Devices</h2>
+                 <h4 align="left">Lorem ipsum explanations</h4>
+                 <div style="position:relative;top:50px">
+                     <table border="2" style="width:200%">
+                       <tr>
+                         <td>#      Location</td>
+                         <td>Description</td>
+                         <td>Device Type</td>
+                         <td>Activated</td>
+                       </tr>
+                     </table>
                 </div>
-             </div>
+                <div style="position:relative;top:50px">
+                    <h3 top="50px" align="left">Add a New Device</h2>
+                    <h4 align="left">You have X devices left in your subscription plan</h4>
+                    <a style="position:relative;right:-225px;top:-30px" href="">Upgrade my Plan</a>
+                    <div align="left">
+                        <input placeholder="Location">
+                        <input placeholder="Description">
+                        <input placeholder="Device Type">
+                        <button type="button" class="btn custom-button">Get Key</button>
+                    </div>
+                </div>
             </div>
         </div>
-  </div>
+    </div>
 </body>
