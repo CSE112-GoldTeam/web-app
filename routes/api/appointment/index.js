@@ -8,7 +8,7 @@ var auth = require('../../../lib/auth');
 
 
 /**
- * @api {get} /api/m/appointment
+ * @api {get} /api/m/appointment Confirm an Appointment
  * @apiName confirm
  * @apiGroup Appointment
  * @apiPermission admin
