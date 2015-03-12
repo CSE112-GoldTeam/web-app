@@ -251,7 +251,7 @@ gulp.task('deploy-gh', function () {
                 + currentdate.getMinutes() + ":"
                 + currentdate.getSeconds();
     var options = {
-        message :  "Update "+ timeString +" --skip-ci"
+        message :  "Update API Doc --skip-ci"
     };
     return gulp.src('./apidoc/**/*')
         .pipe(deploy(options));
