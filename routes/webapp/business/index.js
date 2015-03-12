@@ -36,7 +36,7 @@ module.exports = function (passport) {
         failureRedirect : '/login'
     }));
 
-    router.get('/formbuilder',isLoggedInBusiness, formbuilder.get);
+    router.get('/formbuilder',isLoggedInEmployee, formbuilder.get);
 
     router.get('/accountSettings', isLoggedInEmployee, accountSettings.get);
     router.post('/accountSettings', isLoggedInEmployee, accountSettings.post);
@@ -50,7 +50,7 @@ module.exports = function (passport) {
         failureRedirect : '/register' // redirect back to the signup page if there is an error
     }));
 
-    router.get('/dashboard', isLoggedInBusiness, dashboard.get);
+    router.get('/dashboard', isLoggedInEmployee, dashboard.get);
 
     router.get('/registerdevice', registerDevice.get);
 
