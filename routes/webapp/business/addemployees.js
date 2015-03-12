@@ -55,10 +55,13 @@ exports.post = function(req,res){
         for(var i = 0; i < rows.length; i++){
            var username = rows[i][0];
            var email = rows[i][1];
-
+					 var nameArr = username.split(' ');
+					 var fname = nameArr[0];
+					 var lname = nameArr[1];
             var token = randomToken();
             employeeDB.insert({
-                name: username,
+                fname: fname,
+								lname: lname,
                 email: email,
                 registrationToken : token,
             });
