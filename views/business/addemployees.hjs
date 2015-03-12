@@ -13,27 +13,19 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-header">
         <a class="navbar-brand" href="/">
-            <div id="company-logo">
-                iReceptionist
-            </div>
+            <img id = "company-logo" src="images/logo.png">
         </a>
       </div>
       <div class="navbar-padding-right">
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right navbar-padding">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li class="active"><a href="/addemployees">Employees</a></li>
             <li>
-                <a href="#">Dashboard</a>
+                <a href="/customizetheme">Settings</a>
             </li>
-            <li>
-                <a href="#">Employees</a>
-            </li>
-            <li>
-                <a href="#">Settings</a>
-            </li>
-            <li>
-                <a href="#">Company Name</a>
-            </li>
+            <li><a href="/companySettings">Company Name</a></li>
         </ul>
-      </div>
+        </div>
     </nav>
 
     <div class="container container-margin">
