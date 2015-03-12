@@ -5,7 +5,13 @@
 
 'use strict';
 
-// Get list of things
+/**
+ * Confirms the users first name, last name, date of birth and business id
+ * @param {Object} req 
+ * @param {Object} res
+ * @param {Object} next
+ * @returns `200` Ok or `404` error depedning if id was found
+ */
 exports.confirm = function (req, res, next) {
     var db = req.db;
     var appointments = db.get('appointments');
@@ -27,7 +33,13 @@ exports.confirm = function (req, res, next) {
     });
 };
 
-// Get list of things
+/**
+ * Retrieves the list of appointments
+ * @param {Object} req 
+ * @param {Object} res
+ * @param {Object} next
+ * @returns `200` Ok or `404` error depedning if id was found
+ */
 exports.retrieve = function (req, res, next) {
     var db = req.db;
     var appointments = db.get('appointments');
@@ -44,9 +56,11 @@ exports.retrieve = function (req, res, next) {
 };
 
 /**
- * PUT /api/appointment/:id/state/next
  * Transitions the state to the next state
- * scheduled -> formDone -> checkedIn -> roomed -> done
+ * @param {Object} req 
+ * @param {Object} res
+ * @param {Object} next
+ * @returns `200` Ok or error depending if the state update was successful
  */
 exports.nextState = function (req, res, next) {
     var db = req.db;
@@ -76,9 +90,11 @@ exports.nextState = function (req, res, next) {
 };
 
 /**
- * PUT /api/appointment/:id/state
- * Set a specific state
- * scheduled, formDone, checkedIn, roomed, done
+ * PUT an updated state
+ * @param {Object} req 
+ * @param {Object} res
+ * @param {Object} next
+ * @returns if the state was valid 
  */
 exports.updateState = function (req, res, next) {
     // grab our db object from the request

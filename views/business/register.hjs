@@ -13,7 +13,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-header">
         <a class="navbar-brand" href="/">
-            <div id="company-logo">RoboBetty</div>
+            <div id="company-logo">iReceptionist</div>
         </a>
       </div>
       <div class="navbar-padding-right">
@@ -53,7 +53,7 @@
                 </div>
             </div>
     </div>
-    <footer class="footer navbar-fixed-bottom">
+    <footer class="footer">
         <div class="container">
             <ul class="list-inline footer-links text-center">
                 <li><a href="">About Us</a></li>

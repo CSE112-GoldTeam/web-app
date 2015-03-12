@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }}</title>
+    <title>Confirm</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
@@ -35,7 +35,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-4">
             <h1>
-                <img src="http://placehold.it/140x100">
+                <img src="http://placehold.it/140x100" alt="">
                 Hi, {{name}}
             </h1>
 
@@ -57,16 +57,24 @@
             </div>
         </div>
         </div>
-        
+
         <!-- /.container -->
         <div class="row innerInfo">
             <div class="col-md-4"></div>
             <div class="col-md-2">
-    <a class="btn btn-lg btn-danger btn-block" type="submit" href="entercode">Not you?</a>
+
+    <form action="entercode">
+        <button class="btn btn-lg btn-danger btn-block" type="submit">Not you?</button>
+    </form>
+    
 </div>
 <div class="col-md-2">
-    <a class="btn btn-lg btn-success btn-block" type="submit" href="customform">Next</a>
+    <form action="customform">
+         <button class="btn btn-lg btn-success btn-block" type="submit">Next</button>
+     </form>
 </div>
+    
+   
         </div>
 
 

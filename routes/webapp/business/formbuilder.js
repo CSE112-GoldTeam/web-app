@@ -4,10 +4,12 @@ exports.get = function (req, res) {
 
 exports.get = function (req, res) {
   var forms = req.db.get('forms');
-  forms.findOne({business: 'temp'}, function (err, form) {
+  var businessID = req.user.Business[0]._id;
+  forms.findOne({business: businessID}, function (err, form,findID) {
     res.render('business/formbuilder', {
       title: 'Express',
-      form: JSON.stringify(form)
+      form: JSON.stringify(form),
+      findID: businessID
     });
   });
 };
