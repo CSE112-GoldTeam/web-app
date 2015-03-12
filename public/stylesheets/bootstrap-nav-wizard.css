@@ -24,9 +24,9 @@
   top: 0;
   left: 0;
 }
-.nav-wizard > li:not(:last-child) > a {
+/*.nav-wizard > li:not(:last-child) > a {
   margin-right: 6px;
-}
+}*/
 .nav-wizard > li:not(:last-child) > a:after {
   width: 0px;
   height: 0px;
