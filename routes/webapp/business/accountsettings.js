@@ -1,7 +1,7 @@
 var auth = require('../../../lib/auth');
 
 exports.get = function (req,res) {
-		var eid = req.user.Employee[0]._id;;
+		var eid = req.user.Employee[0]._id;
     var db = req.db;
     var employees = db.get('employees');
 
@@ -33,7 +33,7 @@ exports.post = function (req, res) {
     var db = req.db;
     var employees = db.get('employees');
     var eid = req.user.Employee[0]._id;
-		
+
     var inputPass = req.body.editPassword;
     var inputEmail = req.body.editEmail;
     var inputPhone = req.body.editPhone;
