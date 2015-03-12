@@ -5,6 +5,7 @@ $(function(){
   $(table);
   $(poll);
 
+
 });
 
 function dateToString(date) {
@@ -57,19 +58,18 @@ function table() {
   
     var cols,$btn;
 
-    $.get('/api/employee/'+'5500e8527ac4b1b508657e6d'+'/appointments/today', function( data ){
+    $.get('/api/employee/'+eid+'/appointments/today', function( data ){
         
-        $('#empName').html("Hello, "+ data[0].fname + ' '+data[0].lname );
         var count = 0;
         //empty's the table
         $('#tblBody').empty();
+
         //for loop to reload the table
         for(var i=0; i<data.length; i++){
 
             if(data[i].state == 'done'){
               continue;
             }
-
 
             var $img = $('<img id="Image" src="http://placehold.it/50x50" />');
             count++;
