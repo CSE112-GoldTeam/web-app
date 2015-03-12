@@ -45,7 +45,7 @@
                 <img id="intro-image" src="images/ipad.png">
             </div>
         </div>
-        
+
         <div class="row" id="second-section">
             <div class="col-xs-6">
                 <div>
@@ -81,7 +81,6 @@
             </div>
         </div>
     </div>
->>>>>>> develop
     <footer class="footer navbar-bottom">
         <div class="container">
             <ul class="list-inline footer-links text-center">
