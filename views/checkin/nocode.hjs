@@ -56,7 +56,7 @@
                 </div>
             {{/error}}
             <h3 class="form-signin-heading">Please enter the following information:</h3>
-            <form class="form-horizontal" action="apptinfo" method="post">
+            <form class="form-horizontal" action="nocode" method="post">
                 <div class="form-group">
                     <label class="col-md-2 control-label inputFirst">First Name</label>
                     <div class="col-md-10">
