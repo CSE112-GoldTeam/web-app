@@ -1,3 +1,4 @@
+var auth = require('../../../lib/auth');
 var fs = require('fs');
 
 exports.get = function(req, res, next){
