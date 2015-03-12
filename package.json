@@ -1,6 +1,8 @@
 {
   "name": "robobetty",
   "version": "0.0.0",
+  "description": "apiDoc for Robobetty",
+  "title": "Robobetty API",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
