@@ -2,7 +2,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/api/m/appointment",
-    "title": "",
+    "title": "Confirm an Appointment",
     "name": "confirm",
     "group": "Appointment",
     "permission": [
