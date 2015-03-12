@@ -244,5 +244,7 @@ var deploy = require('gulp-gh-pages');
 
 gulp.task('deploy-gh', function () {
     return gulp.src('./apidoc/**/*')
-        .pipe(deploy(options));
+        .pipe(deploy());
 });
+
+gulp.task('apidoc-deploy', ['apidoc','deploy-gh']);
