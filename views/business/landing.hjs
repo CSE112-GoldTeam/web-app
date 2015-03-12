@@ -12,29 +12,25 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-header">
         <a class="navbar-brand" href="/">
-            <div id="company-logo">iReceptionist</div>
+            <img id = "company-logo" src="images/logo.png">
         </a>
       </div>
       <div class="navbar-padding-right">
         <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a href="#">Features</a>
-            </li>
-            <li>
-                <a href="#">About Us</a>
-            </li>
-            <li>
-                <a href="login" class="btn custom-button" id="login-btn-navbar">Log In</a>
-            </li>
+           <li>
+               <p class="navbar-btn">
+                   <a href="/login" class="btn custom-button" id="login-btn-navbar">Log In</a>
+               </p>
+           </li>
         </ul>
       </div>
     </nav>
     <!-- start of outer container -->
-    <div class="container-fluid container-margin">
+    <div class="container-fluid container-margin-landing landing-pic">
         <div class="row" id="first-section">
             <div id="intro" class="col-xs-7">
-                <h3 class="bold text-center">Patient Check-In. Made Easy.</h3>
-                <p class="text-center">Effortless check-in, form management, arrival notification, and appointment integration for your office.</p>
+                <h1 class="heading bold text-center">The old rules of waiting are over.</h3>
+                <p class="text-center info-text"> Let us help you revolutionize your customer waiting experience.</p>
                 <form class="form-group" action="" method="post">
                     <div class="col-xs-9">
                         <input type="company" class="small form-control" id="companyName" name="companyName" value="{{companyName}}" method="post" placeholder="Step 1: Enter company name">
@@ -44,10 +40,12 @@
                     </div>
                 </form>
             </div>
-            <div class="col-xs-4">
-                <img id="intro-image" src="images/landing_page_cover.png"/>
+
+            <div class="col-xs-4 ">
+                <img id="intro-image" src="images/ipad.png">
             </div>
         </div>
+        
         <div class="row" id="second-section">
             <div class="col-xs-6">
                 <div>
@@ -83,6 +81,7 @@
             </div>
         </div>
     </div>
+>>>>>>> develop
     <footer class="footer navbar-bottom">
         <div class="container">
             <ul class="list-inline footer-links text-center">

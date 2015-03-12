@@ -13,19 +13,15 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
         <a class="navbar-brand" href="/">
-            <div id="company-logo">iReceptionist</div>
+            <img id = "company-logo" src="images/logo.png">
         </a>
     </div>
     <div class="navbar-padding-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="#">Features</a>
-            </li>
-            <li>
-                <a href="#">About Us</a>
-            </li>
-            <li>
-                <button type="button" class="btn custom-button" id="login-btn-navbar">Log In</button>
+                <p class="navbar-btn">
+                   <a href="/login" class="btn custom-button" id="login-btn-navbar">Log In</a>
+               </p>
             </li>
         </ul>
     </div>
