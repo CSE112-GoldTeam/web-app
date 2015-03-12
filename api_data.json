@@ -1,7 +1,7 @@
 [
   {
     "type": "get",
-    "url": "/api/m/appointment",
+    "url": "/m/appointment",
     "title": "Confirm an Appointment",
     "name": "confirm",
     "group": "Appointment",
@@ -55,7 +55,14 @@
             "description": "<p>Firstname of the User.</p> "
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request (example):",
+          "content": "HTTP/1.1 200 OK\n{\n \"appointment\": [\n    \"appointmentObject\"\n ]\n}",
+          "type": "json"
+        }
+      ]
     },
     "error": {
       "fields": {
@@ -88,7 +95,7 @@
   },
   {
     "type": "put",
-    "url": "/api/m/appointment/:id/state/next",
+    "url": "/m/appointment/:id/state/next",
     "title": "Transition to Next State",
     "name": "controller_nextState",
     "group": "Appointment",
@@ -103,7 +110,7 @@
   },
   {
     "type": "put",
-    "url": "/api/m/appointment/:id/state",
+    "url": "/m/appointment/:id/state",
     "title": "Set a Specific State",
     "name": "controller_updateState",
     "group": "Appointment",
@@ -118,8 +125,9 @@
   },
   {
     "type": "get",
-    "url": "/api/m/appointment/:id",
+    "url": "/m/appointment/:id",
     "title": "Get Appointment Info",
+    "version": "0.6.0",
     "name": "retrieve",
     "group": "Appointment",
     "permission": [
@@ -127,13 +135,52 @@
         "name": "admin"
       }
     ],
-    "version": "0.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Appointment id</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "http://localhost/api/m/appointment/123456789",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "fname",
+            "description": "<p>Firstname of the User.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response (example):",
+          "content": "HTTP/1.1 200 OK\n{\n \"appointment\": [\n    \"appointmentObject\"\n ]\n}",
+          "type": "json"
+        }
+      ]
+    },
     "filename": "routes/api/appointment/index.js",
     "groupTitle": "Appointment"
   },
   {
     "type": "post",
-    "url": "/api/authTest/:id",
+    "url": "/authTest/",
     "title": "Test Your Authentication",
     "name": "authTest",
     "group": "Authentication",
@@ -142,13 +189,74 @@
         "name": "Admin"
       }
     ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "api_token",
+            "description": "<p>The api token</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authentication\": \"Token WW9sbzp5b2xv\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -i http://localhost/api/authTest -H \"Authorization: Token WW9sbzp5b2xv\"",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Request (example):",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NoAccessRight",
+            "description": "<p>Only authenticated Admins can access the data.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ApptNotFound",
+            "description": "<p>The <code>id</code> of the User was not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 401 Not Authenticated\n{\n  \"error\": \"NoAccessRight\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "routes/api/auth/index.js",
     "groupTitle": "Authentication"
   },
   {
     "type": "post",
-    "url": "/api/m/auth/",
+    "url": "/auth/",
     "title": "Get Authenticated",
     "name": "postAuth",
     "group": "Authentication",
@@ -157,13 +265,74 @@
         "name": "Admin"
       }
     ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authentication",
+            "description": "<p>The api token</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authentication\": \"Token WW9sbzp5b2xv\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -i http://localhost/api/authTest -H \"Authorization: Token WW9sbzp5b2xv\"",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 200 OK\n    {\n      \"api_token\": \"WW9sbzp5b2xv\"\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NoAccessRight",
+            "description": "<p>Only authenticated Admins can access the data.</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ApptNotFound",
+            "description": "<p>The <code>id</code> of the User was not found.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 401 Not Authenticated\n{\n  \"error\": \"NoAccessRight\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "routes/api/auth/index.js",
     "groupTitle": "Authentication"
   },
   {
     "type": "post",
-    "url": "/api/m/form/:id",
+    "url": "/m/form/:id",
     "title": "Create a form",
     "name": "controller_createForm",
     "group": "Form",
@@ -172,13 +341,33 @@
         "name": "Admin"
       }
     ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>The id for a form.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n \"answers\": [\n   {\n     \"label\": \"Name\",\n     \"response\": \"John Doe\"\n   },\n   {\n     \"label\": \"Gender\",\n     \"response\": \"Female\"\n   },\n   {\n     \"label\": \"Email\",\n     \"response\": \"john.doe@example.com\"\n   },\n   {\n     \"label\": \"Favorite Color\",\n     \"response\": \"Blue\"\n   }\n ]\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "routes/api/form/index.js",
     "groupTitle": "Form"
   },
   {
     "type": "post",
-    "url": "/api/m/form/",
+    "url": "/m/form/",
     "title": "Create a form response",
     "name": "controller_createResponse",
     "group": "Form",
@@ -193,7 +382,7 @@
   },
   {
     "type": "get",
-    "url": "/api/m/form/:id",
+    "url": "/m/form/:id",
     "title": "Get a form",
     "name": "controller_show",
     "group": "Form",
@@ -226,7 +415,7 @@
       "examples": [
         {
           "title": "Success-Response (example):",
-          "content": "HTTP/1.1 200 OK\n{\n    business: 1293182391203,\n    fields: [ {\n               type: \"textfield\",\n               label: \"Name\"\n       },\n       {\n               type: \"dropdown\",\n               label: \"Gender\",\n               options: [\"Male\", \"Female\"]\n       },\n       {\n               type: \"textfield\",\n               label: \"Email\"\n       },\n       {\n               type: \"dropdown\",\n               label: \"Favorite Color\",\n               options: [\"Blue\", \"Yellow\", \"Green\", \"Pink\"]\n       }]\n}",
+          "content": "HTTP/1.1 200 OK\n{\n    business: 1293182391203,\n    fields: [ {\n        type: \"textfield\",\n        label: \"Name\"\n},\n{\n        type: \"dropdown\",\n        label: \"Gender\",\n        options: [\"Male\", \"Female\"]\n},\n{\n        type: \"textfield\",\n        label: \"Email\"\n},\n{\n        type: \"dropdown\",\n        label: \"Favorite Color\",\n        options: [\"Blue\", \"Yellow\", \"Green\", \"Pink\"]\n}]\n}",
           "type": "json"
         }
       ]
@@ -262,7 +451,7 @@
   },
   {
     "type": "delete",
-    "url": "/api/m/appointment/:id",
+    "url": "/m/appointment/:id",
     "title": "Delete A Mobile Token",
     "name": "DeleteToken",
     "group": "MobileToken",
@@ -331,7 +520,7 @@
   },
   {
     "type": "get",
-    "url": "/api/m/appointment/",
+    "url": "/m/appointment/",
     "title": "Get A Mobile Token",
     "name": "GetToken",
     "group": "MobileToken",
