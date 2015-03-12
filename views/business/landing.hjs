@@ -17,24 +17,18 @@
       </div>
       <div class="navbar-padding-right">
         <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a href="#">Features</a>
-            </li>
-            <li>
-                <a href="#">About Us</a>
-            </li>
-            <li>
-                <a href="login" class="btn custom-button" id="login-btn-navbar">Log In</a>
-            </li>
+           <li>
+               <button type="button" class="btn custom-button" id="login-btn-navbar">Log In</button>
+           </li>
         </ul>
       </div>
     </nav>
     <!-- start of outer container -->
-    <div class="container-fluid container-margin">
+    <div class="container-fluid container-margin-landing landing-pic">
         <div class="row" id="first-section">
             <div id="intro" class="col-xs-7">
-                <h3 class="bold text-center">The old rules of waiting are over.</h3>
-                <p class="text-center">Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor. Cum Sociees natoque panatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, null luctus pharetra vulputate, felix tellus mellis orci, sed rhoncus sapien nunc eget odio.</p>
+                <h1 class="heading bold text-center">The old rules of waiting are over.</h3>
+                <p class="text-center info-text"> Let us help you revolutionize your customer waiting experience.</p>
                 <div class="form-group">
                     <div class="col-xs-9">
                         <input type="company" class="small form-control" id="inputCompany" placeholder="Step 1: Enter company name">
@@ -45,30 +39,30 @@
                 </div>
             </div>
             <div class="col-xs-4">
-                <img id="intro-image" alt="introduction image for company logo" src="http://placehold.it/270x370"/>
+                <img id="intro-image" src="images/ipad.png">
             </div>
         </div>
         <div class="row" id="second-section">
             <div class="col-xs-6">
                 <div>
-                    <blockquote class="testimonial"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <blockquote class="testimonial"> <p>So much easier to check in now!</p> </blockquote>
                     <div class="arrow-down"></div>
                     <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
                 </div>
                 <div>
-                    <blockquote class="testimonial testimonial-grey"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <blockquote class="testimonial testimonial-grey"> <p>I love how much easier it is to manage all my patients!</p> </blockquote>
                     <div class="arrow-down arrow-down-grey"></div>
                     <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
                 </div>
             </div>
             <div class="col-xs-6">
                 <div>
-                    <blockquote class="testimonial testimonial-grey"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <blockquote class="testimonial testimonial-grey"> <p>Those text message notifcations are a life saver.</p> </blockquote>
                     <div class="arrow-down arrow-down-grey"></div>
                     <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
                 </div>
                 <div>
-                    <blockquote class="testimonial"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <blockquote class="testimonial"> <p>A simple, elegant app.</p> </blockquote>
                     <div class="arrow-down"></div>
                     <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
                 </div>
