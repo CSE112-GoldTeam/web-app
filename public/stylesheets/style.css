@@ -559,3 +559,15 @@ a:hover {
 
 
 /********************************************/
+
+/************Customize Theme ****************/
+
+.custom-button-wide {
+  background-color: #21ca6b;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  border-radius: 4px; /* Overrides bootstrap rounded corners*/
+  border-color: #21ca6b;
+  width: auto;
+}

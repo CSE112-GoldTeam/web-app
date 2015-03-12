@@ -17,16 +17,24 @@
 	        </a>
 	    </div>
 	    <div class="navbar-padding-right">
-	        <ul class="nav navbar-nav navbar-right navbar-padding">
+        <ul class="nav navbar-nav navbar-right navbar-padding">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/addemployees">Employees</a></li>
+            <li class="active">
+                <a href="/customizetheme">Settings</a>
+            </li>
+            <li><a href="/companySettings">Company Name</a></li>
+        </ul>
+	    </div>
+	    <!--Secondary navbar for the Settings tab-->
+	    <div class="navbar-secondary navbar-tabs">
+	        <ul>
+	            <li><a href="/registerDevice">Configurations</a></li>
+	            <li><a href="/manageforms">Manage Forms</a></li>
 	            <li>
-	                <a href="#">Dashboard</a>
+	                <a href="/customizetheme">Customize Theme</a>
 	            </li>
-	            <li class = "active">
-	                <a href="#">Settings</a>
-	            </li>
-	            <li>
-	                <a href="#">CompanyName</a>
-	            </li>
+	            <li class="active"><a href="/accountsettings">More Settings</a></li>
 	        </ul>
 	    </div>
 	</nav>
