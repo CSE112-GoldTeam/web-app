@@ -6,8 +6,19 @@
 'use strict';
 
 /**
+ * @api {get} /user/:id Request User information
+ * @apiName GetUser
+ * @apiGroup User
+ *
+ * @apiParam {Number} id Users unique ID.
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ */
+
+/**
  * Confirms the users first name, last name, date of birth and business id
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  * @param {Object} next
  * @returns `200` Ok or `404` error depedning if id was found
@@ -35,7 +46,7 @@ exports.confirm = function (req, res, next) {
 
 /**
  * Retrieves the list of appointments
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  * @param {Object} next
  * @returns `200` Ok or `404` error depedning if id was found
@@ -57,7 +68,7 @@ exports.retrieve = function (req, res, next) {
 
 /**
  * Transitions the state to the next state
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  * @param {Object} next
  * @returns `200` Ok or error depending if the state update was successful
@@ -91,10 +102,10 @@ exports.nextState = function (req, res, next) {
 
 /**
  * PUT an updated state
- * @param {Object} req 
+ * @param {Object} req
  * @param {Object} res
  * @param {Object} next
- * @returns if the state was valid 
+ * @returns if the state was valid
  */
 exports.updateState = function (req, res, next) {
     // grab our db object from the request
