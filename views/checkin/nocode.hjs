@@ -22,7 +22,7 @@
             color: {{buttonText}}
         }
 
-        .container-checkin {
+        .container {
             background-color: {{containerBg}};
         }
     </style>
