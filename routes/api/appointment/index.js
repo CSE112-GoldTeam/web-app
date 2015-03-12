@@ -34,17 +34,26 @@ var auth = require('../../../lib/auth');
 router.get('/', controller.confirm);
 
 /**
- * GET appointment information
+ * @api {get} /api/m/appointment/:id Get Appointment Info
+ * @apiName retrieve
+ * @apiGroup Appointment
+ * @apiPermission admin
  */
 router.get('/:id', auth.isAuthenticated, controller.retrieve);
 
 /**
- * PUT transistion states
+ * @api {put} /api/m/appointment/:id/state/next Transition to Next State
+ * @apiName controller.nextState
+ * @apiGroup Appointment
+ * @apiPermission admin
  */
 router.put('/:id/state/next', controller.nextState);
 
 /**
- * PUT setting sates
+ * @api {put} /api/m/appointment/:id/state Set a Specific State
+ * @apiName controller.updateState
+ * @apiGroup Appointment
+ * @apiPermission admin
  */
 router.put('/:id/state', controller.updateState);
 

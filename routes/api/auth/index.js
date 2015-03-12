@@ -36,6 +36,12 @@ function decodeAuthString(authString) {
  * @param res
  * @returns `401` Unauthorized and `200` if authorized.
  */
+ /**
+  * @api {post} /api/authTest/:id Test Your Authentication
+  * @apiName authTest
+  * @apiGroup Authentication
+  * @apiPermission Admin
+  */
 router.post('/api/authTest', function (req, res) {
     auth.isValidToken(req.db, req.headers.authorization, function (result) {
         if (!result) {
@@ -53,6 +59,12 @@ router.post('/api/authTest', function (req, res) {
  * @param next
  * @returns `400` bad request
  */
+ /**
+  * @api {post} /api/m/auth/ Get Authenticated
+  * @apiName postAuth
+  * @apiGroup Authentication
+  * @apiPermission Admin
+  */
 router.post('/api/auth', function (req, res, next) {
     if (!req.headers.authorization) {
         return res.send(400, 'Basic HTTP Auth required');
