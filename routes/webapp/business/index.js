@@ -26,6 +26,7 @@ module.exports = function (passport) {
 
     //Setup the routes
     router.get('/', landing.get);
+    router.post('/', landing.post);
 
     router.get('/theming', theming.get);
 
