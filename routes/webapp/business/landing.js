@@ -1,4 +1,4 @@
-exports.get = function (req, res) {
+exports.get = function (req, res, next) {
 
 	req.session.companyName = null;
 
@@ -6,14 +6,14 @@ exports.get = function (req, res) {
             
             if (err) {
                 
-                console.error('Error saving session', err);
+                return next(err);
             }
         });
     
     res.render('business/landing', {title: 'Landing Page'});
 };
 
-exports.post = function (req, res) {
+exports.post = function (req, res, next) {
     var companyName = req.body.companyName;
 
     if (companyName === '') {
@@ -27,7 +27,7 @@ exports.post = function (req, res) {
         
             if (err) {
         
-                console.error('Error saving session', err);
+                return next(err);
             }
         
             res.redirect('/register');
