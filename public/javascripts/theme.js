@@ -54,4 +54,9 @@ $(document).ready(function () {
             $('.header').css('color', color.toHexString());
         }
     });
+
+    //Save button
+    $('#save').click(function () {
+
+    });
 });
