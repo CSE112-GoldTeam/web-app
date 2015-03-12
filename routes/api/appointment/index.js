@@ -8,14 +8,28 @@ var auth = require('../../../lib/auth');
 
 
 /**
- * @api {get} /api/m/appointment?fname=John&lname="Doe"&dob="05/13/1965"
- * @apiName GetAppointmentConfirm
+ * @api {get} /api/m/appointment
+ * @apiName confirm
  * @apiGroup Appointment
+ * @apiPermission admin
  *
  * @apiParam {String} fname Firstname of the User.
  * @apiParam {String} lname Lastname of the User.
+ * @apiParam {String} dob Date of birth of the User.
+ *
+ * @apiExample Example usage:
+ * curl -i http://localhost/api/m/appointment?fname=John&lname="Doe"&dob="05/13/1965
  *
  * @apiSuccess {String} fname Firstname of the User.
+ *
+ * @apiError NoAccessRight Only authenticated Admins can access the data.
+ * @apiError ApptNotFound  The <code>id</code> of the User was not found.
+ *
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 401 Not Authenticated
+ *     {
+ *       "error": "NoAccessRight"
+ *     }
  */
 router.get('/', controller.confirm);
 
