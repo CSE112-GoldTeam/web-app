@@ -5,6 +5,23 @@
 
 'use strict';
 
+/*
+ * Shows all appointments
+ */
+
+exports.index = function(req, res) {
+
+  // grab our db object from the request
+  var db = req.db;
+  var collection = db.get('appointments');
+
+  // query the collection
+  collection.find({ }, function(err, users) {
+    if (err) { return handleError(res, err); }
+    return res.json(200, users);
+  });
+};
+
 /**
  * Confirms the users first name, last name, date of birth and business id
  * @param {Object} req
@@ -16,20 +33,38 @@ exports.confirm = function (req, res, next) {
     var db = req.db;
     var appointments = db.get('appointments');
 
-    var business = forms.id(req.mobileToken.business);
+    if(!req.mobileToken) {
+        console.log("Mobiletoken is empty cannot access business id!")
+    }  else {
+        console.log(req.mobileToken);
+        var business = appointments.id(req.mobileToken.business._id);
+    }
+
+    if (!req.query.bid && !req.mobileToken){
+        return res.sendStatus(400);
+    } else {
+        business = appointments.id(req.query.bid.replace(/['"]+/g, ''));
+        console.log("Manual Overriding BusinessID: " + business);
+    }
+
+    if(!req.query.fname || !req.query.lname || !req.query.dob){
+        return res.sendStatus(400);
+    }
+
     var fname = req.query.fname.replace(/['"]+/g, '');
     var lname = req.query.lname.replace(/['"]+/g, '');
     var dob = req.query.dob.replace(/['"]+/g, '');
+
     appointments.find({
         'fname': fname,
         'lname': lname,
         'dob': dob,
         'business': business
-    }, function (err, users) {
-        if (err) {
-            return next(err);
-        }
-        return res.json(200, users);
+    }, function (err, appt) {
+        console.log("appt: " + appt)
+        if (err) { return handleError(res, err); }
+        if(!appt) { return res.sendStatus(404); }
+        return res.json(200, appt);
     });
 };
 
