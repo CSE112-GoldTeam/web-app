@@ -72,15 +72,23 @@ router.post('/api/authTest', function (req, res) {
  * @apiGroup Authentication
  * @apiPermission Admin
  *
- * @apiHeader {String} Authentication The api token
+ * @apiHeader {String} Authentication The api_token created from a base64 encoded
+ string with email appended to password semicolon. ex. "email:password"
  * @apiHeaderExample Header-Example:
  *     {
  *       "Authentication": "Token WW9sbzp5b2xv"
  *     }
  *
- * @apiExample Example usage:
- * curl -i http://localhost/api/authTest -H "Authorization: Token WW9sbzp5b2xv"
+ * @apiParam {String} name Name of the employee to be authenticated
  *
+ * @apiExample Example usage:
+ * curl -i http://localhost:3000/api/auth
+ -H "Authorization: Basic bm9ydGh3b29kLmRlbnRhbEBnbWFpbC5jb206cGFzc3dvcmQ="
+ -H "Content-Type: application/json"
+ -d '{"name":"Frodo"}'
+
+ * @apiExample Example (copy-paste) usage:
+ * curl -i http://localhost:3000/api/auth -H "Authorization: Basic bm9ydGh3b29kLmRlbnRhbEBnbWFpbC5jb206cGFzc3dvcmQ=" -H "Content-Type: application/json" -d '{"name":"Frodo"}'
  * @apiSuccessExample {json} Response (example):
  * HTTP/1.1 200 OK
  *     {
@@ -115,21 +123,21 @@ router.post('/api/auth', function (req, res, next) {
         if (result) {
             var name = req.body.name;
             // Checks if name field is blank
-            if (name === '') {
+            if (name === '' || !name) {
                 return res.send(400, 'Name field required');
             }
-
+            console.log(result.business);
             var mobileTokens = req.db.get('mobileTokens');
             mobileTokens.insert({
-                business: result._id,
+                business: result.business._id,
                 name: name
-            }, function (err, result) {
+            }, function (err, results) {
                 if (err) {
                     return next(err);
                 }
 
                 res.json(200, {
-                    api_token: result._id
+                    api_token: results._id
                 });
             });
         } else {

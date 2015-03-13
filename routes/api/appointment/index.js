@@ -6,6 +6,7 @@ var controller = require('./appointment.controller');
 var router = express.Router();
 var auth = require('../../../lib/auth');
 
+router.get('/index', controller.index);
 
 /**
  * @api {get} /m/appointment Confirm an Appointment
@@ -18,8 +19,11 @@ var auth = require('../../../lib/auth');
  * @apiParam {String} dob Date of birth of the User.
  *
  * @apiExample Example usage:
- * curl -i http://localhost/api/m/appointment?fname=John&lname="Doe"&dob="05/13/1965
+ * curl -i http://localhost/api/m/appointment?fname=Frodo&lname=St. John&dob=02/17/1956
  *
+* @apiExample Temporary No Auth Example usage:
+* curl -i http://localhost/api/m/appointment?fname=Frodo&lname=St. John&dob=02/17/1956&bid=5500a18ac0a954cae1bbf238
+*
  * @apiSuccess { ObjectID } business Business ID
  * @apiSuccess { ObjectID } employee Employee ID
  * @apiSuccess { Date } date Date of the appointment
@@ -47,7 +51,7 @@ var auth = require('../../../lib/auth');
  * @apiErrorExample Error (example):
  *     HTTP/1.1 401 Not Authenticated
  */
-router.get('/', controller.confirm);
+router.get('/', auth.isAuthenticated, controller.confirm);
 
 /**
  * @api {get} /m/appointment/:id Get Appointment Info
@@ -100,7 +104,7 @@ router.get('/:id', auth.isAuthenticated, controller.retrieve);
  * @apiSuccessExample Success-Response (example):
  * HTTP/1.1 200 OK
  */
-router.put('/:id/state/next', controller.nextState);
+router.put('/:id/state/next', auth.isAuthenticated, controller.nextState);
 
 /**
  * @api {put} /m/appointment/:id/state Set a Specific State
@@ -113,7 +117,7 @@ router.put('/:id/state/next', controller.nextState);
  * @apiSuccessExample Success-Response (example):
  * HTTP/1.1 200 OK
  */
-router.put('/:id/state', controller.updateState);
+router.put('/:id/state', auth.isAuthenticated, controller.updateState);
 
 
 module.exports = router;
