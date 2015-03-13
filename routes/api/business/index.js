@@ -15,7 +15,7 @@ var router = express.Router();
 * @apiSuccessExample {json} Success-Response (example):
 * HTTP/1.1 200 OK
 {
-	"_id" : ObjectId("5500a18ac0a954cae1bbf23a"),
+	"_id" : "5500a18ac0a954cae1bbf23a",
 	"companyName" : "Arch Health Partners",
 	"email" : "1letterboy@gmail.com",
 	"password" : "$2a$08$KoipSqlCwrLi2dSRcvCHse1mpzMnRfA1NCBZaaAEf2fQ1U9tVIYp.",

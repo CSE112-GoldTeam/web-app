@@ -46,10 +46,10 @@ function decodeAuthString(authString) {
 curl -X POST -i http://localhost:3000/api/authTest \
 -H "Authorization: Token 550286024ae861626c9235f4"
  *
- * @apiSuccessExample Request (example):
+ * @apiSuccessExample Success-Response (example):
  * HTTP/1.1 200 OK
  *
- * @apiErrorExample Error Response (example):
+ * @apiErrorExample Error-Response (example):
  *     HTTP/1.1 401 Not Authenticated
  */
 router.post('/api/authTest', function (req, res) {
@@ -79,13 +79,13 @@ router.post('/api/authTest', function (req, res) {
  -H "Content-Type: application/json" \
  -d '{"name":"Frodo"}'
 
- * @apiSuccessExample {json} Response (example):
+ * @apiSuccessExample {json} Success-Response (example):
  * HTTP/1.1 200 OK
  *     {
  *       "api_token": "WW9sbzp5b2xv"
  *     }
  *
- * @apiErrorExample Error Response (example):
+ * @apiErrorExample Error-Response (example):
  *     HTTP/1.1 401 Not Authenticated
  */
 router.post('/api/auth', function (req, res, next) {
