@@ -32,19 +32,12 @@ exports.index = function(req, res) {
 exports.confirm = function (req, res, next) {
     var db = req.db;
     var appointments = db.get('appointments');
-
+    var business;
+    
     if(!req.mobileToken) {
-        console.log("Mobiletoken is empty cannot access business id!")
+        return res.send(400, "Mobiletoken is empty cannot access business id!");
     }  else {
-        console.log(req.mobileToken);
-        var business = appointments.id(req.mobileToken.business._id);
-    }
-
-    if (!req.query.bid && !req.mobileToken){
-        return res.sendStatus(400);
-    } else {
-        business = appointments.id(req.query.bid.replace(/['"]+/g, ''));
-        console.log("Manual Overriding BusinessID: " + business);
+        business = appointments.id(req.mobileToken.business);
     }
 
     if(!req.query.fname || !req.query.lname || !req.query.dob){
@@ -54,14 +47,12 @@ exports.confirm = function (req, res, next) {
     var fname = req.query.fname.replace(/['"]+/g, '');
     var lname = req.query.lname.replace(/['"]+/g, '');
     var dob = req.query.dob.replace(/['"]+/g, '');
-
     appointments.find({
         'fname': fname,
         'lname': lname,
         'dob': dob,
         'business': business
     }, function (err, appt) {
-        console.log("appt: " + appt)
         if (err) { return handleError(res, err); }
         if(!appt) { return res.sendStatus(404); }
         return res.json(200, appt);

@@ -19,10 +19,12 @@ router.get('/index', controller.index);
  * @apiParam {String} dob Date of birth of the User.
  *
  * @apiExample Example usage:
- * curl -i http://localhost/api/m/appointment?fname=Frodo&lname=St. John&dob=02/17/1956
+ * curl -H
+ -i http://localhost:3000/api/m/appointment?fname='Frodo'&lname='St. John'&dob='02/17/1956'
  *
 * @apiExample Temporary No Auth Example usage:
-* curl -i http://localhost/api/m/appointment?fname=Frodo&lname=St. John&dob=02/17/1956&bid=5500a18ac0a954cae1bbf238
+* curl -i http://localhost:3000/api/m/appointment?fname=Frodo\
+&lname=St. John&dob=02/17/1956&bid=5500a18ac0a954cae1bbf238
 *
  * @apiSuccess { ObjectID } business Business ID
  * @apiSuccess { ObjectID } employee Employee ID
