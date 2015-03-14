@@ -42,18 +42,37 @@ gulp.task('clean', function () {
 gulp.task('vendor', function() {
   return gulp.src('./public/javascripts/*.js')
     .pipe(concat('vendor.js'))
-    .pipe(gulp.dest('./public/javascripts/'))
+    .pipe(gulp.dest('./build/concat/javascripts/'))
     .pipe(uglify())
     .pipe(rename('vendor.min.js'))
-    .pipe(gulp.dest('./public/javascripts/'))
+    .pipe(gulp.dest('./build/concat/javascripts/'))
     .on('error', gutil.log)
 });
 
-gulp.task('build', ['vendor'], function() {
+gulp.task('build-concat', ['vendor'], function() {
   return gulp.src('./public/stylesheets/*.css')
     .pipe(minifyCSS({keepBreaks:false}))
     .pipe(rename('style.min.css'))
-    .pipe(gulp.dest('./public/stylesheets/'))
+    .pipe(gulp.dest('./build/concat/stylesheets/'))
+});
+
+
+gulp.task('compress', function() {
+  gulp.src('./public/javascripts/*.js')
+    .pipe(uglify())
+    .pipe(rename(function (path) {
+        path.basename += ".min";
+    }))
+    .pipe(gulp.dest('./build/js'))
+});
+
+gulp.task('build', ['compress'], function() {
+  return gulp.src('./public/stylesheets/*.css')
+    .pipe(minifyCSS({keepBreaks:false}))
+    .pipe(rename(function (path) {
+        path.basename += ".min";
+    }))
+    .pipe(gulp.dest('./build/css'))
 });
 
 //// end of additional plugins
@@ -162,10 +181,10 @@ gulp.task('test', function (done) {
 //               - must be authenticated with heroku
 //               - must have git installed and be in application root directory
 //               - must be authenticated with git so that password does not have to be entered on push
-gulp.task('stage', ['test'], function(){ 
+gulp.task('stage', ['test'], function(){
     execute('git symbolic-ref --short HEAD', function(br){
         console.log('deploying current branch: ' + br);
-        var timer; 
+        var timer;
         return gulp.src('')
                 .pipe(shell([
                     '<%= setKillTimer() %>',
@@ -198,7 +217,7 @@ gulp.task('stage', ['test'], function(){
                         }
                     }
                 }));
-    }); 
+    });
 })
 
 // watch for js/css changes and run checkDev on changes
