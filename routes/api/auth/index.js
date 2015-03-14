@@ -66,7 +66,6 @@ router.post('/api/authTest', function (req, res) {
  * @api {post} /auth/ Get Authenticated
  * @apiName postAuth
  * @apiGroup Authentication
- * @apiPermission Admin
  *
  * @apiHeader {String} Authentication The api_token created from a base64 encoded
  string with email appended to password semicolon. ex. "email:password"
