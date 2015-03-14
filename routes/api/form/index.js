@@ -58,7 +58,7 @@ router.get('/:id', auth.isAuthenticated, controller.show);
 
 
 /**
-* @api {post} /m/form/:id Create a form
+* @api {post} /m/form/ Create a form
 * @apiName controller.createForm
 * @apiGroup Form
 * @apiPermission Admin
