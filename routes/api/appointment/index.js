@@ -105,7 +105,7 @@ router.get('/:id', auth.isAuthenticated, controller.retrieve);
 *
 * @apiExample Example usage:
 curl -X PUT -i http://localhost:3000/api/m/appointment/12345613/state/next \
--H "Authentication": "Token 550286024ae861626c9235f4" \
+-H "Authentication": "Token 550286024ae861626c9235f4" 
 *
 *
 *

@@ -7,13 +7,17 @@ var router = express.Router();
 var auth = require('../../../lib/auth');
 
 /**
+* @apiDescription Getting a custom form from the database. Authentication is required.
+* 
+* in the database schema.
 * @api {get} /m/form/:id Get a form
 * @apiName controller.show
 * @apiGroup Form
 * @apiPermission Admin
 *
 * @apiExample Example usage:
-* curl -i http://localhost/api/m/form/:id
+* curl -i http://localhost/api/m/form/:id \
+-H "Authentication": "Token 550286024ae861626c9235f4"
 *
 * @apiParam {String} id The id for a form.
 *
