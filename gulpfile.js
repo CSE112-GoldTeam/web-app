@@ -257,4 +257,14 @@ gulp.task('deploy-gh', function () {
         .pipe(deploy(options));
 });
 
-gulp.task('doc-deploy', ['apidoc','deploy-gh']);
+var open = require('gulp-open');
+
+// Open API Docs
+gulp.task('apidoc-url', function(){
+  var options = {
+    url: 'http://cse112-goldteam.github.io/web-app/'
+  };
+  return gulp.src('./README.md')
+  .pipe(open('', options));
+});
+gulp.task('doc-deploy', ['apidoc','deploy-gh','apidoc-url']);
