@@ -1,11 +1,17 @@
 // gulpfile.js
 var gulp = require('gulp');
-
 var child_process = require('child_process');
+var gutil = require('gulp-util');
+var clean = require('gulp-clean');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
+var server = require('gulp-express');
+var browserSync = require('browser-sync');
 
 var plugins= require('gulp-load-plugins')({
 	pattern: ['gulp-*', 'gulp.*', 'check-*', 
-	'jasmine-*', 'mongobackup', 'yargs'],
+	'jasmine-*', 'mongobackup', 'karma', 'karma-*', 'yargs'],
 	scope: ['devDependencies'],
 	lazy: false
 
@@ -14,11 +20,10 @@ var plugins= require('gulp-load-plugins')({
 
 //console.log(plugins);
 //var argv = require('yargs').argv;
-var server = require('gulp-express');
 
 //var nodemon = require('gulp-nodemon');
 //var jshint = require('gulp-jshint');
-var browserSync = require('browser-sync');
+
 //var checkPages = require('check-pages');
 
 //var mongobackup = require('mongobackup');
@@ -34,12 +39,7 @@ function execute(command, callback){
 //// dev team to group files by types to make it happen
 //// such as .js folder, .css folder, build folder
 
-var gutil = require('gulp-util');
-var clean = require('gulp-clean');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var minifyCSS = require('gulp-minify-css');
+//var minifyCSS = require('gulp-minify-css');
 
 
 //// end of additional plugins
@@ -63,7 +63,7 @@ gulp.task('vendor', function() {
 
 gulp.task('build', ['vendor'], function() {
   return gulp.src('./public/stylesheets/*.css')
-    .pipe(minifyCSS({keepBreaks:false}))
+    .pipe(plugins.minifyCSS({keepBreaks:false}))
     .pipe(rename('style.min.css'))
     .pipe(gulp.dest('./public/stylesheets/'))
 });
@@ -164,7 +164,7 @@ var karma = require('karma').server;
  * Run test once and exit
  */
 gulp.task('test', function (done) {
-  plugins.karma.start({
+  karma.start({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
   }, done);
