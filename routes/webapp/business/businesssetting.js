@@ -3,12 +3,13 @@ exports.get = function (req,res) {
     var bid = req.user.Business[0]._id;
     var db = req.db;
     var businesses = db.get('businesses');
-    businesses.find({_id: bid}, function (err, result) {
+    businesses.findById(bid, function (err, result) {
         if (err) {
                 return next(err);
             }
-        var dbBusiness = result[0];
+        var dbBusiness = result;
         var phone = dbBusiness.phone;
+        phone = phone.replace('1', '');
         phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
         res.render('business/businesssetting', {
             companyName: dbBusiness.companyName,
@@ -30,18 +31,19 @@ exports.post = function (req, res) {
     var oldPassword = req.body.oldPassword;
     var newPassword = req.body.newPassword;
     var confirmPassword = req.body.confirmPassword;
-
-    businesses.find({_id: bid}, function (err, result) {
+    businesses.findById(bid, function (err, result) {
         if (err) {
                 return next(err);
             }
-        var dbBusiness = result[0];
-        var dbPassword = result[0].password;
+        var dbBusiness = result;
+        var dbPassword = result.password;
          //checks and makes sure to only perform a name, phone email setting
         if(phone && email && companyName) {
-            
+            //if input fields are empty
             if (companyName === '' || email === '' || phone === '') {
                 phone = dbBusiness.phone;
+                //removing country code 1 from phone 
+                phone = phone.replace('1', '');
                 phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
                 res.render('business/businesssetting', {
                     error: 'You must fill in all fields.',
@@ -52,35 +54,54 @@ exports.post = function (req, res) {
             }
              else {
                 phone = phone.replace(/-/g, '');
-                businesses.update({_id:bid}, {
-                    $set :{
+                if(phone.length === 10){
+                    //this regex is removing the dashesh from input
+                    //its adding 1 in the front for US coutry code
+                    phone = '1'+phone;
+                    businesses.update({_id:bid}, {
+                        //writes in database
+                        $set :{
+                            companyName: companyName,
+                            email: email,
+                            phone: phone
+                        }
+                    });
+                    phone = phone.replace('1', '');
+                    phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
+                    res.render('business/businesssetting', {
                         companyName: companyName,
                         email: email,
-                        phone: phone
-                    }
-                });
-                phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
-                res.render('business/businesssetting', {
-                    companyName: companyName,
-                    email: email,
-                    phone: phone,
-                    edited: 'change successfully done.'
-                });
+                        phone: phone,
+                        edited: 'change successfully done.'
+                    });
+                }
+                else{
+                    phone = dbBusiness.phone;
+                    phone = phone.replace('1', '');
+                    phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
+                    res.render('business/businesssetting', {
+                        companyName: dbBusiness.companyName,
+                        email: dbBusiness.email,
+                        phone: phone,
+                        error: 'phone number should be in 1 xxx-xxx-xxxx format'
+                    });
+                }
+                
             }
         }// end of undefined password if statement
 
         //performs only if password submit is pressed
         else if (oldPassword && newPassword && confirmPassword) {
-            if (oldPassword && newPassword && confirmPassword){
                 var boolPsw = auth.validPassword(dbPassword, oldPassword);
                 if (boolPsw &&  newPassword === confirmPassword) {
                     newPassword = auth.hashPassword(newPassword);
-                    businesses.findAndModify({_id:bid}, {
+                    businesses.update({_id:bid}, {
                         $set :{
                             password: newPassword,
                         }
                     });
                     phone = dbBusiness.phone;
+                    phone = phone.replace('1', '');
                     phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
                     res.render('business/businesssetting', {
                         companyName: dbBusiness.companyName,
@@ -91,6 +112,7 @@ exports.post = function (req, res) {
                 }
                 else {
                     phone = dbBusiness.phone;
+                    phone = phone.replace('1', '');
                     phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
                     res.render('business/businesssetting', {
                         companyName: dbBusiness.companyName,
@@ -99,25 +121,13 @@ exports.post = function (req, res) {
                         error: 'password does not match'
                     });
                 }
-                
-            }
-            else {
-                phone = dbBusiness.phone;
-                phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
-                res.render('business/businesssetting', {
-                    error: 'You must fill in all fields of password.',
-                    companyName: dbBusiness.companyName,
-                    email: dbBusiness.email,
-                    phone: phone
-                });
-            }
-
         }//end of elseif statement
         else {
             phone = dbBusiness.phone;
+            phone = phone.replace('1', '');
             phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
             res.render('business/businesssetting', {
-                error: 'You must fill in all fields',
+                error: 'You must fill in all fields.',
                 companyName: dbBusiness.companyName,
                 email: dbBusiness.email,
                 phone: phone
