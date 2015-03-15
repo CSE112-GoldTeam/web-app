@@ -32,11 +32,11 @@ exports.post = function (req, res) {
     businesses.find({_id: bid}, function (err, result) {
          var dbBusiness = result[0];
          var dbPassword = result[0].password;
-         phone = dbBusiness.phone;
          //checks and makes sure to only perform a name, phone email setting
-        if(!oldPassword && !newPassword && !confirmPassword && phone && email && companyName) {
-            console.log("i am inside name setting yo ---___>>>+++++=====");
+        if(phone && email && companyName) {
+            
             if (companyName === '' || email === '' || phone === '') {
+                phone = dbBusiness.phone;
                 phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
                 res.render('business/businesssetting', {
                     error: 'You must fill in all fields.',
@@ -56,8 +56,8 @@ exports.post = function (req, res) {
                 });
                 phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
                 res.render('business/businesssetting', {
-                    companyName: dbBusiness.companyName,
-                    email: dbBusiness.email,
+                    companyName: companyName,
+                    email: email,
                     phone: phone,
                     edited: 'change successfully done.'
                 });
@@ -65,25 +65,33 @@ exports.post = function (req, res) {
         }// end of undefined password if statement
 
         //performs only if password submit is pressed
-        else if (!phone && !companyName && !email) {
-            console.log("Inside else ifXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        else if (oldPassword && newPassword && confirmPassword) {
             if (oldPassword && newPassword && confirmPassword){
-                //var boolPsw = auth.validPassword(dbPassword, oldPassword);
-                console.log("confirmPassword-------->>>> :"+confirmPassword);
-                if (/*boolPsw && */ newPassword === confirmPassword) {
-                    //console.log("hashPassword-------->>>> : "+newPassword+'-->'+auth.hashPassword(newPassword));
-                   // newPassword = auth.hashPassword(newPassword);
+                var boolPsw = auth.validPassword(dbPassword, oldPassword);
+                if (boolPsw &&  newPassword === confirmPassword) {
+                    newPassword = auth.hashPassword(newPassword);
                     businesses.findAndModify({_id:bid}, {
                         $set :{
                             password: newPassword,
                         }
                     });
+                    phone = dbBusiness.phone;
                     phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
                     res.render('business/businesssetting', {
                         companyName: dbBusiness.companyName,
                         email: dbBusiness.email,
                         phone: phone,
                         edited: 'password successfully changed.'
+                    });
+                }
+                else {
+                    phone = dbBusiness.phone;
+                    phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
+                    res.render('business/businesssetting', {
+                        companyName: dbBusiness.companyName,
+                        email: dbBusiness.email,
+                        phone: phone,
+                        error: 'password does not match'
                     });
                 }
                 
@@ -100,9 +108,17 @@ exports.post = function (req, res) {
             }
 
         }//end of elseif statement
-        //$2a$08$PSCbjEeE2ymJTfY3buscq.ozt3J8iHcIaHQ4yHKzPeETYvcywJX
-        //$2a$08$PSCbjEeE2ymJTfY3buscq.ozt3J8iHcIaHQ4yHKzPeETYvcywJX3S"
-            
+        else {
+            phone = dbBusiness.phone;
+            phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
+            res.render('business/businesssetting', {
+                error: 'You must fill in all fields',
+                companyName: dbBusiness.companyName,
+                email: dbBusiness.email,
+                phone: phone
+            });
+
+        }
 
     });
 
