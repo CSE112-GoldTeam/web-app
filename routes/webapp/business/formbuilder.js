@@ -5,7 +5,7 @@ exports.get = function (req, res) {
 exports.get = function (req, res) {
   var forms = req.db.get('forms');
   var businessID = req.user.Business[0]._id;
-  forms.findOne({business: businessID}, function (err, form,findID) {
+  forms.findOne({business: businessID.toString()}, function (err, form,findID) {
     res.render('business/formbuilder', {
       title: 'Express',
       form: JSON.stringify(form),

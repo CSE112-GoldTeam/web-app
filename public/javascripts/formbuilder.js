@@ -2,6 +2,7 @@
 
 var dropOptions = [];
 var dropCounter = 0;
+var flag = false;
 
 // Insert options into appropriate dropdown field
 function insertOption(dropcounter) {
@@ -34,12 +35,12 @@ function removeOption(dropcounter) {
 
 $(document).ready(function () {
     if (form != null){
-    makeForm(form,function (err, formHtml) {
-        if (err) {
-            return next(err);
-        }
-    });
-  }
+        makeForm(form,function (err, formHtml) {
+            if (err) {
+                return next(err);
+            }
+        });
+    }
 
     function addField(label, type) {
         var intId = $('#buildyourform div').length + 1;
@@ -143,10 +144,10 @@ $(document).ready(function () {
             ]
         };
         var counter = 0;
-        var form = $('fieldset');
+        var newForm = $('fieldset');
 
         // Cycle through each preview form field
-        form.children().each(function(){
+        newForm.children().each(function(){
 
             // Check field type and insert appropriate fields
             if ($(this).find('select.fieldtype').first().val()) {
@@ -174,20 +175,38 @@ $(document).ready(function () {
             }
         });
 
-        $.ajax({
-            url:'/api/m/form',
-            type:'POST',
-            data: JSON.stringify(json),
-            contentType:'application/json',
-            dataType:'json',
-            success:function(){
-                alert("Form Submitted!");
-            }
-        });
+        if(flag) {
+            console.log('PUT');
+            $.ajax({
+                url:'/api/form',
+                type:'PUT',
+                data: JSON.stringify(json),
+                contentType:'application/json',
+                dataType:'json',
+                success:function(){
+                    alert("Form Submitted!");
+                }
+            });
+        }
+        else {
+            console.log('POST');
+            $.ajax({
+                url:'/api/form',
+                type:'POST',
+                data: JSON.stringify(json),
+                contentType:'application/json',
+                dataType:'json',
+                success:function(){
+                    alert("Form Submitted!");
+                }
+            });
+
+        }
 
     });
 
 function makeForm(form, fn) {
+    flag = true;
     var body = {};
     var formHtml = '<form class="form-horizontal" method="post" action="#" enctype="application/x-www-form-urlencoded">';
     _.each(form.fields, function (field, index) {
