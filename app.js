@@ -15,6 +15,8 @@ var passport = require('passport');
 var async = require('async');
 var app = express();
 
+global.__base = __dirname + '/';
+
 //Database
 var monk = require('monk');
 var mongoURI = process.env.MONGOLAB_URI || 'localhost:27017/robobetty';
@@ -75,6 +77,7 @@ var mobileAuth = require('./routes/api/auth');
 var mobileForm = require('./routes/api/form');
 var mobileAppointment = require('./routes/api/appointment');
 var mobileToken = require('./routes/api/mobiletoken');
+var business = require('./routes/api/business');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -145,11 +148,14 @@ app.use(function(req, res, next) {
 app.use('/office', require('./routes/webapp/checkin'));
 app.use('/', businessRoutes);
 
+
+
 // Set Mobile Routes
 app.use('/', mobileAuth);
 app.use('/api/m/form', mobileForm);
 app.use('/api/m/appointment', mobileAppointment);
 app.use('/api/m/mobiletoken', mobileToken);
+app.use('/api/m/business', business);
 app.use('/api/m/example', require('./routes/api/example'));
 app.use('/api', require('./routes/webapi'));
 
