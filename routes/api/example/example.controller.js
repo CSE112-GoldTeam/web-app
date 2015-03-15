@@ -11,7 +11,7 @@
 
 var _ = require('underscore');
 
-// Get list of things
+
 exports.index = function(req, res) {
 
   // grab our db object from the request

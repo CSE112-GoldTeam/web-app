@@ -5,8 +5,31 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <link rel='stylesheet' href='/stylesheets/style.css'/>
   <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-nav-wizard.css">
+    {{#newrelic}}
+        {{{ newrelic.getBrowserTimingHeader }}}
+    {{/newrelic}}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            color: {{containerText}} !important;
+        }
+
+        .customBG {
+            background-image: url(/images/bg/full/{{bg}});
+        }
+
+        .btn {
+            background-color: {{buttonBg}};
+            border-color: {{buttonBg}};
+            color: {{buttonText}}
+        }
+
+        .container-checkin {
+            background-color: {{containerBg}};
+        }
+    </style>
+
   <script>
       $(document).ready(function () {
           $('#sig').on('input', function () {
@@ -52,7 +75,7 @@
     <div class="row text-center bottomInfo">
       <h3>SIGN HERE</h3>
       <form action="sign" method="post">
-        <img id="sigImg" src="/api/signature/" style="width:auto"/>
+        <img id="sigImg" alt="image for customer signature" src="/api/signature/" style="width:auto"/>
         <br>
         <input type="text" id="sig" name="sig" onkeyup="this.value=this.value.replace(/[^a-zA-Z0-9_ ' , \. -]/g, '')"  />
         <button class="btn btn-default" type="submit">Sign</button>

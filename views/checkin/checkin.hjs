@@ -5,8 +5,30 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel='stylesheet' href='/stylesheets/style.css'/>
+        {{#newrelic}}
+            {{{ newrelic.getBrowserTimingHeader }}}
+        {{/newrelic}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <style>
+            body, h1, h2, h3, h4, h5, h6 {
+                color: {{containerText}} !important;
+            }
+
+            .customBG {
+                background-image: url(/images/bg/full/{{bg}});
+            }
+
+            .btn {
+                background-color: {{buttonBg}};
+                border-color: {{buttonBg}};
+                color: {{buttonText}}
+            }
+
+            .container-checkin {
+                background-color: {{containerBg}};
+            }
+        </style>
     </head>
     <body class = "customBG">
         <!-- this nav bar is consistent with PK's navbar
@@ -21,8 +43,8 @@
         </header> -->
 
         <div class="container container-checkin">
-            <h1 class ="header">Welcome to Northwood Dental!</h1>
-            <img class="checkinphoto" src="/images/dentalLogo.jpg" alt="...">
+            <h1 class ="header">Welcome to {{companyName}}!</h1>
+            <img class="checkinphoto" src="{{logo}}" alt="...">
             <a type="button" class="btn custom-button checkinbutton" href="nocode"
                     style="display:block;margin-left:auto;margin-right:auto">Check In
             </a>

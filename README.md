@@ -8,7 +8,7 @@ First Run
 4. Install Imagemagick using [Homebrew](http://brew.sh/) if you're using OS X
 
         $ brew install imagemagick
-   
+
    If you're using Windows, head to http://www.imagemagick.org/download/ and download
    the latest version of Imagemagick, and just follow the installer steps.
 
@@ -34,3 +34,12 @@ Push to testing environment
 5. if want permanent storage of git password (https://help.github.com/articles/caching-your-github-password-in-git/)
 6. heroku login
 7. gulp stage OR gulp stage --test [stage number]
+
+REST API Documentation
+---------------------
+http://cse112-goldteam.github.io/web-app/
+
+To deploy documents
+```
+gulp doc-deploy
+```
