@@ -9,7 +9,9 @@ exports.get = function(req, res) {
 		console.log(result);
 		var disclosure = dbBusiness.disclosure;
 
-
+		disclosure = disclosure.slice(3);
+		disclosure = disclosure.replace(/<p>/g, '\n');
+		disclosure = disclosure.replace(/<\/p>/g, '\n');
 
 		res.render('business/setdisclosure', {
 			disclosure: disclosure
@@ -18,6 +20,12 @@ exports.get = function(req, res) {
 	
 };
 
-//exports.post = function(req, res) {
+exports.post = function(req, res) {
+	var bid = req.user.Business[0]._id;
+	var db = req.db;
+	var business = db.get('businesses');
+	var disclosure = req.body.disclosure;
 
-//}
+	disclosure = disclosure.replace(/\n\n/g, '</p><p>');
+	disclosure = '<p>' + disclosure;
+}
