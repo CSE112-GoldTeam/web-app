@@ -1,7 +1,7 @@
 var auth = require('../../../lib/auth');
 
 exports.get = function (req,res) {
-		var eid = req.user.Employee[0]._id;
+	var eid = req.user.Employee[0]._id;
     var db = req.db;
     var employees = db.get('employees');
 
