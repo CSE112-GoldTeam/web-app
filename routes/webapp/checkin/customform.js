@@ -1,6 +1,7 @@
 var ObjectID = require('mongodb').ObjectID;
 var _ = require('underscore');
 var style = require('./../../../lib/style.js');
+var sms = require('./../../../lib/sms.js');
 
 //Custom Form
 function makeDropdown(options, name, body) {
@@ -167,12 +168,28 @@ exports.post = function (req, res, next) {
 
                     //Update the state of the appointment
                     var appointmentId = req.session.appointmentId;
-                    db.get('appointments').update({_id: ObjectID(appointmentId)}, {
+                    db.get('appointments').findAndModify({_id: ObjectID(appointmentId)}, {
                         $set: {
                             state: 'formDone'
                         }
-                    }, function () {
-                        res.redirect('sign');
+                    }, function (err, appt) {
+                        //Find the employee this appointment belongs to
+                        db.get('employees').findById(appt.employee, function (err, employee) {
+                            if (err) {
+                                return next(err);
+                            }
+                            if (!employee) {
+                                return next(err);
+                            }
+
+                            sms.sendText(employee.phone, 'Your patient ' + appt.fname + ' ' + appt.lname + ' has checked in.', function (err) {
+                                if (err) {
+                                    return next(err);
+                                }
+
+                                res.redirect('sign');
+                            });
+                        });
                     });
                 });
             }
