@@ -13,13 +13,26 @@
 </head>
 
 <body>
-
-	<form  class="form-horizontal" action="" method="post">
-		<textarea rows="20" cols="50" action="setdisclosure" class="disclosure" type="text" id ="disclosure" name="disclosure" required>{{disclosure}}</textarea>
-        <button class="btn custom-button" type="submit">Save</button>
-	</form>
-
-
+	<div class="container container-margin">
+		<div class="row">
+			{{#edited}}
+				<div class="alert alert-success" role="alert">
+					{{edited}}
+				</div>
+			{{/edited}}
+			{{#alert}}
+				<div class="alert alert-error" role="alert">
+					{{alert}}
+				</div>
+			{{/alert}}
+		</div>
+		<div class="form-inline">
+			<form  class="form-horizontal" action="" method="post">
+			<textarea rows="20" cols="50" action="setdisclosure" class="disclosure" type="text" id ="disclosure" name="disclosure" required>{{disclosure}}</textarea>
+      <button class="btn custom-button" type="submit">Save</button>
+			</form>
+		</div>
+	</div>
 </body>
 
 </html>
