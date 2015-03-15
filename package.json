@@ -25,6 +25,7 @@
     "newrelic": "^1.16.4",
     "passport": "~0.1.17",
     "passport-local": "~0.1.6",
+    "plivo-node": "^0.2.5",
     "sendgrid": "^1.6.0",
     "serve-favicon": "~2.2.0",
     "underscore": "^1.8.1"
