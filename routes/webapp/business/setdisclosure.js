@@ -6,7 +6,7 @@ exports.get = function(req, res) {
 	var business = db.get('businesses');
 	business.find({_id: bid}, function (err, result) {
 		var dbBusiness = result[0];
-		console.log(result);
+		//console.log(result);
 		var disclosure = dbBusiness.disclosure;
 
 		disclosure = disclosure.slice(3);
@@ -24,8 +24,15 @@ exports.post = function(req, res) {
 	var bid = req.user.Business[0]._id;
 	var db = req.db;
 	var business = db.get('businesses');
+	console.log("bid: ---->>>>++++>>>: "+bid);
 	var disclosure = req.body.disclosure;
 
+console.log("disclosure:------------------------------------->>>>>>>>>>>>>>>>>>>> "+disclosure);
 	disclosure = disclosure.replace(/\n\n/g, '</p><p>');
 	disclosure = '<p>' + disclosure;
+	business.findAndModify({_id: bid},{
+		$set :{
+			disclosure: disclosure
+		}
+	});
 }

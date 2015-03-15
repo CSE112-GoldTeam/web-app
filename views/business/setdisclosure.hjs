@@ -14,10 +14,9 @@
 
 <body>
 
-	<form>
-		<textarea rows="20" cols="50" action="setdisclosure" class="disclosure" type="text" name="disclosure" required>{{disclosure}}</textarea>
-
-		<input class="btn custom-button" name="submit" type="submit" value="Save">
+	<form  class="form-horizontal" action="" method="post">
+		<textarea rows="20" cols="50" action="setdisclosure" class="disclosure" type="text" id ="disclosure" name="disclosure" required>{{disclosure}}</textarea>
+        <button type="button" class="btn custom-button" type="submit">Save</button>
 	</form>
 
 
