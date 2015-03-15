@@ -29,6 +29,33 @@ function decodeAuthString(authString) {
     };
 }
 
+/**
+ * @api {post} /authTest/ Test Your Authentication
+ * @apiName authTest
+ * @apiGroup Authentication
+ * @apiPermission Admin
+ *
+ * @apiHeader {String} api_token The api token
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authentication": "Token WW9sbzp5b2xv"
+ *     }
+ *
+ * @apiExample Example usage:
+ * curl -i http://localhost/api/authTest -H "Authorization: Token WW9sbzp5b2xv"
+ *
+ * @apiSuccessExample Request (example):
+ * HTTP/1.1 200 OK
+ *
+ * @apiError NoAccessRight Only authenticated Admins can access the data.
+ * @apiError ApptNotFound  The <code>id</code> of the User was not found.
+ *
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 401 Not Authenticated
+ *     {
+ *       "error": "NoAccessRight"
+ *     }
+ */
 router.post('/api/authTest', function (req, res) {
     auth.isValidToken(req.db, req.headers.authorization, function (result) {
         if (!result) {
@@ -39,6 +66,36 @@ router.post('/api/authTest', function (req, res) {
     });
 });
 
+/**
+ * @api {post} /auth/ Get Authenticated
+ * @apiName postAuth
+ * @apiGroup Authentication
+ * @apiPermission Admin
+ *
+ * @apiHeader {String} Authentication The api token
+ * @apiHeaderExample Header-Example:
+ *     {
+ *       "Authentication": "Token WW9sbzp5b2xv"
+ *     }
+ *
+ * @apiExample Example usage:
+ * curl -i http://localhost/api/authTest -H "Authorization: Token WW9sbzp5b2xv"
+ *
+ * @apiSuccessExample {json} Response (example):
+ * HTTP/1.1 200 OK
+ *     {
+ *       "api_token": "WW9sbzp5b2xv"
+ *     }
+ *
+ * @apiError NoAccessRight Only authenticated Admins can access the data.
+ * @apiError ApptNotFound  The <code>id</code> of the User was not found.
+ *
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 401 Not Authenticated
+ *     {
+ *       "error": "NoAccessRight"
+ *     }
+ */
 router.post('/api/auth', function (req, res, next) {
     if (!req.headers.authorization) {
         return res.send(400, 'Basic HTTP Auth required');
@@ -53,9 +110,11 @@ router.post('/api/auth', function (req, res, next) {
     }
 
     var user = decodeAuthString(matches[1]);
+    // Validates user's email and password
     auth.validateLogin(req.db, user.email, user.password, function (result) {
         if (result) {
             var name = req.body.name;
+            // Checks if name field is blank
             if (name === '') {
                 return res.send(400, 'Name field required');
             }

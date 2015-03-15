@@ -1,12 +1,15 @@
+var ObjectID = require('mongodb').ObjectID;
+
 exports.get = function (req, res, next) {
     var db = req.db;
     var formResponses = db.get('formResponses');
     var appointments = db.get('appointments');
-
-    formResponses.findOne({ appointment: req.params.id }, function(err, formResponse) {
+    
+    formResponses.findOne({ appointment: ObjectID(req.params.id) }, function(err, formResponse) {
         if (err) {
             return next(err);
         }
+        console.log(formResponse);
         if (!formResponse) {
             return next(new Error('Error finding form response for appointment: ' + req.params.id));
         }
