@@ -4,11 +4,13 @@ exports.get = function (req,res) {
     var db = req.db;
     var businesses = db.get('businesses');
     businesses.find({_id: bid}, function (err, result) {
+        if (err) {
+                return next(err);
+            }
         var dbBusiness = result[0];
         var phone = dbBusiness.phone;
         phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
         res.render('business/businesssetting', {
-            title: 'Express',
             companyName: dbBusiness.companyName,
             phone: phone,
             email: dbBusiness.email
@@ -30,8 +32,11 @@ exports.post = function (req, res) {
     var confirmPassword = req.body.confirmPassword;
 
     businesses.find({_id: bid}, function (err, result) {
-         var dbBusiness = result[0];
-         var dbPassword = result[0].password;
+        if (err) {
+                return next(err);
+            }
+        var dbBusiness = result[0];
+        var dbPassword = result[0].password;
          //checks and makes sure to only perform a name, phone email setting
         if(phone && email && companyName) {
             
@@ -47,7 +52,7 @@ exports.post = function (req, res) {
             }
              else {
                 phone = phone.replace(/-/g, '');
-                businesses.findAndModify({_id:bid}, {
+                businesses.update({_id:bid}, {
                     $set :{
                         companyName: companyName,
                         email: email,
