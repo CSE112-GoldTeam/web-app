@@ -38,3 +38,8 @@ Push to testing environment
 REST API Documentation
 ---------------------
 http://cse112-goldteam.github.io/web-app/
+
+To deploy documents
+```
+gulp doc-deploy
+```

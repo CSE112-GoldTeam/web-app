@@ -1,0 +1,18 @@
+How to use:
+
+Move the `dumps` folder to the /web-app directory.
+Start up everything with the `gulp` command
+Open up a new terminal and run:
+	mongo --eval 'db.dropDatabase()' robobetty
+Now import the new data with:
+	gulp mongorestore
+
+The password for every account is `password`
+
+To find your employee acount open up a mongo shell with the command `mongo robobetty`.
+Now enter the following (replace my name with yours):
+	db.employees.find({fname: 'J', lname:'Delaney'}).pretty()
+Take note of your `_id` field and `business` field.
+
+Now to find your appointments, run the following command (replacing my ObjectId with yours):
+	db.appointments.find({employee:ObjectId("5500e8517ac4b1b508657d09")})
