@@ -28,11 +28,16 @@ exports.post = function(req, res) {
 	var disclosure = req.body.disclosure;
 
 console.log("disclosure:------------------------------------->>>>>>>>>>>>>>>>>>>> "+disclosure);
-	disclosure = disclosure.replace(/\n\n/g, '</p><p>');
-	disclosure = '<p>' + disclosure;
+	disclosure = disclosure.replace(/\r\n\r\n/g, '</p><p>');
+	disclosure = disclosure.replace(/\r\n/g, '</p><p>');
+	disclosure = '<p>' + disclosure + '</p>';
 	business.findAndModify({_id: bid},{
 		$set :{
 			disclosure: disclosure
 		}
 	});
+
+	res.render('business/setdisclosure', {
+			disclosure: req.body.disclosure
+		});
 }

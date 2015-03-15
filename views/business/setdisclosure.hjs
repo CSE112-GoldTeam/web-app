@@ -16,7 +16,7 @@
 
 	<form  class="form-horizontal" action="" method="post">
 		<textarea rows="20" cols="50" action="setdisclosure" class="disclosure" type="text" id ="disclosure" name="disclosure" required>{{disclosure}}</textarea>
-        <button type="button" class="btn custom-button" type="submit">Save</button>
+        <button class="btn custom-button" type="submit">Save</button>
 	</form>
 
 
