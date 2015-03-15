@@ -40,7 +40,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "curl -i http://localhost/api/m/appointment?fname=John&lname=\"Doe\"&dob=\"05/13/1965",
+        "content": "curl -i http://localhost:3000/api/m/appointment?fname='Frodo'&lname='St. John'&dob='02/17/1956' \\\n-H \"Authentication\": \"Token 550286024ae861626c9235f4\"",
         "type": "json"
       }
     ],
@@ -49,42 +49,75 @@
         "Success 200": [
           {
             "group": "Success 200",
+            "type": "ObjectID",
+            "optional": false,
+            "field": "business",
+            "description": "<p>Business ID</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "ObjectID",
+            "optional": false,
+            "field": "employee",
+            "description": "<p>Employee ID</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "date",
+            "description": "<p>Date of the appointment</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "lname",
+            "description": "<p>Last name</p> "
+          },
+          {
+            "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "fname",
-            "description": "<p>Firstname of the User.</p> "
+            "description": "<p>First name</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "dob",
+            "description": "<p>Date of birth MM/DD/YYYY</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "state",
+            "description": "<p>See db scheme for possible states</p> "
           }
         ]
       },
       "examples": [
         {
-          "title": "Request (example):",
-          "content": "HTTP/1.1 200 OK\n{\n \"appointment\": [\n    \"appointmentObject\"\n ]\n}",
+          "title": "Success-Response (example):",
+          "content": "HTTP/1.1 200 OK\n[\n {\n \t\"business\" : ObjectId(\"54eca953f2a2d47937757616\"),\n \t\"employee\" : ObjectId(\"54ecaa24fb4974129dc2050c\"),\n \t\"date\" : ISODate(\"2015-02-26T21:00:00Z\"),\n \t\"fname\" : \"Emily\",\n \t\"lname\" : \"Lee\",\n \t\"dob\" : \"03/25/1968\",\n \t\"email\" : \"Emily.Lee@example.com\",\n \t\"state\" : \"scheduled\"\n }\n]",
           "type": "json"
         }
       ]
     },
     "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "NoAccessRight",
-            "description": "<p>Only authenticated Admins can access the data.</p> "
-          },
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "ApptNotFound",
-            "description": "<p>The <code>id</code> of the User was not found.</p> "
-          }
-        ]
-      },
       "examples": [
         {
-          "title": "Response (example):",
-          "content": "HTTP/1.1 401 Not Authenticated\n{\n  \"error\": \"NoAccessRight\"\n}",
+          "title": "Error-Response (example):",
+          "content": "HTTP/1.1 401 Not Authenticated",
           "type": "json"
         }
       ]
@@ -104,6 +137,44 @@
         "name": "admin"
       }
     ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Appointment id</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -X PUT -i http://localhost:3000/api/m/appointment/12345613/state/next \\\n-H \"Authentication\": \"Token 550286024ae861626c9235f4\"",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response (example):",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response (example):",
+          "content": "HTTP/1.1 401 Not Authenticated",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "routes/api/appointment/index.js",
     "groupTitle": "Appointment"
@@ -119,6 +190,51 @@
         "name": "admin"
       }
     ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Appointment id</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "state",
+            "description": "<p>State to set. See database schema for see possible states.</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -X PUT -i http://localhost:3000/api/m/appointment/12345613/state \\\n-H \"Authentication\": \"Token 550286024ae861626c9235f4\" \\\n-H \"Content-Type: application/json\" \\\n-d '{\"state\":\"roomed\"}'",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response (example):",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response (example):",
+          "content": "HTTP/1.1 401 Not Authenticated",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "routes/api/appointment/index.js",
     "groupTitle": "Appointment"
@@ -151,7 +267,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "http://localhost/api/m/appointment/123456789",
+        "content": "curl -i http://localhost/api/m/appointment/123456789 \\\n-H \"Authentication\": \"Token 550286024ae861626c9235f4\"",
         "type": "json"
       }
     ],
@@ -160,17 +276,75 @@
         "Success 200": [
           {
             "group": "Success 200",
+            "type": "ObjectID",
+            "optional": false,
+            "field": "business",
+            "description": "<p>Business ID</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "ObjectID",
+            "optional": false,
+            "field": "employee",
+            "description": "<p>Employee ID</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "date",
+            "description": "<p>Date of the appointment</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "lname",
+            "description": "<p>Last name</p> "
+          },
+          {
+            "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "fname",
-            "description": "<p>Firstname of the User.</p> "
+            "description": "<p>First name</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "dob",
+            "description": "<p>Date of birth MM/DD/YYYY</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "state",
+            "description": "<p>See db scheme for possible states</p> "
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response (example):",
-          "content": "HTTP/1.1 200 OK\n{\n \"appointment\": [\n    \"appointmentObject\"\n ]\n}",
+          "content": "HTTP/1.1 200 OK\n[\n {\n \t\"business\" : ObjectId(\"54eca953f2a2d47937757616\"),\n \t\"employee\" : ObjectId(\"54ecaa24fb4974129dc2050c\"),\n \t\"date\" : ISODate(\"2015-02-26T21:00:00Z\"),\n \t\"fname\" : \"Emily\",\n \t\"lname\" : \"Lee\",\n \t\"dob\" : \"03/25/1968\",\n \t\"email\" : \"Emily.Lee@example.com\",\n \t\"state\" : \"scheduled\"\n }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response (example):",
+          "content": "HTTP/1.1 401 Not Authenticated",
           "type": "json"
         }
       ]
@@ -197,14 +371,14 @@
             "type": "String",
             "optional": false,
             "field": "api_token",
-            "description": "<p>The api token</p> "
+            "description": "<p>returned from api/auth</p> "
           }
         ]
       },
       "examples": [
         {
           "title": "Header-Example:",
-          "content": "{\n  \"Authentication\": \"Token WW9sbzp5b2xv\"\n}",
+          "content": "{\n  \"Authentication\": \"Token 550286024ae861626c9235f4\"\n}",
           "type": "json"
         }
       ]
@@ -212,40 +386,24 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "curl -i http://localhost/api/authTest -H \"Authorization: Token WW9sbzp5b2xv\"",
+        "content": "curl -X POST -i http://localhost:3000/api/authTest \\\n-H \"Authorization: Token 550286024ae861626c9235f4\"",
         "type": "json"
       }
     ],
     "success": {
       "examples": [
         {
-          "title": "Request (example):",
+          "title": "Success-Response (example):",
           "content": "HTTP/1.1 200 OK",
           "type": "json"
         }
       ]
     },
     "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "NoAccessRight",
-            "description": "<p>Only authenticated Admins can access the data.</p> "
-          },
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "ApptNotFound",
-            "description": "<p>The <code>id</code> of the User was not found.</p> "
-          }
-        ]
-      },
       "examples": [
         {
-          "title": "Response (example):",
-          "content": "HTTP/1.1 401 Not Authenticated\n{\n  \"error\": \"NoAccessRight\"\n}",
+          "title": "Error-Response (example):",
+          "content": "HTTP/1.1 401 Not Authenticated",
           "type": "json"
         }
       ]
@@ -260,11 +418,6 @@
     "title": "Get Authenticated",
     "name": "postAuth",
     "group": "Authentication",
-    "permission": [
-      {
-        "name": "Admin"
-      }
-    ],
     "header": {
       "fields": {
         "Header": [
@@ -273,55 +426,45 @@
             "type": "String",
             "optional": false,
             "field": "Authentication",
-            "description": "<p>The api token</p> "
+            "description": "<p>The api_token created from a base64 encoded  string with email appended to password semicolon. ex. &quot;email:password&quot;</p> "
           }
         ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authentication\": \"Token WW9sbzp5b2xv\"\n}",
-          "type": "json"
-        }
-      ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name of the employee to be authenticated</p> "
+          }
+        ]
+      }
     },
     "examples": [
       {
         "title": "Example usage:",
-        "content": "curl -i http://localhost/api/authTest -H \"Authorization: Token WW9sbzp5b2xv\"",
+        "content": "curl -X POST -i http://localhost:3000/api/auth \\\n-H \"Authorization: Basic bm9ydGh3b29kLmRlbnRhbEBnbWFpbC5jb206cGFzc3dvcmQ=\" \\\n-H \"Content-Type: application/json\" \\\n-d '{\"name\":\"Frodo\"}'",
         "type": "json"
       }
     ],
     "success": {
       "examples": [
         {
-          "title": "Response (example):",
+          "title": "Success-Response (example):",
           "content": "HTTP/1.1 200 OK\n    {\n      \"api_token\": \"WW9sbzp5b2xv\"\n    }",
           "type": "json"
         }
       ]
     },
     "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "NoAccessRight",
-            "description": "<p>Only authenticated Admins can access the data.</p> "
-          },
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "ApptNotFound",
-            "description": "<p>The <code>id</code> of the User was not found.</p> "
-          }
-        ]
-      },
       "examples": [
         {
-          "title": "Response (example):",
-          "content": "HTTP/1.1 401 Not Authenticated\n{\n  \"error\": \"NoAccessRight\"\n}",
+          "title": "Error-Response (example):",
+          "content": "HTTP/1.1 401 Not Authenticated",
           "type": "json"
         }
       ]
@@ -331,8 +474,43 @@
     "groupTitle": "Authentication"
   },
   {
+    "type": "get",
+    "url": "/m/business",
+    "title": "List businesses",
+    "name": "index",
+    "group": "Business",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Nothing",
+            "optional": false,
+            "field": "Nothing",
+            "description": "<p>See the business schema...</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response (example):",
+          "content": "HTTP/1.1 200 OK\n{\n\t\"_id\" : \"5500a18ac0a954cae1bbf23a\",\n\t\"companyName\" : \"Arch Health Partners\",\n\t\"email\" : \"1letterboy@gmail.com\",\n\t\"password\" : \"$2a$08$KoipSqlCwrLi2dSRcvCHse1mpzMnRfA1NCBZaaAEf2fQ1U9tVIYp.\",\n\t\"phone\" : \"16199209355\",\n\t\"disclosure\" : \"A very long disclosure\",\n\t\"logo\" : \"/images/uploads/arch.png\",\n\t\"style\" : {\n\t\t\"buttonBg\" : {\n\t\t\t\"r\" : 202,\n\t\t\t\"g\" : 122,\n\t\t\t\"b\" : 33,\n\t\t\t\"a\" : 1\n\t\t},\n\t\t\"buttonText\" : {\n\t\t\t\"r\" : 255,\n\t\t\t\"g\" : 255,\n\t\t\t\"b\" : 255,\n\t\t\t\"a\" : 1\n\t\t},\n\t\t\"containerBg\" : {\n\t\t\t\"r\" : 255,\n\t\t\t\"g\" : 255,\n\t\t\t\"b\" : 255,\n\t\t\t\"a\" : 0.95\n\t\t},\n\t\t\"containerText\" : {\n\t\t\t\"r\" : 21,\n\t\t\t\"g\" : 24,\n\t\t\t\"b\" : 49,\n\t\t\t\"a\" : 1\n\t\t},\n\t\t\"bg\" : \"bg5.jpg\"\n\t}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/api/business/index.js",
+    "groupTitle": "Business"
+  },
+  {
     "type": "post",
-    "url": "/m/form/:id",
+    "url": "/m/form/",
     "title": "Create a form",
     "name": "controller_createForm",
     "group": "Form",
@@ -356,7 +534,7 @@
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n \"answers\": [\n   {\n     \"label\": \"Name\",\n     \"response\": \"John Doe\"\n   },\n   {\n     \"label\": \"Gender\",\n     \"response\": \"Female\"\n   },\n   {\n     \"label\": \"Email\",\n     \"response\": \"john.doe@example.com\"\n   },\n   {\n     \"label\": \"Favorite Color\",\n     \"response\": \"Blue\"\n   }\n ]\n}",
+          "content": "{\n   business: \"948943204910\",\n   fields: [\n           {\n                   type: \"textfield\",\n                   label: \"Name\"\n           },\n           {\n                   type: \"dropdown\",\n                   label: \"Gender\",\n                   options: [\"Male\", \"Female\"]\n           },\n           {\n                   type: \"textfield\",\n                   label: \"Email\"\n           },\n           {\n                   type: \"dropdown\",\n                   label: \"Favorite Color\",\n                   options: [\"Blue\", \"Yellow\", \"Green\", \"Pink\"]\n           }\n   ]\n}",
           "type": "json"
         }
       ]
@@ -376,11 +554,21 @@
         "name": "Admin"
       }
     ],
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n \"business\" : \"1231254124\",\n \"appointment\" : \"12321312312\",\n \"answers\": [\n   {\n     \"label\": \"Name\",\n     \"response\": \"John Doe\"\n   },\n   {\n     \"label\": \"Gender\",\n     \"response\": \"Female\"\n   },\n   {\n     \"label\": \"Email\",\n     \"response\": \"john.doe@example.com\"\n   },\n   {\n     \"label\": \"Favorite Color\",\n     \"response\": \"Blue\"\n   }\n ]\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "routes/api/form/index.js",
     "groupTitle": "Form"
   },
   {
+    "description": "<p>Getting a custom form from the database. Authentication is required.</p> <p>in the database schema.</p> ",
     "type": "get",
     "url": "/m/form/:id",
     "title": "Get a form",
@@ -394,7 +582,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "curl -i http://localhost/api/m/form/:id",
+        "content": "curl -i http://localhost/api/m/form/:id \\\n-H \"Authentication\": \"Token 550286024ae861626c9235f4\"",
         "type": "json"
       }
     ],
@@ -415,7 +603,7 @@
       "examples": [
         {
           "title": "Success-Response (example):",
-          "content": "HTTP/1.1 200 OK\n{\n    business: 1293182391203,\n    fields: [ {\n        type: \"textfield\",\n        label: \"Name\"\n},\n{\n        type: \"dropdown\",\n        label: \"Gender\",\n        options: [\"Male\", \"Female\"]\n},\n{\n        type: \"textfield\",\n        label: \"Email\"\n},\n{\n        type: \"dropdown\",\n        label: \"Favorite Color\",\n        options: [\"Blue\", \"Yellow\", \"Green\", \"Pink\"]\n}]\n}",
+          "content": "HTTP/1.1 200 OK\n{\n    business: \"948943204910\",\n    fields: [ {\n        type: \"textfield\",\n        label: \"Name\"\n},\n{\n        type: \"dropdown\",\n        label: \"Gender\",\n        options: [\"Male\", \"Female\"]\n},\n{\n        type: \"textfield\",\n        label: \"Email\"\n},\n{\n        type: \"dropdown\",\n        label: \"Favorite Color\",\n        options: [\"Blue\", \"Yellow\", \"Green\", \"Pink\"]\n}]\n}",
           "type": "json"
         }
       ]
@@ -521,7 +709,7 @@
   {
     "type": "get",
     "url": "/m/mobileToken/",
-    "title": "Get A Mobile Token",
+    "title": "Get A List of Mobile Tokens",
     "name": "GetToken",
     "group": "MobileToken",
     "permission": [
