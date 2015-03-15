@@ -5,6 +5,7 @@
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    {{{ newrelic.getBrowserTimingHeader }}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
@@ -13,8 +14,8 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 	    <div class="navbar-header">
 	        <a class="navbar-brand" href="/">
-	            <div id="company-logo">iReceptionist</div>
-	        </a>
+            <img id = "company-logo" src="images/logo.png">
+        </a>
 	    </div>
 	    <div class="navbar-padding-right">
         <ul class="nav navbar-nav navbar-right navbar-padding">
@@ -34,7 +35,7 @@
 	            <li>
 	                <a href="/customizetheme">Customize Theme</a>
 	            </li>
-	            <li class="active"><a href="/accountsettings">More Settings</a></li>
+	            <li class="active"><a href="/accountSettings">More Settings</a></li>
 	        </ul>
 	    </div>
 	</nav>
@@ -105,13 +106,13 @@
 		</div>
 		<div class="form-inline">
 			<form class = "form-horizontal" action = "" method = "">
-				
+
 				<label class="col-md-2 col-md-offset-2 control-label editNotify">Notification Settings</label>
 
 				<div class="col-md-2 col-md-offset-3">
 					 <br><br>
 				</div>
-			
+
 			</form>
 		</div>
 		<div  class="column">

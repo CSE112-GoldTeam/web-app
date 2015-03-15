@@ -1,15 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <title>{{ title }}</title>
-   <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-   <link rel='stylesheet' href='/stylesheets/style.css'/>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <title>{{ title }}</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    {{#newrelic}}
+        {{{ newrelic.getBrowserTimingHeader }}}
+    {{/newrelic}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
- <nav class="navbar navbar-default navbar-fixed-top"></nav>
+ <nav class="navbar navbar-default navbar-static-top">
+         <div class="navbar-header">
+             <a class="navbar-brand" href="/">
+                 <img id = "company-logo" src="images/logo.png">
+             </a>
+         </div>
+         <div class="navbar-padding-right">
+             <ul class="nav navbar-nav navbar-right navbar-padding">
+                 <li><a href="/dashboard">Dashboard</a></li>
+                 <li><a href="/addemployees">Employees</a></li>
+                 <li class="active">
+                     <a href="/customizetheme">Settings</a>
+                 </li>
+                 <li><a href="/companySettings">Company Name</a></li>
+             </ul>
+         </div>
+         <!--Secondary navbar for the Settings tab-->
+         <div class="navbar-secondary navbar-tabs">
+             <ul>
+                 <li class="active"><a href="/registerDevice">Configurations</a></li>
+                 <li><a href="/manageforms">Manage Forms</a></li>
+                 <li>
+                     <a href="/customizetheme">Customize Theme</a>
+                 </li>
+                 <li><a href="/accountSettings">More Settings</a></li>
+             </ul>
+         </div>
+     </nav>
  <div style="position:absolute;top:150px;left:80px">
    <h2 top="50px" align="left">Setting Up</h2>
      <h4 align="left">Register all of your devices and generate activation keys</h4>
@@ -50,7 +81,6 @@
          </div>
        </div>
  </div>
-
  <script>
      console.log("Entered Script")
      $(".deleteBtn").click(function() {
@@ -72,8 +102,4 @@
          modal.find('.modal-footer button').val(recipient);
      });
  </script>
-
-
-
-
 </body>

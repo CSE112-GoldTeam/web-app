@@ -1,5 +1,7 @@
+var newrelic = false;
+
 if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
-    require('newrelic');
+    newrelic = require('newrelic');
 }
 
 var express = require('express');
@@ -23,7 +25,9 @@ var db = monk(mongoURI);
 var businesses = db.get('businesses');
 var employee = db.get('employees');
 
-
+if (newrelic) {
+    app.locals.newrelic = newrelic;
+}
 
 //passport functions to Serialize and Deserialize users
 
@@ -71,6 +75,7 @@ var mobileAuth = require('./routes/api/auth');
 var mobileForm = require('./routes/api/form');
 var mobileAppointment = require('./routes/api/appointment');
 var mobileToken = require('./routes/api/mobiletoken');
+var business = require('./routes/api/business');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -141,11 +146,14 @@ app.use(function(req, res, next) {
 app.use('/office', require('./routes/webapp/checkin'));
 app.use('/', businessRoutes);
 
+
+
 // Set Mobile Routes
 app.use('/', mobileAuth);
 app.use('/api/m/form', mobileForm);
 app.use('/api/m/appointment', mobileAppointment);
 app.use('/api/m/mobiletoken', mobileToken);
+app.use('/api/m/business', business);
 app.use('/api/m/example', require('./routes/api/example'));
 app.use('/api', require('./routes/webapi'));
 
