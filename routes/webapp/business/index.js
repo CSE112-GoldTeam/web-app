@@ -17,6 +17,7 @@ var employeeRegister = require('./employeeregister');
 var viewForm = require('./viewform');
 var customizeTheme = require('./customize_theme');
 var manageForms = require('./manage_forms');
+var setdisclosure = require('./setdisclosure');
 
 module.exports = function (passport) {
 
@@ -69,6 +70,8 @@ module.exports = function (passport) {
 
     router.get('/viewform/:id', viewForm.get);
 
+    router.get('/setdisclosure', setdisclosure.get);
+    //router.post('/setdisclosure', setdisclosure.post);
 
 function isLoggedInEmployee(req,res,next){
         if((req.isAuthenticated() && (req.user.Employee.length === 1))){
