@@ -9,12 +9,12 @@ exports.get = function(req,res){
         var employeeDB = database.get('employees');
         var employee;
         var notemployee;
-        var businessID = req.user.Business[0]._id.toString();
+        var businessID = req.user[0].business.toString();
   
 
         async.parallel({
             employee: function(cb){
-                employeeDB.find({registrationToken: {$exists: false}, 'business': ObjectId(businessID)},function (err,results){
+                employeeDB.find({registrationToken: {$exists: false}, business: ObjectId(businessID), admin: false},function (err,results){
 
                     if (err) { return next(err);  }
                     if(!results) { return next(new Error('Error finding employee'));}
@@ -25,7 +25,7 @@ exports.get = function(req,res){
                 });
             },
             nonemployee: function(cb){
-                employeeDB.find({registrationToken: {$exists: true}, business: ObjectId(businessID)}, function (err,results){
+                employeeDB.find({registrationToken: {$exists: true}, business: ObjectId(businessID), admin: false}, function (err,results){
 
 
                     if (err) { return next(err); }
@@ -53,7 +53,7 @@ exports.post = function(req,res){
        var rows = parsed.data;
        var database =  req.db;
        var employeeDB = database.get('employees');
-       var businessID = req.user.Business[0]._id;
+       var businessID = req.user[0].business;
 
 
         for(var i = 0; i < rows.length; i++){
@@ -69,6 +69,7 @@ exports.post = function(req,res){
 				lname: lname,
                 email: email,
                 registrationToken : token,
+                admin: false
             });
 
 
