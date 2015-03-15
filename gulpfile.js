@@ -252,7 +252,7 @@ gulp.task('checkLocal', function(callback) {
   };
 
   var callback = function() {
-    console.log('Done checking development.');
+    console.log('Done checking local.');
   };
 
   checkPages(console, options, callback);
@@ -272,7 +272,7 @@ gulp.task('checkDev', function(callback) {
   };
 
   var callback = function() {
-    console.log('Done checking production.');
+    console.log('Done checking development.');
   };
 
   checkPages(console, options, callback);
