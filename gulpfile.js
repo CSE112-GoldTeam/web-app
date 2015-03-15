@@ -1,16 +1,28 @@
 // gulpfile.js
 var gulp = require('gulp');
-var server = require('gulp-express');
+
 var child_process = require('child_process');
-var argv = require('yargs').argv;
 
-var nodemon = require('gulp-nodemon');
-var jshint = require('gulp-jshint');
+var plugins= require('gulp-load-plugins')({
+	pattern: ['gulp-*', 'gulp.*', 'check-*', 
+	'jasmine-*', 'mongobackup', 'yargs'],
+	scope: ['devDependencies'],
+	lazy: false
+
+});
+
+
+//console.log(plugins);
+//var argv = require('yargs').argv;
+var server = require('gulp-express');
+
+//var nodemon = require('gulp-nodemon');
+//var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync');
-var checkPages = require('check-pages');
+//var checkPages = require('check-pages');
 
-var mongobackup = require('mongobackup');
-var shell = require('gulp-shell');
+//var mongobackup = require('mongobackup');
+//var shell = require('gulp-shell');
 
 
 var exec = require('child_process').exec;
@@ -32,12 +44,6 @@ var minifyCSS = require('gulp-minify-css');
 
 //// end of additional plugins
 
-gulp.task('lint', function() {
-  return gulp.src('./lib/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
-});
-
 
 //// begin of additional plugins
 gulp.task('clean', function () {
@@ -48,43 +54,24 @@ gulp.task('clean', function () {
 gulp.task('vendor', function() {
   return gulp.src('./public/javascripts/*.js')
     .pipe(concat('vendor.js'))
-    .pipe(gulp.dest('./build/concat/javascripts/'))
+    .pipe(gulp.dest('./public/javascripts/'))
     .pipe(uglify())
     .pipe(rename('vendor.min.js'))
-    .pipe(gulp.dest('./build/concat/javascripts/'))
+    .pipe(gulp.dest('./public/javascripts/'))
     .on('error', gutil.log)
 });
 
-gulp.task('build-concat', ['vendor'], function() {
+gulp.task('build', ['vendor'], function() {
   return gulp.src('./public/stylesheets/*.css')
     .pipe(minifyCSS({keepBreaks:false}))
     .pipe(rename('style.min.css'))
-    .pipe(gulp.dest('./build/concat/stylesheets/'))
-});
-
-
-gulp.task('compress', function() {
-  gulp.src('./public/javascripts/*.js')
-    .pipe(uglify())
-    .pipe(rename(function (path) {
-        path.basename += ".min";
-    }))
-    .pipe(gulp.dest('./build/js'))
-});
-
-gulp.task('build', ['compress'], function() {
-  return gulp.src('./public/stylesheets/*.css')
-    .pipe(minifyCSS({keepBreaks:false}))
-    .pipe(rename(function (path) {
-        path.basename += ".min";
-    }))
-    .pipe(gulp.dest('./build/css'))
+    .pipe(gulp.dest('./public/stylesheets/'))
 });
 
 //// end of additional plugins
-gulp.task('nodemon', ['lint'], function (cb) {
+gulp.task('nodemon', function (cb) {
   var called = false;
-  return nodemon({
+  return plugins.nodemon({
 
     // nodemon our expressjs server
     script: 'bin/www',
@@ -101,7 +88,7 @@ gulp.task('nodemon', ['lint'], function (cb) {
       called = true;
     })
     .on('restart', function onRestart() {
-      browserSync.reload({
+      plugins.browser-sync.reload({
         stream: true
       });
     });
@@ -153,7 +140,7 @@ gulp.task('browser-sync', ['nodemon', 'mongostart', 'watch-check'], function () 
 
 // mongodump - dump all databases on localhost
 gulp.task('mongodump', function() {
-  mongobackup.dump({
+  plugins.mongobackup.dump({
     host : 'localhost',
     out : './dumps/mongo'
   });
@@ -161,7 +148,7 @@ gulp.task('mongodump', function() {
 
 // mongorestore - restore database to localhost
 gulp.task('mongorestore', function() {
-  mongobackup.restore({
+  plugins.mongobackup.restore({
     host : 'localhost',
     drop : true,
     path : './dumps/mongo'
@@ -177,7 +164,7 @@ var karma = require('karma').server;
  * Run test once and exit
  */
 gulp.task('test', function (done) {
-  karma.start({
+  plugins.karma.start({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
   }, done);
@@ -187,12 +174,12 @@ gulp.task('test', function (done) {
 //               - must be authenticated with heroku
 //               - must have git installed and be in application root directory
 //               - must be authenticated with git so that password does not have to be entered on push
-gulp.task('stage', ['test'], function(){
+gulp.task('stage', ['test'], function(){ 
     execute('git symbolic-ref --short HEAD', function(br){
         console.log('deploying current branch: ' + br);
-        var timer;
+        var timer; 
         return gulp.src('')
-                .pipe(shell([
+                .pipe(plugins.shell([
                     '<%= setKillTimer() %>',
                     'heroku git:remote -a robobetty-test<%= getArg()%> -r test<%= getArg() %>',
                     '<%= clearKillTimer() %>',
@@ -204,7 +191,7 @@ gulp.task('stage', ['test'], function(){
                             return n_remote;
                         },
                         getArg: function() {
-                            var n = argv.test;
+                            var n = plugins.yargs.test;
                             if (n == null) {
                                 n = "1";
                             }
@@ -223,7 +210,7 @@ gulp.task('stage', ['test'], function(){
                         }
                     }
                 }));
-    });
+    }); 
 })
 
 // watch for js/css changes and run checkDev on changes
@@ -261,7 +248,7 @@ gulp.task('checkLocal', function(callback) {
     console.log('Done checking development.');
   };
 
-  checkPages(console, options, callback);
+  plugins.check-pages(console, options, callback);
 });
 
 // check pages on development
@@ -281,7 +268,7 @@ gulp.task('checkDev', function(callback) {
     console.log('Done checking production.');
   };
 
-  checkPages(console, options, callback);
+  plugins.check-pages(console, options, callback);
 });
 
 // check pages on production
@@ -301,45 +288,5 @@ gulp.task('checkProd', function(callback) {
     console.log('Done checking production.');
   };
 
-  checkPages(console, options, callback);
+  plugins.check-pages(console, options, callback);
 });
-// Generate API Doc
-var gulp = require('gulp'),
-    apidoc = require('gulp-apidoc');
-
-gulp.task('apidoc', function(){
-          apidoc.exec({
-            src: "routes/api",
-            dest: "apidoc/"
-          });
-});
-
-// Deploy API Docs to gh pages
-var deploy = require('gulp-gh-pages');
-
-gulp.task('deploy-gh', function () {
-    var currentdate = new Date()
-    var timeString = currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/"
-                + currentdate.getFullYear() + " @ "
-                + currentdate.getHours() + ":"
-                + currentdate.getMinutes() + ":"
-                + currentdate.getSeconds();
-    var options = {
-        message :  "Update API Doc --skip-ci"
-    };
-    return gulp.src('./apidoc/**/*')
-        .pipe(deploy(options));
-});
-
-var open = require('gulp-open');
-
-// Open API Docs
-gulp.task('apidoc-url', function(){
-  var options = {
-    url: 'http://cse112-goldteam.github.io/web-app/'
-  };
-  return gulp.src('./README.md')
-  .pipe(open('', options));
-});
-gulp.task('doc-deploy', ['apidoc','deploy-gh','apidoc-url']);
