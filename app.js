@@ -15,6 +15,8 @@ var passport = require('passport');
 var async = require('async');
 var app = express();
 
+global.__base = __dirname + '/';
+
 //Database
 var monk = require('monk');
 var mongoURI = process.env.MONGOLAB_URI || 'localhost:27017/robobetty';
