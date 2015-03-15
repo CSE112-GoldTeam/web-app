@@ -1,18 +1,18 @@
 // gulpfile.js
 var gulp = require('gulp');
 var child_process = require('child_process');
-var gutil = require('gulp-util');
-var clean = require('gulp-clean');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
+//var gutil = require('gulp-util');
+//var clean = require('gulp-clean');
+//var concat = require('gulp-concat');
+//var uglify = require('gulp-uglify');
+//var rename = require('gulp-rename');
 var server = require('gulp-express');
 var browserSync = require('browser-sync');
 
 var plugins= require('gulp-load-plugins')({
 	pattern: ['gulp-*', 'gulp.*', 'check-*', 
 	'jasmine-*', 'mongobackup', 'karma', 'karma-*', 'yargs'],
-	scope: ['devDependencies'],
+	scope: ['dependencies', 'devDependencies'],
 	lazy: false
 
 });
@@ -48,23 +48,23 @@ function execute(command, callback){
 //// begin of additional plugins
 gulp.task('clean', function () {
   return gulp.src('build', {read: false})
-    .pipe(clean());
+    .pipe(plugins.gulp-clean());
 });
 
 gulp.task('vendor', function() {
   return gulp.src('./public/javascripts/*.js')
-    .pipe(concat('vendor.js'))
+    .pipe(plugins.gulp-concat('vendor.js'))
     .pipe(gulp.dest('./public/javascripts/'))
-    .pipe(uglify())
-    .pipe(rename('vendor.min.js'))
+    .pipe(plugins.gulp-uglify())
+    .pipe(plugins.gulp-rename('vendor.min.js'))
     .pipe(gulp.dest('./public/javascripts/'))
-    .on('error', gutil.log)
+    .on('error', plugins.gulp-util.log)
 });
 
 gulp.task('build', ['vendor'], function() {
   return gulp.src('./public/stylesheets/*.css')
     .pipe(plugins.minifyCSS({keepBreaks:false}))
-    .pipe(rename('style.min.css'))
+    .pipe(plugins.gulp-rename('style.min.css'))
     .pipe(gulp.dest('./public/stylesheets/'))
 });
 
