@@ -36,11 +36,7 @@ function removeOption(dropcounter) {
 
 $(document).ready(function () {
     if (form != null){
-        makeForm(form,function (err, formHtml) {
-            if (err) {
-                return next(err);
-            }
-        });
+        makeForm(form);
     }
 
     function addField(label, type) {
@@ -154,7 +150,6 @@ $(document).ready(function () {
 
     // Create JSON object and post to database
     $('#submit').click(function() {
-        console.log(findID);
         var json = {
             business: findID,
             fields: [
@@ -194,7 +189,6 @@ $(document).ready(function () {
 
         // If form exists, PUT to database
         if(flag) {
-            console.log('PUT');
             $.ajax({
                 url:'/api/form',
                 type:'PUT',
@@ -209,7 +203,6 @@ $(document).ready(function () {
 
         // POST to database
         else {
-            console.log('POST');
             $.ajax({
                 url:'/api/form',
                 type:'POST',
@@ -226,7 +219,7 @@ $(document).ready(function () {
     });
 
     // Gets form from database and creates fields
-    function makeForm(form, fn) {
+    function makeForm(form) {
         flag = true;
         var body = {};
         var formHtml = '<form class="form-horizontal" method="post" action="#" enctype="application/x-www-form-urlencoded">';
@@ -235,7 +228,6 @@ $(document).ready(function () {
         });
 
         formHtml += '</form>';
-        fn(null, formHtml);
     }
 
     // Called by makeForm, creates appropriate text/drop fields
