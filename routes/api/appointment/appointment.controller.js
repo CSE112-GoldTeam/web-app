@@ -4,6 +4,7 @@
  */
 
 'use strict';
+var ObjectID = require('mongodb').ObjectID;
 
 /*
  * Shows all appointments
@@ -33,7 +34,7 @@ exports.confirm = function (req, res, next) {
     var db = req.db;
     var appointments = db.get('appointments');
     var business;
-    
+
     if(!req.mobileToken) {
         return res.send(400, "Mobiletoken is empty cannot access business id!");
     }  else {
@@ -47,11 +48,12 @@ exports.confirm = function (req, res, next) {
     var fname = req.query.fname.replace(/['"]+/g, '');
     var lname = req.query.lname.replace(/['"]+/g, '');
     var dob = req.query.dob.replace(/['"]+/g, '');
-    appointments.find({
+
+
+    appointments.findOne({
         'fname': fname,
         'lname': lname,
-        'dob': dob,
-        'business': business
+        'dob': dob
     }, function (err, appt) {
         if (err) { return handleError(res, err); }
         if(!appt) { return res.sendStatus(404); }

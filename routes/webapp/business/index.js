@@ -17,7 +17,7 @@ var employeeRegister = require('./employeeregister');
 var viewForm = require('./viewform');
 var customizeTheme = require('./customize_theme');
 var manageForms = require('./manage_forms');
-
+var businesssetting = require('./businesssetting');
 module.exports = function (passport) {
 
 
@@ -32,14 +32,19 @@ module.exports = function (passport) {
 
     router.get('/login', login.get);
     router.post('/login',passport.authenticate('local-login',{
-        successRedirect : '/addemployees',
+        successRedirect : '/dashboard',
         failureRedirect : '/login'
     }));
 
     router.get('/formbuilder',isLoggedIn, formbuilder.get);
 
+
     router.get('/accountSettings', isLoggedIn, accountSettings.get);
     router.post('/accountSettings', isLoggedIn, accountSettings.post);
+
+    router.get('/businesssetting', businesssetting.get);
+    router.post('/businesssetting', businesssetting.post);
+
 
     router.get('/uploadlogo', uploadLogo.get);
     router.post('/uploadlogo', uploadLogo.post);
