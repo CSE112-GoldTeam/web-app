@@ -19,20 +19,20 @@
   <!--Holds the main tabs for the business-->
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand" href="#" onclick='location.reload(true); return false;'>
           <div id="company-logo">iReceptionist</div>
       </a>
     </div>
     <div class="navbar-padding-right">
       <ul class="nav navbar-nav navbar-right navbar-padding">
           <li class="active">
-              <a href="#">Dashboard</a>
+              <a href="/dashboard">Dashboard</a>
           </li>
           <li>
-              <a href="#">Employees</a>
+              <a href="/addemployees">Employees</a>
           </li>
           <li>
-              <a href="#">Settings</a>
+              <a href="/customizetheme">Settings</a>
           </li>
           <li>
               <a href="#">Company Name</a>
