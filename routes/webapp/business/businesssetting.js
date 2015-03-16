@@ -1,6 +1,6 @@
 var auth = require ('../../../lib/auth');
 exports.get = function (req,res) {
-    var bid = req.user.Business[0]._id;
+    var bid = req.user[0].business;
     var db = req.db;
     var businesses = db.get('businesses');
     businesses.findById(bid, function (err, result) {
@@ -23,7 +23,7 @@ exports.get = function (req,res) {
 exports.post = function (req, res) {
     var db = req.db;
     var businesses = db.get('businesses');
-    var bid = req.user.Business[0]._id;
+    var bid = req.user[0].business;
 
     var companyName = req.body.companyName;
     var email = req.body.email;
