@@ -1,7 +1,7 @@
 var style = require('./../../../lib/style.js');
 
 exports.get = function (req, res, next) {
-    var bid = req.user.Business[0]._id;
+    var bid = req.user[0].business;
 
     req.db.get('businesses').findById(bid, function (err, business) {
         if (err) {
