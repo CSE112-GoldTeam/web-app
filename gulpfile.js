@@ -48,28 +48,57 @@ function execute(command, callback){
 //// begin of additional plugins
 gulp.task('clean', function () {
   return gulp.src('build', {read: false})
-    .pipe(plugins.gulp-clean());
+    .pipe(plugins.clean());
+});
+
+gulp.task('lint', function() {
+  return gulp.src('./lib/*.js')
+    .pipe(plugins.jshint())
+    .pipe(plugins.jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('vendor', function() {
   return gulp.src('./public/javascripts/*.js')
-    .pipe(plugins.gulp-concat('vendor.js'))
+    .pipe(plugins.concat('vendor.js'))
     .pipe(gulp.dest('./public/javascripts/'))
-    .pipe(plugins.gulp-uglify())
-    .pipe(plugins.gulp-rename('vendor.min.js'))
+    .pipe(plugins.uglify())
+    .pipe(plugins.rename('vendor.min.js'))
     .pipe(gulp.dest('./public/javascripts/'))
-    .on('error', plugins.gulp-util.log)
+    .on('error', plugins.util.log)
 });
 
-gulp.task('build', ['vendor'], function() {
+//gulp.task('build', ['vendor'], function() {
+gulp.task('build-concat', ['vendor'], function() {
   return gulp.src('./public/stylesheets/*.css')
-    .pipe(plugins.minifyCSS({keepBreaks:false}))
-    .pipe(plugins.gulp-rename('style.min.css'))
-    .pipe(gulp.dest('./public/stylesheets/'))
+	.pipe(plugins.minifyCss({keepBreaks:false}))
+    	.pipe(plugins.rename('style.min.css'))
+    	.pipe(gulp.dest('./build/concat/stylesheets/'))
+	});
+
+gulp.task('compress', function() {
+  gulp.src('./public/javascripts/*.js')
+    .pipe(plugins.uglify())
+    .pipe(plugins.rename(function (path) {
+        path.basename += ".min";
+    }))
+    .pipe(gulp.dest('./build/js'))
+});
+
+gulp.task('build', ['compress'], function() {
+  return gulp.src('./public/stylesheets/*.css')
+    .pipe(plugins.minifyCss({keepBreaks:false}))
+    .pipe(plugins.rename(function (path) {
+        path.basename += ".min";
+    }))
+    .pipe(gulp.dest('./build/css'))
+
+    //.pipe(minifyCSS({keepBreaks:false}))
+    //.pipe(rename('style.min.css'))
+    //.pipe(gulp.dest('./public/stylesheets/'))
 });
 
 //// end of additional plugins
-gulp.task('nodemon', function (cb) {
+gulp.task('nodemon', ['lint'], function (cb) {
   var called = false;
   return plugins.nodemon({
 
@@ -88,7 +117,7 @@ gulp.task('nodemon', function (cb) {
       called = true;
     })
     .on('restart', function onRestart() {
-      plugins.browser-sync.reload({
+      browserSync.reload({
         stream: true
       });
     });
@@ -248,7 +277,7 @@ gulp.task('checkLocal', function(callback) {
     console.log('Done checking development.');
   };
 
-  plugins.check-pages(console, options, callback);
+  plugins.checkPages(console, options, callback);
 });
 
 // check pages on development
@@ -268,7 +297,7 @@ gulp.task('checkDev', function(callback) {
     console.log('Done checking production.');
   };
 
-  plugins.check-pages(console, options, callback);
+  plugins.checkPages(console, options, callback);
 });
 
 // check pages on production
@@ -288,5 +317,46 @@ gulp.task('checkProd', function(callback) {
     console.log('Done checking production.');
   };
 
-  plugins.check-pages(console, options, callback);
+plugins.checkPages(console, options, callback);
+
 });
+// Generate API Doc
+var gulp = require('gulp'),
+    apidoc = require('gulp-apidoc');
+
+gulp.task('apidoc', function(){
+          plugins.apidoc.exec({
+            src: "routes/api",
+            dest: "apidoc/"
+          });
+});
+
+// Deploy API Docs to gh pages
+var deploy = require('gulp-gh-pages');
+
+gulp.task('deploy-gh', function () {
+   	var currentdate = new Date();    
+	var timeString = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getFullYear() + " @ "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+    var options = {
+        message :  "Update API Doc --skip-ci"
+    };
+    return gulp.src('./apidoc/**/*')
+        .pipe(plugins.deploy(options));
+});
+
+var open = require('gulp-open');
+
+// Open API Docs
+gulp.task('apidoc-url', function(){
+  var options = {
+    url: 'http://cse112-goldteam.github.io/web-app/'
+  };
+  return gulp.src('./README.md')
+  .pipe(plugins.open('', options));
+});
+gulp.task('doc-deploy', ['apidoc','deploy-gh','apidoc-url']);
