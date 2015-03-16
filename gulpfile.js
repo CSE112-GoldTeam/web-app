@@ -8,6 +8,7 @@ var child_process = require('child_process');
 //var rename = require('gulp-rename');
 var server = require('gulp-express');
 var browserSync = require('browser-sync');
+var mongobackup = require('mongobackup')
 
 var plugins= require('gulp-load-plugins')({
 	pattern: ['gulp-*', 'gulp.*', 'check-*', 
@@ -52,7 +53,7 @@ gulp.task('clean', function () {
 });
 
 gulp.task('lint', function() {
-  return gulp.src('./lib/*.js')
+  return gulp.src('./*.js')
     .pipe(plugins.jshint())
     .pipe(plugins.jshint.reporter('jshint-stylish'));
 });
@@ -169,7 +170,7 @@ gulp.task('browser-sync', ['nodemon', 'mongostart', 'watch-check'], function () 
 
 // mongodump - dump all databases on localhost
 gulp.task('mongodump', function() {
-  plugins.mongobackup.dump({
+  mongobackup.dump({
     host : 'localhost',
     out : './dumps/mongo'
   });
@@ -177,7 +178,7 @@ gulp.task('mongodump', function() {
 
 // mongorestore - restore database to localhost
 gulp.task('mongorestore', function() {
-  plugins.mongobackup.restore({
+  mongobackup.restore({
     host : 'localhost',
     drop : true,
     path : './dumps/mongo'
@@ -250,7 +251,7 @@ gulp.task('watch-check', function() {
 });
 
 // check pages on local
-gulp.task('checkLocal', function(callback) {
+gulp.task('checkLocal', ['lint'], function(callback) {
 
   var options = {
     pageUrls: [
@@ -281,7 +282,7 @@ gulp.task('checkLocal', function(callback) {
 });
 
 // check pages on development
-gulp.task('checkDev', function(callback) {
+gulp.task('checkDev', ['lint'], function(callback) {
   var options = {
     pageUrls: [
       'http://robobetty-dev.herokuapp.com/',
