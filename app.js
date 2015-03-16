@@ -39,10 +39,10 @@ passport.serializeUser(function(user, done) {
 
 // used to deserialize the user
 passport.deserializeUser(function (id, done) {
-  
+
     employee.find({_id: id}, function (err, user){
             if(err){ done(err);}
-            
+
             if(user){
                 done(null,user);
             }
@@ -154,6 +154,8 @@ app.use(function (req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function (err, req, res) {
+        console.error(err);
+        console.error(err.stack);
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -166,6 +168,8 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function (err, req, res) {
     res.status(err.status || 500);
+    console.error(err);
+    console.error(err.stack);
     res.render('error', {
         message: err.message,
         error: {}
