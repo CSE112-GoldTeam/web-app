@@ -284,10 +284,21 @@ body {
 }
 
 .testimonial-author {
+  margin: 10px 0 0 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #999999;
+  text-align: left;
+}
+
+.testimonial-image {
   margin: 10px 0 0 120px;
   font-family: Arial, Helvetica, sans-serif;
   color: #999999;
   text-align:left;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  border: 5px solid black;
 }
 
 .testimonial-grey {
