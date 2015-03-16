@@ -8,10 +8,10 @@ exports.get = function(req, res, next){
     var businessID;
 
     if(req.user.Business.length!=0){
-        businessID = req.user.Business[0]._id;
+        businessID = req.user[0].business;
     }
     else{
-        businessID = req.user.Employee[0].business;
+        businessID = req.user[0].business;
     }
     
     businesses.findById(businessID,
@@ -41,10 +41,10 @@ exports.post = function(req, res, next){
    
     
     if(req.user.Business.length!=0){
-        businessID = req.user.Business[0]._id;
+        businessID = req.user[0].business;
     }
     else{
-        businessID = req.user.Employee[0].business;
+        businessID = req.user[0].business;
     }
 
     if(req.files.userLogo){
