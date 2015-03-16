@@ -3,6 +3,7 @@
 var dropOptions = [];
 var dropCounter = 0;
 var flag = false;
+var dropped = 0;
 
 // Insert options into appropriate dropdown field
 function insertOption(dropcounter) {
@@ -56,7 +57,7 @@ $(document).ready(function () {
         }
 
         if(type === 'dropdown') {
-            fType = $('<select class=\"fieldtype form-control cols-xs-3\"><option selected=\"selected\" value=\"dropdown\">Drop</option> <option value=\"textbox\">Text</option></select>');
+            fType = $('<select class=\"fieldtype form-control cols-xs-3\"> <option selected=\"selected\" value=\"dropdown\">Drop</option> <option value=\"textbox\">Text</option></select>');
         }
         else {
             fType = $('<select class=\"fieldtype form-control col-xs-3\"><option selected=\"dropdown\" value=\"textbox\">Text</option><option value=\"dropdown\">Drop</option> </select>');
@@ -67,8 +68,8 @@ $(document).ready(function () {
             var confirmRemove = confirm("Are you sure?");
             if (confirmRemove)
             {
-              $(this).parent().remove();
-                preview();
+                $(this).parent().remove();
+                preview(intId, type);
             }
         });
 
@@ -88,10 +89,11 @@ $(document).ready(function () {
         preview();
     }
 
-    function preview() {
+    function preview(removeId, type) {
         $('#yourform').remove();
 
-        var counter = 0;
+        var fieldcount = 0;
+        var dropcounter = 0;
 
         var fieldSet = $('<fieldset id=\"yourform\"><legend>Your Form</legend></fieldset>');
 
@@ -103,11 +105,20 @@ $(document).ready(function () {
 
             switch ($(this).find('select.fieldtype').first().val()) {
                 case 'textbox':
+                    fieldcount++;
+                    console.log(fieldcount);
                     input = $('<div class=\"previewForm col-md-8\"><input class=\"form-control\" type=\"text\" id=\"' + id + '\" name=\"' + id + '\" /></div>');
                     break;
                 case 'dropdown':
-                    counter++;
-                    input = $('<div class=\"previewForm col-md-8\"><select class=\"form-control\" id=\"drop' + counter + '\">  </select> <button class=\"btn btn-default\" type=\"button\" onclick=\"insertOption(' + counter +')\">Insert option</button> <button class=\"btn btn-default btn-danger\" type=\"button\" onclick=\"removeOption(' + counter + ')\">Remove option</button></div>');
+                    dropcounter++;
+                    fieldcount++;
+                    console.log(fieldcount);
+
+                    if(fieldcount === removeId && type === 'dropdown') {
+                        dropOptions.splice(dropcounter , 1);
+                    }
+
+                    input = $('<div class=\"previewForm col-md-8\"><select class=\"form-control\" id=\"drop' + dropcounter + '\">  </select> <button class=\"btn btn-default\" type=\"button\" onclick=\"insertOption(' + dropcounter +')\">Insert option</button> <button class=\"btn btn-default btn-danger\" type=\"button\" onclick=\"removeOption(' + dropcounter + ')\">Remove option</button></div>');
                     break;
             }
             fieldSet.append(label);
@@ -116,9 +127,15 @@ $(document).ready(function () {
 
         $('body').append(fieldSet);
 
-        for (i = 1; i <= counter; i++) {
+        for(i = 1; i <= dropOptions.length; i++) {
+            if(dropcounter < i) {
+                delete dropOptions[i];
+            }
+        }
+
+        for (i = 1; i <= dropcounter; i++) {
             if(dropOptions[i] !== undefined) {
-                for (j = 0; j < dropOptions[i].length; j++) {
+                for (j = 1; j < dropOptions[i].length; j++) {
                     x = document.getElementById('drop' + i.toString());
                     x.add(dropOptions[i][j]);
                 }
@@ -130,9 +147,7 @@ $(document).ready(function () {
 
     // Add form creation buttons
     $('#add').click(function () {
-
         addField();
-
     });
 
     // Create JSON object and post to database
@@ -184,7 +199,7 @@ $(document).ready(function () {
                 contentType:'application/json',
                 dataType:'json',
                 success:function(){
-                    alert("Form Submitted!");
+                    alert('Form Updated!');
                 }
             });
         }
@@ -197,7 +212,7 @@ $(document).ready(function () {
                 contentType:'application/json',
                 dataType:'json',
                 success:function(){
-                    alert("Form Submitted!");
+                    alert('Form Submitted!');
                 }
             });
 
@@ -245,6 +260,7 @@ function makeDropdown(options, name, body) {
 
         if(! dropOptions[dropCounter]) {
             dropOptions[dropCounter] = [];
+            dropOptions[dropCounter].push(name);
         }
 
         optionText.text = option;
