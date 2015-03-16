@@ -89,6 +89,7 @@ $(document).ready(function () {
         preview();
     }
 
+    // Display elements in preview field
     function preview(removeId, type) {
         $('#yourform').remove();
 
@@ -106,14 +107,13 @@ $(document).ready(function () {
             switch ($(this).find('select.fieldtype').first().val()) {
                 case 'textbox':
                     fieldcount++;
-                    console.log(fieldcount);
                     input = $('<div class=\"previewForm col-md-8\"><input class=\"form-control\" type=\"text\" id=\"' + id + '\" name=\"' + id + '\" /></div>');
                     break;
                 case 'dropdown':
                     dropcounter++;
                     fieldcount++;
-                    console.log(fieldcount);
 
+                    // This element's options have been removed
                     if(fieldcount === removeId && type === 'dropdown') {
                         dropOptions.splice(dropcounter , 1);
                     }
@@ -121,6 +121,7 @@ $(document).ready(function () {
                     input = $('<div class=\"previewForm col-md-8\"><select class=\"form-control\" id=\"drop' + dropcounter + '\">  </select> <button class=\"btn btn-default\" type=\"button\" onclick=\"insertOption(' + dropcounter +')\">Insert option</button> <button class=\"btn btn-default btn-danger\" type=\"button\" onclick=\"removeOption(' + dropcounter + ')\">Remove option</button></div>');
                     break;
             }
+
             fieldSet.append(label);
             fieldSet.append(input);
         });
@@ -133,6 +134,7 @@ $(document).ready(function () {
             }
         }
 
+        // Add options to dropdown fields
         for (i = 1; i <= dropcounter; i++) {
             if(dropOptions[i] !== undefined) {
                 for (j = 1; j < dropOptions[i].length; j++) {
@@ -190,6 +192,7 @@ $(document).ready(function () {
             }
         });
 
+        // If form exists, PUT to database
         if(flag) {
             console.log('PUT');
             $.ajax({
@@ -203,6 +206,8 @@ $(document).ready(function () {
                 }
             });
         }
+
+        // POST to database
         else {
             console.log('POST');
             $.ajax({
@@ -220,62 +225,66 @@ $(document).ready(function () {
 
     });
 
-function makeForm(form, fn) {
-    flag = true;
-    var body = {};
-    var formHtml = '<form class="form-horizontal" method="post" action="#" enctype="application/x-www-form-urlencoded">';
-    _.each(form.fields, function (field, index) {
-        formHtml += makeFormGroup(field, index, body);
-    });
+    // Gets form from database and creates fields
+    function makeForm(form, fn) {
+        flag = true;
+        var body = {};
+        var formHtml = '<form class="form-horizontal" method="post" action="#" enctype="application/x-www-form-urlencoded">';
+        _.each(form.fields, function (field, index) {
+            formHtml += makeFormGroup(field, index, body);
+        });
 
-    formHtml += '</form>';
-    fn(null, formHtml);
-}
-
-function makeFormGroup(field, index, body) {
-    var name = '_' + index;
-
-    var s = '<div class="form-group">';
-    s += '<label for="' + name + '" class="col-md-2 control-label">' + field.label + '</label>';
-
-    s += '<div class="col-md-10">';
-    if (field.type === 'textfield') {
-        s += makeTextfield(name, body);
-        addField(field.label, field.type);
-    } else if (field.type === 'dropdown') {
-        dropCounter++;
-        s += makeDropdown(field.options, name, body);
-        addField(field.label, field.type);
+        formHtml += '</form>';
+        fn(null, formHtml);
     }
-    s += '</div>';
 
-    s += '</div>';
-    return s;
-}
+    // Called by makeForm, creates appropriate text/drop fields
+    function makeFormGroup(field, index, body) {
+        var name = '_' + index;
 
-function makeDropdown(options, name, body) {
-    var s = '<select class="form-control" name="'+ name +'" id="'+ name +'">';
-    _.each(options, function (option) {
-        var optionText = document.createElement('option');
+        var s = '<div class="form-group">';
+        s += '<label for="' + name + '" class="col-md-2 control-label">' + field.label + '</label>';
 
-        if(! dropOptions[dropCounter]) {
-            dropOptions[dropCounter] = [];
-            dropOptions[dropCounter].push(name);
+        s += '<div class="col-md-10">';
+        if (field.type === 'textfield') {
+            s += makeTextfield(name, body);
+            addField(field.label, field.type);
+        } else if (field.type === 'dropdown') {
+            dropCounter++;
+            s += makeDropdown(field.options, name, body);
+            addField(field.label, field.type);
         }
+        s += '</div>';
 
-        optionText.text = option;
-        dropOptions[dropCounter].push(optionText);
+        s += '</div>';
+        return s;
+    }
 
-        s += '<option value="'+option+'" ' + (body[name] === option ? 'selected' : '') + '>'+option+'</option> ';
-    });
+    // Creates dropdown field from database form
+    function makeDropdown(options, name, body) {
+        var s = '<select class="form-control" name="'+ name +'" id="'+ name +'">';
+        _.each(options, function (option) {
+            var optionText = document.createElement('option');
 
-    s+= '</select>';
-    return s;
-}
+            if(! dropOptions[dropCounter]) {
+                dropOptions[dropCounter] = [];
+                dropOptions[dropCounter].push(name);
+            }
 
-function makeTextfield(name, body) {
+            optionText.text = option;
+            dropOptions[dropCounter].push(optionText);
 
-    return'<input type="text" class="form-control" name="'+name+'" id="' + name + '"value="' + (body[name] || '') + '">';
-}
+            s += '<option value="'+option+'" ' + (body[name] === option ? 'selected' : '') + '>'+option+'</option> ';
+        });
+
+        s+= '</select>';
+        return s;
+    }
+
+    // Creates text field from database form
+    function makeTextfield(name, body) {
+
+        return'<input type="text" class="form-control" name="'+name+'" id="' + name + '"value="' + (body[name] || '') + '">';
+    }
 
 });
