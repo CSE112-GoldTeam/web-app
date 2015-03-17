@@ -37,8 +37,8 @@ function makeFormGroup(field, index, body) {
 
 function makeSubmitButton() {
     var s = '<div class="form-group">';
-    s += '<div class="col-sm-offset-5 col-sm-6">';
-    s += '<button type="submit" class="btn btn-default">Submit</button>';
+    s += '<div>';
+    s += '<button type="submit" class="btn btn-lg btn-block custom-button custom-center">Submit</button>';
     s += '</div>';
     s += '</div>';
 
