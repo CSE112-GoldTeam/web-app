@@ -20,7 +20,7 @@ var _ = require('underscore');
  * @param req req.params.id An id associated with a form.
  * @param res Respond with '404' (form not found) or a JSON representation of
  *        the form.
- * @param next Used to handle any errors encountered when querying the 
+ * @param next Used to handle any errors encountered when querying the
  *        database.
  * @returns {JSON} An array of fieldObjects representing the form.
  */
@@ -31,7 +31,7 @@ exports.show = function (req, res, next) {
 
     // acquire the token for the appropriate business
     var business = forms.id(req.mobileToken.business);
-
+    console.log('BusinessID: ' + req.mobileToken.business);
     // query the database for the correct forms
     forms.find({'business': business}, function (err, doc) {
         if (err) {
@@ -79,7 +79,7 @@ exports.createForm = function (req, res, next) {
  *        to the form.
  * @param res Respond with a '500' (no business id), '400' (malformed response)
  *         or a '200'(everything is OK).
- * @param next Used to handle any errors encountered when querying the 
+ * @param next Used to handle any errors encountered when querying the
  *        database.
  * @returns N/A
  */
