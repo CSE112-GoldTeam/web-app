@@ -4,6 +4,24 @@
  */
 
 'use strict';
+var ObjectID = require('mongodb').ObjectID;
+
+/*
+ * Shows all appointments
+ */
+
+exports.index = function(req, res) {
+
+  // grab our db object from the request
+  var db = req.db;
+  var collection = db.get('appointments');
+
+  // query the collection
+  collection.find({ }, function(err, users) {
+    if (err) { return handleError(res, err); }
+    return res.json(200, users);
+  });
+};
 
 /**
  * Confirms the users first name, last name, date of birth and business id
@@ -15,21 +33,31 @@
 exports.confirm = function (req, res, next) {
     var db = req.db;
     var appointments = db.get('appointments');
+    var business;
 
-    var business = forms.id(req.mobileToken.business);
+    if(!req.mobileToken) {
+        return res.send(400, "Mobiletoken is empty cannot access business id!");
+    }  else {
+        business = appointments.id(req.mobileToken.business);
+    }
+
+    if(!req.query.fname || !req.query.lname || !req.query.dob){
+        return res.sendStatus(400);
+    }
+
     var fname = req.query.fname.replace(/['"]+/g, '');
     var lname = req.query.lname.replace(/['"]+/g, '');
     var dob = req.query.dob.replace(/['"]+/g, '');
-    appointments.find({
+
+
+    appointments.findOne({
         'fname': fname,
         'lname': lname,
-        'dob': dob,
-        'business': business
-    }, function (err, users) {
-        if (err) {
-            return next(err);
-        }
-        return res.json(200, users);
+        'dob': dob
+    }, function (err, appt) {
+        if (err) { return handleError(res, err); }
+        if(!appt) { return res.sendStatus(404); }
+        return res.json(200, appt);
     });
 };
 
