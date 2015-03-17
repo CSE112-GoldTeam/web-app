@@ -11,16 +11,15 @@ function insertOption(dropcounter) {
     var option = document.createElement('option');
     option.text = prompt ('Name your option');
 
+    // Create array within options array for new dropdown menu
     if(! dropOptions[dropcounter]) {
        dropOptions[dropcounter] = [];
     }
 
-    //checks for null
     if (option.text === 'null'){
       return;
     }
 
-    //checks for input
     if (option.text)
     {
        dropdown.add(option);
@@ -35,13 +34,25 @@ function removeOption(dropcounter) {
 }
 
 $(document).ready(function () {
+
+    // Form exists in database
     if (form != null){
         makeForm(form);
     }
 
+    // Update field names if deletion occurs
+    function update() {
+        var id = 1;
+        $('#buildyourform div').each(function () {
+            $(this).attr('id', id.toString());
+            id++;
+        });
+    }
+
+    // Add form control fields/buttons
     function addField(label, type) {
         var intId = $('#buildyourform div').length + 1;
-        var fieldWrapper = $('<div class=\"fieldwrapper\" id=\"field' + intId + '\"/>');
+        var fieldWrapper = $('<div class=\"fieldwrapper\" id=\"' + intId + '\"/>');
         var fName;
         var fType;
 
@@ -52,6 +63,7 @@ $(document).ready(function () {
             fName = $('<input type=\"text\" class=\"fieldname form-control col-xs-4\" />');
         }
 
+        // Display appropriate ordering depending on type
         if(type === 'dropdown') {
             fType = $('<select class=\"fieldtype form-control cols-xs-3\"> <option selected=\"selected\" value=\"dropdown\">Drop</option> <option value=\"textbox\">Text</option></select>');
         }
@@ -62,10 +74,17 @@ $(document).ready(function () {
         var removeButton = $('<button type="button" class="remove btn btn-default btn-danger col-xs-1s" aria-label="Left Align"><span class="glyphicon glyphicon-remove white" aria-hidden="true"></span></button>');
         removeButton.click(function () {
             var confirmRemove = confirm("Are you sure?");
+
+            // Remove and fill preview once for deletion, and again to display results
             if (confirmRemove)
             {
+                var id = $(this).parent().attr('id');
+                preview(id, type);
+
                 $(this).parent().remove();
-                preview(intId, type);
+                update();
+
+                preview();
             }
         });
 
@@ -109,9 +128,12 @@ $(document).ready(function () {
                     dropcounter++;
                     fieldcount++;
 
-                    // This element's options have been removed
-                    if(fieldcount === removeId && type === 'dropdown') {
-                        dropOptions.splice(dropcounter , 1);
+                    if(removeId !== undefined) {
+
+                        // This element's options have been removed
+                        if(fieldcount.toString() === removeId.toString() ) {
+                            dropOptions.splice(dropcounter, 1);
+                        }
                     }
 
                     input = $('<div class=\"previewForm col-md-8\"><select class=\"form-control\" id=\"drop' + dropcounter + '\">  </select> <button class=\"btn btn-default\" type=\"button\" onclick=\"insertOption(' + dropcounter +')\">Insert option</button> <button class=\"btn btn-default btn-danger\" type=\"button\" onclick=\"removeOption(' + dropcounter + ')\">Remove option</button></div>');
@@ -124,16 +146,10 @@ $(document).ready(function () {
 
         $('body').append(fieldSet);
 
-        for(i = 1; i <= dropOptions.length; i++) {
-            if(dropcounter < i) {
-                delete dropOptions[i];
-            }
-        }
-
         // Add options to dropdown fields
         for (i = 1; i <= dropcounter; i++) {
             if(dropOptions[i] !== undefined) {
-                for (j = 1; j < dropOptions[i].length; j++) {
+                for (j = 0; j < dropOptions[i].length; j++) {
                     x = document.getElementById('drop' + i.toString());
                     x.add(dropOptions[i][j]);
                 }
@@ -173,7 +189,6 @@ $(document).ready(function () {
 
                     counter ++;
                     var options = $('#drop' + counter + ' option');
-
 
                     $.map(options ,function(option) {
                         dropJson.options.push(option.value);
@@ -260,7 +275,6 @@ $(document).ready(function () {
 
             if(! dropOptions[dropCounter]) {
                 dropOptions[dropCounter] = [];
-                dropOptions[dropCounter].push(name);
             }
 
             optionText.text = option;
@@ -278,5 +292,4 @@ $(document).ready(function () {
 
         return'<input type="text" class="form-control" name="'+name+'" id="' + name + '"value="' + (body[name] || '') + '">';
     }
-
 });
