@@ -57,7 +57,8 @@ router.post('/api/authTest', function (req, res) {
         if (!result) {
             res.send(401);
         } else {
-            res.send(200);
+
+            res.json(200,result);
         }
     });
 });
@@ -114,8 +115,9 @@ router.post('/api/auth', function (req, res, next) {
             }
 
             var mobileTokens = req.db.get('mobileTokens');
+
             mobileTokens.insert({
-                business: result.business._id,
+                business: result.business,
                 name: name
             }, function (err, results) {
                 if (err) {

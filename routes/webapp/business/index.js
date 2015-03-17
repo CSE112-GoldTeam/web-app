@@ -17,7 +17,7 @@ var employeeRegister = require('./employeeregister');
 var viewForm = require('./viewform');
 var customizeTheme = require('./customize_theme');
 var manageForms = require('./manage_forms');
-
+var businesssetting = require('./businesssetting');
 module.exports = function (passport) {
 
 
@@ -32,14 +32,19 @@ module.exports = function (passport) {
 
     router.get('/login', login.get);
     router.post('/login',passport.authenticate('local-login',{
-        successRedirect : '/addemployees',
+        successRedirect : '/dashboard',
         failureRedirect : '/login'
     }));
 
-    router.get('/formbuilder',isLoggedInEmployee, formbuilder.get);
+    router.get('/formbuilder',isLoggedIn, formbuilder.get);
 
-    router.get('/accountSettings', isLoggedInEmployee, accountSettings.get);
-    router.post('/accountSettings', isLoggedInEmployee, accountSettings.post);
+
+    router.get('/accountSettings', isLoggedIn, accountSettings.get);
+    router.post('/accountSettings', isLoggedIn, accountSettings.post);
+
+    router.get('/businesssetting', businesssetting.get);
+    router.post('/businesssetting', businesssetting.post);
+
 
     router.get('/uploadlogo', uploadLogo.get);
     router.post('/uploadlogo', uploadLogo.post);
@@ -50,7 +55,7 @@ module.exports = function (passport) {
         failureRedirect : '/register' // redirect back to the signup page if there is an error
     }));
 
-    router.get('/dashboard', isLoggedInEmployee, dashboard.get);
+    router.get('/dashboard', isLoggedIn, dashboard.get);
 
     router.get('/registerdevice', registerDevice.get);
 
@@ -70,8 +75,8 @@ module.exports = function (passport) {
     router.get('/viewform/:id', viewForm.get);
 
 
-function isLoggedInEmployee(req,res,next){
-        if((req.isAuthenticated() && (req.user.Employee.length === 1))){
+function isLoggedIn(req,res,next){
+        if(req.isAuthenticated()){
             return next();
         }
 
@@ -80,12 +85,10 @@ function isLoggedInEmployee(req,res,next){
 
 // route middleware to make sure a user is logged in
 function isLoggedInBusiness(req, res, next) {
-
     // if user is authenticated in the session, carry on
-    if ((req.isAuthenticated()&& (req.user.Business.length === 1))) {
+    if (req.isAuthenticated()&& (req.user[0].admin === true)){
         return next();
     }
-
     // if they aren't redirect them to the home page
     res.redirect('/');
 }

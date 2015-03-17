@@ -3,7 +3,7 @@ var async = require('async');
 
 exports.get = function (req,res) {
 
-    var currentuser = req.user.Business[0]._id;
+    var currentuser = req.user[0].business;
     console.log(currentuser);
     var db = req.db;
     var tokens = db.get('mobileTokens');
