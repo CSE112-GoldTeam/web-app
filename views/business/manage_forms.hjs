@@ -5,6 +5,9 @@
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    {{#newrelic}}
+        {{{ newrelic.getBrowserTimingHeader }}}
+    {{/newrelic}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -15,15 +18,15 @@
 <nav class="navbar navbar-default navbar-static-top">
     <div class="navbar-header">
         <a class="navbar-brand" href="/">
-            <div id="company-logo">iReceptionist</div>
+            <img id = "company-logo" src="images/logo.png">
         </a>
     </div>
     <div class="navbar-padding-right">
         <ul class="nav navbar-nav navbar-right navbar-padding">
             <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="#">Employees</a></li>
+            <li><a href="/addemployees">Employees</a></li>
             <li class="active">
-                <a href="#">Settings</a>
+                <a href="/customizetheme">Settings</a>
             </li>
             <li><a href="#">Company Name</a></li>
         </ul>
@@ -31,12 +34,12 @@
     <!--Secondary navbar for the Settings tab-->
     <div class="navbar-secondary navbar-tabs">
         <ul>
-            <li><a href="#">Configurations</a></li>
-            <li><a href="#">Manage Forms</a></li>
-            <li class="active">
-                <a href="/uploadLogo">Upload Logo</a>
+            <li><a href="/registerDevice">Configurations</a></li>
+            <li class="active"><a href="/manageforms">Manage Forms</a></li>
+            <li>
+                <a href="/customizetheme">Customize Theme</a>
             </li>
-            <li><a href="#">More Settings</a></li>
+            <li><a href="/accountSettings">More Settings</a></li>
         </ul>
     </div>
 </nav>
@@ -49,14 +52,19 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <h3>Your Current Form</h3>
-
         </div>
     </div>
 
-    <br/>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <img src="" alt="Company's Custom Form Preview">
+        </div>
+    </div>
 
     <div class="text-center">
-        <button class="btn btn-success">Edit Custom Form</button>
+        <a type="button" class="btn custom-button-wide" href="/formbuilder">
+            Edit Custom Form
+        </a>
     </div>
 
 

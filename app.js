@@ -1,5 +1,7 @@
+var newrelic = false;
+
 if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
-    require('newrelic');
+    newrelic = require('newrelic');
 }
 
 var express = require('express');
@@ -13,6 +15,8 @@ var passport = require('passport');
 var async = require('async');
 var app = express();
 
+global.__base = __dirname + '/';
+
 //Database
 var monk = require('monk');
 var mongoURI = process.env.MONGOLAB_URI || 'localhost:27017/robobetty';
@@ -23,7 +27,9 @@ var db = monk(mongoURI);
 var businesses = db.get('businesses');
 var employee = db.get('employees');
 
-
+if (newrelic) {
+    app.locals.newrelic = newrelic;
+}
 
 //passport functions to Serialize and Deserialize users
 
@@ -33,32 +39,14 @@ passport.serializeUser(function(user, done) {
 
 // used to deserialize the user
 passport.deserializeUser(function (id, done) {
-    var theemployee;
-    var thebusiness;
-    async.parallel({
-        Employee: function(cb){
-            employee.find({_id: id}, function (err, user){
-                    if(err){ done(err);}
-                    if(user){
-                        theemployee = user;
-                    }
-                    cb();
-            });
-        },
-        Business: function(cb){
-            businesses.find({_id: id}, function (err, user) {
-                    if(err){ done(err);}
-                    if(user){
-                        thebusiness = user;
-                    }
-                    cb();        
-            });
-        }
-    }, function (err,results){
-        results.Employee = theemployee;
-        results.Business = thebusiness;
-        done(null,results);
-    });    
+  
+    employee.find({_id: id}, function (err, user){
+            if(err){ done(err);}
+            
+            if(user){
+                done(null,user);
+            }
+    });
 });
 
 require('./config/passport')(passport); // pass passport for configuration
@@ -70,6 +58,8 @@ var businessRoutes = require('./routes/webapp/business')(passport);
 var mobileAuth = require('./routes/api/auth');
 var mobileForm = require('./routes/api/form');
 var mobileAppointment = require('./routes/api/appointment');
+var mobileToken = require('./routes/api/mobiletoken');
+var business = require('./routes/api/business');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -113,7 +103,7 @@ app.use(express.static(path.join(__dirname, 'static')));
 //but when using both or just app.use(session), the route works
 //note to j
 
-//required for passport
+// required for passport
 app.use(session({secret: '1234567890QWERTY'}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
@@ -140,10 +130,14 @@ app.use(function(req, res, next) {
 app.use('/office', require('./routes/webapp/checkin'));
 app.use('/', businessRoutes);
 
+
+
 // Set Mobile Routes
 app.use('/', mobileAuth);
 app.use('/api/m/form', mobileForm);
 app.use('/api/m/appointment', mobileAppointment);
+app.use('/api/m/mobiletoken', mobileToken);
+app.use('/api/m/business', business);
 app.use('/api/m/example', require('./routes/api/example'));
 app.use('/api', require('./routes/webapi'));
 
