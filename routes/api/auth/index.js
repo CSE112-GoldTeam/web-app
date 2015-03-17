@@ -29,12 +29,28 @@ function decodeAuthString(authString) {
     };
 }
 
-
 /**
- * Checks if the user is authorized.
- * @param req
- * @param res
- * @returns `401` Unauthorized and `200` if authorized.
+ * @api {post} /authTest/ Test Your Authentication
+ * @apiName authTest
+ * @apiGroup Authentication
+ * @apiPermission Admin
+ *
+ * @apiHeader {String} api_token returned from api/auth
+
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authentication": "Token 550286024ae861626c9235f4"
+ *     }
+ *
+* @apiExample Example usage:
+curl -X POST -i http://localhost:3000/api/authTest \
+-H "Authorization: Token 550286024ae861626c9235f4"
+ *
+ * @apiSuccessExample Success-Response (example):
+ * HTTP/1.1 200 OK
+ *
+ * @apiErrorExample Error-Response (example):
+ *     HTTP/1.1 401 Not Authenticated
  */
 router.post('/api/authTest', function (req, res) {
     auth.isValidToken(req.db, req.headers.authorization, function (result) {
@@ -47,11 +63,29 @@ router.post('/api/authTest', function (req, res) {
 });
 
 /**
- * Checks if user has basic http authentication
- * @param req
- * @param res
- * @param next
- * @returns `400` bad request
+ * @api {post} /auth/ Get Authenticated
+ * @apiName postAuth
+ * @apiGroup Authentication
+ *
+ * @apiHeader {String} Authentication The api_token created from a base64 encoded
+ string with email appended to password semicolon. ex. "email:password"
+ *
+ * @apiParam {String} name Name of the employee to be authenticated
+ *
+ * @apiExample Example usage:
+ curl -X POST -i http://localhost:3000/api/auth \
+ -H "Authorization: Basic bm9ydGh3b29kLmRlbnRhbEBnbWFpbC5jb206cGFzc3dvcmQ=" \
+ -H "Content-Type: application/json" \
+ -d '{"name":"Frodo"}'
+
+ * @apiSuccessExample {json} Success-Response (example):
+ * HTTP/1.1 200 OK
+ *     {
+ *       "api_token": "WW9sbzp5b2xv"
+ *     }
+ *
+ * @apiErrorExample Error-Response (example):
+ *     HTTP/1.1 401 Not Authenticated
  */
 router.post('/api/auth', function (req, res, next) {
     if (!req.headers.authorization) {
@@ -72,21 +106,24 @@ router.post('/api/auth', function (req, res, next) {
         if (result) {
             var name = req.body.name;
             // Checks if name field is blank
-            if (name === '') {
+            if (name === '' || !name) {
                 return res.send(400, 'Name field required');
+            }
+            if (!result.business) {
+                return res.send(404, 'Business not found. Name or password maybe wrong.');
             }
 
             var mobileTokens = req.db.get('mobileTokens');
             mobileTokens.insert({
-                business: result._id,
+                business: result.business._id,
                 name: name
-            }, function (err, result) {
+            }, function (err, results) {
                 if (err) {
                     return next(err);
                 }
 
                 res.json(200, {
-                    api_token: result._id
+                    api_token: results._id
                 });
             });
         } else {

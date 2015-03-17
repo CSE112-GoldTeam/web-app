@@ -1,5 +1,7 @@
+var auth = require('../../../lib/auth');
+
 exports.get = function (req,res) {
-    var eid = '54ecaa5cfb4974129dc2050f';
+		var eid = req.user[0]._id;
     var db = req.db;
     var employees = db.get('employees');
 
@@ -30,7 +32,7 @@ exports.get = function (req,res) {
 exports.post = function (req, res) {
     var db = req.db;
     var employees = db.get('employees');
-    var eid = '54ecaa5cfb4974129dc2050f';
+    var eid = req.user[0]._id;
 
     var inputPass = req.body.editPassword;
     var inputEmail = req.body.editEmail;
@@ -40,28 +42,51 @@ exports.post = function (req, res) {
 
     if (inputPass != null)
     {
-        employees.findAndModify({_id: eid}, { $set: {password: inputPass}}, function(err, data)
-        {
-            if (err) { return handleError(res, err);}
+        if(inputPass === req.user.Employee[0].password)
+				{
+					employees.find({_id: eid}, function (err, result) {
+						var emp = result[0];
+						var phone = emp.phone;
+						phone = phone.replace('1', '');
+						phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
+        		res.render('business/accountsettings', {
+            	title: 'Express',
+            	fname: emp.fname,
+            	lname: emp.lname,
+            	password: emp.password,
+            	phone: phone,
+            	email: emp.email,
+            	smsNotify: emp.smsNotify,
+            	emailNotify: emp.emailNotify,
+							edited: 'Password successfully changed!'
+						});
+					});
+				}
+				else
+				{
+					inputPass = auth.hashPassword(inputPass);
+					employees.findAndModify({_id: eid}, { $set: {password: inputPass}}, function(err, data) {
+           	if (err) { return handleError(res, err);}
 
-            employees.find({_id: eid}, function (err, result) {
-                var emp = result[0];
-                var phone = emp.phone;
-                phone = phone.replace('1', '');
-								phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
-                res.render('business/accountsettings', {
-                    title: 'Express',
-                    fname: emp.fname,
-                    lname: emp.lname,
-                    password: emp.password,
-                    phone: phone,
-                    email: emp.email,
-                    smsNotify: emp.smsNotify,
-                    emailNotify: emp.emailNotify,
-                    edited: 'Password successfully changed!'
-                });
-            });
-        });
+           	employees.find({_id: eid}, function (err, result) {
+             	var emp = result[0];
+             	var phone = emp.phone;
+             	phone = phone.replace('1', '');
+							phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
+             	res.render('business/accountsettings', {
+                 	title: 'Express',
+                 	fname: emp.fname,
+                 	lname: emp.lname,
+                 	password: emp.password,
+                 	phone: phone,
+                 	email: emp.email,
+                 	smsNotify: emp.smsNotify,
+                 	emailNotify: emp.emailNotify,
+                 	edited: 'Password successfully changed!'
+             	});
+           	});
+        	});
+				}
     }
 
     if (inputEmail != null)
