@@ -1,4 +1,5 @@
 var auth = require('../../../lib/auth');
+var _ = require('underscore');
 
 exports.get = function(req, res) {
 	var bid = req.user.Business[0]._id;
@@ -11,9 +12,10 @@ exports.get = function(req, res) {
 		disclosure = disclosure.slice(3);
 		disclosure = disclosure.replace(/<p>/g, '\n');
 		disclosure = disclosure.replace(/<\/p>/g, '\n');
+		//disclosure = _.escape(disclosure);
 
 		res.render('business/setdisclosure', {
-			disclosure: disclosure
+			disclosure: _.unescape(disclosure)
 		});
 	});
 	
@@ -34,9 +36,13 @@ exports.post = function(req, res) {
 	}
 	else
 	{
+		disclosure = _.escape(disclosure);
 		disclosure = disclosure.replace(/\r\n\r\n/g, '</p><p>');
 		disclosure = disclosure.replace(/\r\n/g, '</p><p>');
 		disclosure = '<p>' + disclosure + '</p>';
+
+		console.log(disclosure);
+		
 		business.findAndModify({_id: bid},{
 			$set :{
 				disclosure: disclosure
