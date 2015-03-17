@@ -33,7 +33,7 @@ exports.show = function (req, res, next) {
     var business = forms.id(req.mobileToken.business);
 
     // query the database for the correct forms
-    forms.find({'_id': req.params.id, 'business': business}, function (err, doc) {
+    forms.find({'business': business}, function (err, doc) {
         if (err) {
             return next(err);
         }
