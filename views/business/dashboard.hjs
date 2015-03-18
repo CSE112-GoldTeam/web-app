@@ -46,7 +46,9 @@
 
 <div class="container"style=" box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 15px -4px rgba(31, 73, 125, 0.8);;">
 
-
+{{#message}}
+   <div class="alert alert-danger">{{message}}</div>
+{{/message}}
 
   <h1><strong><div>Hi, {{employeeName}} {{employeeID}}</div></strong></h1>
 
