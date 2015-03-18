@@ -90,8 +90,9 @@ function isLoggedInBusiness(req, res, next) {
     if (req.isAuthenticated()&& (req.user[0].admin === true)){
         return next();
     }
+    req.flash("permission", "You do not have permission to access that page");
     // if they aren't redirect them to the home page
-    res.redirect('/');
+    res.redirect('back');
 }
 
 
