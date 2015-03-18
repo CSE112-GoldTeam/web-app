@@ -26,7 +26,7 @@
             <li class="active">
                 <a href="/customizetheme">Settings</a>
             </li>
-            <li><a href="/companySettings">Company Name</a></li>
+            <li><a href="#">Company Name</a></li>
         </ul>
     </div>
     <!--Secondary navbar for the Settings tab-->

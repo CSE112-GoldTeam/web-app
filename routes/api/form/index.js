@@ -54,7 +54,7 @@ var auth = require('../../../lib/auth');
 *       "error": "NoAccessRight"
 *     }
 */
-router.get('/:id', auth.isAuthenticated, controller.show);
+router.get('/', auth.isAuthenticated, controller.show);
 
 
 /**

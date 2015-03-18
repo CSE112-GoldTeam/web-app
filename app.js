@@ -7,6 +7,7 @@ if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
 var express = require('express');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+var flash = require('connect-flash');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
@@ -14,6 +15,8 @@ var multer = require('multer');
 var passport = require('passport');
 var async = require('async');
 var app = express();
+
+global.__base = __dirname + '/';
 
 //Database
 var monk = require('monk');
@@ -37,31 +40,13 @@ passport.serializeUser(function(user, done) {
 
 // used to deserialize the user
 passport.deserializeUser(function (id, done) {
-    var theemployee;
-    var thebusiness;
-    async.parallel({
-        Employee: function(cb){
-            employee.find({_id: id}, function (err, user){
-                    if(err){ done(err);}
-                    if(user){
-                        theemployee = user;
-                    }
-                    cb();
-            });
-        },
-        Business: function(cb){
-            businesses.find({_id: id}, function (err, user) {
-                    if(err){ done(err);}
-                    if(user){
-                        thebusiness = user;
-                    }
-                    cb();
-            });
-        }
-    }, function (err,results){
-        results.Employee = theemployee;
-        results.Business = thebusiness;
-        done(null,results);
+
+    employee.find({_id: id}, function (err, user){
+            if(err){ done(err);}
+
+            if(user){
+                done(null,user);
+            }
     });
 });
 
@@ -119,8 +104,9 @@ app.use(express.static(path.join(__dirname, 'static')));
 //but when using both or just app.use(session), the route works
 //note to j
 
-//required for passport
+// required for passport
 app.use(session({secret: '1234567890QWERTY'}));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
@@ -170,6 +156,8 @@ app.use(function (req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function (err, req, res) {
+        console.error(err);
+        console.error(err.stack);
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -182,6 +170,8 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function (err, req, res) {
     res.status(err.status || 500);
+    console.error(err);
+    console.error(err.stack);
     res.render('error', {
         message: err.message,
         error: {}
