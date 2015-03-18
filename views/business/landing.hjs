@@ -5,6 +5,9 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    {{#newrelic}}
+        {{{ newrelic.getBrowserTimingHeader }}}
+    {{/newrelic}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
@@ -12,65 +15,76 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-header">
         <a class="navbar-brand" href="/">
-            <div id="company-logo">RoboBetty</div>
+            <img id = "company-logo" src="images/logo.png">
         </a>
       </div>
       <div class="navbar-padding-right">
         <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a href="#">Features</a>
-            </li>
-            <li>
-                <a href="#">About Us</a>
-            </li>
-            <li>
-                <a href="login" class="btn custom-button" id="login-btn-navbar">Log In</a>
-            </li>
+           <li>
+               <p class="navbar-btn">
+                   <a href="/login" class="btn custom-button" id="login-btn-navbar">Log In</a>
+               </p>
+           </li>
         </ul>
       </div>
     </nav>
     <!-- start of outer container -->
-    <div class="container-fluid container-margin">
+    <div class="container-fluid container-margin-landing landing-pic">
         <div class="row" id="first-section">
             <div id="intro" class="col-xs-7">
-                <h3 class="bold text-center">The old rules of waiting are over.</h3>
-                <p class="text-center">Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor. Cum Sociees natoque panatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, null luctus pharetra vulputate, felix tellus mellis orci, sed rhoncus sapien nunc eget odio.</p>
-                <div class="form-group">
+                <h1 class="heading bold text-center">The old rules of waiting are over.</h3>
+                <p class="text-center info-text"> Let us help you revolutionize your customer waiting experience.</p>
+                <form class="form-group" action="" method="post">
                     <div class="col-xs-9">
-                        <input type="company" class="small form-control" id="inputCompany" placeholder="Step 1: Enter company name">
+                        <input type="company" class="small form-control" id="companyName" name="companyName" value="{{companyName}}" method="post" placeholder="Step 1: Enter company name">
                     </div>
                     <div class="col-xs-1 text-small">
-                        <a type="submit" class="btn custom-button" href="/register">Submit</a>
+                        <button type="submit" class="btn custom-button">Submit</button>
                     </div>
-                </div>
+                </form>
             </div>
-            <div class="col-xs-4">
-                <img id="intro-image" src="http://placehold.it/270x370"/>
+
+            <div class="col-xs-4 ">
+                <img id="intro-image" src="images/ipad.png">
             </div>
         </div>
+
         <div class="row" id="second-section">
             <div class="col-xs-6">
                 <div>
-                    <blockquote class="testimonial"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <blockquote class="testimonial">
+                        <p>With a limited budget and tight schedule, this check-in app really saved me time and cost to run the dental clinic I just opened up. Thank you, iReceptionist. You’re a life-saver.</p>
+                    </blockquote>
                     <div class="arrow-down"></div>
-                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                    <img src="images/jennifer.jpg" class="testimonial-image">
+                    <span class="testimonial-author">Dr. Jennifer Kim, DDS | <span>San Francisco, California</span></span>
                 </div>
                 <div>
-                    <blockquote class="testimonial testimonial-grey"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <blockquote class="testimonial testimonial-grey">
+                        <p>Wow! iReceptionist was the perfect addition to our offices! It’s elegant, fast, and our customers absolutely love it! The team’s continued support and commitment to excellence has made me a life-long customer. Definitely the GOLD standard for check-in apps!</p>
+                    </blockquote>
                     <div class="arrow-down arrow-down-grey"></div>
-                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                    <img src="images/leonard.jpg" class="testimonial-image">
+                    <span class="testimonial-author">Dr. Leonard McCoy, M.D. | <span>Riverside, California</span></span>
+                    
                 </div>
             </div>
             <div class="col-xs-6">
                 <div>
-                    <blockquote class="testimonial testimonial-grey"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <blockquote class="testimonial testimonial-grey">
+                        <p>iReceptionist is truly an aesthetic experience, I love how intuitive and modern the design is. Making appointments and checking in has never been easier.</p>
+                    </blockquote>
                     <div class="arrow-down arrow-down-grey"></div>
-                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                    <img src="images/betty.jpg" class="testimonial-image">
+                    <span class="testimonial-author">Betty Johnson | <span>Stockholm, Sweden</span></span>
                 </div>
                 <div>
-                    <blockquote class="testimonial"> <p>Lorem ipsum dolor sit amet, consecture adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumans et vivrra justo commando. proin sodales pulvinar tempor.</p> </blockquote>
+                    <blockquote class="testimonial">
+                        <p>I can’t believe how much time I saved using iReceptionist. It was truly a breathe of fresh air. Never again will I have to deal with the hassle of a grumpy receptionist and a clipboard!</p>
+                    </blockquote>
                     <div class="arrow-down"></div>
-                    <p class="testimonial-author">Jon Farell | <span>Vancouver, Canada</span></p>
+                    <img src="images/joel.jpg" class="testimonial-image">
+                    <span class="testimonial-author">Joel Spolsky | <span>Kathmandu, Nepal</span></span>
                 </div>
             </div>
         </div>

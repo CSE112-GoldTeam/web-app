@@ -22,12 +22,18 @@ $(document).ready(function () {
     $themeToolbar.find('.bg-image').click(function () {
         var bg = $(this).data('bg');
         $('.customBG').css('background-image', ' url(images/bg/full/' + bg + ')');
+        style.bg = bg;
     });
 
     //Colorpicker for buttons
     $('#button-bg-color').spectrum({
         color: $('.checkinbutton').css('background-color'),
         move: function (color) {
+            $('.checkinbutton').css('background-color', color.toHexString());
+        }, change: function (color) {
+            $('.checkinbutton').css('background-color', color.toHexString());
+            style.buttonBg = color.toRgb();
+        }, hide: function (color) {
             $('.checkinbutton').css('background-color', color.toHexString());
         }
     });
@@ -36,15 +42,25 @@ $(document).ready(function () {
         color: $('.checkinbutton').css('color'),
         move: function (color) {
             $('.checkinbutton').css('color', color.toHexString());
+        }, change: function (color) {
+            $('.checkinbutton').css('color', color.toHexString());
+            style.buttonText = color.toRgb();
+        }, hide: function (color) {
+            $('.checkinbutton').css('color', color.toHexString());
         }
     });
 
     //Colorpicker for content container
     $('#content-container-color').spectrum({
         color: $('.container-checkin').css('background-color'),
-        showAlpha: true
+        showAlpha: true,
+        change: function (color) {
+            $('.container-checkin').css('background-color', color.toRgbString());
+            style.containerBg = color.toRgb();
+        }, hide: function (color) {
+            $('.container-checkin').css('background-color', color.toRgbString());
+        }
     }).on('dragstop.spectrum', function (e, color) {
-        console.log(color);
         $('.container-checkin').css('background-color', color.toRgbString());
     });
 
@@ -52,6 +68,23 @@ $(document).ready(function () {
         color: $('.header').css('color'),
         move: function (color) {
             $('.header').css('color', color.toHexString());
+        },
+        change: function (color) {
+            $('.header').css('background-color', color.toRgbString());
+            style.containerText = color.toRgb();
+        }, hide: function (color) {
+            $('.header').css('background-color', color.toRgbString());
         }
+    });
+
+    //Save button
+    $('#save').click(function () {
+        $.ajax({
+            method: 'put',
+            url: '/api/style',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(style)
+        });
     });
 });

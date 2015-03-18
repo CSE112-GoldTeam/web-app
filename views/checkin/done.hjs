@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }}</title>
+    <title>You're Done!</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    {{#newrelic}}
+        {{{ newrelic.getBrowserTimingHeader }}}
+    {{/newrelic}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script type="text/javascript">  window.setTimeout("location=('checkin');",7000); </script>
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            color: {{containerText}} !important;
+        }
+
+        .customBG {
+            background-image: url(/images/bg/full/{{bg}});
+        }
+
+        .btn {
+            background-color: {{buttonBg}};
+            border-color: {{buttonBg}};
+            color: {{buttonText}}
+        }
+
+        .container-checkin {
+            background-color: {{containerBg}};
+        }
+    </style>
 </head>
 <body class="customBG">
 
@@ -23,7 +45,7 @@
 <!-- Took out all unnecessary divs to make consistent with checkin page design -->
 <div class="container container-margin container-checkin">
     <h1 class="header"> Thank you! Someone will be with you shortly. </h1>
-    <img class="checkinphoto" src="/images/dentalLogo.jpg" alt="">
+    <img class="checkinphoto" src="{{logo}}" alt="">
 </div>
 
 </body>

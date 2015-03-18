@@ -1,5 +1,7 @@
 var ObjectID = require('mongodb').ObjectID;
 var _ = require('underscore');
+var style = require('./../../../lib/style.js');
+var sms = require('./../../../lib/sms.js');
 
 //Custom Form
 function makeDropdown(options, name, body) {
@@ -12,16 +14,16 @@ function makeDropdown(options, name, body) {
 }
 
 function makeTextfield(name, body) {
-    return'<input type="text" class="form-control" name="'+name+'" id="' + name + '"value="' + (body[name] || '') + '">';
+    return'<input type="text" class="form-control form-width-custom" name="'+name+'" id="' + name + '"value="' + (body[name] || '') + '">';
 }
 
 function makeFormGroup(field, index, body) {
     var name = '_' + index;
 
     var s = '<div class="form-group">';
-    s += '<label for="' + name + '" class="col-md-2 control-label">' + field.label + '</label>';
+    s += '<label for="' + name + '" class="col-md-4 control-label">' + field.label + '</label>';
 
-    s += '<div class="col-md-10">';
+    s += '<div class="col-md-8">';
     if (field.type === 'textfield') {
         s += makeTextfield(name, body);
     } else if (field.type === 'dropdown') {
@@ -35,8 +37,8 @@ function makeFormGroup(field, index, body) {
 
 function makeSubmitButton() {
     var s = '<div class="form-group">';
-    s += '<div class="col-sm-offset-2 col-sm-10">';
-    s += '<button type="submit" class="btn btn-default">Submit</button>';
+    s += '<div>';
+    s += '<button type="submit" class="btn btn-lg btn-block custom-button custom-center">Submit</button>';
     s += '</div>';
     s += '</div>';
 
@@ -86,84 +88,112 @@ function makeForm(db, businessId, body, fn) {
 }
 
 exports.get = function (req, res, next) {
+    var business = req.session.business;
     makeForm(req.db, req.params.id, {}, function (err, formHtml) {
         if (err) {
             return next(err);
         }
         res.render('checkin/customform', {
-            title: 'Express',
-            formHtml: formHtml
+            formHtml: formHtml,
+            companyName: business.companyName,
+            bg: business.style.bg,
+            logo: business.logo,
+            buttonBg: style.rgbObjectToCSS(business.style.buttonBg),
+            buttonText: style.rgbObjectToCSS(business.style.buttonText),
+            containerText: style.rgbObjectToCSS(business.style.containerText),
+            containerBg: style.rgbObjectToCSS(business.style.containerBg)
         });
     });
 };
 
 exports.post = function (req, res, next) {
     var db = req.db;
-    var businesses = db.get('businesses');
     var forms = db.get('forms');
 
-    businesses.findById(req.params.id, function (err, business) {
+    var business = req.session.business;
+
+    forms.findOne({business: ObjectID(business._id)}, function (err, form) {
         if (err) {
             return next(err);
         }
-        if (!business) {
-            return next(new Error('Business not found: ' + req.params.id));
+        if (!form) {
+            return next(new Error('Form for business not found: ' + business._id));
         }
 
-        forms.findOne({business: business._id}, function (err, form) {
-            if (err) {
-                return next(err);
-            }
-            if (!form) {
-                return next(new Error('Form for business not found: ' + business._id));
-            }
+        //Ensure that there are all the responses
+        var valid = _.every(form.fields, function (field, index) {
+            var name = '_' + index;
+            //TODO: Validation for dropdowns
+            return name in req.body && req.body[name].trim() !== '';
+        });
 
-            //Ensure that there are all the responses
-            var valid = _.every(form.fields, function (field, index) {
+        if (!valid) {
+            makeForm(db, req.params.id, req.body, function (formHtml) {
+                res.render('checkin/customform', {
+                    formHtml: formHtml,
+                    formError: 'You are missing required fields.',
+                    companyName: business.companyName,
+                    bg: business.style.bg,
+                    logo: business.logo,
+                    buttonBg: style.rgbObjectToCSS(business.style.buttonBg),
+                    buttonText: style.rgbObjectToCSS(business.style.buttonText),
+                    containerText: style.rgbObjectToCSS(business.style.containerText),
+                    containerBg: style.rgbObjectToCSS(business.style.containerBg)
+                });
+            });
+        } else { //Form is valid, let's put it into the DB
+            var formResponses = db.get('formResponses');
+            var formResponse = {
+                appointment: req.session.appointmentId,
+                answers: []
+            };
+
+            _.each(form.fields, function (field, index) {
                 var name = '_' + index;
-                //TODO: Validation for dropdowns
-                return name in req.body && req.body[name].trim() !== '';
+                formResponse.answers.push({
+                    label: field.label,
+                    response: req.body[name]
+                });
             });
 
-            if (!valid) {
-                makeForm(db, req.params.id, req.body, function (formHtml) {
-                    res.render('checkin/customform', {
-                        title: 'Express',
-                        formHtml: formHtml,
-                        formError: 'You are missing required fields.'
-                    });
-                });
-            } else { //Form is valid, let's put it into the DB
-                var formResponses = db.get('formResponses');
-                var formResponse = {
-                    appointment: req.session.appointmentId,
-                    answers: []
-                };
+            formResponses.insert(formResponse, function (err) {
+                if (err) {
+                    return next(err);
+                }
 
-                _.each(form.fields, function (field, index) {
-                    var name = '_' + index;
-                    formResponse.answers.push({
-                        label: field.label,
-                        response: req.body[name]
-                    });
-                });
-
-                formResponses.insert(formResponse, function (err) {
+                //Update the state of the appointment
+                var appointmentId = req.session.appointmentId;
+                db.get('appointments').findAndModify({_id: appointmentId}, {
+                    $set: {
+                        state: 'formDone'
+                    }
+                }, function (err, appt) {
                     if (err) {
                         return next(err);
                     }
+                    if (!appt) {
+                        return next(new Error('Appointment not found'));
+                    }
 
-                    //Update the state of the appointment
-                    var appointmentId = req.session.appointmentId;
-                    db.get('appointments').update({_id: ObjectID(appointmentId)}, {
-                        $set: {
-                            state: 'formDone'
+                    //Find the employee this appointment belongs to
+                    db.get('employees').findById(appt.employee, function (err, employee) {
+                        if (err) {
+                            return next(err);
                         }
-                    }, function () {
-                        res.redirect('sign');
+                        if (!employee) {
+                            return next(new Error('Employee not found'));
+                        }
+
+                        sms.sendText(employee.phone, 'Your patient ' + appt.fname + ' ' + appt.lname + ' has checked in.', function (err) {
+                            if (err) {
+                                return next(err);
+                            }
+
+                            res.redirect('sign');
+                        });
                     });
                 });
-            }
-        });
+            });
+        }
     });
 };

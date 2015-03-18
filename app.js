@@ -1,16 +1,22 @@
+var newrelic = false;
+
 if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
-    require('newrelic');
+    newrelic = require('newrelic');
 }
 
 var express = require('express');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+var flash = require('connect-flash');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var passport = require('passport');
+var async = require('async');
 var app = express();
+
+global.__base = __dirname + '/';
 
 //Database
 var monk = require('monk');
@@ -19,7 +25,12 @@ console.log('Connecting to DB: ' + mongoURI);
 var db = monk(mongoURI);
 
 //login config
-var collect = db.get('businesses');
+var businesses = db.get('businesses');
+var employee = db.get('employees');
+
+if (newrelic) {
+    app.locals.newrelic = newrelic;
+}
 
 //passport functions to Serialize and Deserialize users
 
@@ -28,19 +39,28 @@ passport.serializeUser(function(user, done) {
     });
 
 // used to deserialize the user
-passport.deserializeUser(function(id, done) {
-    collect.findById(id, function(err, user) {
-        done(err, user);
+passport.deserializeUser(function (id, done) {
+
+    employee.find({_id: id}, function (err, user){
+            if(err){ done(err);}
+
+            if(user){
+                done(null,user);
+            }
     });
 });
 
 require('./config/passport')(passport); // pass passport for configuration
 
 
+var businessRoutes = require('./routes/webapp/business')(passport);
+
 // Load Routes for Mobile
 var mobileAuth = require('./routes/api/auth');
 var mobileForm = require('./routes/api/form');
 var mobileAppointment = require('./routes/api/appointment');
+var mobileToken = require('./routes/api/mobiletoken');
+var business = require('./routes/api/business');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,7 +76,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 
 app.use(multer({
-  dest: __dirname + '/static/images/',
+  dest: __dirname + '/public/images/uploads/',
   onFileUploadStart: function (file) {
     console.log(file.mimetype);
     if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg' && file.mimetype !== 'image/jpeg') {
@@ -77,14 +97,16 @@ app.use(multer({
 
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'static')));
 
 
 //so... when only using router, for some reason deserialize wont work
 //but when using both or just app.use(session), the route works
 //note to j
 
-//required for passport
+// required for passport
 app.use(session({secret: '1234567890QWERTY'}));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
@@ -104,16 +126,20 @@ app.use(function(req, res, next) {
     next();
 });
 
-var businessRoutes = require('./routes/webapp/business')(passport);
+
 
 // Set Webapp Routes
 app.use('/office', require('./routes/webapp/checkin'));
 app.use('/', businessRoutes);
 
+
+
 // Set Mobile Routes
 app.use('/', mobileAuth);
 app.use('/api/m/form', mobileForm);
 app.use('/api/m/appointment', mobileAppointment);
+app.use('/api/m/mobiletoken', mobileToken);
+app.use('/api/m/business', business);
 app.use('/api/m/example', require('./routes/api/example'));
 app.use('/api', require('./routes/webapi'));
 
@@ -130,6 +156,8 @@ app.use(function (req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function (err, req, res) {
+        console.error(err);
+        console.error(err.stack);
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -142,6 +170,8 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function (err, req, res) {
     res.status(err.status || 500);
+    console.error(err);
+    console.error(err.stack);
     res.render('error', {
         message: err.message,
         error: {}

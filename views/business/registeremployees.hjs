@@ -5,28 +5,32 @@
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    {{#newrelic}}
+        {{{ newrelic.getBrowserTimingHeader }}}
+    {{/newrelic}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-   
     <div class="container container-margin">
             <div class="row">
-                <div class="col-xs-offset-1 col-xs-4">
-                    <h2>Employee Signup</h2>
+                <div class="col-xs-offset-1 col-xs-5">
+                    <h2 class="employee-header">Employee Signup</h2>
+                    <h4> Enter your emailed password to set up your account.</h4>
                 </div>
             </div>
 
             <div class="row text-center" id="regis-container">
-                <div class="col-xs-offset-1 col-xs-4" id="form-separator">
+                <div class="password col-xs-offset-1 col-xs-6">
                     <form method="post" action="" enctype="application/x-www-form-urlencoded">
-                        <input class="regis" type="password" name="password" value="{{ password }}" placeholder="PASSWORD" required>
-                        <input class="btn custom-button" name="submit" type="submit" value="SignUp">
+                        <input class="hidden" type="email" name="email" value="fake@gmail.com">
+                        <input class="regis" type="password" name="password" value="{{ password }}" placeholder=" PASSWORD" required>
+                        <input class="btn custom-button employee-submit" name="submit" type="submit" value="Sign Up">
                     </form>
                 </div>
-                <div class="col-xs-7">
-                    <img class="custom-center" src="http://placehold.it/500x420"/>
+                <div class="col-xs-5">
+                    <img class="custom-center employee-register-pic" src="http://placehold.it/500x420"/>
                 </div>
             </div>
     </div>

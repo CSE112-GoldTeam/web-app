@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+
 //Define the controllers for checkin process
 var landing = require('./landing');
 var theming = require('./theming');
@@ -14,42 +15,87 @@ var registerDevice = require('./registerdevice');
 var addEmployees = require('./addemployees');
 var employeeRegister = require('./employeeregister');
 var viewForm = require('./viewform');
-
+var customizeTheme = require('./customize_theme');
+var manageForms = require('./manage_forms');
+var businesssetting = require('./businesssetting');
+var setdisclosure = require('./setdisclosure');
 module.exports = function (passport) {
+
+
+
     //Pass in passport
-    login.init(passport);
-    register.init(passport);
 
     //Setup the routes
     router.get('/', landing.get);
+    router.post('/', landing.post);
 
-    router.get('/theming', theming.get);
+    router.get('/theming', isLoggedInBusiness, theming.get);
 
     router.get('/login', login.get);
-    router.post('/login', login.post);
+    router.post('/login',passport.authenticate('local-login',{
+        successRedirect : '/dashboard',
+        failureRedirect : '/login',
+        failureFlash: true
+    }));
 
-    router.get('/formbuilder', formbuilder.get);
+    router.get('/formbuilder',isLoggedIn, formbuilder.get);
 
-    router.get('/accountSettings', accountSettings.get);
-    router.post('/accountSettings', accountSettings.post);
+
+    router.get('/accountSettings', isLoggedIn, accountSettings.get);
+    router.post('/accountSettings', isLoggedIn, accountSettings.post);
+
+    router.get('/businesssetting', businesssetting.get);
+    router.post('/businesssetting', businesssetting.post);
+
 
     router.get('/uploadlogo', uploadLogo.get);
     router.post('/uploadlogo', uploadLogo.post);
 
     router.get('/register', register.get);
-    router.post('/register', register.post);
+    router.post('/register',passport.authenticate('local-signup',{
+        successRedirect : '/dashboard', // redirect to the secure profile section
+        failureRedirect : '/register' // redirect back to the signup page if there is an error
+    }));
 
-    router.get('/dashboard', dashboard.get);
+    router.get('/dashboard', isLoggedIn, dashboard.get);
 
     router.get('/registerdevice', registerDevice.get);
 
-    router.get('/addemployees', addEmployees.get);
-    router.post('/addemployees', addEmployees.post);
+    router.get('/addemployees',isLoggedInBusiness, addEmployees.get);
+    router.post('/addemployees',isLoggedInBusiness, addEmployees.post);
+
+    router.get('/customizetheme', customizeTheme.get);
+
+    router.get('/manageforms', manageForms.get);
 
     router.get('/employeeregister', employeeRegister.get);
-    router.post('/employeeregister', employeeRegister.post);
+    router.post('/employeeregister', passport.authenticate('local-signup-employee',{
+        successRedirect : '/dashboard', // redirect to the secure profile section
+        failureRedirect : '/register' // redirect back to the signup page if there is an error
+    }));
 
     router.get('/viewform/:id', viewForm.get);
+
+    router.get('/setdisclosure', setdisclosure.get);
+    router.post('/setdisclosure', setdisclosure.post);
+
+function isLoggedIn(req,res,next){
+        if(req.isAuthenticated()){
+            return next();
+        }
+
+        res.redirect('/');
+    }
+
+// route middleware to make sure a user is logged in
+function isLoggedInBusiness(req, res, next) {
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated()&& (req.user[0].admin === true)){
+        return next();
+    }
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
 
 
     return router;

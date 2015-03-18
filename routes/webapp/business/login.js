@@ -1,15 +1,7 @@
-var passport = null;
-exports.init = function (passportIn) {
-    passport = passportIn;
-};
 
 exports.get = function(req, res) {
-    res.render('business/login.hjs');
+	req.logout();
+    res.render('business/login.hjs',{ message: req.flash("login")});
 };
 
-exports.post = function () {
-    return passport.authenticate('local-login', {
-        successRedirect : '/config',
-        failureRedirect : '/login'
-    });
-};
+

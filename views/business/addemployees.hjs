@@ -5,6 +5,9 @@
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'>
+    {{#newrelic}}
+        {{{ newrelic.getBrowserTimingHeader }}}
+    {{/newrelic}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
@@ -12,76 +15,75 @@
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/">
-            <div id="company-logo">RoboBetty</div>
+        <a class="navbar-brand" href="#" onclick='location.reload(true); return false;'>
+            <img id = "company-logo" src="images/logo.png">
         </a>
       </div>
       <div class="navbar-padding-right">
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right navbar-padding">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li class="active"><a href="/addemployees">Employees</a></li>
             <li>
-                <a href="#">Dashboard</a>
+                <a href="/customizetheme">Settings</a>
             </li>
-            <li>
-                <a href="#">Employees</a>
-            </li>
-            <li>
-                <a href="#">Settings</a>
-            </li>
-            <li>
-                <a href="#">Company Name</a>
-            </li>
+            <li><a href="#">Company Name</a></li>
         </ul>
-      </div>
+        </div>
     </nav>
 
     <div class="container container-margin">
             <div class="row">
                 <div class="col-xs-offset-1 col-xs-4">
                     <h2>Register Employees</h2>
-                    <h4 align="left">Register all your employee(s) through a CSV file!</h4>
+                    <h4>Register all your employee(s) through a CSV file!</h4>
                 </div>
             </div>
 
             <div class="row text-center" id="regis-container">
                 <form method="post" action="addemployees" enctype="application/x-www-form-urlencoded">
-                    <input class="add-email" type="text" name="csvEmployees" placeholder="CSV of Employees EMAILS" required>
+                    <textarea class="add-email" type="text" name="csvEmployees" placeholder="CSV of Employees EMAILS" required></textarea>
                     <input class="btn custom-button" name="submit" type="submit" href="/addemployees" value="Upload">
                 </form>
-            
-                <div style="position:relative;top:50px" align = "center">
 
-                    <h3 style="position:relative;top:50px;right:135px">Employees already registered</h2>
+                <div class="outerAlign" >
 
-                        <div style="position:relative;top:50px">
-                        
-                            <table border="2" style="width:50%" id="registeredEmployees">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                </tr>
+                    <h3 class="tableheader">Employees already registered</h2>
+
+                        <div class="tableheader">
+
+                            <table class="table table-hover tablewidth" id="registeredEmployees">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
                                 {{#signed}}
                                 <tr>
-                                    <td>{{name}}</td>
+                                    <td>{{fname}} {{lname}}</td>
                                     <td>{{email}}</td>
                                 </tr>
                                 {{/signed}}
                             </table>
 
                         </div>
-                        
-                
-                        <h3 style="position:relative;top:50px;right:135px">Employees not yet registered</h2>
 
-                        <div style="position:relative;top:50px">
-                        
-                            <table border="2" style="width:50%" id="unregisteredEmployees">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                </tr>
+
+                        <h3 class="tableheader">Employees not yet registered</h2>
+
+                        <div class="tableheader">
+
+                            <table class="table table-hover tablewidth" id="unregisteredEmployees">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+
                                 {{#notsigned}}
                                 <tr>
-                                    <td>{{name}}</td>
+                                    <td>{{fname}} {{lname}}</td>
                                     <td>{{email}}</td>
                                 </tr>
                                 {{/notsigned}}

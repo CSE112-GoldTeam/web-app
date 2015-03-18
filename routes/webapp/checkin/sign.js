@@ -1,42 +1,36 @@
+var style = require('./../../../lib/style.js');
+
 exports.get = function(req, res, next) {
-    var db = req.db;
-    var businesses = db.get('businesses');
+    var business = req.session.business;
 
-    businesses.findById(req.params.id, function (err, business) {
-        if (err) {
-            return next(err);
-        }
-        if (!business) {
-            return next(new Error('Error finding business: ' + req.params.id));
-        }
-
-        //TODO: Verify that there are results and no errors
-        res.render('checkin/sign', {
-            title: 'Express',
-            disclosure: business.disclosure
-        });
+    //TODO: Verify that there are results and no errors
+    res.render('checkin/sign', {
+        disclosure: business.disclosure,
+        companyName: business.companyName,
+        bg: business.style.bg,
+        logo: business.logo,
+        buttonBg: style.rgbObjectToCSS(business.style.buttonBg),
+        buttonText: style.rgbObjectToCSS(business.style.buttonText),
+        containerText: style.rgbObjectToCSS(business.style.containerText),
+        containerBg: style.rgbObjectToCSS(business.style.containerBg)
     });
 };
 
 exports.post = function (req, res, next) {
     var sig = req.body.sig.trim();
     if (sig === '') {
-        var db = req.db;
-        var businesses = db.get('businesses');
+        var business = req.session.business;
 
-        businesses.findById(req.params.id, function (err, business) {
-            if (err) {
-                return next(err);
-            }
-            if (!business) {
-                return next(new Error('Error finding business: ' + req.params.id));
-            }
-
-            res.render('checkin/sign', {
-                title: 'Express',
-                disclosure: business.disclosure,
-                error: 'You must provide a signature'
-            });
+        res.render('checkin/sign', {
+            disclosure: business.disclosure,
+            error: 'You must provide a signature',
+            companyName: business.companyName,
+            bg: business.style.bg,
+            logo: business.logo,
+            buttonBg: style.rgbObjectToCSS(business.style.buttonBg),
+            buttonText: style.rgbObjectToCSS(business.style.buttonText),
+            containerText: style.rgbObjectToCSS(business.style.containerText),
+            containerBg: style.rgbObjectToCSS(business.style.containerBg)
         });
     } else {
         //Update the state of the appointment
