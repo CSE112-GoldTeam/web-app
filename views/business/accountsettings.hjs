@@ -41,7 +41,14 @@
 	</nav>
 
 
+
+
+
+
 	<div class="container container-margin-accountSettings">
+		{{#message}}
+	   <div class="alert alert-danger">{{message}}</div>
+		{{/message}}
 		<div class="row">
 			{{#edited}}
 				<div class="alert alert-success" role="alert">
