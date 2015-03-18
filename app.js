@@ -7,6 +7,7 @@ if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
 var express = require('express');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+var flash = require('connect-flash');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
@@ -105,6 +106,7 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 // required for passport
 app.use(session({secret: '1234567890QWERTY'}));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
