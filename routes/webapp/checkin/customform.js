@@ -14,16 +14,16 @@ function makeDropdown(options, name, body) {
 }
 
 function makeTextfield(name, body) {
-    return'<input type="text" class="form-control" name="'+name+'" id="' + name + '"value="' + (body[name] || '') + '">';
+    return'<input type="text" class="form-control form-width-custom" name="'+name+'" id="' + name + '"value="' + (body[name] || '') + '">';
 }
 
 function makeFormGroup(field, index, body) {
     var name = '_' + index;
 
     var s = '<div class="form-group">';
-    s += '<label for="' + name + '" class="col-md-2 control-label">' + field.label + '</label>';
+    s += '<label for="' + name + '" class="col-md-4 control-label">' + field.label + '</label>';
 
-    s += '<div class="col-md-10">';
+    s += '<div class="col-md-8">';
     if (field.type === 'textfield') {
         s += makeTextfield(name, body);
     } else if (field.type === 'dropdown') {
@@ -37,8 +37,8 @@ function makeFormGroup(field, index, body) {
 
 function makeSubmitButton() {
     var s = '<div class="form-group">';
-    s += '<div class="col-sm-offset-2 col-sm-10">';
-    s += '<button type="submit" class="btn btn-default">Submit</button>';
+    s += '<div>';
+    s += '<button type="submit" class="btn btn-lg btn-block custom-button custom-center">Submit</button>';
     s += '</div>';
     s += '</div>';
 

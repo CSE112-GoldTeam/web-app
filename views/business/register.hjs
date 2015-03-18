@@ -49,7 +49,7 @@
                     </form>
                 </div>
                 <div class="col-xs-7">
-                    <img class="custom-center" src="http://placehold.it/500x420"/>
+                    <img class="custom-center" src="http://placehold.it/500x420" alt="Register to use iReceptionist"/>
                 </div>
             </div>
     </div>
