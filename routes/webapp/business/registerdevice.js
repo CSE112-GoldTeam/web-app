@@ -1,7 +1,7 @@
 var ObjectId = require('mongodb').ObjectID;
 var async = require('async');
 
-exports.get = function (req,res) {
+exports.get = function (req, res, next) {
 
     var currentuser = req.user[0].business;
     console.log(currentuser);
@@ -19,6 +19,15 @@ exports.get = function (req,res) {
             })
         }, function () {
             res.render('business/registerDevice', {tokensDB: results, message: req.flash("permission")});
-        });
+
+                if (err) {
+                    fn(err);
+                } else {
+                    if (employee) {
+                        result.employee = employee.fname + " " + employee.lname;
+                    }
+                    fn();
+                }
+            });
     });
 };
