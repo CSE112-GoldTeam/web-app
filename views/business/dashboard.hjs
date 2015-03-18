@@ -26,16 +26,16 @@
     <div class="navbar-padding-right">
       <ul class="nav navbar-nav navbar-right navbar-padding">
           <li class="active">
-              <a href="/dashboard">Dashboard</a>
+            <a href="/dashboard">Dashboard</a>
           </li>
           <li>
-              <a href="/addemployees">Employees</a>
+            <a href="/addemployees">Employees</a>
           </li>
           <li>
-              <a href="/customizetheme">Settings</a>
+            <a href="/customizetheme">Settings</a>
           </li>
           <li>
-              <a href="#">Company Name</a>
+            <a href="/companySettings">Company Name</a>
           </li>
       </ul>
     </div>

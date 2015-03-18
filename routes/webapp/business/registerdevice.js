@@ -19,15 +19,7 @@ exports.get = function (req, res, next) {
             })
         }, function () {
             res.render('business/registerDevice', {tokensDB: results, message: req.flash("permission")});
-
-                if (err) {
-                    fn(err);
-                } else {
-                    if (employee) {
-                        result.employee = employee.fname + " " + employee.lname;
-                    }
-                    fn();
-                }
-            });
+            }
+        );
     });
 };
