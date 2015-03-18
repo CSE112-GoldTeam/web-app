@@ -41,6 +41,9 @@
         </ul>
     </div>
 </nav>
+    {{#message}}
+   <div class="alert alert-danger">{{message}}</div>
+    {{/message}}
 
 <div class="container">
 

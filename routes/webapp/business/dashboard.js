@@ -7,5 +7,7 @@ exports.get = function (req, res) {
 
     res.render('business/dashboard', {title: 'Express',
 		eid: employeeId,
-		employeeName: employeename});
+		employeeName: employeename,
+		message: req.flash("permission"),
+	});
 };

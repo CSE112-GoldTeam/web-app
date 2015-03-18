@@ -44,6 +44,10 @@
     </div>
 </nav>
 
+    {{#message}}
+   <div class="alert alert-danger">{{message}}</div>
+    {{/message}}
+
 <div class="container">
 
     <h2>Create Custom Form</h2>

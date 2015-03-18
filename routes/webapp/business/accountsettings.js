@@ -24,7 +24,8 @@ exports.get = function (req,res) {
             phone: phone,
             email: emp.email,
             smsNotify: emp.smsNotify,
-            emailNotify: emp.emailNotify
+            emailNotify: emp.emailNotify,
+            message: req.flash("permission")
         });
     });
 };
@@ -82,7 +83,7 @@ exports.post = function (req, res) {
                  	email: emp.email,
                  	smsNotify: emp.smsNotify,
                  	emailNotify: emp.emailNotify,
-                 	edited: 'Password successfully changed!'
+                 	edited: 'Password successfully changed!',
              	});
            	});
         	});
