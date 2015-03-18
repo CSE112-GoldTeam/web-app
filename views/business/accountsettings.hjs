@@ -40,10 +40,15 @@
 	    </div>
 	</nav>
 
-	<div class="container container-margin">
-	{{#message}}
-   <div class="alert alert-danger">{{message}}</div>
-	{{/message}}
+
+
+
+
+
+	<div class="container container-margin-accountSettings">
+		{{#message}}
+	   <div class="alert alert-danger">{{message}}</div>
+		{{/message}}
 		<div class="row">
 			{{#edited}}
 				<div class="alert alert-success" role="alert">
@@ -55,7 +60,7 @@
 					{{alert}}
 				</div>
 			{{/alert}}
-			<div class="col-md-3">
+			<div class="col-md-4" style = "margin-bottom:30px">
 				<h2>Hello, Dr. {{ lname }}!</h2>
 			</div>
 		</div>
@@ -80,7 +85,7 @@
 					<input type="password" id="editPassword" name="editPassword" value="{{ password }}" class="form-control">
 				</div>
 				<div class="col-md-2">
-					<button type="password" class="btn custom-button" type="submit">Update</button>
+					<button type="password" style = "margin-bottom: 10px" class="btn custom-button" type="submit">Update</button>
 				</div>
 			</form>
 		</div>
@@ -91,7 +96,7 @@
 					<input type="email" id="editEmail" name="editEmail" value="{{ email }}" class="form-control">
 				</div>
 				<div class="col-md-2">
-					<button type="email" class="btn custom-button">Update</button>
+					<button type="email" style = "margin-bottom: 10px" class="btn custom-button">Update</button>
 				</div>
 			</form>
 		</div>
@@ -102,7 +107,7 @@
 					<input type="phone" id="editPhone" name="editPhone" value="{{ phone }}" class="form-control">
 				</div>
 				<div class="col-md-2">
-					<button type="phone" class="btn custom-button">Update</button>
+					<button type="phone" style = "margin-bottom: 10px" class="btn custom-button">Update</button>
 				</div>
 			</form>
 		</div>
@@ -119,7 +124,7 @@
 		</div>
 		<div  class="column">
 			<div class="row">
-				<div class="col-md-2 col-md-offset-3">
+				<div class="col-md-3 col-md-offset-3">
 					<h5>When Patient Checked-in:</h5>
 				</div>
 			</div>
