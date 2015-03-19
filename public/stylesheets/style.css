@@ -633,9 +633,18 @@ a:hover {
   z-index: 1;
 }
 
+.editNotify {
+  text-decoration: underline;
+  font-size: 18px;
+}
+
+.formSection {
+  margin-bottom: 60px;
+}
 
 /******************************************/
 
 .form-width-custom {
   width: 420px;
 }
+
