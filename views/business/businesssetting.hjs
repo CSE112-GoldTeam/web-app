@@ -79,52 +79,9 @@
                             </div>
                           </div>
                         </div>
-                        <div class="form-group">
-                          <label>Admin Email </label>
-                          <input type="email" id="email" name="email" class="form-control input-lg" value="{{email}}">
-                        </div>
                         <button   type="submit" class="custom-center btn custom-button">Save</button>
                       </form>
 
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class ="col-md-8 col-md-offset-2">
-                  <div>
-                      <h3>Admin Password</h3>
-                      <hr>
-                    <div class="panel-body">
-
-                      <form class="form" action="" method="post">
-                         <div class="row">
-                          <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                              <label>Old Password </label>
-                              <input type="password" name="oldPassword" id="oldPassword" class="form-control input-lg" value="{{oldPassword}}" placeholder="Password">
-                            </div>
-                          </div>
-                         </div>
-                         <div class="row">
-                          <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                              <label>New Password </label>
-                              <input type="password" id="newPassword" name="newPassword" class="form-control input-lg" value="{{newPassword}}" placeholder="New Password">
-                            </div>
-                          </div>
-                         </div>
-                         <div class="row">
-                          <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                              <label>Confirm Password </label>
-                              <input type="password" id="confirmPassword" name="confirmPassword" class="form-control input-lg" value="{{confirmPassword}}" placeholder="Confirm Password">
-                            </div>
-                          </div>
-                        </div>
-                          <button type="submit" class="custom-center btn custom-button">Sign in</button>
-                      </form>
                     </div>
                   </div>
                 </div>
