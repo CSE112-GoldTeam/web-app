@@ -5,7 +5,7 @@
 
 var LocalStrategy = require('passport-local').Strategy;
 var auth = require('../lib/auth');
-
+var ObjectId = require('mongodb').ObjectID;
 
 //need this since we are passing in a passport dependency in app.js line 22
 module.exports = function (passport) {
@@ -28,21 +28,24 @@ module.exports = function (passport) {
         function (req, email, password, done) {
             var db = req.db;
             var companyName = req.body.companyName;
-            var username = req.body.username;
+            var fname = req.body.fname;
+            var lname = req.body.lname;
             var phone = req.body.phone;
             // Check if any field has been left blank
-            if (companyName === '' || username === '' || email === ''
+            if (companyName === '' || fname === '' || lname === '' || email === ''
                 || phone === '' || password === '') {
                 res.render('business/register', {
                     error: 'You must fill in all fields.',
                     companyName: companyName,
                     phone: phone,
-                    username: username,
+                    fname: fname,
+                    lname: lname,
                     email: email,
                 });
             } else {
 
                 var businesses = db.get('businesses');
+                var employees = db.get('employees');
 
 
                 // find a user whose email is the same as the forms email
@@ -71,16 +74,33 @@ module.exports = function (passport) {
                             password: password,
                             companyName: companyName,
                             phone: phone,
-                            username: username,
+                            fname: fname,
+                            lname: lname,
                             logo: '',
                             walkins: false
-                        }, function (err, user) {
+                        }, function (err, result) {
                             if (err) {
                                 throw err;
                             }
 
-                            return done(null, user);
-
+                            var businessID = result._id.toString();
+                            
+                            employees.insert({
+                                business: ObjectId(businessID),
+                                password: result.password,
+                                phone: result.phone,
+                                fname: result.fname,
+                                lname: result.lname,
+                                email: result.email,
+                                smsNotify: true,
+                                emailNotify: true,
+                                admin: true
+                            },function(err, user){
+                                if (err) {
+                                    throw err;
+                                }
+                                return done(null, user);
+                            });
                         });
                     }
                 });
@@ -136,19 +156,17 @@ module.exports = function (passport) {
         },
         function (req, email, password, done) { // callback with email and password from our form
 
+      
             auth.validateLogin(req.db, email, password, function (user) {
                 if (!user) {
-                    done(null, false);
-                } else {
-                    if(user.employee === null){
-                        done(null, user.business);
+                    return done(null, false, req.flash("login", "Invalid Email/Password Combo"));
+                } 
+                else {
+                    return done(null,user);
                     }
-                    else{
-                        done(null,user.employee);
-                    }
-                }
-            });
+            });     
         }
     ));
-};
+    
 
+};

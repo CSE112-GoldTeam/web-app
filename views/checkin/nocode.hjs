@@ -61,21 +61,21 @@
             <h3 class="form-signin-heading">Please enter the following information:</h3>
             <form class="form-horizontal" action="nocode" method="post">
                 <div class="form-group">
-                    <label class="col-md-2 control-label inputFirst">First Name</label>
-                    <div class="col-md-10">
-                        <input type="firstName" id="inputFirst" name="inputFirst" value="{{ inputFirst }}" class="form-control" required autofocus>
+                    <label class="col-md-4 control-label inputFirst">First Name</label>
+                    <div class="col-md-8">
+                        <input type="firstName" id="inputFirst" name="inputFirst" value="{{ inputFirst }}" class="form-control form-width-custom" required autofocus>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label inputLast">Last Name</label>
-                    <div class="col-md-10">
-                        <input type="lastName" id="inputLast" name="inputLast" value="{{ inputLast }}" class="form-control" required autofocus>
+                    <label class="col-md-4 control-label inputLast">Last Name</label>
+                    <div class="col-md-8">
+                        <input type="lastName" id="inputLast" name="inputLast" value="{{ inputLast }}" class="form-control form-width-custom" required autofocus>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label inputDOB">Date of Birth</label>
-                    <div class="col-md-10">
-                        <input type="birthDate" id="inputDOB" name="inputDOB" value="{{ inputDOB }}" class="form-control" placeholder='MM/DD/YY' required autofocus>
+                    <label class="col-md-4 control-label inputDOB">Date of Birth</label>
+                    <div class="col-md-8">
+                        <input type="birthDate" id="inputDOB" name="inputDOB" value="{{ inputDOB }}" class="form-control form-width-custom" placeholder='MM/DD/YY' required autofocus>
                     </div>
                 </div>
                <button class="btn btn-lg btn-block custom-button custom-center" type="submit">Next</button>

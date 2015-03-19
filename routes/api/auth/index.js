@@ -35,33 +35,30 @@ function decodeAuthString(authString) {
  * @apiGroup Authentication
  * @apiPermission Admin
  *
- * @apiHeader {String} api_token The api token
+ * @apiHeader {String} api_token returned from api/auth
+
  * @apiHeaderExample {json} Header-Example:
  *     {
- *       "Authentication": "Token WW9sbzp5b2xv"
+ *       "Authentication": "Token 550286024ae861626c9235f4"
  *     }
  *
- * @apiExample Example usage:
- * curl -i http://localhost/api/authTest -H "Authorization: Token WW9sbzp5b2xv"
+* @apiExample Example usage:
+curl -X POST -i http://localhost:3000/api/authTest \
+-H "Authorization: Token 550286024ae861626c9235f4"
  *
- * @apiSuccessExample Request (example):
+ * @apiSuccessExample Success-Response (example):
  * HTTP/1.1 200 OK
  *
- * @apiError NoAccessRight Only authenticated Admins can access the data.
- * @apiError ApptNotFound  The <code>id</code> of the User was not found.
- *
- * @apiErrorExample Response (example):
+ * @apiErrorExample Error-Response (example):
  *     HTTP/1.1 401 Not Authenticated
- *     {
- *       "error": "NoAccessRight"
- *     }
  */
 router.post('/api/authTest', function (req, res) {
     auth.isValidToken(req.db, req.headers.authorization, function (result) {
         if (!result) {
             res.send(401);
         } else {
-            res.send(200);
+
+            res.json(200,result);
         }
     });
 });
@@ -70,31 +67,26 @@ router.post('/api/authTest', function (req, res) {
  * @api {post} /auth/ Get Authenticated
  * @apiName postAuth
  * @apiGroup Authentication
- * @apiPermission Admin
  *
- * @apiHeader {String} Authentication The api token
- * @apiHeaderExample Header-Example:
- *     {
- *       "Authentication": "Token WW9sbzp5b2xv"
- *     }
+ * @apiHeader {String} Authentication The api_token created from a base64 encoded
+ string with email appended to password semicolon. ex. "email:password"
+ *
+ * @apiParam {String} name Name of the employee to be authenticated
  *
  * @apiExample Example usage:
- * curl -i http://localhost/api/authTest -H "Authorization: Token WW9sbzp5b2xv"
- *
- * @apiSuccessExample {json} Response (example):
+ curl -X POST -i http://localhost:3000/api/auth \
+ -H "Authorization: Basic bm9ydGh3b29kLmRlbnRhbEBnbWFpbC5jb206cGFzc3dvcmQ=" \
+ -H "Content-Type: application/json" \
+ -d '{"name":"Frodo"}'
+
+ * @apiSuccessExample {json} Success-Response (example):
  * HTTP/1.1 200 OK
  *     {
  *       "api_token": "WW9sbzp5b2xv"
  *     }
  *
- * @apiError NoAccessRight Only authenticated Admins can access the data.
- * @apiError ApptNotFound  The <code>id</code> of the User was not found.
- *
- * @apiErrorExample Response (example):
+ * @apiErrorExample Error-Response (example):
  *     HTTP/1.1 401 Not Authenticated
- *     {
- *       "error": "NoAccessRight"
- *     }
  */
 router.post('/api/auth', function (req, res, next) {
     if (!req.headers.authorization) {
@@ -115,21 +107,25 @@ router.post('/api/auth', function (req, res, next) {
         if (result) {
             var name = req.body.name;
             // Checks if name field is blank
-            if (name === '') {
+            if (name === '' || !name) {
                 return res.send(400, 'Name field required');
+            }
+            if (!result.business) {
+                return res.send(404, 'Business not found. Name or password maybe wrong.');
             }
 
             var mobileTokens = req.db.get('mobileTokens');
+
             mobileTokens.insert({
-                business: result._id,
+                business: result.business,
                 name: name
-            }, function (err, result) {
+            }, function (err, results) {
                 if (err) {
                     return next(err);
                 }
 
                 res.json(200, {
-                    api_token: result._id
+                    api_token: results._id
                 });
             });
         } else {

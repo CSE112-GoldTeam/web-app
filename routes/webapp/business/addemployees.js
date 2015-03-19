@@ -2,17 +2,19 @@ var crypto = require('crypto');
 var baby = require('babyparse');
 var async = require('async');
 var sendgrid  = require('sendgrid')('robobetty', 'NoKcE0FGE4bd');
+var ObjectId = require('mongodb').ObjectID;
 
 exports.get = function(req,res){
 	    var database =  req.db;
         var employeeDB = database.get('employees');
         var employee;
         var notemployee;
-        
+        var businessID = req.user[0].business.toString();
+  
 
         async.parallel({
             employee: function(cb){
-                employeeDB.find({registrationToken: {$exists: false}},function (err,results){
+                employeeDB.find({registrationToken: {$exists: false}, business: ObjectId(businessID), admin: false},function (err,results){
 
                     if (err) { return next(err);  }
                     if(!results) { return next(new Error('Error finding employee'));}
@@ -23,7 +25,7 @@ exports.get = function(req,res){
                 });
             },
             nonemployee: function(cb){
-                employeeDB.find({registrationToken: {$exists: true}}, function (err,results){
+                employeeDB.find({registrationToken: {$exists: true}, business: ObjectId(businessID), admin: false}, function (err,results){
 
 
                     if (err) { return next(err); }
@@ -51,6 +53,8 @@ exports.post = function(req,res){
        var rows = parsed.data;
        var database =  req.db;
        var employeeDB = database.get('employees');
+       var businessID = req.user[0].business;
+
 
         for(var i = 0; i < rows.length; i++){
            var username = rows[i][0];
@@ -60,10 +64,12 @@ exports.post = function(req,res){
 					 var lname = nameArr[1];
             var token = randomToken();
             employeeDB.insert({
+                business: ObjectId(businessID),
                 fname: fname,
-								lname: lname,
+				lname: lname,
                 email: email,
                 registrationToken : token,
+                admin: false
             });
 
 

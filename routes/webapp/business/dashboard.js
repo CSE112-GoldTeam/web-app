@@ -2,10 +2,12 @@ var auth = require('../../../lib/auth');
 
 exports.get = function (req, res) {
 
-	var employeeId = req.user.Employee[0]._id;
-	var employeename = req.user.Employee[0].fname;
+	var employeeId = req.user[0]._id;
+	var employeename = req.user[0].fname;
 
     res.render('business/dashboard', {title: 'Express',
 		eid: employeeId,
-		employeeName: employeename});
+		employeeName: employeename,
+		message: req.flash("permission"),
+	});
 };
