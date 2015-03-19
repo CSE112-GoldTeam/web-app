@@ -13,8 +13,7 @@ exports.get = function (req,res) {
         phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
         res.render('business/businesssetting', {
             companyName: dbBusiness.companyName,
-            phone: phone,
-           // email: dbBusiness.email,
+            phone: phone
         });
     });
 };
@@ -26,7 +25,6 @@ exports.post = function (req, res) {
     var bid = req.user[0].business;
 
     var companyName = req.body.companyName;
-    //var email = req.body.email;
     var phone = req.body.phone;
     var oldPassword = req.body.oldPassword;
     var newPassword = req.body.newPassword;
@@ -48,7 +46,6 @@ exports.post = function (req, res) {
                 res.render('business/businesssetting', {
                     error: 'You must fill in all fields.',
                     companyName: dbBusiness.companyName,
-                    //email: dbBusiness.email,
                     phone: phone
                 });
             }
@@ -62,7 +59,6 @@ exports.post = function (req, res) {
                         //writes in database
                         $set :{
                             companyName: companyName,
-                           // email: email,
                             phone: phone
                         }
                     });
@@ -70,7 +66,6 @@ exports.post = function (req, res) {
                     phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
                     res.render('business/businesssetting', {
                         companyName: companyName,
-                       // email: email,
                         phone: phone,
                         edited: 'change successfully done.'
                     });
@@ -81,7 +76,6 @@ exports.post = function (req, res) {
                     phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
                     res.render('business/businesssetting', {
                         companyName: dbBusiness.companyName,
-                       // email: dbBusiness.email,
                         phone: phone,
                         error: 'phone number should be in 1 xxx-xxx-xxxx format'
                     });
@@ -105,7 +99,6 @@ exports.post = function (req, res) {
                     phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
                     res.render('business/businesssetting', {
                         companyName: dbBusiness.companyName,
-                       // email: dbBusiness.email,
                         phone: phone,
                         edited: 'password successfully changed.'
                     });
@@ -116,7 +109,6 @@ exports.post = function (req, res) {
                     phone = phone.slice(0, 3) + '-' + phone.slice(3, 6) + '-' + phone.slice(6);
                     res.render('business/businesssetting', {
                         companyName: dbBusiness.companyName,
-                        //email: dbBusiness.email,
                         phone: phone,
                         error: 'password does not match'
                     });
@@ -129,7 +121,6 @@ exports.post = function (req, res) {
             res.render('business/businesssetting', {
                 error: 'You must fill in all fields.',
                 companyName: dbBusiness.companyName,
-               // email: dbBusiness.email,
                 phone: phone
             });
 
