@@ -33,13 +33,13 @@
         <div class="row" id="first-section">
             <div id="intro" class="col-xs-7">
                 <h1 class="heading bold text-center">The old rules of waiting are over.</h3>
-                <p class="text-center info-text"> Let us help you revolutionize your customer waiting experience.</p>
+                <p class="text-center info-text"> Let us help you revolutionize your patient waiting experience with effortless check-in, form management, arrival notification, and appointment integration for your office.</p>
                 <form class="form-group" action="" method="post">
                     <div class="col-xs-9">
                         <input type="company" class="small form-control" id="companyName" name="companyName" value="{{companyName}}" method="post" placeholder="Step 1: Enter company name">
                     </div>
                     <div class="col-xs-1 text-small">
-                        <button type="submit" class="btn custom-button">Submit</button>
+                        <button type="submit" class="btn custom-button">Sign Up</button>
                     </div>
                 </form>
             </div>
@@ -88,12 +88,13 @@
     <footer class="footer navbar-bottom">
         <div class="container">
             <ul class="list-inline footer-links text-center">
-                <li><a href="">About Us</a></li>
+                <!--<li><a href="">About Us</a></li>
                 <li><a href="">Store</a></li>
                 <li><a href="">Jobs</a></li>
                 <li><a href="">Privacy</a></li>
                 <li><a href="">Terms</a></li>
-                <li><a href="">Support</a></li>
+                <li><a href="">Support</a></li>-->
+                <li class = "footer-copyright">Copyright &#169; Gold Team-CSE 112, Winter 2015. All Rights Reserved.</li>
             </ul>
         </div>
     </footer>

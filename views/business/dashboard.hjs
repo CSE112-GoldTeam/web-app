@@ -19,23 +19,23 @@
   <!--Holds the main tabs for the business-->
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">
-          <div id="company-logo">iReceptionist</div>
+      <a class="navbar-brand" href="#" onclick='location.reload(true); return false;'>
+          <img id = "company-logo" src="images/logo.png">
       </a>
     </div>
     <div class="navbar-padding-right">
       <ul class="nav navbar-nav navbar-right navbar-padding">
           <li class="active">
-              <a href="#">Dashboard</a>
+            <a href="/dashboard">Dashboard</a>
           </li>
           <li>
-              <a href="#">Employees</a>
+            <a href="/addemployees">Employees</a>
           </li>
           <li>
-              <a href="#">Settings</a>
+            <a href="/customizetheme">Settings</a>
           </li>
           <li>
-              <a href="#">Company Name</a>
+            <a href="/companySettings">Company Name</a>
           </li>
       </ul>
     </div>
@@ -46,7 +46,9 @@
 
 <div class="container"style=" box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 15px -4px rgba(31, 73, 125, 0.8);;">
 
-
+{{#message}}
+   <div class="alert alert-danger">{{message}}</div>
+{{/message}}
 
   <h1><strong><div>Hi, {{employeeName}} {{employeeID}}</div></strong></h1>
 
@@ -92,12 +94,12 @@
         <div class="container">
             <ul class="list-inline footer-links text-center">
 
-                <li><a href="#">Privacy</a></li>
+                <!--<li><a href="#">Privacy</a></li>
                 <li><a href="#">Terms</a></li>
-                <li><a href="#">Support</a></li>
+                <li><a href="#">Support</a></li>-->
+                <li class = "footer-copyright">Copyright &#169; Gold Team-CSE 112, Winter 2015. All Rights Reserved.</li>
             </ul>
         </div>
     </footer>
 </body>
 </html>
-
