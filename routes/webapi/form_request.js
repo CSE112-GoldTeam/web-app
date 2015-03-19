@@ -1,3 +1,5 @@
+var ObjectID = require('mongodb').ObjectID;
+
 /**
  * Create a form.
  * PUT /api/m/form/
@@ -28,11 +30,8 @@ exports.updateForm = function (req, res, next) {
     var db = req.db;
     var forms = db.get('forms');
 
-    // acquire the token for the appropriate business
-    var business = forms.id(req.body.business);
-
     // query the database for the correct forms
-    forms.update({'business': business.toString()}, {$set: {'fields': req.body.fields}}, function (err, doc) {
+    forms.update({business: ObjectID(req.body.business)}, {$set: {'fields': req.body.fields}}, function (err, doc) {
         if (err) {
             return next(err);
         }
