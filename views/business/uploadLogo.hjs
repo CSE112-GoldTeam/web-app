@@ -58,12 +58,16 @@
                 <p style="color:grey">Upload your own logo to match your office.</p>
                 <br>
             </div>
+        </div>
 
-            <div class="col-sm-6">
+        <div class="row">
+             <div class="col-md-4 col-md-offset-4 ">
 
                 {{#logo}}
-                    <h2>Current Logo</h2>
-                    <img src={{logo}} width="200" height="200"/>
+                    <h2 class="">Current Logo</h2>
+                    <div class="">
+                        <img class="logoImage text-center logoRow" src={{logo}} width="300" height="250"/>
+                    </div>
                 {{/logo}}
 
                 {{^logo}}
@@ -72,7 +76,6 @@
 
             </div>
         </div>
-
 
         <br><br>
         <h2 class = "text-center">Click the upload button to browse for a picture</h2>
@@ -96,12 +99,12 @@
              enctype   =  "multipart/form-data"
              action    =  "/uploadlogo"
              method    =  "post"
-             class="uploadFormCenterHack"
+             class="uploadFormCenterHack bottomOfPage"
         >
             <input type="file" name="userLogo" class="text-center" />
             <br><br>
             <input type="hidden" value="54eca979f2a2d47937757617" name="business" class="text-center"/>
-            <input class ="btn custom-button" style = "width:120px" type="submit" value="Upload Image" name="Upload Button"/>
+            <input class ="btn custom-button " style = "width:120px" type="submit" value="Upload Image" name="Upload Button"/>
         </form>
 
     </div>
