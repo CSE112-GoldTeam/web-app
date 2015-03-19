@@ -64,9 +64,9 @@ module.exports = function (passport) {
     router.get('/addemployees',isLoggedInBusiness, addEmployees.get);
     router.post('/addemployees',isLoggedInBusiness, addEmployees.post);
 
-    router.get('/customizetheme', customizeTheme.get);
+    router.get('/customizetheme', isLoggedIn, customizeTheme.get);
 
-    router.get('/manageforms', manageForms.get);
+    router.get('/manageforms', isLoggedInBusiness, manageForms.get);
 
     router.get('/employeeregister', employeeRegister.get);
     router.post('/employeeregister', passport.authenticate('local-signup-employee',{

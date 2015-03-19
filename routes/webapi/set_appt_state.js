@@ -1,3 +1,7 @@
+/**
+ * Finds user's appointment in database and updates state accordingly:
+ * if checked in, state is set to roomed; if roomed, state is set to done.
+ */
 exports.put = function (req, res, next) {
 
     // grab our db object from the request
