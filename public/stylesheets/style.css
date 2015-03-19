@@ -340,6 +340,10 @@ a:hover {
   color: #ffffff;
 }
 
+.footer-copyright{
+  color:#999999;
+}
+
 /***********************************************/
 
 /********************* Registration Page **************************/
@@ -530,6 +534,20 @@ a:hover {
   margin-left: 500px;
 }
 
+.logoRow {
+  border: 2px solid black;
+}
+
+.logoImage {
+  width: auto;
+  margin-left: auto;
+  margin-right: auto; 
+  padding: 20px 20px 20px 20px;
+}
+
+.bottomOfPage {
+  padding-bottom: 60px;
+}
 /**********************************************/
 
 /**** Styling for viewform page ***/
@@ -633,9 +651,18 @@ a:hover {
   z-index: 1;
 }
 
+.editNotify {
+  text-decoration: underline;
+  font-size: 18px;
+}
+
+.formSection {
+  margin-bottom: 60px;
+}
 
 /******************************************/
 
 .form-width-custom {
   width: 420px;
 }
+
