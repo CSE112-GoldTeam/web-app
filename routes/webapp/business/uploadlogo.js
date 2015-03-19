@@ -2,18 +2,11 @@ var fs = require('fs');
 var auth = require('../../../lib/auth');
 
 exports.get = function(req, res, next){
-    
+
     var db = req.db;
     var businesses = db.get('businesses');
-    var businessID;
+    var businessID = req.user[0].business;
 
-    if(req.user.Business.length!=0){
-        businessID = req.user[0].business;
-    }
-    else{
-        businessID = req.user[0].business;
-    }
-    
     businesses.findById(businessID,
         function (err, results){
             if(err){
@@ -29,7 +22,7 @@ exports.get = function(req, res, next){
                 res.render('business/uploadLogo',
                     {title:'Upload Logo'});
             }
-        }    
+        }
     );
 
 };
@@ -38,8 +31,8 @@ exports.post = function(req, res, next){
 
     var db = req.db;
     var businesses = db.get('businesses');
-   
-    
+
+
     if(req.user.Business.length!=0){
         businessID = req.user[0].business;
     }
@@ -57,7 +50,7 @@ exports.post = function(req, res, next){
                 }
 
                 fs.unlink('public/'+results.logo);
-            }    
+            }
         );
 
         businesses.updateById(businessID, {
@@ -102,7 +95,7 @@ exports.post = function(req, res, next){
                         error:'Please select a valid image(png,jpg) file to upload.'
                     });
                 }
-            }    
+            }
         );
     }
 
