@@ -34,7 +34,7 @@
 
 
 <div class="container container-margin">
-    <img class="custom-center" src="http://placehold.it/350x250"/>
+    <img class="custom-center" id="login-image" src="images/ipad.png"/>
     <br><br>
     <form class="form-horizontal" action="login" method="post">
         <div class="form-group">
