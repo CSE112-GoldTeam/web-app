@@ -3,7 +3,6 @@
 var dropOptions = [];
 var dropCounter = 0;
 var flag = false;
-var dropped = 0;
 
 // Insert options into appropriate dropdown field
 function insertOption(dropcounter) {
@@ -30,7 +29,20 @@ function insertOption(dropcounter) {
 // Remove option from appropriate dropdown field
 function removeOption(dropcounter) {
     var x = document.getElementById('drop' + dropcounter);
-    x.remove(x.selectedIndex);
+    var deleted = x.options[x.selectedIndex].text;
+
+    var confirmRemove = confirm("Are you sure?");
+
+    if (confirmRemove)
+    {
+        x.remove(x.selectedIndex);
+
+        for (i = 0; i < dropOptions[dropcounter].length; i++) {
+            if(dropOptions[dropcounter][i].text === deleted) {
+                dropOptions[dropcounter].splice(i, 1);
+            }
+        }
+    }
 }
 
 $(document).ready(function () {
@@ -55,6 +67,8 @@ $(document).ready(function () {
         var fieldWrapper = $('<div class=\"fieldwrapper\" id=\"' + intId + '\"/>');
         var fName;
         var fType;
+        var temp;
+        var flag = false;
 
         if(label) {
             fName = $('<input type=\"text\" class=\"fieldname form-control col-xs-4\" value=\"' + label + '\" class=\"fieldname\" />');
@@ -65,7 +79,7 @@ $(document).ready(function () {
 
         // Display appropriate ordering depending on type
         if(type === 'dropdown') {
-            fType = $('<select class=\"fieldtype form-control cols-xs-3\"> <option selected=\"selected\" value=\"dropdown\">Drop</option> <option value=\"textbox\">Text</option></select>');
+            fType = $('<select class=\"fieldtype form-control col-xs-3\"> <option selected=\"selected\" value=\"dropdown\">Drop</option> <option value=\"textbox\">Text</option></select>');
         }
         else {
             fType = $('<select class=\"fieldtype form-control col-xs-3\"><option selected=\"dropdown\" value=\"textbox\">Text</option><option value=\"dropdown\">Drop</option> </select>');
@@ -94,14 +108,40 @@ $(document).ready(function () {
         $('#buildyourform').append(fieldWrapper);
 
         fType.change(function() {
+            typeChange($(this).parent().attr('id'));
             preview();
         });
+
 
         fName.on('input', function() {
             preview();
         });
 
         preview();
+    }
+
+    function typeChange(id) {
+        var fieldcount = 0;
+        var dropcounter = 0;
+
+        $('#buildyourform div').each(function () {
+
+            switch ($(this).find('select.fieldtype').first().val()) {
+                case 'textbox':
+                    fieldcount++;
+
+                    if(fieldcount.toString() === id) {
+                        dropcounter++;
+                        dropOptions.splice(dropcounter, 1);
+                    }
+
+                    break;
+                case 'dropdown':
+                    fieldcount++;
+                    dropcounter++;
+                    break;
+            }
+        });
     }
 
     // Display elements in preview field

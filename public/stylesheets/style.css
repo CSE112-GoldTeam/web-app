@@ -68,6 +68,19 @@ body {
 
 }
 
+.btn-success {
+  background-color: #21ca6b;
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  border-radius: 4px; /* Overrides bootstrap rounded corners*/
+  border-color: #21ca6b;
+}
+
+.btn-success:hover {
+  background-color: #1eb962;
+  color: #ffffff;
+}
+
 .container-checkin {
   margin-top: 100px;
   border-radius: 4px;
@@ -243,15 +256,13 @@ body {
 #intro {
   width: 40%;
   margin-left: 130px;
-  margin-top:10%;
+  margin-top: 40px;
   background: rgba(256,256,256,0.8);
   padding-bottom:20px;
-  padding-top:20px;
 }
 
 #intro-image {
     margin-left: 100px;
-    margin-top: 10%;
     width:500px;
 }
 .landing-pic {
@@ -340,6 +351,10 @@ a:hover {
   color: #ffffff;
 }
 
+.footer-copyright{
+  color:#999999;
+}
+
 /***********************************************/
 
 /********************* Registration Page **************************/
@@ -366,6 +381,12 @@ a:hover {
 #form-separator {
   border-right: 2px solid;
   border-color: #999999;
+}
+
+#register-image {
+    margin-left: 100px;
+    margin-top: -10px;
+    width:500px;
 }
 /***********************************************/
 
@@ -530,6 +551,20 @@ a:hover {
   margin-left: 500px;
 }
 
+.logoRow {
+  border: 2px solid black;
+}
+
+.logoImage {
+  width: inherit;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 20px 20px 20px;
+}
+
+.bottomOfPage {
+  padding-bottom: 60px;
+}
 /**********************************************/
 
 /**** Styling for viewform page ***/
@@ -619,7 +654,21 @@ a:hover {
   width: auto;
 }
 
+.bgImage {
+  width: inherit;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid black;
+}
 
+.paddingTopButton {
+  margin-top: 30px;
+}
+
+.finishButton {
+  margin-top: 30px;
+  margin-left: 10px;
+}
 /***********Account Settings*****************/
 
 .container-margin-accountSettings {
@@ -633,9 +682,43 @@ a:hover {
   z-index: 1;
 }
 
+.editNotify {
+  text-decoration: underline;
+  font-size: 18px;
+}
+
+.formSection {
+  margin-bottom: 60px;
+}
 
 /******************************************/
 
 .form-width-custom {
   width: 420px;
+}
+
+.business-setting-margin {
+  margin-top: 100px;
+}
+
+/*************** Login Page **************/
+
+#login-image {
+    width:400px;
+}
+
+
+.disclosure {
+  margin-left:35%;
+  margin-top:20px;
+}
+
+.setdisclosurebutton{
+  margin-top:2%;
+  margin-left:45%;
+  margin-bottom: 10px;
+}
+
+.setdisclosureheading{
+  margin-left:35%;
 }

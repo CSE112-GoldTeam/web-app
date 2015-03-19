@@ -4,8 +4,8 @@ exports.get = function (req, res, next) {
     var db = req.db;
     var formResponses = db.get('formResponses');
     var appointments = db.get('appointments');
-    
-    formResponses.findOne({ appointment: ObjectID(req.params.id) }, function(err, formResponse) {
+
+    formResponses.findOne({ appointment: req.params.id }, function(err, formResponse) {
         if (err) {
             return next(err);
         }

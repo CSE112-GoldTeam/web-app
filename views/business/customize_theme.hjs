@@ -26,7 +26,7 @@
             <li class="active">
                 <a href="/customizetheme">Settings</a>
             </li>
-            <li><a href="#">Company Name</a></li>
+            <li><a href="/businesssetting">Company Name</a></li>
         </ul>
     </div>
     <!--Secondary navbar for the Settings tab-->
@@ -34,6 +34,8 @@
         <ul>
             <li><a href="/registerDevice">Configurations</a></li>
             <li><a href="/manageforms">Manage Forms</a></li>
+            <li><a href="/setdisclosure">Add Disclosure Agreement</a></li>
+            <li><a href="/uploadlogo">Upload Logo</a></li>
             <li class="active">
                 <a href="/customizetheme">Customize Theme</a>
             </li>
@@ -41,6 +43,9 @@
         </ul>
     </div>
 </nav>
+    {{#message}}
+   <div class="alert alert-danger">{{message}}</div>
+    {{/message}}
 
 <div class="container">
 
@@ -50,18 +55,18 @@
     <div class="row text-center">
         <div class="col-md-6">
             <h3>Current Logo</h3>
-            <img src="" alt="Company's Logo"/>
+            <img class="logoImage logoRow" src="{{logo}}" style="width:inherit" alt="Company's Logo"/>
         </div>
         <div class="col-md-6">
             <h3>Current Background Image</h3>
-            <img src="" alt="Company's Custom Background Image"/>
+            <img class="bgImage" src="{{bg}}" alt="Company's Custom Background Image"/>
         </div>
     </div>
 
     <br/>
 
     <div class="text-center">
-        <a type="button" class="btn custom-button-wide" href="/theme">
+        <a type="button" class="btn custom-button-wide" href="/theming">
             Customize My Theme
         </a>
     </div>
@@ -73,12 +78,13 @@
 <footer class="footer navbar-fixed-bottom">
     <div class="container">
         <ul class="list-inline footer-links text-center">
-            <li><a href="#">About Us</a></li>
+            <!--<li><a href="#">About Us</a></li>
             <li><a href="#">Store</a></li>
             <li><a href="#">Jobs</a></li>
             <li><a href="#">Privacy</a></li>
             <li><a href="#">Terms</a></li>
-            <li><a href="#">Support</a></li>
+            <li><a href="#">Support</a></li>-->
+            <li class = "footer-copyright">Copyright &#169; Gold Team-CSE 112, Winter 2015. All Rights Reserved.</li>
         </ul>
     </div>
 </footer>

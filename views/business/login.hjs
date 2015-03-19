@@ -34,7 +34,7 @@
 
 
 <div class="container container-margin">
-    <img class="custom-center" src="http://placehold.it/350x250"/>
+    <img class="custom-center" id="login-image" src="images/ipad.png"/>
     <br><br>
     <form class="form-horizontal" action="login" method="post">
         <div class="form-group">
@@ -64,12 +64,14 @@
 <footer class="footer navbar-fixed-bottom">
     <div class="container">
         <ul class="list-inline footer-links text-center">
-            <li><a href="">About Us</a></li>
+            
+            <!--<li><a href="">About Us</a></li>
             <li><a href="">Store</a></li>
             <li><a href="">Jobs</a></li>
             <li><a href="">Privacy</a></li>
             <li><a href="">Terms</a></li>
-            <li><a href="">Support</a></li>
+            <li><a href="">Support</a></li>-->
+            <li class = "footer-copyright">Copyright &#169; Gold Team-CSE 112, Winter 2015. All Rights Reserved.</li>
         </ul>
     </div>
 </footer>

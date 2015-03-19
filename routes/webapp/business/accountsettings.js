@@ -1,5 +1,11 @@
 var auth = require('../../../lib/auth');
 
+/**
+ * Takes an req parameter and res parameter and returns the details of a particular employee.
+ *
+ * @param req The req parameter used to access the database,
+ * @returns title, fname, lname, password, phone, email, smsNotify, emailNotify
+ */
 exports.get = function (req,res) {
 		var eid = req.user[0]._id;
     var db = req.db;
@@ -11,6 +17,7 @@ exports.get = function (req,res) {
     var sms;
     var email;
 
+    //calls find method to find the correct employee to pull results
     employees.find({_id: eid}, function (err, result) {
         var emp = result[0];
         var phone = emp.phone;
@@ -24,11 +31,19 @@ exports.get = function (req,res) {
             phone: phone,
             email: emp.email,
             smsNotify: emp.smsNotify,
-            emailNotify: emp.emailNotify
+            emailNotify: emp.emailNotify,
+            message: req.flash("permission")
         });
     });
 };
 
+/**
+ * Takes an req parameter and res parameter and returns the details of a particular employee. The user
+ * is then prompted to change any of the information presented.
+ *
+ * @param req The req parameter used to access the database,
+ * @returns title, fname, lname, password, phone, email, smsNotify, emailNotify
+ */
 exports.post = function (req, res) {
     var db = req.db;
     var employees = db.get('employees');
@@ -44,6 +59,7 @@ exports.post = function (req, res) {
     {
         if(inputPass === req.user.Employee[0].password)
 				{
+                    //find employees based on id
 					employees.find({_id: eid}, function (err, result) {
 						var emp = result[0];
 						var phone = emp.phone;
@@ -67,7 +83,7 @@ exports.post = function (req, res) {
 					inputPass = auth.hashPassword(inputPass);
 					employees.findAndModify({_id: eid}, { $set: {password: inputPass}}, function(err, data) {
            	if (err) { return handleError(res, err);}
-
+		   //find employees based on id
            	employees.find({_id: eid}, function (err, result) {
              	var emp = result[0];
              	var phone = emp.phone;
@@ -82,7 +98,7 @@ exports.post = function (req, res) {
                  	email: emp.email,
                  	smsNotify: emp.smsNotify,
                  	emailNotify: emp.emailNotify,
-                 	edited: 'Password successfully changed!'
+                 	edited: 'Password successfully changed!',
              	});
            	});
         	});
@@ -94,7 +110,7 @@ exports.post = function (req, res) {
         employees.findAndModify({_id: eid}, { $set: {email: inputEmail}}, function(err, data)
         {
             if (err) { return handleError(res, err);}
-
+		    //find employees based on id
             employees.find({_id: eid}, function (err, result) {
                 var emp = result[0];
                 var phone = emp.phone;
@@ -125,7 +141,7 @@ exports.post = function (req, res) {
 						employees.findAndModify({_id: eid}, { $set: {phone: inputPhone}}, function(err, data)
             {
                 if (err) { return handleError(res, err);}
-
+		        //find employees based on id
                 employees.find({_id: eid}, function (err, result) {
                     var emp = result[0];
                     var phone = emp.phone;
@@ -147,6 +163,7 @@ exports.post = function (req, res) {
         }
         else
         {
+            //find employees based on id
             employees.find({_id: eid}, function (err, result) {
                 var emp = result[0];
                 var phone = emp.phone;
@@ -181,7 +198,7 @@ exports.post = function (req, res) {
         employees.findAndModify({_id: eid}, { $set: {smsNotify: smsSet}}, function(err, data)
         {
             if (err) { return handleError(res, err);}
-
+	        //find the employee based off ids
             employees.find({_id: eid}, function (err, result) {
                 var emp = result[0];
                 var phone = emp.phone;
@@ -212,7 +229,7 @@ exports.post = function (req, res) {
         {
             var emailSet = true;
         }
-
+	    //find the appropriate employee to set the email and notification settings
         employees.findAndModify({_id: eid}, { $set: {emailNotify: emailSet}}, function(err, data)
         {
             if (err) { return handleError(res, err);}

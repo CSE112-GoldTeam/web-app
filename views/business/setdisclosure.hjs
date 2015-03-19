@@ -13,26 +13,73 @@
 </head>
 
 <body>
-	<div class="container container-margin">
-		<div class="row">
-			{{#edited}}
-				<div class="alert alert-success" role="alert">
-					{{edited}}
-				</div>
-			{{/edited}}
-			{{#alert}}
-				<div class="alert alert-error" role="alert">
-					{{alert}}
-				</div>
-			{{/alert}}
-		</div>
-		<div class="form-inline">
-			<form  class="form-horizontal" action="" method="post">
-			<textarea rows="20" cols="50" action="setdisclosure" class="disclosure" type="text" id ="disclosure" name="disclosure" required>{{disclosure}}</textarea>
-      <button class="btn custom-button" type="submit">Save</button>
-			</form>
-		</div>
-	</div>
+   <nav class="navbar navbar-default navbar-static-top">
+      <div class="navbar-header">
+          <a class="navbar-brand" href="/">
+              <img id = "company-logo" src="images/logo.png">
+          </a>
+      </div>
+      <div class="navbar-padding-right">
+          <ul class="nav navbar-nav navbar-right navbar-padding">
+              <li><a href="/dashboard">Dashboard</a></li>
+              <li><a href="/addemployees">Employees</a></li>
+              <li class="active">
+                  <a href="/customizetheme">Settings</a>
+              </li>
+              <li><a href="/businesssetting">Company Name</a></li>
+          </ul>
+      </div>
+      <!--Secondary navbar for the Settings tab-->
+      <div class="navbar-secondary navbar-tabs">
+          <ul>
+              <li><a href="/registerDevice">Configurations</a></li>
+              <li><a href="/manageforms">Manage Forms</a></li>
+              <li class="active"><a href="/setdisclosure">Add Disclosure Agreement</a></li>
+              <li><a href="/uploadlogo">Upload Logo</a></li>
+              <li>
+                  <a href="/customizetheme">Customize Theme</a>
+              </li>
+              <li><a href="/accountSettings">More Settings</a></li>
+          </ul>
+      </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      {{#edited}}
+        <div class="alert alert-success" role="alert">
+          {{edited}}
+        </div>
+      {{/edited}}
+      {{#alert}}
+        <div class="alert alert-error" role="alert">
+          {{alert}}
+        </div>
+      {{/alert}}
+    </div>
+    <div class ="setdisclosureheading">
+      <h2> Set Disclosure Agreement </h2>
+      <h4> Customize your disclosure agreement here. </h4>
+    </div>
+    <div class="form-inline">
+      <form  class="form-horizontal" action="" method="post">
+      <textarea rows="20" cols="50" action="setdisclosure" class="disclosure" type="text" id ="disclosure" name="disclosure" required>{{disclosure}}</textarea>
+      <button class="setdisclosurebutton btn custom-button" type="submit">Save</button>
+      </form>
+    </div>
+  </div>
+   <footer class="footer navbar-bottom">
+        <div class="container">
+            <ul class="list-inline footer-links text-center">
+                <!--<li><a href="">About Us</a></li>
+                <li><a href="">Store</a></li>
+                <li><a href="">Jobs</a></li>
+                <li><a href="">Privacy</a></li>
+                <li><a href="">Terms</a></li>
+                <li><a href="">Support</a></li>-->
+                <li class = "footer-copyright">Copyright &#169; Gold Team-CSE 112, Winter 2015. All Rights Reserved.</li>
+            </ul>
+        </div>
+    </footer>
 </body>
 
 </html>

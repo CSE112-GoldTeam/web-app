@@ -14,20 +14,12 @@ exports.get = function (req, res, next) {
         }
         async.eachSeries(results, function (result, fn) {
             employees.findOne({_id: result.employee, business: currentuser}, function (err, employee) {
-                if (err) {
-                    fn(err);
-                } else {
-                    if (employee) {
-                        result.employee = employee.fname + " " + employee.lname;
-                    }
-                    fn();
-                }
-            });
-        }, function (err) {
-            if (err) {
-                return next(err);
+                result.employee = employee.fname + " " + employee.lname;
+                fn();
+            })
+        }, function () {
+            res.render('business/registerDevice', {tokensDB: results, message: req.flash("permission")});
             }
-            res.render('business/registerDevice', {tokensDB: results});
-        });
+        );
     });
 };

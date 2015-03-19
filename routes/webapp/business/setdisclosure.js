@@ -2,7 +2,7 @@ var auth = require('../../../lib/auth');
 var _ = require('underscore');
 
 exports.get = function(req, res) {
-	var bid = req.user.Business[0]._id;
+	var bid = req.user[0].business;
 	var db = req.db;
 	var business = db.get('businesses');
 	business.find({_id: bid}, function (err, result) {
@@ -18,11 +18,11 @@ exports.get = function(req, res) {
 			disclosure: _.unescape(disclosure)
 		});
 	});
-	
+
 };
 
 exports.post = function(req, res) {
-	var bid = req.user.Business[0]._id;
+	var bid = req.user[0].business;
 	var db = req.db;
 	var business = db.get('businesses');
 	var disclosure = req.body.disclosure;
@@ -42,7 +42,7 @@ exports.post = function(req, res) {
 		disclosure = '<p>' + disclosure + '</p>';
 
 		console.log(disclosure);
-		
+
 		business.findAndModify({_id: bid},{
 			$set :{
 				disclosure: disclosure
