@@ -1,5 +1,11 @@
+/**
+ * Loads ObjectID from MongoDB module, mongodb.
+ */
 var ObjectID = require('mongodb').ObjectID;
 
+/**
+ * Obtains all appointments for today for the given employee.
+ */
 exports.get = function (req, res) {
     var db = req.db;
     var appointments = db.get('appointments');
