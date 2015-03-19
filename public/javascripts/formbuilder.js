@@ -3,7 +3,6 @@
 var dropOptions = [];
 var dropCounter = 0;
 var flag = false;
-var dropped = [];
 
 // Insert options into appropriate dropdown field
 function insertOption(dropcounter) {
@@ -134,7 +133,6 @@ $(document).ready(function () {
                     if(fieldcount.toString() === id) {
                         dropcounter++;
                         dropOptions.splice(dropcounter, 1);
-                        dropped.push(dropcounter);
                     }
 
                     break;
@@ -187,10 +185,6 @@ $(document).ready(function () {
         });
 
         $('body').append(fieldSet);
-
-        for(i = 0; i < dropped.length; i++) {
-            console.log(dropped[i]);
-        }
 
         // Add options to dropdown fields
         for (i = 1; i <= dropcounter; i++) {
