@@ -47,15 +47,17 @@
   {{#message}}
    <div class="alert alert-danger">{{message}}</div>
   {{/message}}
-     
- <div style="position:absolute;top:150px;left:80px">
-   <h2 top="50px" align="left">Setting Up</h2>
-     <h4 align="left">Register all of your devices and generate activation keys</h4>
-       <div style="position:relative;top:50px;left:30px">
-         <h3 top="50px" align="left">Registered Devices</h2>
-         <h4 align="left">Lorem ipsum explanations</h4>
-         <div style="position:relative;top:50px">
-         <table border="2" style="width:70%" id="devices">
+
+  <div style="position:absolute;top:150px;left:80px">
+    <h2 top="50px" align="left">Setting Up</h2>
+      <span align="left" class="subtitle">Register all of your devices and generate activation keys</span>
+        <div style="position:relative;top:50px;left:30px">
+          <h3 top="50px" align="left">Registered Devices</h3>
+          <span align="left" class="subtitle">Devices currently set up with iReceptionist</span>
+
+
+
+         <table id="devices" class="table devices">
            <tr>
            <td>Device Name</td>
            <td>Employee</td>
@@ -70,9 +72,9 @@
              </td>
              </tr>
              {{/tokensDB}}
-           </p>
-           </div>
-       </div>
+           </table>
+        </div>
+  </div>
        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog">
            <div class="modal-content">
@@ -88,6 +90,19 @@
          </div>
        </div>
  </div>
+ <footer class="footer navbar-fixed-bottom">
+    <div class="container">
+        <ul class="list-inline footer-links text-center">
+            <!--<li><a href="#">About Us</a></li>
+            <li><a href="#">Store</a></li>
+            <li><a href="#">Jobs</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Support</a></li>-->
+            <li class = "footer-copyright">Copyright &#169; Gold Team-CSE 112, Winter 2015. All Rights Reserved.</li>
+        </ul>
+    </div>
+</footer>
  <script>
      console.log("Entered Script")
      $(".deleteBtn").click(function() {
