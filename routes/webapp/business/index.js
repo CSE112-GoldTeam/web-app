@@ -44,8 +44,8 @@ module.exports = function (passport) {
     router.get('/accountSettings', isLoggedIn, accountSettings.get);
     router.post('/accountSettings', isLoggedIn, accountSettings.post);
 
-    router.get('/businesssetting', businesssetting.get);
-    router.post('/businesssetting', businesssetting.post);
+    router.get('/businesssetting', isLoggedInBusiness, businesssetting.get);
+    router.post('/businesssetting', isLoggedInBusiness,businesssetting.post);
 
 
     router.get('/uploadlogo', isLoggedInBusiness, uploadLogo.get);

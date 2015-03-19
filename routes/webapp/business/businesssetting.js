@@ -14,7 +14,7 @@ exports.get = function (req,res) {
         res.render('business/businesssetting', {
             companyName: dbBusiness.companyName,
             phone: phone,
-            email: dbBusiness.email
+            email: dbBusiness.email,
         });
     });
 };
