@@ -48,8 +48,8 @@ module.exports = function (passport) {
     router.post('/businesssetting', businesssetting.post);
 
 
-    router.get('/uploadlogo', uploadLogo.get);
-    router.post('/uploadlogo', uploadLogo.post);
+    router.get('/uploadlogo', isLoggedInBusiness, uploadLogo.get);
+    router.post('/uploadlogo', isLoggedInBusiness, uploadLogo.post);
 
     router.get('/register', register.get);
     router.post('/register',passport.authenticate('local-signup',{

@@ -31,14 +31,7 @@ exports.post = function(req, res, next){
 
     var db = req.db;
     var businesses = db.get('businesses');
-
-
-    if(req.user.Business.length!=0){
-        businessID = req.user[0].business;
-    }
-    else{
-        businessID = req.user[0].business;
-    }
+    var businessID = req.user[0].business;
 
     if(req.files.userLogo){
 
