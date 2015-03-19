@@ -100,10 +100,10 @@
         <div id="toolbar-main" class="active-page container-margin toolbar-bgcolor">
             <fieldset id="buildyourform" class="builderForm"></fieldset>
             <input type="button" value="Add a field" class="add btn btn-default" id="add" />
-            <input type="button" value="Submit" class="add btn btn-default" id="submit" />
+            <input type="button" value="Save" class="add btn custom-button" id="submit" />
 
             <a href="/manageforms">
-                <input type="button" value="Return to forms" class="add btn btn-default" id="return" />
+                <input type="button" value="Return to Forms" class="add btn btn-default" id="return" />
             </a>
         </div>
       </div>
