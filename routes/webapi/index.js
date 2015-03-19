@@ -57,7 +57,7 @@ router.put('/style', isLoggedInBusiness, updateStyle.put);
 function isLoggedInBusiness(req, res, next) {
 
     // if user is authenticated in the session, carry on
-    if ((req.isAuthenticated()&& (req.user.Business.length === 1))) {
+    if (req.isAuthenticated()&& (req.user[0].admin === true)){
         return next();
     }
 
