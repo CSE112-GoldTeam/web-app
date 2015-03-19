@@ -56,7 +56,7 @@
         }
 
         .change-toolbar-page {
-            margin-top: 5px;
+            margin-top: 10px;
         }
 
         .container-checkin,
@@ -97,8 +97,7 @@
 
         <div id="theme-toolbar" class="col-md-2">
             <div id="toolbar-main" class="active-page">
-                <button type="button" class="btn btn-success" id="save">Save Changes</button>
-
+                
                 <h3>What would you like to change?</h3>
 
                 <div class="btn-group-vertical" role="group" aria-label="..." style="margin: 0 auto; width:155px; display: block;">
@@ -106,10 +105,16 @@
                     <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-buttons">Buttons</button>
                     <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-content-container">Content Container</button>
                 </div>
+
+                <button type="button" class="btn btn-success paddingTopButton" id="save">Save Changes</button>
+                <a href="/customizetheme">
+                    <input type="button" value="Discard Changes" class="add btn btn-default paddingTopButton finishButton" id="return" />
+                </a>
+                
             </div>
 
             <div id="toolbar-bg-img" class="hidden-page">
-                <button type="button" class="btn btn-default change-toolbar-page" data-to="toolbar-main">Main Menu</button>
+                <button type="button" class="btn btn-default change-toolbar-page paddingTopButton" data-to="toolbar-main">Main Menu</button>
 
                 <h4>Choose a BG image:</h4>
                 <img src="images/bg/thumb/bg1.jpg" data-bg="bg1.jpg" class="bg-image" />
@@ -152,6 +157,7 @@
                     <input type="text" id="content-container-font-color"/>
                 </p>
             </div>
+            
         </div>
 
     </div>
