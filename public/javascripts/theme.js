@@ -84,7 +84,10 @@ $(document).ready(function () {
             url: '/api/style',
             dataType: 'json',
             contentType: 'application/json',
-            data: JSON.stringify(style)
+            data: JSON.stringify(style),
+            complete: function () {
+                window.location.href = '/customizetheme';
+            }
         });
     });
 });
