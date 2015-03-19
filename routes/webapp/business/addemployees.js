@@ -16,22 +16,22 @@ exports.get = function(req,res){
         var employee;
         var notemployee;
         var businessID = req.user[0].business.toString();
-  
 
         async.parallel({
             employee: function(cb){
-                employeeDB.find({registrationToken: {$exists: false}, business: ObjectId(businessID), admin: false},function (err,results){
+                employeeDB.find({registrationToken: {$exists: false}, business: ObjectId(businessID)},function (err,results){
 
                     if (err) { return next(err);  }
                     if(!results) { return next(new Error('Error finding employee'));}
                      
                         employeee = results;
+                        console.log(employeee);
                        cb();
                 
                 });
             },
             nonemployee: function(cb){
-                employeeDB.find({registrationToken: {$exists: true}, business: ObjectId(businessID), admin: false}, function (err,results){
+                employeeDB.find({registrationToken: {$exists: true}, business: ObjectId(businessID)}, function (err,results){
 
 
                     if (err) { return next(err); }
