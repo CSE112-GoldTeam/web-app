@@ -4,6 +4,12 @@ var async = require('async');
 var sendgrid  = require('sendgrid')('robobetty', 'NoKcE0FGE4bd');
 var ObjectId = require('mongodb').ObjectID;
 
+ /**
+ * Takes a req and res parameters and is inputted into function to get employee, notemployee, and business data.
+ *
+ * @param req and res The two parameters passed in to get the apprporiate employee,
+ * @returns The appropriate data about the employee
+ */
 exports.get = function(req,res){
 	    var database =  req.db;
         var employeeDB = database.get('employees');
@@ -47,7 +53,12 @@ exports.get = function(req,res){
         });  
 }
 
-
+/**
+ * Takes a req and res parameters and is inputted into function to get employee, notemployee, and business data.
+ *  Allows the User to input specified data and make changes
+ * @param req and res The two parameters passed in to get the apprporiate employee,
+ * @returns The appropriate data about the employee
+ */
 exports.post = function(req,res){
 	   var parsed = baby.parse(req.body.csvEmployees);
        var rows = parsed.data;
