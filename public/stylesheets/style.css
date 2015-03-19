@@ -541,7 +541,7 @@ a:hover {
 .logoImage {
   width: auto;
   margin-left: auto;
-  margin-right: auto; 
+  margin-right: auto;
   padding: 20px 20px 20px 20px;
 }
 
@@ -666,3 +666,6 @@ a:hover {
   width: 420px;
 }
 
+.business-setting-margin {
+  margin-top: 100px;
+}
