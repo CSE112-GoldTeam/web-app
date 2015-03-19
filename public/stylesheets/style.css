@@ -243,15 +243,13 @@ body {
 #intro {
   width: 40%;
   margin-left: 130px;
-  margin-top:10%;
+  margin-top: 40px;
   background: rgba(256,256,256,0.8);
   padding-bottom:20px;
-  padding-top:20px;
 }
 
 #intro-image {
     margin-left: 100px;
-    margin-top: 10%;
     width:500px;
 }
 .landing-pic {
@@ -370,6 +368,12 @@ a:hover {
 #form-separator {
   border-right: 2px solid;
   border-color: #999999;
+}
+
+#register-image {
+    margin-left: 100px;
+    margin-top: -10px;
+    width:500px;
 }
 /***********************************************/
 
@@ -541,7 +545,7 @@ a:hover {
 .logoImage {
   width: auto;
   margin-left: auto;
-  margin-right: auto; 
+  margin-right: auto;
   padding: 20px 20px 20px 20px;
 }
 
@@ -666,3 +670,12 @@ a:hover {
   width: 420px;
 }
 
+.business-setting-margin {
+  margin-top: 100px;
+}
+
+/*************** Login Page **************/
+
+#login-image {
+    width:400px;
+}
