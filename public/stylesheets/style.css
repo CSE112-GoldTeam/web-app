@@ -534,6 +534,20 @@ a:hover {
   margin-left: 500px;
 }
 
+.logoRow {
+  border: 2px solid black;
+}
+
+.logoImage {
+  width: auto;
+  margin-left: auto;
+  margin-right: auto; 
+  padding: 20px 20px 20px 20px;
+}
+
+.bottomOfPage {
+  padding-bottom: 60px;
+}
 /**********************************************/
 
 /**** Styling for viewform page ***/
