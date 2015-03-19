@@ -8,7 +8,7 @@ exports.get = function (req, res, next) {
     forms.findOne({business: businessID}, function (err, form, findID) {
         if (err) {
             return next(err);
-        }HOT
+        }
         res.render('business/formbuilder', {
             title: 'Express',
             form: JSON.stringify(form),
