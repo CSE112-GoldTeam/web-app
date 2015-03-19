@@ -9,15 +9,35 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <div class="row">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#" onclick='location.reload(true); return false;'>
+            <img id = "company-logo" src="images/logo.png">
+        </a>
+      </div>
+      <div class="navbar-padding-right">
+        <ul class="nav navbar-nav navbar-right navbar-padding">
+            <li>
+              <a href="/dashboard">Dashboard</a>
+            </li>
+            <li>
+              <a href="/addemployees">Employees</a>
+            </li>
+            <li>
+              <a href="/customizetheme">Settings</a>
+            </li>
+            <li  class="active">
+              <a href="/businesssetting">Company Name</a>
+            </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="row business-setting-margin">
       <div class="col-md-8 col-md-offset-2">
-        <div class="panel panel-default"style=" background-color: #90EE90; background: rgba(255, 255, 255, 0.8);
-                                              box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
-                                              color: #4e5d6c;">
-
-          <div class="panel-heading" style=" background-color:#708090">
-            <h1 style="text-align:center"><font style="color:white">Account Settings</font></h1>
-            <p style="text-align:center"><font style="color:white">Configure other parts of your account</font></p>
+        <div>
+          <div>
+            <h1>Company Settings</h1>
+            <p>Configure other parts of your company account</p>
             <div class="row" style="text-align:center">
               {{#edited}}
                 <div class="alert alert-success" role="alert">
@@ -30,18 +50,16 @@
                 </div>
               {{/error}}
             </div>
+            <hr>
           </div>
-          <div class="panel-body"style=" background-color: #708090">
-              
-              
+          <div>
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                  <div class="panel panel-default">
-                    <div class="panel-heading"style=" background-color: #42444F" >
-                      <h3 class="panel-title" ><font style="color:white">Account Info</font></h3>
+                  <div>
+                      <h3>Company Info</h3>
+                      <hr>
                     </div>
                     <div class="panel-body">
-
                       <form class="form" action="" method="post">
                         <div class="row">
                           <div class="col-xs-12 col-sm-12 col-md-12">
@@ -63,7 +81,7 @@
                           <label>Admin Email </label>
                           <input type="email" id="email" name="email" class="form-control input-lg" value="{{email}}">
                         </div>
-                        <button   type="submit" class="btn btn-success btn-block">Save</button>
+                        <button   type="submit" class="custom-center btn custom-button">Save</button>
                       </form>
 
                     </div>
@@ -73,10 +91,9 @@
 
               <div class="row">
                 <div class ="col-md-8 col-md-offset-2">
-                  <div class="panel panel-default">
-                    <div class="panel-heading"style=" background-color: #42444F">
-                      <h3 class="panel-title"><font style="color:white">Admin Password</font></h3>
-                    </div>
+                  <div>
+                      <h3>Admin Password</h3>
+                      <hr>
                     <div class="panel-body">
 
                       <form class="form" action="" method="post">
@@ -104,8 +121,7 @@
                             </div>
                           </div>
                         </div>
-                        <button type="submit"  class="btn btn-success btn-block"> save</button>
-
+                          <button type="submit" class="custom-center btn custom-button">Sign in</button>
                       </form>
                     </div>
                   </div>
@@ -115,5 +131,16 @@
         </div>
       </div>
     </div>
+    <footer class="footer">
+        <div class="container">
+            <ul class="list-inline footer-links text-center">
+
+                <!--<li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Support</a></li>-->
+                <li class = "footer-copyright">Copyright &#169; Gold Team-CSE 112, Winter 2015. All Rights Reserved.</li>
+            </ul>
+        </div>
+    </footer>
   </body>
 </html>
