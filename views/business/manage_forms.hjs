@@ -63,7 +63,7 @@
 
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <img src="" alt="Company's Custom Form Preview">
+            {{{form}}}
         </div>
     </div>
 
