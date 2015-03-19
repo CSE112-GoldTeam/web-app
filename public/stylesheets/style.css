@@ -706,3 +706,19 @@ a:hover {
 #login-image {
     width:400px;
 }
+
+
+.disclosure {
+  margin-left:35%;
+  margin-top:20px;
+}
+
+.setdisclosurebutton{
+  margin-top:2%;
+  margin-left:45%;
+  margin-bottom: 10px;
+}
+
+.setdisclosureheading{
+  margin-left:35%;
+}
