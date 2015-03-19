@@ -24,26 +24,28 @@
             </a>
         </div>
         <div class="navbar-padding-right">
-            <ul class="nav navbar-nav navbar-right navbar-padding">
-                <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="#">Employees</a></li>
-                <li class="active">
-                    <a href="#">Settings</a>
-                </li>
-                <li><a href="#">Company Name</a></li>
-            </ul>
-        </div>
-        <!--Secondary navbar for the Settings tab-->
-        <div class="navbar-secondary navbar-tabs">
-            <ul>
-                <li><a href="#">Configurations</a></li>
-                <li><a href="#">Manage Forms</a></li>
-                <li class="active">
-                    <a href="/uploadLogo">Upload Logo</a>
-                </li>
-                <li><a href="#">More Settings</a></li>
-            </ul>
-        </div>
+        <ul class="nav navbar-nav navbar-right navbar-padding">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/addemployees">Employees</a></li>
+            <li class="active">
+                <a href="/customizetheme">Settings</a>
+            </li>
+            <li><a href="/businesssetting">Company Name</a></li>
+        </ul>
+    </div>
+    <!--Secondary navbar for the Settings tab-->
+    <div class="navbar-secondary navbar-tabs">
+        <ul>
+            <li><a href="/registerDevice">Configurations</a></li>
+            <li><a href="/manageforms">Manage Forms</a></li>
+            <li><a href="/setdisclosure">Add Disclosure Agreement</a></li>
+            <li class="active"><a href="/uploadlogo">Upload Logo</a></li>
+            <li>
+                <a href="/customizetheme">Customize Theme</a>
+            </li>
+            <li><a href="/accountSettings">More Settings</a></li>
+        </ul>
+    </div>
     </nav>
 
     <!-- Container to hold instructions & upload form-->

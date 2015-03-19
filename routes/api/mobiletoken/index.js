@@ -6,7 +6,7 @@ var controller = require('./mobileToken.controller');
 var router = express.Router();
 
 /**
- * @api {get} /m/mobileToken/ Get A Mobile Token
+ * @api {get} /m/mobileToken/ Get A List of Mobile Tokens
  * @apiName GetToken
  * @apiGroup MobileToken
  * @apiPermission Admin

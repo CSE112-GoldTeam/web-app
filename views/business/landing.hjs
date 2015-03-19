@@ -56,14 +56,17 @@
                         <p>With a limited budget and tight schedule, this check-in app really saved me time and cost to run the dental clinic I just opened up. Thank you, iReceptionist. You’re a life-saver.</p>
                     </blockquote>
                     <div class="arrow-down"></div>
-                    <p class="testimonial-author">Dr. Jennifer Kim, DDS | <span>San Francisco, California</span></p>
+                    <img src="images/jennifer.jpg" class="testimonial-image">
+                    <span class="testimonial-author">Dr. Jennifer Kim, DDS | <span>San Francisco, California</span></span>
                 </div>
                 <div>
                     <blockquote class="testimonial testimonial-grey">
                         <p>Wow! iReceptionist was the perfect addition to our offices! It’s elegant, fast, and our customers absolutely love it! The team’s continued support and commitment to excellence has made me a life-long customer. Definitely the GOLD standard for check-in apps!</p>
                     </blockquote>
                     <div class="arrow-down arrow-down-grey"></div>
-                    <p class="testimonial-author">Dr. Leonard McCoy, M.D. | <span>Riverside, California</span></p>
+                    <img src="images/leonard.jpg" class="testimonial-image">
+                    <span class="testimonial-author">Dr. Leonard McCoy, M.D. | <span>Riverside, California</span></span>
+                    
                 </div>
             </div>
             <div class="col-xs-6">
@@ -72,19 +75,20 @@
                         <p>iReceptionist is truly an aesthetic experience, I love how intuitive and modern the design is. Making appointments and checking in has never been easier.</p>
                     </blockquote>
                     <div class="arrow-down arrow-down-grey"></div>
-                    <p class="testimonial-author">Betty Johnson | <span>Stockholm, Sweden</span></p>
+                    <img src="images/betty.jpg" class="testimonial-image">
+                    <span class="testimonial-author">Betty Johnson | <span>Stockholm, Sweden</span></span>
                 </div>
                 <div>
                     <blockquote class="testimonial">
                         <p>I can’t believe how much time I saved using iReceptionist. It was truly a breathe of fresh air. Never again will I have to deal with the hassle of a grumpy receptionist and a clipboard!</p>
                     </blockquote>
                     <div class="arrow-down"></div>
-                    <p class="testimonial-author">Joel Spolsky | <span>Kathmandu, Nepal</span></p>
+                    <img src="images/joel.jpg" class="testimonial-image">
+                    <span class="testimonial-author">Joel Spolsky | <span>Kathmandu, Nepal</span></span>
                 </div>
             </div>
         </div>
     </div>
->>>>>>> develop
     <footer class="footer navbar-bottom">
         <div class="container">
             <ul class="list-inline footer-links text-center">
