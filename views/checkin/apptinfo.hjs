@@ -57,7 +57,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-4">
             <h1>
-                <img src="http://placehold.it/140x100" alt="">
+                <img src="/images/jennifer.jpg" style="width:140px" alt="">
                 Hi, {{name}}
             </h1>
 
