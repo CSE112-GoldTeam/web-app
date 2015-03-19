@@ -79,7 +79,7 @@ $(document).ready(function () {
 
         // Display appropriate ordering depending on type
         if(type === 'dropdown') {
-            fType = $('<select class=\"fieldtype form-control cols-xs-3\"> <option selected=\"selected\" value=\"dropdown\">Drop</option> <option value=\"textbox\">Text</option></select>');
+            fType = $('<select class=\"fieldtype form-control col-xs-3\"> <option selected=\"selected\" value=\"dropdown\">Drop</option> <option value=\"textbox\">Text</option></select>');
         }
         else {
             fType = $('<select class=\"fieldtype form-control col-xs-3\"><option selected=\"dropdown\" value=\"textbox\">Text</option><option value=\"dropdown\">Drop</option> </select>');
