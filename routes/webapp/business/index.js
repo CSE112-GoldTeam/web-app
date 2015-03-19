@@ -76,8 +76,8 @@ module.exports = function (passport) {
 
     router.get('/viewform/:id', viewForm.get);
 
-    router.get('/setdisclosure', setdisclosure.get);
-    router.post('/setdisclosure', setdisclosure.post);
+    router.get('/setdisclosure', isLoggedInBusiness, setdisclosure.get);
+    router.post('/setdisclosure', isLoggedInBusiness, setdisclosure.post);
 
 function isLoggedIn(req,res,next){
         if(req.isAuthenticated()){
