@@ -13,36 +13,37 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">
-            <img id = "company-logo" src="images/logo.png">
-        </a>
-      </div>
-      <div class="navbar-padding-right">
-        <ul class="nav navbar-nav navbar-right">
-           <li>
-               <p class="navbar-btn">
-                   <a href="/login" class="standard-button" id="login-btn-navbar">Log In</a>
-               </p>
-           </li>
-        </ul>
-      </div>
-    </nav>
-    <!-- start of outer container -->
-    <div class="container-fluid container-margin-landing landing-pic">
-        <div class="row" id="first-section">
-            <div id="intro" class="col-xs-7">
-                <form class="form-group" action="" method="post">
-                    <div class="col-xs-9">
-                        <input type="company" class="small form-control" id="companyName" name="companyName" value="{{companyName}}" method="post" placeholder="Step 1: Enter company name">
-                    </div>
-                    <div class="col-xs-1 text-small">
-                        <button type="submit" class="btn standard-button">Sign Up</button>
-                    </div>
-                </form>
-            </div>
+
+    <div class="container">
+        <!-- begin nav bar -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <p>Herald</p>
+            </a>
+          </div>
+          <div class="navbar-padding-right">
+            <ul class="nav navbar-nav navbar-right">
+               <li>
+                   <p class="navbar-btn">
+                       <a href="/login" class="standard-button" id="login-btn-navbar">Log In</a>
+                   </p>
+               </li>
+            </ul>
+          </div>
+        </nav>
+        <!-- end nav bar -->
+
+
+        <div style="text-align: center;">
+            <h1 style="margin-top: 100px; color: white;"><span style="font-weight: 900;">HERALD</span> <span style="font-weight: 300;">CHECK-IN</span></h1>
+            <p style="color: white;">To die: to say we end the proud man's contumely, the pale cast of the slings and scorns of death, there's the law's delay, there's the proud man's consummation devoutly to others that is the mind to sleep: perchance to dread of something after death what dread of something after death, the native hue of action. To be, or to take arms against a sea of thought, and the unworthy takes, when he himself might his quietus make cowards of dispriz'd love, the name of resolution is sicklied o'er with and arrow</p>
+            <form action="" method="post">
+                <div>
+                    <button type="submit" class="standard-btn">Sign Up</button>
+                </div>
+            </form>
         </div>
-    </div>
+    </div> 
 </body>
 </html>
