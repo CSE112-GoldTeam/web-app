@@ -1,0 +1,59 @@
+h1, h2, h3, h4, h5, h6, p, span, a {
+  color: white;
+}
+
+a:hover {
+  color: white;
+}
+
+.signup-container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+body {
+  background-image: url('../images/landing-background.jpg');
+  background-size: cover;
+}
+
+html * {
+   font-family: Lato, sans-serif;
+}
+
+html {
+  min-height: 100%;
+}
+
+.standard-btn {
+  border-width: 2px;
+  border-style: solid;
+  border-color: white;
+  color: #ffffff;
+  font-size: 20px;
+  color: white;
+  background: transparent;
+  padding: 13px 25px 13px 25px;
+  text-decoration: none;
+
+    width:150px;
+  display:inline-block;
+  overflow: auto;
+  white-space: nowrap;
+  margin:0px auto;
+  border:1px white solid;
+}
+
+.standard-btn:hover {
+  text-decoration: none;
+}
+
+.intro-p {
+    font-size: 18px;
+}
+
+.no-margin {
+  margin: 0px 0px 0px 0px;
+}
