@@ -14,12 +14,34 @@
 </head>
 <body>
     <div class="initial-screen">
+
+        <!--  LOGIN AT TOP RIGHT OF SCREEN -->
+       <div class = "top-bar-section" >
+        <div class="form-container">
+            <br><br>
+            <form  action="login" method="post">
+              <label for="email" class = "login-section-text" "form-label" >
+                <span class = "form-span">Email </span>
+                <input type="email" class="form-input" id="email" name="email" placeholder="Email" required />
+              </label>
+              <label for="password" class = "login-section-text" "form-label">
+                <span class="form-span">Password</span>
+                <input type="password" class="form-input" id="password" name="password" placeholder="Password" required />
+              </label>
+              <button type="submit" class="standard-btn standard-btn-small">Log in</button>
+
+            </form>
+        </div>
+       </div>
+        <!--    LOGIN DIV END HERE -->
+
         <div class="signup-container">
+
             <div class="col-md-2 col-md-offset-5"></div>
                 <h1><span style="font-weight: 900;">HERALD</span> <span style="font-weight: 300;">CHECK-IN</span></h1>
                 <div>
                     <a href="/register" class="standard-btn" style="margin-right: -1px;">Sign Up</a>
-                    <a href="/login" class="standard-btn" style="margin-left: -1px;">Log In</a>
+                  <!--  <a href="/login" class="standard-btn" style="margin-left: -1px;">Log In</a> -->
                 </div>
             </div>
             <div class="initial-screen-bottom-links">
