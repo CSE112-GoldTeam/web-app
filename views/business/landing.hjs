@@ -14,13 +14,19 @@
 </head>
 <body>
     <div class="initial-screen">
-        <div class="row signup-container">
+        <div class="signup-container">
             <div class="col-md-2 col-md-offset-5"></div>
                 <h1><span style="font-weight: 900;">HERALD</span> <span style="font-weight: 300;">CHECK-IN</span></h1>
                 <div>
                     <a href="/register" class="standard-btn" style="margin-right: -1px;">Sign Up</a>
                     <a href="/login" class="standard-btn" style="margin-left: -1px;">Log In</a>
                 </div>
+            </div>
+            <div class="initial-screen-bottom-links">
+                <a href="/register" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">About</a>
+                <a href="/login" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">About</a>
+                <a href="/login" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">About</a>
+                <a href="/login" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">About</a>
             </div>
         </div>
     </div>

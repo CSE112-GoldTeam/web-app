@@ -30,6 +30,7 @@ a:hover {
   background: transparent;
   padding: 13px 25px 13px 25px;
   text-decoration: none;
+  text-align: center;
 
   width:150px;
   display:inline-block;
@@ -39,12 +40,19 @@ a:hover {
   border:1px white solid;
 }
 
+.standard-btn-small {
+  width: 90px;
+  padding: 6px 25px 6px 25px;
+  font-size: 13px;
+  overflow: hidden;
+}
+
 .standard-btn:hover {
   text-decoration: none;
 }
 
+/*----------custom for landing page----------*/
 
-/* custom for landing page */
 .initial-screen {
   height: 100vh;
   width: 100vw;
@@ -52,17 +60,25 @@ a:hover {
   background-size: cover;
 }
 
-.bottom-part {
-  height: 80vh;
-  width: 100vw;
-  background-image: url('../images/landing-background.jpg');
-  background-size: cover;
+.signup-container {
+  text-align: center;
+  padding-top: 30vh;
+}
+
+.initial-screen-bottom-links {
+  padding-top: 290px;
+  text-align: center;
 }
 
 .middle-bar-section {
   height: 20vh;
   width: 100vw;
-  background-color: #c9c9c9;
+  background-color: #9ad3de;
+  padding-top: 60px;
+}
+.initial-screen-bottom-links-buttons{
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .middle-bar-section-text {
@@ -70,12 +86,10 @@ a:hover {
   text-align: center;
 }
 
-.signup-container {
-  text-align: center;
-}
-
-.intro-p {
-    font-size: 20px;
-    margin-top: -20px;
+.bottom-part {
+  height: 80vh;
+  width: 100vw;
+  background-image: url('../images/landing-background-2.jpg');
+  background-size: cover;
 }
 
