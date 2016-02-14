@@ -13,17 +13,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="initial-screen">
         <div class="row signup-container">
             <div class="col-md-2 col-md-offset-5"></div>
                 <h1><span style="font-weight: 900;">HERALD</span> <span style="font-weight: 300;">CHECK-IN</span></h1>
-                <p class="intro-p">To die: to say we end the proud man's contumely, the pale cast of the slings and scorns of death, there's the law's delay, there's the proud man's consummation devoutly to others that is the mind to sleep: perchance to dread of something after death what dread of something after death, the native hue of action. To be, or to take arms against a sea of thought, and the unworthy takes, when he himself might his quietus make cowards of dispriz'd love, the name of resolution is sicklied o'er with and arrow</p>
                 <div>
                     <a href="/register" class="standard-btn" style="margin-right: -1px;">Sign Up</a>
                     <a href="/login" class="standard-btn" style="margin-left: -1px;">Log In</a>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
+    <div class="middle-bar-section">
+        <h2 class="middle-bar-section-text">Herald is changing the way businesses do reception.</h2>
+    </div>
+    <div class="bottom-part">
+    </div>
 </body>
 </html>

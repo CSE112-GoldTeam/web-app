@@ -1,13 +1,6 @@
+/* general rules */
 h1, h2, h3, h4, h5, h6, p, span, a {
   color: white;
-}
-
-a:hover {
-  color: white;
-}
-
-.signup-container {
-  text-align: center;
 }
 
 h1 {
@@ -15,18 +8,18 @@ h1 {
 }
 
 body {
-  background-image: url('../images/landing-background.jpg');
-  background-size: cover;
+  overflow-x: hidden;
 }
 
 html * {
    font-family: Lato, sans-serif;
 }
 
-html {
-  min-height: 100%;
+a:hover {
+  color: white;
 }
 
+/* BUTTON THINGS */
 .standard-btn {
   border-width: 2px;
   border-style: solid;
@@ -38,7 +31,7 @@ html {
   padding: 13px 25px 13px 25px;
   text-decoration: none;
 
-    width:150px;
+  width:150px;
   display:inline-block;
   overflow: auto;
   white-space: nowrap;
@@ -50,10 +43,39 @@ html {
   text-decoration: none;
 }
 
-.intro-p {
-    font-size: 18px;
+
+/* custom for landing page */
+.initial-screen {
+  height: 100vh;
+  width: 100vw;
+  background-image: url('../images/landing-background.jpg');
+  background-size: cover;
 }
 
-.no-margin {
-  margin: 0px 0px 0px 0px;
+.bottom-part {
+  height: 80vh;
+  width: 100vw;
+  background-image: url('../images/landing-background.jpg');
+  background-size: cover;
 }
+
+.middle-bar-section {
+  height: 20vh;
+  width: 100vw;
+  background-color: #c9c9c9;
+}
+
+.middle-bar-section-text {
+  margin: 0px 0px 0px 0px;
+  text-align: center;
+}
+
+.signup-container {
+  text-align: center;
+}
+
+.intro-p {
+    font-size: 20px;
+    margin-top: -20px;
+}
+
