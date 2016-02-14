@@ -1,0 +1,22 @@
+
+h1 {
+    /*font-size: 60px;*/
+    color: white;
+}
+
+body {
+    background-image: url('../images/dashboard-background2.png');
+    background-size: cover;
+}
+
+#txt {
+    color:white
+}
+
+.whitetext {
+    color: white !important;
+}
+
+/*.active {
+    font-size: larger;
+}*/
