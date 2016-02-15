@@ -16,50 +16,60 @@
     <div class="initial-screen">
 
         <!--  LOGIN AT TOP RIGHT OF SCREEN -->
-       <div class = "top-bar-section" >
-        <div class="form-container">
-
-            <form  action="login" method="post">
-              <label for="email" class = "login-section-text" "form-label" >
-                <span class = "form-span">Email </span>
-                <input type="email" class="form-input" id="email" name="email" placeholder="Email" required />
-              </label>
-              <label for="password" class = "login-section-text" "form-label">
-                <span class="form-span">Password</span>
-                <input type="password" class="form-input" id="password" name="password" placeholder="Password" required />
-              </label>
-              <button type="submit" class="standard-btn standard-btn-small">Log in</button>
-
-            </form>
-                    {{#message}}
-                       <div style="color: #FFFFFF">{{message}}</div>
-                    {{/message}}
-        </div>
-
+        <div class = "top-bar-section" >
+            <div class="shameless-plug">Powered by Quart 3.0</div>
+            <div class="form-container">
+                <form action="login" method="post">
+                    <label for="email" class="login-section-text    " "form-label" >
+                        <span class="form-span">Email</span>
+                        <input type="email" class="form-input" id="email" name="email" required />
+                    </label>
+                    <label for="password" class = "login-section-text" "form-label">
+                        <span class="form-span">Password</span>
+                        <input type="password" class="form-input" id="password" name="password" required />
+                    </label>
+                    <button type="submit" class="standard-btn standard-btn-small">Log in</button>
+                </form>
+                {{#message}}
+                   <div style="color: #FFFFFF">{{message}}</div>
+                {{/message}}
+            </div>
        </div>
-        <!--    LOGIN DIV END HERE -->
+        <!-- LOGIN DIV END HERE -->
 
         <div class="signup-container">
-
             <div class="col-md-2 col-md-offset-5"></div>
                 <h1><span style="font-weight: 900;">HERALD</span> <span style="font-weight: 300;">CHECK-IN</span></h1>
                 <div>
-                    <a href="/register" class="standard-btn" style="margin-right: -1px;">Sign Up</a>
+                    <a href="/register" class="standard-btn" style="width: 300px;">Register Your Business</a>
                   <!--  <a href="/login" class="standard-btn" style="margin-left: -1px;">Log In</a> -->
                 </div>
             </div>
             <div class="initial-screen-bottom-links">
                 <a href="/register" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">About</a>
-                <a href="/login" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">About</a>
-                <a href="/login" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">About</a>
-                <a href="/login" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">About</a>
+                <a href="/register" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">Sponsors</a>
+                <a href="/register" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">Testimonials</a>
+                <a href="/register" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">Blog</a>
             </div>
         </div>
     </div>
     <div class="middle-bar-section">
         <h2 class="middle-bar-section-text">Herald is changing the way businesses do reception.</h2>
     </div>
-    <div class="bottom-part">
+    <div class="bottom-part" style="text-align: center;">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-2">
+                <h2>What is Herald?</h2>
+                <p class="about-p">Herald is your automated receptionist. With Herald, customers keep track of themselves, allowing your business to use human resources on things other than appointment times and check-in. It's your guestbook, your customer database, your calendar.</p>
+            </div>
+            <div class="col-md-4">
+                <h2>About Peter &amp; Quart 3.0</h2>
+                <p class="about-p">Peter is the peanut butter to Quart 3.0's jelly.</p>
+            </div>
+        </div>
+        <div class="row">
+            <p style="padding-top: 350px;">© Copyright 2058, Quart 3.0</p>
+        </div>
     </div>
 </body>
 </html>

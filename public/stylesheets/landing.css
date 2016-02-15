@@ -1,5 +1,5 @@
 /* general rules */
-h1, h2, h3, h4, h5, h6, p, span, a {
+h1, h2, h3, h4, h5, h6, p, span, a, input, label, div {
   color: white;
 }
 
@@ -47,11 +47,55 @@ a:hover {
   overflow: hidden;
 }
 
+.standard-btn-large {
+  width: 300px;
+  font-size: 25px;
+  padding: 13px 25px 13px 25px;
+  overflow: hidden;
+}
+
 .standard-btn:hover {
   text-decoration: none;
 }
 
 /*----------custom for landing page----------*/
+
+/* grey bar on top of landing page including login form */
+.top-bar-section{
+    height: 12vh;
+    width: 100vw;
+    background-color: rgba(201,201,201, 0.3);
+}
+.form-label{
+    float: left;
+}
+.form-span {
+    display: block;
+    margin: 0 0 3px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.form-input{
+    width: 230px;
+    border: 1px solid #FFF;
+    color: white;
+    padding: 5px;
+    background: transparent;
+}
+.form-input::placeholder-shown {
+  color: white;
+}
+.form-container{
+  float: right;
+  padding-right: 40px;
+  margin-top: -42px;
+}
+.shameless-plug {
+  font-size: 13pt;
+  margin-left: 10%;
+  padding-top: 33px;
+}
+/* end of top bar */
 
 .initial-screen {
   height: 100vh;
@@ -62,20 +106,19 @@ a:hover {
 
 .signup-container {
   text-align: center;
-  padding-top: 30vh;
+  padding-top: 22vh;
 }
 
 .initial-screen-bottom-links {
-  padding-top: 330px;
+  padding-top: 290px;
   text-align: center;
 }
 
-
 .middle-bar-section {
-  height: 20vh;
+  height: 15vh;
   width: 100vw;
   background-color: #9ad3de;
-  padding-top: 20px;
+  padding-top: 40px;
 }
 
 
@@ -89,46 +132,16 @@ a:hover {
   text-align: center;
 }
 
-
-
 .bottom-part {
-  height: 80vh;
+  height: 85vh;
   width: 100vw;
   background-image: url('../images/landing-background-2.jpg');
   background-size: cover;
+  padding-top: 50px;
+}
+
+.about-p {
+  font-size: 13pt;
 }
 
 
-/* grey bar on top of landing page including login form */
-.top-bar-section{
-    height: 10vh;
-    width: 100vw;
-    background-color: #c9c9c9;
-    /*padding-top: 0px;*/
-}
-
-.form-label{
-    width: 200px; float: left; margin: 0 20px 0 0;
-}
-.form-span{
-    display: block; margin: 0 0 3px; font-size: 1.2em; font-weight: bold;
-}
-.form-input{
-    width: 200px; border: 1px solid #000; padding: 5px;
-}
-.form-button{
-    margin: 100px;
-}
-
-.form-container{
-    width:500px;
-    margin-left: auto;
-    margin-bottom: 100px;
-    padding-top: -100px;
-}
-
-.longin-section-text{
-    color: #FFFFFF;
-}
-
-/* end of top bar */
