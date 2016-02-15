@@ -18,7 +18,7 @@
         <!--  LOGIN AT TOP RIGHT OF SCREEN -->
        <div class = "top-bar-section" >
         <div class="form-container">
-            <br><br>
+
             <form  action="login" method="post">
               <label for="email" class = "login-section-text" "form-label" >
                 <span class = "form-span">Email </span>
@@ -31,7 +31,11 @@
               <button type="submit" class="standard-btn standard-btn-small">Log in</button>
 
             </form>
+                    {{#message}}
+                       <div style="color: #FFFFFF">{{message}}</div>
+                    {{/message}}
         </div>
+
        </div>
         <!--    LOGIN DIV END HERE -->
 

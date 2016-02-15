@@ -10,11 +10,12 @@ exports.get = function (req, res, next) {
             }
         });
 
-    res.render('business/landing', {title: 'Landing Page'});
+    res.render('business/landing', { title: 'Landing Page',  message: req.flash("login")});
 };
 
 
 exports.post = function (req, res, next) {
+
     var companyName = req.body.companyName;
 
     if (companyName === '') {

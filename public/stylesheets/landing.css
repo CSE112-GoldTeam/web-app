@@ -66,7 +66,7 @@ a:hover {
 }
 
 .initial-screen-bottom-links {
-  padding-top: 290px;
+  padding-top: 330px;
   text-align: center;
 }
 
@@ -101,7 +101,7 @@ a:hover {
 
 /* grey bar on top of landing page including login form */
 .top-bar-section{
-    height: 15vh;
+    height: 10vh;
     width: 100vw;
     background-color: #c9c9c9;
     /*padding-top: 0px;*/
@@ -123,11 +123,12 @@ a:hover {
 .form-container{
     width:500px;
     margin-left: auto;
-
+    margin-bottom: 100px;
+    padding-top: -100px;
 }
 
 .longin-section-text{
     color: #FFFFFF;
-
 }
+
 /* end of top bar */
