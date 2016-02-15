@@ -43,25 +43,25 @@ function startTime() {
 		dn='PM';
 		h=h-12;
 	}
-    m = checkTime(m);
-    s = checkTime(s);
+
+    m = prependZero(m);
+    s = prependZero(s);
     $('#txt').html('Current Time: ' +h+':'+m+':'+s+ ' '+ dn);
     setTimeout(function(){startTime();},500);
 }
 
-function checkTime(i) {
-    if (i<10) {i = '0' + i;}  // add zero in front of numbers < 10
-    return i;
+function prependZero(i) {
+    return i < 10 ? '0' + i : i; // add zero in front of numbers < 10
 }
 
 function table() {
-  
+
     var cols,$btn;
 
     $.get('/api/employee/'+eid+'/appointments/today', function( data ){
-        
+
         var count = 0;
-        //empty's the table
+        //empties the table
         $('#tblBody').empty();
 
         //for loop to reload the table
@@ -153,7 +153,7 @@ function getAppDate(date){
     appTime = hoursPM+':'+minutesPM + ' PM';
   }
 
-  return appTime;  
+  return appTime;
 }
 
 // JQuery Insert Row
