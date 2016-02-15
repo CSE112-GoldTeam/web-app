@@ -84,7 +84,7 @@ module.exports = function (passport) {
                             }
 
                             var businessID = result._id.toString();
-                            
+
                             employees.insert({
                                 business: ObjectId(businessID),
                                 password: result.password,
@@ -118,7 +118,7 @@ module.exports = function (passport) {
     },
         function (req,email,password,done) {
 
-       
+
 
             var db =req.db;
             var employee = db.get('employees');
@@ -129,12 +129,12 @@ module.exports = function (passport) {
              query: {registrationToken: req.query.token},
              update: { $unset: {registrationToken: 1},
                 $set: {password: password} },
-             new: true},    
-                function (err,user){  
-                if (err) { 
+             new: true},
+                function (err,user){
+                if (err) {
                      throw err; }
                 return done(null,user);
-       
+
                  }
             );
         }
@@ -156,17 +156,17 @@ module.exports = function (passport) {
         },
         function (req, email, password, done) { // callback with email and password from our form
 
-      
+
             auth.validateLogin(req.db, email, password, function (user) {
                 if (!user) {
-                    return done(null, false, req.flash("login", "Invalid Email/Password Combo"));
-                } 
+                    return done(null, false, req.flash("login", "Invalid Email and/or Password"));
+                }
                 else {
                     return done(null,user);
                     }
-            });     
+            });
         }
     ));
-    
+
 
 };
