@@ -1,4 +1,10 @@
 
+/*.container-background{
+    
+    box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 15px -4px rgba(31, 73, 125, 0.8);;
+    
+}*/
+
 h1 {
     /*font-size: 60px;*/
     color: white;
@@ -20,3 +26,4 @@ body {
 /*.active {
     font-size: larger;
 }*/
+
