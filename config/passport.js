@@ -161,7 +161,7 @@ module.exports = function (passport) {
 
             auth.validateLogin(req.db, email, password, function (user) {
                 if (!user) {
-                    return done(null, false, req.flash("login", "Invalid Email/Password Combo"));
+                    return done(null, false, req.flash("login", "Invalid Email and/or Password"));
                 }
                 else {
                     return done(null,user);
