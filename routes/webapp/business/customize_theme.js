@@ -11,7 +11,7 @@ exports.get = function (req, res, next) {
         res.render('business/customize_theme', {
             message: req.flash('permission'),
             logo: business.logo,
-            bg: '/images/bg/thumb/' + business.style.bg
+            //bg: '/images/bg/thumb/' + business.style.bg
         });
     });
 };

@@ -40,7 +40,7 @@ module.exports = function (passport) {
                     phone: phone,
                     fname: fname,
                     lname: lname,
-                    email: email,
+                    email: email
                 });
             } else {
 
@@ -77,7 +77,8 @@ module.exports = function (passport) {
                             fname: fname,
                             lname: lname,
                             logo: '',
-                            walkins: false
+                            walkins: false,
+                            permissionLevel: 3
                         }, function (err, result) {
                             if (err) {
                                 throw err;
@@ -94,7 +95,8 @@ module.exports = function (passport) {
                                 email: result.email,
                                 smsNotify: true,
                                 emailNotify: true,
-                                admin: true
+                                admin: true,
+                                permissionLevel: 'my permission is 2!'
                             },function(err, user){
                                 if (err) {
                                     throw err;

@@ -3,7 +3,7 @@
 <head>
     <title>{{ title }}</title>
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    
+
     <link rel='stylesheet' href='/stylesheets/index.css'/>
     <link rel='stylesheet' href='/stylesheets/dashboard.css'/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -48,18 +48,14 @@
 
   </div>
 
-<!--/*
-<div class="container container-background">
-*-->
-<div class="container"style="
-box-shadow:  0px 0px 30px 15px rgba(0, 0, 0, 0.8)">
+<div class="container transbox" style="box-shadow:  0px 0px 30px 15px rgba(0, 0, 0, 0.8)">
 
 
 {{#message}}
    <div class="alert alert-danger">{{message}}</div>
 {{/message}}
 
-  <h1><strong><div>Hi, {{employeeName}} {{employeeID}}</div></strong></h1>
+  <h1><strong><div>Hi, {{employeeName}} {{employeeLast}} ({{employeePermission}}) {{walkinsAllowed}}</div></strong></h1>
 
   <div class="dashboardTopInfo text-center">
 

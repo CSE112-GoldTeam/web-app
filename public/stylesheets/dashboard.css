@@ -1,8 +1,8 @@
 
 /*.container-background{
-    
+
     box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 15px -4px rgba(31, 73, 125, 0.8);;
-    
+
 }*/
 
 h1 {
@@ -23,7 +23,8 @@ body {
     color: white !important;
 }
 
-/*.active {
-    font-size: larger;
-}*/
-
+.transbox {
+    background-color: #000000;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+}
