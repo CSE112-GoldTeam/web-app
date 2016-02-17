@@ -23,7 +23,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li>
                 <p class="navbar-btn">
-                   <a href="/login" class="btn custom-button" id="login-btn-navbar">Log In</a>
+                   <a href="/" class="btn custom-button" id="login-btn-navbar">Log In</a>
                </p>
             </li>
         </ul>
