@@ -1,0 +1,62 @@
+h1, h2, h3, h4, h5, h6, p, span, a {
+    color: white;
+    font-family: Lato, sans-serif;
+}
+
+body {
+    background-image: url('../images/add-employee-bg.jpg');
+    background-size: cover;
+    background-color: #89bdd3;
+}
+
+
+h1 {
+    font-size: 60px;
+    text-align: center;
+}
+
+.custom-button{
+
+    border-width: 2px;
+    border-style: solid;
+    border-color: white;
+    color: #ffffff;
+    font-size: 20px;
+    color: white;
+    background: transparent;
+    padding: 13px 25px 13px 25px;
+    text-decoration: none;
+    width:150px;
+    overflow: auto;
+    white-space: nowrap;
+    margin:20px auto;
+    border:1px white solid;
+
+
+}
+
+html *
+{
+    font-family: Lato, sans-serif;
+    color: white;
+}
+
+
+.custom-button:hover {
+    background-color: inherit;
+}
+
+.container-margin-employee {
+    padding-top: 80px;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    background: rgba(100,100,100,.5);
+    z-index: 1;
+
+}
+
+.label{
+    font-size: 15px;
+    color: white;
+}

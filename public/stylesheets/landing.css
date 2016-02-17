@@ -1,0 +1,147 @@
+/* general rules */
+h1, h2, h3, h4, h5, h6, p, span, a, input, label, div {
+  color: white;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+html * {
+   font-family: Lato, sans-serif;
+}
+
+a:hover {
+  color: white;
+}
+
+/* BUTTON THINGS */
+.standard-btn {
+  border-width: 2px;
+  border-style: solid;
+  border-color: white;
+  color: #ffffff;
+  font-size: 20px;
+  color: white;
+  background: transparent;
+  padding: 13px 25px 13px 25px;
+  text-decoration: none;
+  text-align: center;
+
+  width:150px;
+  display:inline-block;
+  overflow: auto;
+  white-space: nowrap;
+  margin:0px auto;
+  border:1px white solid;
+}
+
+.standard-btn-small {
+  width: 90px;
+  padding: 6px 25px 6px 25px;
+  font-size: 13px;
+  overflow: hidden;
+}
+
+.standard-btn-large {
+  width: 300px;
+  font-size: 25px;
+  padding: 13px 25px 13px 25px;
+  overflow: hidden;
+}
+
+.standard-btn:hover {
+  text-decoration: none;
+}
+
+/*----------custom for landing page----------*/
+
+/* grey bar on top of landing page including login form */
+.top-bar-section{
+    height: 12vh;
+    width: 100vw;
+    background-color: rgba(201,201,201, 0.3);
+}
+.form-label{
+    float: left;
+}
+.form-span {
+    display: block;
+    margin: 0 0 3px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.form-input{
+    width: 230px;
+    border: 1px solid #FFF;
+    color: white;
+    padding: 5px;
+    background: transparent;
+}
+.form-input::placeholder-shown {
+  color: white;
+}
+.form-container{
+  float: right;
+  padding-right: 40px;
+  margin-top: -42px;
+}
+.shameless-plug {
+  font-size: 13pt;
+  margin-left: 10%;
+  padding-top: 33px;
+}
+/* end of top bar */
+
+.initial-screen {
+  height: 100vh;
+  width: 100vw;
+  background-image: url('../images/landing-background.jpg');
+  background-size: cover;
+}
+
+.signup-container {
+  text-align: center;
+  padding-top: 22vh;
+}
+
+.initial-screen-bottom-links {
+  padding-top: 290px;
+  text-align: center;
+}
+
+.middle-bar-section {
+  height: 15vh;
+  width: 100vw;
+  background-color: #9ad3de;
+  padding-top: 40px;
+}
+
+
+.initial-screen-bottom-links-buttons{
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.middle-bar-section-text {
+  margin: 0px 0px 0px 0px;
+  text-align: center;
+}
+
+.bottom-part {
+  height: 85vh;
+  width: 100vw;
+  background-image: url('../images/landing-background-2.jpg');
+  background-size: cover;
+  padding-top: 50px;
+}
+
+.about-p {
+  font-size: 13pt;
+}
+
+

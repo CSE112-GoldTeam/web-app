@@ -4,7 +4,9 @@
     <title>{{ title }}</title>
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/index.css'/>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/businesssettings.css'/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   </head>
@@ -39,7 +41,6 @@
         <div>
           <div>
             <h1>Company Settings</h1>
-            <p>Configure other parts of your company account</p>
             <div class="row" style="text-align:center">
               {{#edited}}
                 <div class="alert alert-success" role="alert">
@@ -58,7 +59,7 @@
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                   <div>
-                      <h3>Company Info</h3>
+                      <h3>Edit the name of your company or phone number</h3>
                       <hr>
                     </div>
                     <div class="panel-body">
@@ -66,7 +67,7 @@
                         <div class="row">
                           <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                              <label for="email">Company Name</label>
+                              <label class = "label" for="email">Company Name</label>
                               <input type="text" id="companyName" name="companyName" class="form-control input-lg" value="{{companyName}}">
                             </div>
                           </div>
@@ -74,12 +75,12 @@
                         <div class="row">
                           <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                              <label>Phone Number </label>
+                              <label class = "label">Phone Number </label>
                               <input type="text" id="phone" name ="phone"class="form-control input-lg" value="{{phone}}">
                             </div>
                           </div>
                         </div>
-                        <button   type="submit" class="custom-center btn custom-button">Save</button>
+                        <button   type="submit" class="standard-btn">Save</button>
                       </form>
 
                     </div>

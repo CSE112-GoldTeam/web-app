@@ -4,7 +4,8 @@
     <title>{{ title }}</title>
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <!--<link rel='stylesheet' href='/stylesheets/style.css'/>-->
+    <link rel='stylesheet' href='/stylesheets/landing.css'/>
     {{#newrelic}}
         {{{ newrelic.getBrowserTimingHeader }}}
     {{/newrelic}}
@@ -12,95 +13,63 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">
-            <img id = "company-logo" src="images/logo.png">
-        </a>
-      </div>
-      <div class="navbar-padding-right">
-        <ul class="nav navbar-nav navbar-right">
-           <li>
-               <p class="navbar-btn">
-                   <a href="/login" class="btn custom-button" id="login-btn-navbar">Log In</a>
-               </p>
-           </li>
-        </ul>
-      </div>
-    </nav>
-    <!-- start of outer container -->
-    <div class="container-fluid container-margin-landing landing-pic">
-        <div class="row" id="first-section">
-            <div id="intro" class="col-xs-7">
-                <h1 class="heading bold text-center">The old rules of waiting are over.</h3>
-                <p class="text-center info-text"> Let us help you revolutionize your patient waiting experience with effortless check-in, form management, arrival notification, and appointment integration for your office.</p>
-                <form class="form-group" action="" method="post">
-                    <div class="col-xs-9">
-                        <input type="company" class="small form-control" id="companyName" name="companyName" value="{{companyName}}" method="post" placeholder="Step 1: Enter company name">
-                    </div>
-                    <div class="col-xs-1 text-small">
-                        <button type="submit" class="btn custom-button">Sign Up</button>
-                    </div>
+    <div class="initial-screen">
+
+        <!--  LOGIN AT TOP RIGHT OF SCREEN -->
+        <div class = "top-bar-section" >
+            <div class="shameless-plug">Powered by Quart 3.0</div>
+            <div class="form-container">
+                <form action="login" method="post">
+                    <label for="email" class="login-section-text    " "form-label" >
+                        <span class="form-span">Email</span>
+                        <input type="email" class="form-input" id="email" name="email" required />
+                    </label>
+                    <label for="password" class = "login-section-text" "form-label">
+                        <span class="form-span">Password</span>
+                        <input type="password" class="form-input" id="password" name="password" required />
+                    </label>
+                    <button type="submit" class="standard-btn standard-btn-small">Log in</button>
                 </form>
+                {{#message}}
+                   <div style="color: #FFFFFF">{{message}}</div>
+                {{/message}}
             </div>
+       </div>
+        <!-- LOGIN DIV END HERE -->
 
-            <div class="col-xs-4 ">
-                <img id="intro-image" src="images/ipad.png">
-            </div>
-        </div>
-
-        <div class="row" id="second-section">
-            <div class="col-xs-6">
+        <div class="signup-container">
+            <div class="col-md-2 col-md-offset-5"></div>
+                <h1><span style="font-weight: 900;">HERALD</span> <span style="font-weight: 300;">CHECK-IN</span></h1>
                 <div>
-                    <blockquote class="testimonial">
-                        <p>With a limited budget and tight schedule, this check-in app really saved me time and cost to run the dental clinic I just opened up. Thank you, iReceptionist. You’re a life-saver.</p>
-                    </blockquote>
-                    <div class="arrow-down"></div>
-                    <img src="images/jennifer.jpg" class="testimonial-image">
-                    <span class="testimonial-author">Dr. Jennifer Kim, DDS | <span>San Francisco, California</span></span>
-                </div>
-                <div>
-                    <blockquote class="testimonial testimonial-grey">
-                        <p>Wow! iReceptionist was the perfect addition to our offices! It’s elegant, fast, and our customers absolutely love it! The team’s continued support and commitment to excellence has made me a life-long customer. Definitely the GOLD standard for check-in apps!</p>
-                    </blockquote>
-                    <div class="arrow-down arrow-down-grey"></div>
-                    <img src="images/leonard.jpg" class="testimonial-image">
-                    <span class="testimonial-author">Dr. Leonard McCoy, M.D. | <span>Riverside, California</span></span>
-                    
+                    <a href="/register" class="standard-btn" style="width: 300px;">Register Your Business</a>
+                  <!--  <a href="/login" class="standard-btn" style="margin-left: -1px;">Log In</a> -->
                 </div>
             </div>
-            <div class="col-xs-6">
-                <div>
-                    <blockquote class="testimonial testimonial-grey">
-                        <p>iReceptionist is truly an aesthetic experience, I love how intuitive and modern the design is. Making appointments and checking in has never been easier.</p>
-                    </blockquote>
-                    <div class="arrow-down arrow-down-grey"></div>
-                    <img src="images/betty.jpg" class="testimonial-image">
-                    <span class="testimonial-author">Betty Johnson | <span>Stockholm, Sweden</span></span>
-                </div>
-                <div>
-                    <blockquote class="testimonial">
-                        <p>I can’t believe how much time I saved using iReceptionist. It was truly a breathe of fresh air. Never again will I have to deal with the hassle of a grumpy receptionist and a clipboard!</p>
-                    </blockquote>
-                    <div class="arrow-down"></div>
-                    <img src="images/joel.jpg" class="testimonial-image">
-                    <span class="testimonial-author">Joel Spolsky | <span>Kathmandu, Nepal</span></span>
-                </div>
+            <div class="initial-screen-bottom-links">
+                <a href="/register" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">About</a>
+                <a href="/register" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">Sponsors</a>
+                <a href="/register" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">Testimonials</a>
+                <a href="/register" class="standard-btn standard-btn-small initial-screen-bottom-links-buttons">Blog</a>
             </div>
         </div>
     </div>
-    <footer class="footer navbar-bottom">
-        <div class="container">
-            <ul class="list-inline footer-links text-center">
-                <!--<li><a href="">About Us</a></li>
-                <li><a href="">Store</a></li>
-                <li><a href="">Jobs</a></li>
-                <li><a href="">Privacy</a></li>
-                <li><a href="">Terms</a></li>
-                <li><a href="">Support</a></li>-->
-                <li class = "footer-copyright">Copyright &#169; Gold Team-CSE 112, Winter 2015. All Rights Reserved.</li>
-            </ul>
+    <div class="middle-bar-section">
+        <h2 class="middle-bar-section-text">Herald is changing the way businesses do reception.</h2>
+    </div>
+    <div class="bottom-part" style="text-align: center;">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-2">
+                <h2>What is Herald?</h2>
+                <p class="about-p">Herald is your automated receptionist. With Herald, customers keep track of themselves, allowing your business to use human resources on things other than appointment times and check-in. It's your guestbook, your customer database, your calendar.</p>
+            </div>
+            <div class="col-md-4">
+                <h2>About Peter &amp; Quart 3.0</h2>
+                <p class="about-p">Peter is the peanut butter to Quart 3.0's jelly.</p>
+            </div>
         </div>
-    </footer>
+        <div class="row">
+            <p style="padding-top: 350px;">© Copyright 2058, Quart 3.0</p>
+        </div>
+    </div>
 </body>
 </html>

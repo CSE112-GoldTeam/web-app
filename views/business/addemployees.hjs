@@ -5,6 +5,8 @@
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'>
+    <link rel='stylesheet' href= '/stylesheets/addemployeepage.css'>
+
     {{#newrelic}}
         {{{ newrelic.getBrowserTimingHeader }}}
     {{/newrelic}}
@@ -31,7 +33,7 @@
         </div>
     </nav>
 
-    <div class="container container-margin">
+    <div class="container container-margin-employee">
             <div class="row">
                 <div class="col-xs-offset-1 col-xs-4">
                     <h2>Register Employees</h2>
@@ -41,7 +43,7 @@
 
             <div class="row text-center" id="regis-container">
                 <form method="post" action="addemployees" enctype="application/x-www-form-urlencoded">
-                    <textarea class="add-email" type="text" name="csvEmployees" placeholder="CSV of Employees EMAILS" required></textarea>
+                    <textarea class="add-email" type="text" STYLE="color: #000000; name="csvEmployees" placeholder="CSV of Employees EMAILS" required ></textarea>
                     <input class="btn custom-button" name="submit" type="submit" href="/addemployees" value="Upload">
                 </form>
 
@@ -51,7 +53,7 @@
 
                         <div class="tableheader">
 
-                            <table class="table table-hover tablewidth" id="registeredEmployees">
+                            <table class="table table tablewidth" id="registeredEmployees">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
@@ -73,7 +75,7 @@
 
                         <div class="tableheader">
 
-                            <table class="table table-hover tablewidth" id="unregisteredEmployees">
+                            <table class="table table tablewidth" id="unregisteredEmployees">
                                 <thead>
                                     <tr>
                                         <th>Name</th>

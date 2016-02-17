@@ -1,0 +1,22 @@
+body {
+  background-image: url('../images/airport-background-darker.png');
+  background-size: cover;
+}
+
+html *
+{
+   font-family: Lato, sans-serif;
+   color: white;
+}
+
+.standard-btn {
+  border-width: 2px;
+  border-style: solid;
+  border-color: white;
+  color: #ffffff;
+  font-size: 15px;
+  color: white;
+  background: transparent;
+  padding: 13px 25px 13px 25px;
+  text-decoration: none;
+}

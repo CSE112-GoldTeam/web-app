@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-
+// note: .js isn't necessary
 //Define the controllers for checkin process
 var landing = require('./landing');
 var theming = require('./theming');
@@ -31,10 +31,10 @@ module.exports = function (passport) {
 
     router.get('/theming', isLoggedInBusiness, theming.get);
 
-    router.get('/login', login.get);
+   // router.get('/login', landing.get);
     router.post('/login',passport.authenticate('local-login',{
         successRedirect : '/dashboard',
-        failureRedirect : '/login',
+        failureRedirect : '/',
         failureFlash: true
     }));
 
